@@ -1,0 +1,4 @@
+rank(100) => Inform(Welcome)
+Agent: Inform(Welcome) -> Hi! I am Troy, your office secretary.
+rank(10) topGoal(*ROOT*) repeat() => Ask(HowCanIHelpYou)
+Agent: Ask(HowCanIHelpYou) -> You can ask me to do tasks. If I don't know how, you can train me.| What tasks can I do for you? If I don't know how, you can train me.
