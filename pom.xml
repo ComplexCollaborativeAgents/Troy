@@ -26,10 +26,5 @@
     	<artifactId>Otto</artifactId>
     	<version>1.2.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-    	<groupId>edu.umich.soar</groupId>
-    	<artifactId>sml</artifactId>
-    	<version>9.5.1</version>
-    </dependency>
   </dependencies>
 </project>

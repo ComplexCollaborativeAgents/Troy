@@ -1,0 +1,31 @@
+##!
+# @file
+#
+# @created smohan 20170315
+
+sp {propose*wait
+   (state <s> ^attribute state
+              ^choices none
+             -^operator.name wait)
+-->
+   (<s> ^operator <o> +)
+   (<o> ^name wait)
+   }
+
+sp {propose*hello
+    (state <s> ^superstate nil
+               ^io.input-link.day 1
+               -^said-hello true)
+-->
+    (<s> ^operator <o> +)
+    (<o> ^name say-hello)
+    }
+
+sp {apply*hello
+    (state <s> ^superstate nil
+               ^operator.name say-hello
+               ^io.output-link <ol>)
+-->
+    (<ol> ^message.message hello-world-from-soar)
+    (<s> ^said-hello true)
+    }
