@@ -53,7 +53,6 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		}
 		String absoluteSoarRulesPath = Config.getProperty(dmName+".soarRules",null);
 		troySoarAgent.LoadProductions(absoluteSoarRulesPath);
-		this.start();
 		troySoarAgent.RegisterForRunEvent(smlRunEventId.smlEVENT_BEFORE_INPUT_PHASE, this, null);
 	}
 

@@ -23,6 +23,7 @@ public class TroyAgent extends PlanStateAgent{
 		if (dmName == null || dmName.isEmpty()) dmName = "troyDM";	
 		this.soarInterface = new SoarInterface(name, dmName);
 		this.configureAndStartDialogEngine(dmName, kb);
+		this.soarInterface.start();
 	}
 	
 	private void configureAndStartDialogEngine(String dmName, KnowledgeBase kb)
