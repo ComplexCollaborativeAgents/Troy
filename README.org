@@ -1,2 +1,2 @@
 * TROY
-A _tr_ainable _o_ffice secretar_y_ design using the Soar cognitive architecture.
+A TRainable Office secretarY design using the Soar cognitive architecture.
