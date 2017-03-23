@@ -2,3 +2,18 @@ rank(100) => Inform(Welcome)
 Agent: Inform(Welcome) -> Hi! I am Troy, your office secretary.
 rank(10) topGoal(*ROOT*) repeat() => Ask(HowCanIHelpYou)
 Agent: Ask(HowCanIHelpYou) -> You can ask me to do tasks. If I don't know how, you can train me.| What tasks can I do for you? If I don't know how, you can train me.
+
+rank(40) Inform(Goal($1)) => writeToSoar($1)
+User: Inform(Goal($1)) <-> Say {Goal[$1]} to Soar.
+Goal[greeting] <-> hello
+Goal[greeting] <-> hi
+
+rank(40) Instruct(ActionCommand($1, $2)) => writeToSoar(ActionCommand, $1,$2)
+rank(40) Instruct(ActionCommand($1, $2, $3)) => writeToSoar(ActionCommand, $1, $2, $3)
+User: Instruct(ActionCommand($1, $2)) <-> {Verb[$1]} {NP[$2]}.
+User: Instruct(ActionCommand($1, $2, $3)) <-> {Verb[$1]} {NP[$2]} to {NP[$3]}.
+Verb[print] <-> print
+Verb[email] <-> email
+Verb[put-together] <-> put together
+NP[sales-brochure] <-> a sales brochure
+NP[person-shiwali] <-> Shiwali
