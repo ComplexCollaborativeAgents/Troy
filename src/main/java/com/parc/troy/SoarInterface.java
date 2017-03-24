@@ -7,14 +7,18 @@ import java.util.Iterator;
 import org.eclipse.jdt.annotation.NonNull;
 
 import com.parc.xi.dm.Config;
+import com.parc.xi.dm.DispatchCallback;
 import com.parc.xi.dm.LogicalForm;
 import com.parc.xi.dm.agent.DialogRuleFn;
 import com.parc.xi.dm.state.DialogState;
 import com.parc.xi.dm.state.Plan;
 
+import static com.parc.xi.dm.LogicalFormConstants.*;
 import sml.Agent;
 import sml.Identifier;
+import sml.IdentifierSymbol;
 import sml.Kernel;
+import sml.WMElement;
 import sml.sml;
 import sml.smlRunEventId;
 import sml.Agent.RunEventInterface;
@@ -33,6 +37,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private boolean queueStop = false;
 	
 	private LogicalForm messageToWrite;
+	private DialogState dialogStateToCallback;
+	private LogicalForm callToProcess;
 
 	public SoarInterface(String name, String dmName){
 		this.configureAndStartSoarAgent(name, dmName);
@@ -48,9 +54,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.interactionLink = this.inputLink.CreateIdWME("interaction");
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))
-		{
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
-		}
+		
 		String absoluteSoarRulesPath = Config.getProperty(dmName+".soarRules",null);
 		troySoarAgent.LoadProductions(absoluteSoarRulesPath);
 		troySoarAgent.RegisterForRunEvent(smlRunEventId.smlEVENT_BEFORE_INPUT_PHASE, this, null);
@@ -58,11 +63,19 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 
 	@NonNull
 	public List<Result> apply(LogicalForm call, Plan plan, DialogState state) {
-		System.out.println("I am here");
 		List <Result> resultList = new ArrayList<Result>();
 		if (call.op.equals("writeToSoar")){
 			messageToWrite = call;
-			System.out.println("Command to soar sent out.");
+			dialogStateToCallback = state;
+			callToProcess = call;
+		}
+		if (call.op.equals("readFromSoar")){
+			LogicalForm da  = readFromSoar();
+			if (da == null) return resultList;
+			Result result = new Result();
+            result.newCall = call.clone();
+            result.newCall.setArg(0, da);
+            resultList.add(result);
 		}
 		
 		else{
@@ -95,9 +108,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	}
 	
 	public void runEventHandler(int eventID, Object data, Agent agent, int phase) {
-		System.out.println("In Soar's running loop");
 		stopAgentIfRequested();
-		readOutputFromSoar();
+		triggerOttoCallback();
 		writeInputToSoar();
 	}
 
@@ -109,9 +121,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	}
 	
 	private void writeInputToSoar() {
-		if (messageToWrite != null){
-			System.out.println("Write message to Soar in the running loop");
-			System.out.println(messageToWrite.getArg(0).toString());
+		if (messageToWrite != null) {
 			if(messageToWrite.getArg(0).toString().equals("ActionCommand"))
 				writeActionCommand(messageToWrite.getArgList());
 			messageToWrite = null;
@@ -119,23 +129,39 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	}
 	
 	private void writeActionCommand(List<LogicalForm> argList) {
-		Identifier commandId = this.interactionLink.CreateIdWME("action-command");
+		Identifier commandId = this.interactionLink.CreateIdWME("message");
+		commandId.CreateStringWME("type", "action-command");
 		Iterator<LogicalForm> argListIterator = argList.iterator();
 		argListIterator.next();
 		commandId.CreateStringWME("verb", argListIterator.next().toString());
-		System.out.println("Wrote verb");
 		String baseObjectString = "object";
-		Integer i = 0;
 		while(argListIterator.hasNext()){
-			commandId.CreateStringWME(baseObjectString.concat(i.toString()), argListIterator.next().toString());
-			i++;
-			System.out.println("Wrote object.");
+			commandId.CreateStringWME(baseObjectString, argListIterator.next().toString());
 		}
 		this.troySoarAgent.Commit();
 	}
+	
+	private void triggerOttoCallback(){
+		if(this.dialogStateToCallback != null && this.troySoarAgent.GetOutputLink() != null && this.troySoarAgent.GetOutputLink().GetNumberChildren() > 0){
+			DispatchCallback callback = this.dialogStateToCallback.getDispatchCallback();
+            callback.setUserTimeout("readOutputFromSoar", 0, REQUEST(new LogicalForm("readOutputFromSoar")), this.dialogStateToCallback); 
+            this.dialogStateToCallback = null;
+		}
+	}
 
-	private void readOutputFromSoar(){
-		
+	private LogicalForm readFromSoar(){
+		LogicalForm responseDialogAct = new LogicalForm();
+		for (int i = 0; i < this.troySoarAgent.GetOutputLink().GetNumberChildren(); i++){
+			Identifier messageId = this.troySoarAgent.GetOutputLink().GetChild(i).ConvertToIdentifier();
+			if (messageId.GetAttribute().equals("message")){
+				String dialog_act = messageId.GetParameterValue("dialog-act");
+				String content = messageId.GetParameterValue("content");
+				if(dialog_act.equals("inform")){
+				responseDialogAct = INFORM(new LogicalForm(content));
+				}
+			}
+		}
+		return responseDialogAct;
 	}
 	
 	

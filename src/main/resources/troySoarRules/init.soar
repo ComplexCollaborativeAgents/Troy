@@ -12,20 +12,49 @@ sp {propose*wait
    (<o> ^name wait)
    }
 
-sp {propose*hello
-    (state <s> ^superstate nil
-               ^io.input-link.day 1
-               -^said-hello true)
+sp {propose*copy*otto-message
+	(state <s> ^superstate nil
+            	^io.input-link.interaction <itr-l>
+             	-^message)
+ 	(<itr-l> ^<any> <m>)
 -->
-    (<s> ^operator <o> +)
-    (<o> ^name say-hello)
+	(<s> ^operator <op> +)
+ 	(<op> ^name copy-interaction
+          ^message <m>)
+  	
+  }
+
+sp {apply*copy*otto-message
+	(state <s> ^operator <op>)
+ 	(<op> ^name copy-interaction
+          ^message <m>)
+-->
+    (<s> ^message <m>)
     }
 
-sp {apply*hello
-    (state <s> ^superstate nil
-               ^operator.name say-hello
-               ^io.output-link <ol>)
+sp {propose*action-command*response
+	(state <s> ^message <m>
+            	-^responded true)
+ 	(<m> ^type action-command)
 -->
-    (<ol> ^message.message hello-world-from-soar)
-    (<s> ^said-hello true)
-    }
+	(<s> ^operator <op> +)
+ 	(<op> ^name respond-unknown-task
+          ^action-command <m>) 
+ }
+
+sp {apply*action-command*message
+	(state <s> ^operator <op>
+            	^io.output-link <ol>)
+ 	(<op> ^name respond-unknown-task
+          ^action-command <m>)
+-->
+	(<ol> ^message <message>)
+ 	(<message> ^dialog-act inform
+       	 ^content unknown-task)
+ 	(<s> ^responded true)
+ }
+          
+          
+          
+            
+            
