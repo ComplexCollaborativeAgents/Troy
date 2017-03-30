@@ -1,20 +1,13 @@
 rank(100) => Inform(Welcome)
-Agent: Inform(Welcome) -> Hi! I am Troy, your office secretary. 
-rank(10) topGoal(*ROOT*) => Ask(HowCanIHelpYou)
-Agent: Ask(HowCanIHelpYou) -> You can ask me to do tasks. If I don't know how, you can train me.| What tasks can I do for you? If I don't know how, you can train me.
+Agent: Inform(Welcome) -> Hi! I am Troy, your office secretary. You can ask me to do a task for you. If I don't know how to, you can train me.
 
-rank(40) Inform(Goal($1)) => writeToSoar($1)
-User: Inform(Goal($1)) <-> Say {Goal[$1]} to Soar.
-Goal[greeting] <-> hello
-Goal[greeting] <-> hi
-
-rank(40) Instruct(ActionCommand($1, $2)) => writeToSoar(ActionCommand, $1,$2)
-rank(40) Instruct(ActionCommand($1, $2, $3)) => writeToSoar(ActionCommand, $1, $2, $3)
+rank(40) Instruct(ActionCommand($1, $2)) => writeToSoar(ActionCommand, $1, $2) Inform()
+rank(40) Instruct(ActionCommand($1, $2, $3)) => writeToSoar(ActionCommand, $1, $2, $3) Inform()
 rank(30) Request(readOutputFromSoar) => readFromSoar($1) say($1)
 
 User: Instruct(ActionCommand($1, $2)) <-> {Verb[$1]} {NP[$2]}.
 User: Instruct(ActionCommand($1, $2, $3)) <-> {Verb[$1]} {NP[$2]} to {NP[$3]}.
-Agent: Inform(unknown-task) <-> I do not know how to do this task. Can you please train me?
+Agent: Inform(unknown-task) <-> I'm sorry. I do not know how to do this task. Can you please train me?
 Verb[print] <-> print
 Verb[email] <-> email
 Verb[put-together] <-> put together
