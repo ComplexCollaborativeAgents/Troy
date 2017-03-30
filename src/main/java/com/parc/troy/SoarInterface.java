@@ -77,7 +77,6 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
             result.newCall.setArg(0, da);
             resultList.add(result);
 		}
-		
 		else{
 			new IllegalArgumentException("Unknown call: " + call.toString());
 		}
