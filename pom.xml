@@ -8,11 +8,23 @@
   <packaging>jar</packaging>
 
   <name>troy</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/PARC/Troy</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>chat-maven-repo-s3</id>
+      <name>CHAT Group Repository</name>
+      <layout>default</layout>
+      <url>s3://chat-maven-repo-s3/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>		
+  </repositories>
 
   <dependencies>
     <dependency>
@@ -26,5 +38,38 @@
     	<artifactId>Otto</artifactId>
     	<version>1.2.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+    	<groupId>soar</groupId>
+    	<artifactId>sml</artifactId>
+    	<version>9.5.1</version>
+    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+	  <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>1.4.0</version>
+      <executions>
+        <execution>
+          <goals>
+            <goal>java</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <mainClass>com.parc.troy.TroyConsole</mainClass>
+      </configuration>
+      </plugin>
+    </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.kuali.maven.wagons</groupId>
+        <artifactId>maven-s3-wagon</artifactId>
+        <version>1.2.1</version>
+      </extension>
+    </extensions>
+  </build>
 </project>
