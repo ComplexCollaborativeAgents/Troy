@@ -2,6 +2,7 @@ package com.parc.troy;
 
 
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import com.parc.xi.dm.Config;
@@ -17,7 +18,7 @@ public class TroyAgent extends PlanStateAgent{
 	
 	private SoarInterface soarInterface;
 	
-	public TroyAgent(String name, String dmName, KnowledgeBase kb){
+	public TroyAgent(String name, String dmName, KnowledgeBase kb) throws URISyntaxException {
 		this.name = LogicalFormConstants.AGENT;
 		if (name == null || name.isEmpty()) name = "troy";
 		if (dmName == null || dmName.isEmpty()) dmName = "troyDM";	
