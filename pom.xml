@@ -47,21 +47,46 @@
 
   <build>
     <plugins>
+
       <plugin>
-	  <groupId>org.codehaus.mojo</groupId>
-      <artifactId>exec-maven-plugin</artifactId>
-      <version>1.4.0</version>
-      <executions>
-        <execution>
-          <goals>
-            <goal>java</goal>
-          </goals>
-        </execution>
-      </executions>
-      <configuration>
-        <mainClass>com.parc.troy.TroyConsole</mainClass>
-      </configuration>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>com.parc.troy.TroyConsole</mainClass>
+        </configuration>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+             <archive>
+                <manifest>
+                    <mainClass>com.parc.troy.TroyConsole</mainClass>
+                </manifest>
+            </archive>
+            <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+            </configuration>
+            <executions>
+              <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+              </execution>
+            </executions>
+      </plugin>
+
     </plugins>
 
     <extensions>
@@ -71,5 +96,6 @@
         <version>1.2.1</version>
       </extension>
     </extensions>
+
   </build>
 </project>
