@@ -21,7 +21,7 @@ Verb[show] <-> show
 NN[home-directory] <-> my home directory
 NN[file] <-> file
 NN[file] <-> files
-NP[Every($1)] <-> all {NN[$1]}
+NP[np(dt(all), n($1))] <-> all {NN[$1]}
 
 Verb[put-together] <-> put together
 NP[sales-brochure] <-> a sales brochure

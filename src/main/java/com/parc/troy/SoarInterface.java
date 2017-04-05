@@ -169,6 +169,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.troySoarAgent.Commit();
 	}
 	
+	
 	private void triggerOttoCallback(){
 		if(this.dialogStateToCallback != null && this.troySoarAgent.GetOutputLink() != null && this.troySoarAgent.GetOutputLink().GetNumberChildren() > 0){
 			DispatchCallback callback = this.dialogStateToCallback.getDispatchCallback();
@@ -182,9 +183,9 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		for (int i = 0; i < this.troySoarAgent.GetOutputLink().GetNumberChildren(); i++){
 			Identifier messageId = this.troySoarAgent.GetOutputLink().GetChild(i).ConvertToIdentifier();
 			if (messageId.GetAttribute().equals("message")){
-				String dialog_act = messageId.GetParameterValue("dialog-act");
+				String dialogAct = messageId.GetParameterValue("dialog-act");
 				String content = messageId.GetParameterValue("content");
-				if(dialog_act.equals("inform")){
+				if(dialogAct.equals("inform")){
 				responseDialogAct = INFORM(new LogicalForm(content));
 				}
 			}
