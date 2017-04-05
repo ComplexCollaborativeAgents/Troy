@@ -16,7 +16,7 @@ sp {topstate*apply*init-agent
 	(state <s> ^operator.name init-agent)
 -->
 	(<s> ^topstate <s>
-      	-^name troy)
+      	^name troy)
  }
 
 

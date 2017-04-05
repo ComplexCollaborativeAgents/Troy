@@ -3,7 +3,13 @@
 #
 # @created smohan 20170330
 
-
-
 sp {topstate*propose*interaction*new*message*otto
-	(state <s> ^
+	(state <s> ^io.input-link.interaction.message <message>
+            	^topstate <s>)
+-->
+	(<s> ^operator <op> +)
+ 	(<op> 	^name interaction
+        	^type incoming-message
+         	^message <message>)
+  }
+
