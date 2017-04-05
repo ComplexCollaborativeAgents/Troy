@@ -1,10 +1,23 @@
 package com.parc.troy;
 
+import static com.parc.xi.dm.LogicalFormConstants.INFORM;
+import static com.parc.xi.dm.LogicalFormConstants.REQUEST;
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+
+import sml.Agent;
+import sml.Agent.RunEventInterface;
+import sml.Identifier;
+import sml.Kernel;
+import sml.smlRunEventId;
 
 import com.parc.xi.dm.Config;
 import com.parc.xi.dm.DispatchCallback;
@@ -12,17 +25,6 @@ import com.parc.xi.dm.LogicalForm;
 import com.parc.xi.dm.agent.DialogRuleFn;
 import com.parc.xi.dm.state.DialogState;
 import com.parc.xi.dm.state.Plan;
-
-import static com.parc.xi.dm.LogicalFormConstants.*;
-import sml.Agent;
-import sml.Identifier;
-import sml.IdentifierSymbol;
-import sml.Kernel;
-import sml.WMElement;
-import sml.sml;
-import sml.smlRunEventId;
-import sml.Agent.RunEventInterface;
-import sml.smlRhsEventId;
 
 
 public class SoarInterface implements DialogRuleFn, RunEventInterface {
@@ -40,23 +42,23 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private DialogState dialogStateToCallback;
 	private LogicalForm callToProcess;
 
-	public SoarInterface(String name, String dmName){
-		this.configureAndStartSoarAgent(name, dmName);
+	public SoarInterface(String name, String dmName) throws URISyntaxException {
+        this.configureAndStartSoarAgent(name, dmName);
 	}
 	
-	void configureAndStartSoarAgent(String name, String dmName)
+	void configureAndStartSoarAgent(String name, String dmName) throws URISyntaxException
 	{
 		this.kernel = Kernel.CreateKernelInNewThread();
 		this.troySoarAgent = kernel.CreateAgent(name);
 		
 		this.inputLink = troySoarAgent.GetInputLink();
-		this.outputLink = troySoarAgent.GetOutputLink();
+		this.setOutputLink(troySoarAgent.GetOutputLink());
 		this.interactionLink = this.inputLink.CreateIdWME("interaction");
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
 		
-		String absoluteSoarRulesPath = Config.getProperty(dmName+".soarRules",null);
+		String absoluteSoarRulesPath = getFullPath(Config.getProperty(dmName+".soarRules",null));
 		troySoarAgent.LoadProductions(absoluteSoarRulesPath);
 		troySoarAgent.RegisterForRunEvent(smlRunEventId.smlEVENT_BEFORE_INPUT_PHASE, this, null);
 	}
@@ -67,7 +69,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		if (call.op.equals("writeToSoar")){
 			messageToWrite = call;
 			dialogStateToCallback = state;
-			callToProcess = call;
+			setCallToProcess(call);
 		}
 		if (call.op.equals("readFromSoar")){
 			LogicalForm da  = readFromSoar();
@@ -110,6 +112,32 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		stopAgentIfRequested();
 		triggerOttoCallback();
 		writeInputToSoar();
+	}
+
+	/**
+	 * Get the filename path for the specified resource value. Resource values might contain a classpath
+	 * prefix indicating they should be found by searching the current classpath. Whether the value is
+	 * specified as a classpath or absolute path, this method returns the absolute path name to the resource.
+	 * @param resourceValue the value specified as a property value that might have the classpath prefix
+	 * @return the full path to the specified resource
+	 * @throws URISyntaxException if the file path is invalid or can't be read
+	 */
+	protected String getFullPath(String resourceValue) throws URISyntaxException {
+	    final String CP_PREFIX = "classpath:";
+	    String fullPathString = null;
+        File soarRulesFile = null;
+
+        if (resourceValue.startsWith(CP_PREFIX)) {
+            URL resourcePath = getClass().getResource(resourceValue.substring(CP_PREFIX.length()));
+            if (resourcePath == null) throw new URISyntaxException(resourceValue, "Invalid path to specified resource file");
+            soarRulesFile = Paths.get(resourcePath.toURI()).toFile();
+            resourceValue = soarRulesFile.getAbsoluteFile().toString();
+        } else {
+            soarRulesFile = Paths.get(resourceValue).toFile();
+        }
+        if (! soarRulesFile.canRead()) throw new URISyntaxException(resourceValue, "Invalid path to specified resource file");
+
+        return fullPathString;
 	}
 
 	private void stopAgentIfRequested() {
@@ -167,6 +195,30 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	public String getErrorMessage(LogicalForm call) {
 		return null;
 	}
+
+    public String getTroySource() {
+        return troySource;
+    }
+
+    public void setTroySource(String troySource) {
+        this.troySource = troySource;
+    }
+
+    public Identifier getOutputLink() {
+        return outputLink;
+    }
+
+    public void setOutputLink(Identifier outputLink) {
+        this.outputLink = outputLink;
+    }
+
+    public LogicalForm getCallToProcess() {
+        return callToProcess;
+    }
+
+    public void setCallToProcess(LogicalForm callToProcess) {
+        this.callToProcess = callToProcess;
+    }
 	
 
 }
