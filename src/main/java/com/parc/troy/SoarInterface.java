@@ -120,16 +120,18 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	 * prefix indicating they should be found by searching the current classpath. Whether the value is
 	 * specified as a classpath or absolute path, this method returns the absolute path name to the resource.
 	 * @param resourceValue the value specified as a property value that might have the classpath prefix
-	 * @return the full path to the specified resource
+	 * @return the full path to the specified resource or null if resourceValue is null
 	 * @throws URISyntaxException if the file path is invalid or can't be read
 	 */
-	protected String getFullPath(String resourceValue) throws URISyntaxException {
+	protected static String getFullPath(String resourceValue) throws URISyntaxException {
 	    final String CP_PREFIX = "classpath:";
 	    String fullPathString = null;
         File soarRulesFile = null;
 
+        if (resourceValue == null) return null;
+
         if (resourceValue.startsWith(CP_PREFIX)) {
-            URL resourcePath = getClass().getResource(resourceValue.substring(CP_PREFIX.length()));
+            URL resourcePath = SoarInterface.class.getResource(resourceValue.substring(CP_PREFIX.length()));
             if (resourcePath == null) throw new URISyntaxException(resourceValue, "Invalid path to specified resource file");
             soarRulesFile = Paths.get(resourcePath.toURI()).toFile();
             resourceValue = soarRulesFile.getAbsoluteFile().toString();
