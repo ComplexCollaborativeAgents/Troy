@@ -59,6 +59,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
 		
 		String absoluteSoarRulesPath = getFullPath(Config.getProperty(dmName+".soarRules",null));
+		System.out.println("Loading files from " + absoluteSoarRulesPath);
 		troySoarAgent.LoadProductions(absoluteSoarRulesPath);
 		troySoarAgent.RegisterForRunEvent(smlRunEventId.smlEVENT_BEFORE_INPUT_PHASE, this, null);
 	}
@@ -136,7 +137,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
             soarRulesFile = Paths.get(resourceValue).toFile();
         }
         if (! soarRulesFile.canRead()) throw new URISyntaxException(resourceValue, "Invalid path to specified resource file");
-
+        System.out.println("Full soar rules path string is " + fullPathString);
         return fullPathString;
 	}
 

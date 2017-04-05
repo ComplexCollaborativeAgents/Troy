@@ -17,12 +17,12 @@ Agent: Inform(unknown-task) <-> I'm sorry. I do not know how to do this task. Ca
 Verb[print] <-> print
 Verb[email] <-> email
 Verb[list] <-> list
-Verb[list] <-> show
-NP[home-directory] <-> my home directory
+Verb[show] <-> show
+NN[home-directory] <-> my home directory
 NN[file] <-> file
 NN[file] <-> files
-ADJ[all] <-> all
-NP[]
+NP[Every($1)] <-> all {NN[$1]}
+
 Verb[put-together] <-> put together
 NP[sales-brochure] <-> a sales brochure
 NP[sales-document] <-> a sales document
