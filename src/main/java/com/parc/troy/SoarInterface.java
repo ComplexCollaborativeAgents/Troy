@@ -137,7 +137,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
             soarRulesFile = Paths.get(resourceValue).toFile();
         }
         if (! soarRulesFile.canRead()) throw new URISyntaxException(resourceValue, "Invalid path to specified resource file");
-
+       
+        fullPathString = soarRulesFile.toString();
         return fullPathString;
 	}
 
