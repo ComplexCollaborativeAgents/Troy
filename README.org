@@ -1,2 +1,0 @@
-* TROY
-A TRainable Office secretarY design using the Soar cognitive architecture.
