@@ -14,17 +14,21 @@ Agent: Ask(UnknownConcept($1)) <-> I do not know what {$1} is. Can you please de
 Agent: Inform(unknown-task) <-> I'm sorry. I do not know how to do this task. Can you please train me?
 
 
+
+NP[np(dt($1), n($2))] <-> {DT[$1]} {NN[$2]}
+
 Verb[print] <-> print
 Verb[email] <-> email
 Verb[list] <-> list
 Verb[show] <-> show
-NN[home-directory] <-> my home directory
+NN[home-directory] <-> home directory
 NN[file] <-> file
 NN[file] <-> files
-NP[np(dt(all), n($1))] <-> all {NN[$1]}
-
+NN[sales-brochure] <-> sales brochure
+NN[sales-document] <-> sales document
+NN[sales-proposal] <-> sales proposal
+DT[all] <- all
+DT[all] <- all the
+DT[a] <- a
+DT[the] <- the
 Verb[put-together] <-> put together
-NP[sales-brochure] <-> a sales brochure
-NP[sales-document] <-> a sales document
-NP[sales-proposal] <-> a sales proposal 
-NP[person-shiwali] <-> Shiwali

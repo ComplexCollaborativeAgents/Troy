@@ -35,6 +35,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private Identifier outputLink;
 	private Identifier interactionLink;
 	
+	private InteractionInputWriter inputWriter;
+	
 	private boolean isRunning = false;
 	private boolean queueStop = false;
 	
@@ -54,6 +56,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.inputLink = troySoarAgent.GetInputLink();
 		this.setOutputLink(troySoarAgent.GetOutputLink());
 		this.interactionLink = this.inputLink.CreateIdWME("interaction");
+		
+		this.inputWriter = new InteractionInputWriter();
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
@@ -149,24 +153,12 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	}
 	
 	private void writeInputToSoar() {
-		if (messageToWrite != null) {
-			if(messageToWrite.getArg(0).toString().equals("ActionCommand"))
-				writeActionCommand(messageToWrite.getArgList());
-			messageToWrite = null;
+		if (this.messageToWrite != null) {
+			//System.out.println("in writeInputToSoar");
+			inputWriter.writeMessage(this.messageToWrite, this.interactionLink);
+			this.troySoarAgent.Commit();
+			this.messageToWrite = null;
 		}
-	}
-	
-	private void writeActionCommand(List<LogicalForm> argList) {
-		Identifier commandId = this.interactionLink.CreateIdWME("message");
-		commandId.CreateStringWME("type", "action-command");
-		Iterator<LogicalForm> argListIterator = argList.iterator();
-		argListIterator.next();
-		commandId.CreateStringWME("verb", argListIterator.next().toString());
-		String baseObjectString = "object";
-		while(argListIterator.hasNext()){
-			commandId.CreateStringWME(baseObjectString, argListIterator.next().toString());
-		}
-		this.troySoarAgent.Commit();
 	}
 	
 	
@@ -221,6 +213,14 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
     public void setCallToProcess(LogicalForm callToProcess) {
         this.callToProcess = callToProcess;
     }
+
+	public InteractionInputWriter getInputWriter() {
+		return inputWriter;
+	}
+
+	public void setInputWriter(InteractionInputWriter inputWriter) {
+		this.inputWriter = inputWriter;
+	}
 	
 
 }
