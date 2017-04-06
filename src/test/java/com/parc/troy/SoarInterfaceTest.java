@@ -5,14 +5,9 @@ import java.net.URISyntaxException;
 
 import junit.framework.TestCase;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class SoarInterfaceTest extends TestCase {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testGetFullPath() throws URISyntaxException, FileNotFoundException {
