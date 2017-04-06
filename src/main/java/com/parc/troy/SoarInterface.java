@@ -4,6 +4,7 @@ import static com.parc.xi.dm.LogicalFormConstants.INFORM;
 import static com.parc.xi.dm.LogicalFormConstants.REQUEST;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -42,11 +43,11 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private DialogState dialogStateToCallback;
 	private LogicalForm callToProcess;
 
-	public SoarInterface(String name, String dmName) throws URISyntaxException {
+	public SoarInterface(String name, String dmName) throws URISyntaxException, FileNotFoundException {
         this.configureAndStartSoarAgent(name, dmName);
 	}
 	
-	void configureAndStartSoarAgent(String name, String dmName) throws URISyntaxException
+	void configureAndStartSoarAgent(String name, String dmName) throws URISyntaxException, FileNotFoundException
 	{
 		this.kernel = Kernel.CreateKernelInNewThread();
 		this.troySoarAgent = kernel.CreateAgent(name);
@@ -121,9 +122,10 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	 * specified as a classpath or absolute path, this method returns the absolute path name to the resource.
 	 * @param resourceValue the value specified as a property value that might have the classpath prefix
 	 * @return the full path to the specified resource or null if resourceValue is null
-	 * @throws URISyntaxException if the file path is invalid or can't be read
+	 * @throws URISyntaxException if the file path is invalid
+	 * @throws FileNotFoundException if the calculated file path is not a file or not readable
 	 */
-	protected static String getFullPath(String resourceValue) throws URISyntaxException {
+	protected static String getFullPath(String resourceValue) throws URISyntaxException, FileNotFoundException {
 	    final String CP_PREFIX = "classpath:";
 	    String fullPathString = null;
         File soarRulesFile = null;
@@ -138,7 +140,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
         } else {
             soarRulesFile = Paths.get(resourceValue).toFile();
         }
-        if (! soarRulesFile.canRead()) throw new URISyntaxException(resourceValue, "Invalid path to specified resource file");
+        if (! soarRulesFile.canRead()) throw new FileNotFoundException("Cannot find or read file: " + resourceValue);
        
         fullPathString = soarRulesFile.toString();
         return fullPathString;

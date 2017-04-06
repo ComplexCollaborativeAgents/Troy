@@ -1,24 +1,19 @@
 package com.parc.troy;
 
-
-import java.io.InputStream;
+import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 import com.parc.xi.dm.Config;
-import com.parc.xi.dm.DialogManager;
 import com.parc.xi.dm.LogicalFormConstants;
-import com.parc.xi.dm.agent.PlanStateAgent;
 import com.parc.xi.dm.agent.DialogRuleEngine;
+import com.parc.xi.dm.agent.PlanStateAgent;
 import com.parc.xi.dm.kb.KnowledgeBase;
-
-
 
 public class TroyAgent extends PlanStateAgent{
 	
 	private SoarInterface soarInterface;
 	
-	public TroyAgent(String name, String dmName, KnowledgeBase kb) throws URISyntaxException {
+	public TroyAgent(String name, String dmName, KnowledgeBase kb) throws URISyntaxException, FileNotFoundException {
 		this.name = LogicalFormConstants.AGENT;
 		if (name == null || name.isEmpty()) name = "troy";
 		if (dmName == null || dmName.isEmpty()) dmName = "troyDM";	
