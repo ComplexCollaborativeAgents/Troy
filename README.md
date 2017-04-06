@@ -12,8 +12,13 @@ A TRainable Office secretarY design using the Soar cognitive architecture.
 1. You must first install Soar libraries on your system.
   * Soar requires SWIG to build the libraries from source. Make sure SWIG is installed on your system.
   * Check out the Soar source code from https://github.com/SoarGroup/Soar/tree/releases/9.5.1
-  * Build the Soar code by executing `python scons/scons.py all` from the top-level Soar directory.
-  * Install the Soar libraries `libSoar.dylib` and `libJava_sml_ClientInterface.jnilib` on your system. They should be in the library search path Java uses on your system. On Mac machines you can place them in `~/Library/Java/Extensions`.
+  * Build the Soar code by executing `python scons/scons.py all` from the top-level Soar directory. All of the compiled files should be in the `out` subdirectory.
+  * The following Soar files must be in the library search path used by Java on your system:
+    * libSoar.dylib
+    * libJava_sml_ClientInterface.jnilib
+    * settings.soar
+    * (the `java` subdirectory)
+    The files should be in the library search path Java uses on your system. On Mac machines you can place them in `~/Library/Java/Extensions`.
 2. Compile Troy:
   * mvn compile
 3. Execute in the console:
