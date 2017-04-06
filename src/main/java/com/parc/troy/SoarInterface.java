@@ -3,12 +3,8 @@ package com.parc.troy;
 import static com.parc.xi.dm.LogicalFormConstants.INFORM;
 import static com.parc.xi.dm.LogicalFormConstants.REQUEST;
 
-import java.io.File;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -19,6 +15,7 @@ import sml.Identifier;
 import sml.Kernel;
 import sml.smlRunEventId;
 
+import com.parc.troy.world.WorldInputWriter;
 import com.parc.xi.dm.Config;
 import com.parc.xi.dm.DispatchCallback;
 import com.parc.xi.dm.LogicalForm;
@@ -34,8 +31,10 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private Identifier inputLink;
 	private Identifier outputLink;
 	private Identifier interactionLink;
+	private Identifier worldLink;
 	
-	private InteractionInputWriter inputWriter;
+	private InteractionInputWriter interactionIW;
+	private WorldInputWriter worldIW;
 	
 	private boolean isRunning = false;
 	private boolean queueStop = false;
@@ -56,14 +55,16 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.inputLink = troySoarAgent.GetInputLink();
 		this.setOutputLink(troySoarAgent.GetOutputLink());
 		this.interactionLink = this.inputLink.CreateIdWME("interaction");
+		this.setWorldLink(this.inputLink.CreateIdWME("world"));
 		
-		this.inputWriter = new InteractionInputWriter();
+		this.interactionIW = new InteractionInputWriter(this.interactionLink);
+		this.worldIW = new WorldInputWriter(dmName, this.worldLink);
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
 		
-		String absoluteSoarRulesPath = getFullPath(Config.getProperty(dmName+".soarRules",null));
-		System.out.println("Loading files from " + absoluteSoarRulesPath);
+		String absoluteSoarRulesPath = ConfigHelper.getFullFilePath(Config.getProperty(dmName+".soarRules",null));
+		//System.out.println("Loading files from " + absoluteSoarRulesPath);
 		troySoarAgent.LoadProductions(absoluteSoarRulesPath);
 		troySoarAgent.RegisterForRunEvent(smlRunEventId.smlEVENT_BEFORE_INPUT_PHASE, this, null);
 	}
@@ -116,33 +117,16 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	public void runEventHandler(int eventID, Object data, Agent agent, int phase) {
 		stopAgentIfRequested();
 		triggerOttoCallback();
-		writeInputToSoar();
+		writeInteractionInputToSoar();
+		writeWorldInputToSoar();
+		
 	}
 
-	/**
-	 * Get the filename path for the specified resource value. Resource values might contain a classpath
-	 * prefix indicating they should be found by searching the current classpath. Whether the value is
-	 * specified as a classpath or absolute path, this method returns the absolute path name to the resource.
-	 * @param resourceValue the value specified as a property value that might have the classpath prefix
-	 * @return the full path to the specified resource
-	 * @throws URISyntaxException if the file path is invalid or can't be read
-	 */
-	protected String getFullPath(String resourceValue) throws URISyntaxException {
-	    final String CP_PREFIX = "classpath:";
-	    String fullPathString = null;
-        File soarRulesFile = null;
+	
 
-        if (resourceValue.startsWith(CP_PREFIX)) {
-            URL resourcePath = getClass().getResource(resourceValue.substring(CP_PREFIX.length()));
-            if (resourcePath == null) throw new URISyntaxException(resourceValue, "Invalid path to specified resource file");
-            soarRulesFile = Paths.get(resourcePath.toURI()).toFile();
-            resourceValue = soarRulesFile.getAbsoluteFile().toString();
-        } else {
-            soarRulesFile = Paths.get(resourceValue).toFile();
-        }
-        if (! soarRulesFile.canRead()) throw new URISyntaxException(resourceValue, "Invalid path to specified resource file");
-        fullPathString = soarRulesFile.toString();
-        return fullPathString;
+	private void writeWorldInputToSoar() {
+		this.worldIW.writeWorldInput();
+		this.troySoarAgent.Commit();
 	}
 
 	private void stopAgentIfRequested() {
@@ -152,10 +136,10 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		}
 	}
 	
-	private void writeInputToSoar() {
+	private void writeInteractionInputToSoar() {
 		if (this.messageToWrite != null) {
 			//System.out.println("in writeInputToSoar");
-			inputWriter.writeMessage(this.messageToWrite, this.interactionLink);
+			this.interactionIW.writeMessage(this.messageToWrite);
 			this.troySoarAgent.Commit();
 			this.messageToWrite = null;
 		}
@@ -215,11 +199,19 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
     }
 
 	public InteractionInputWriter getInputWriter() {
-		return inputWriter;
+		return interactionIW;
 	}
 
 	public void setInputWriter(InteractionInputWriter inputWriter) {
-		this.inputWriter = inputWriter;
+		this.interactionIW = inputWriter;
+	}
+
+	public Identifier getWorldLink() {
+		return worldLink;
+	}
+
+	public void setWorldLink(Identifier worldLink) {
+		this.worldLink = worldLink;
 	}
 	
 

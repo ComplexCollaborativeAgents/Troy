@@ -8,9 +8,16 @@ import sml.Identifier;
 import com.parc.xi.dm.LogicalForm;
 
 public class InteractionInputWriter {
-	void writeMessage(LogicalForm messageToWrite, Identifier interactionLink) {
+	
+	private Identifier interactionLink;
+	
+	public InteractionInputWriter(Identifier interactionLink){
+		this.interactionLink = interactionLink;
+	}
+	
+	void writeMessage(LogicalForm messageToWrite) {
 		//System.out.println("writeMessage");
-		Identifier commandId = interactionLink.CreateIdWME("message");
+		Identifier commandId = this.interactionLink.CreateIdWME("message");
 		if(messageToWrite.getArg(0).toString().equals("ActionCommand")){
 			commandId.CreateStringWME("type", "action-command");
 			this.writeActionCommand(messageToWrite, commandId);
@@ -21,7 +28,6 @@ public class InteractionInputWriter {
 		Iterator<LogicalForm> argListIterator = messageToWrite.getArgList().iterator();
 		argListIterator.next();
 		commandId.CreateStringWME("verb", argListIterator.next().toString());
-		String baseObjectString = "object";
 		while(argListIterator.hasNext()){
 			LogicalForm lf = argListIterator.next();
 			if(lf.op != null & lf.op.equals("np")){
