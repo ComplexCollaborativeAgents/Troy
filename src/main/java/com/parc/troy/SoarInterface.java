@@ -3,6 +3,8 @@ package com.parc.troy;
 import static com.parc.xi.dm.LogicalFormConstants.INFORM;
 import static com.parc.xi.dm.LogicalFormConstants.REQUEST;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +45,11 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private DialogState dialogStateToCallback;
 	private LogicalForm callToProcess;
 
-	public SoarInterface(String name, String dmName) throws URISyntaxException {
+	public SoarInterface(String name, String dmName) throws URISyntaxException, FileNotFoundException {
         this.configureAndStartSoarAgent(name, dmName);
 	}
 	
-	void configureAndStartSoarAgent(String name, String dmName) throws URISyntaxException
+	void configureAndStartSoarAgent(String name, String dmName) throws URISyntaxException, FileNotFoundException
 	{
 		this.kernel = Kernel.CreateKernelInNewThread();
 		this.troySoarAgent = kernel.CreateAgent(name);
@@ -122,12 +124,12 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		
 	}
 
-	
-
 	private void writeWorldInputToSoar() {
 		this.worldIW.writeWorldInput();
 		this.troySoarAgent.Commit();
 	}
+
+	
 
 	private void stopAgentIfRequested() {
 		if(queueStop){
