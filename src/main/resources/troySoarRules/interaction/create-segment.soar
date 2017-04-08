@@ -1,0 +1,17 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+sp {interaction*apply*create-segment
+    (state <s> ^name interaction
+               ^operator <op>
+               ^interaction.stack <stack>)
+    (<op> ^name create-segment
+          ^message <m1>)
+-->
+    (<stack> ^segment <segment>)
+    (<segment> ^message <m1>)
+    }
+               
+    

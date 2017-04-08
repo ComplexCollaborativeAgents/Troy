@@ -1,0 +1,8 @@
+##!
+# @file: 
+#
+# @created smohan 20170407
+
+source "verbs.soar"
+
+source "nouns.soar"

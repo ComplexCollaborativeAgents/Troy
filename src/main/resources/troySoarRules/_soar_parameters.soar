@@ -1,0 +1,9 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+
+
+### semantic memory settings
+smem --set learning on

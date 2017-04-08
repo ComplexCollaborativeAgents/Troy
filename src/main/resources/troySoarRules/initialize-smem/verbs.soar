@@ -1,0 +1,10 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+smem --add {
+    (<a1> ^linguistic <al1> ^procedural <ap1> ^type action)
+    (<al1> ^verb list ^object <obj>)
+    (<ap1> ^op_name op_list ^argument <obj>)
+}

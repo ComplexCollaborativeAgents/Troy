@@ -3,9 +3,11 @@
 #
 # @created smohan 20170330
 
-sp {topstate*propose*interaction*new*message*otto
-	(state <s> ^io.input-link.interaction.message <message>
-            	^topstate <s>)
+sp {topstate*propose*interaction
+	(state <s> ^name troy
+               ^io.input-link.interaction.message <message>
+               ^topstate <s>
+               -^interaction.stack.segment.message <message>)
 -->
 	(<s> ^operator <op> +)
  	(<op> 	^name interaction
@@ -13,3 +15,15 @@ sp {topstate*propose*interaction*new*message*otto
          	^message <message>)
   }
 
+
+sp {topstate*propose*comprehension
+    (state <s> ^name troy
+               ^interaction.stack.segment <seg>)
+    (<seg> ^message <m>
+           -^groundings)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name comprehension
+          ^message <m>
+          ^segment <seg>)
+    }

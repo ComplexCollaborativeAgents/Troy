@@ -1,0 +1,28 @@
+##!
+# @file
+#
+# @created smohan 20170407
+sp {index-noun-phrase*elaborate*description
+    (state <s> ^name index-noun-phrase
+               ^superstate.operator <sop>)
+    (<sop> ^description <d>)
+-->
+    (<s> ^description <d>)
+    }
+
+
+sp {index-noun-phrase*elaborate*resolution-type*set
+    (state <s> ^name index-noun-phrase
+               ^description <d>)
+    (<d> ^determiner all)
+-->
+    (<s> ^resolution-type set)
+    }
+
+sp {index-noun-phrase*elaborate*grounding
+    (state <s> ^name index-noun-phrase)
+-->
+    (<s> ^grounding <g>)
+    }
+
+               

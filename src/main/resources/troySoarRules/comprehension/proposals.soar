@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170407
+sp {comprehension*propose*index-noun-phrase
+    (state <s> ^name comprehension
+               ^message <m>)
+    (<m> ^noun-phrase <np>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name index-noun-phrase
+          ^description <np>)
+    }

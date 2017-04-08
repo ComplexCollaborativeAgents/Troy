@@ -1,0 +1,20 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+sp {interaction*elaborate*message
+    (state <s> ^name interaction
+               ^superstate.operator <sop>)
+    (<sop> ^name interaction
+           ^message <m>)
+-->
+    (<s> ^message <m>)
+    }
+
+sp {interaction*elaborate*interaction-stack
+    (state <s> ^name interaction
+               ^superstate.interaction <inter>)
+-->
+    (<s> ^interaction <inter>)
+    }

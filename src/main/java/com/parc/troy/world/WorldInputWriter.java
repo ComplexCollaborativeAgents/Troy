@@ -10,6 +10,7 @@ import sml.Identifier;
 import sml.WMElement;
 
 import com.parc.troy.ConfigHelper;
+import com.parc.troy.SoarHelper;
 import com.parc.xi.dm.Config;
 
 public class WorldInputWriter {
@@ -20,7 +21,7 @@ public class WorldInputWriter {
 	private Identifier worldId;
 
 	public WorldInputWriter(String dmName, Identifier worldId) throws URISyntaxException, FileNotFoundException{
-		System.out.println("DMname is " + dmName);
+		// SM: put in a test if this file is not null.
 		this.homePath = Config.getProperty(dmName+".Home",null);;
 		this.currentPath = this.homePath;
 		this.worldId = worldId;
@@ -36,23 +37,13 @@ public class WorldInputWriter {
 			File file = listOfFiles[i];
 			Identifier fileId = objectsId.CreateIdWME("object");
 			fileId.CreateStringWME("name", file.getName());
-			if(file.isFile()) fileId.CreateStringWME("type", "file");
-			else if (file.isDirectory()) fileId.CreateStringWME("type", "folder");
+			if(file.isFile()) fileId.CreateStringWME("type", "file_object");
+			else if (file.isDirectory()) fileId.CreateStringWME("type", "folder_object");
 		}
 	}
 	
 	private void clearWorldLink(){
-		deleteAllChildren(this.worldId);
-	}
-	
-	private void deleteAllChildren(Identifier id){
-		int index = 0;
-		while (id.GetNumberChildren() > 0){
-			WMElement child = id.GetChild(index);
-			if (child != null) {
-					child.DestroyWME();
-				}
-		}
+		SoarHelper.deleteAllChildren(this.worldId);
 	}
 	
 	

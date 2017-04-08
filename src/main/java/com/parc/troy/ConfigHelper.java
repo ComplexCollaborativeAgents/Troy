@@ -25,7 +25,6 @@ public class ConfigHelper {
         if (resourceValue == null) return null;
 
         if (resourceValue.startsWith(CP_PREFIX)) {
-        	System.out.println("resource value is " + resourceValue.substring(CP_PREFIX.length()));
             URL resourcePath = ConfigHelper.class.getResource(resourceValue.substring(CP_PREFIX.length()));
             if (resourcePath == null) throw new URISyntaxException(resourceValue, "Invalid path to specified resource");
             soarRulesFile = Paths.get(resourcePath.toURI()).toFile();

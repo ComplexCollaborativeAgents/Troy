@@ -17,6 +17,7 @@ public class InteractionInputWriter {
 	
 	void writeMessage(LogicalForm messageToWrite) {
 		//System.out.println("writeMessage");
+		clearInteractionLink();
 		Identifier commandId = this.interactionLink.CreateIdWME("message");
 		if(messageToWrite.getArg(0).toString().equals("ActionCommand")){
 			commandId.CreateStringWME("type", "action-command");
@@ -24,6 +25,10 @@ public class InteractionInputWriter {
 		}
 	}
 	
+	private void clearInteractionLink() {
+		SoarHelper.deleteAllChildren(this.interactionLink);
+	}
+
 	void writeActionCommand(LogicalForm messageToWrite, Identifier commandId) {
 		Iterator<LogicalForm> argListIterator = messageToWrite.getArgList().iterator();
 		argListIterator.next();

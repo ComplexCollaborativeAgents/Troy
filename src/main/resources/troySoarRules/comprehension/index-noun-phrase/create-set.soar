@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+sp {index-noun-phrase*apply*create-set
+    (state <s> ^name index-noun-phrase
+               ^operator <op>
+               ^grounding <g>)
+    (<op> ^name create-set)
+-->
+    (<g> ^set <set>)
+}

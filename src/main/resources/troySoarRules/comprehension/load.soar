@@ -2,3 +2,9 @@
 # @file: 
 #
 # @created smohan 20170330
+
+source "elaborations.soar"
+
+source "proposals.soar"
+
+source "index-noun-phrase/load.soar"

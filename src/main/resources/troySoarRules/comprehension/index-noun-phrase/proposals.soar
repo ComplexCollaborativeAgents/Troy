@@ -1,0 +1,28 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+
+sp {index-noun-phrase*propose*create-set
+    (state <s> ^name index-noun-phrase
+               ^grounding <g>
+               ^resolution-type set)
+    (<g> -^set <any>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name create-set)
+}
+
+
+sp {index-noun-phrase*propose*find-objects
+    (state <s> ^name index-noun-phrase
+               ^description.noun <noun>
+               -^found-objects.description <noun>)
+               
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name find-objects
+          ^description <noun>)
+    }
+               

@@ -1,0 +1,10 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+
+smem --add {
+        (<o1> ^noun file ^attribute type ^value file_object)
+        (<o2> ^noun folder ^attribute type ^value folder_object)
+}
