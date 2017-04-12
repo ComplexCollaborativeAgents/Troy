@@ -1,58 +1,122 @@
 package com.parc.troy.world;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import sml.Identifier;
 import sml.WMElement;
 
-import com.parc.troy.ConfigHelper;
 import com.parc.troy.SoarHelper;
-import com.parc.xi.dm.Config;
 
 public class WorldInputWriter {
 	
-	private String currentPath;
-	private String homePath;
-	
+	private World world;
 	private Identifier worldId;
+	private WMElement currentFolderName;
+	private Identifier objectsId;
+	private Map<File, Identifier> fileIdMap;
 
-	public WorldInputWriter(String dmName, Identifier worldId) throws URISyntaxException, FileNotFoundException{
-		// SM: put in a test if this file is not null.
-		this.homePath = Config.getProperty(dmName+".Home",null);;
-		this.currentPath = this.homePath;
+	public WorldInputWriter(String dmName, Identifier worldId, World world){
+		this.world = world;
 		this.worldId = worldId;
+		fileIdMap = new HashMap<File, Identifier>();
 	}
 	
 	public void writeWorldInput(){
-		clearWorldLink();
-		File folder = new File(currentPath);
-		this.worldId.CreateStringWME("current-directory", folder.getName());
-		Identifier objectsId = worldId.CreateIdWME("objects");
-		File[] listOfFiles = folder.listFiles();
-		for (int i = 0; i < listOfFiles.length; i++) {
-			File file = listOfFiles[i];
-			Identifier fileId = objectsId.CreateIdWME("object");
-			fileId.CreateStringWME("name", file.getName());
-			if(file.isFile()) fileId.CreateStringWME("type", "file_object");
-			else if (file.isDirectory()) fileId.CreateStringWME("type", "folder_object");
+		if (!this.world.isCurrentPathSameAsPreviousPath()){
+			System.out.println("First time in this directory. Writing the world structure.");
+			this.clearWorldLink();
+			this.writeFolderStructure();
+			this.world.setPreviousPath(this.world.getCurrentPath());
+		}
+		else
+			this.updateFileFolderObjects();			
+	}
+	
+	private void writeFolderStructure(){
+		System.out.println("Writing new folder structure");
+		this.currentFolderName = this.worldId.CreateStringWME("current-folder", this.world.getFolder().getName());
+		this.objectsId = this.worldId.CreateIdWME("objects");
+		this.fileIdMap = new HashMap<File, Identifier>();
+		Set<File> setOfFiles = this.world.getObjectSet();
+		for(File file: setOfFiles){
+			this.createAndAddFileIdentifier(file);
 		}
 	}
 	
-	private void clearWorldLink(){
-		SoarHelper.deleteAllChildren(this.worldId);
+	private void updateFileFolderObjects(){
+		System.out.println("Already have the structure");
+		Set<File> setOfFiles = this.world.getObjectSet();
+		Set<File> filesToKeep = Collections.emptySet();
+		System.out.println("Number of items in fileIdMap " + this.fileIdMap.size());
+		
+		for (File file: setOfFiles){
+			if(!this.fileIdMap.keySet().contains(file)){
+				System.out.println("Adding file " + file.toString());
+				this.createAndAddFileIdentifier(file);
+			}
+		}
+		
+		for (File file: this.fileIdMap.keySet()){
+			if(!setOfFiles.contains(file)){
+				System.out.println("Deleting file " + file.toString());
+				SoarHelper.deleteAllChildren(this.fileIdMap.get(file));
+				this.fileIdMap.get(file).DestroyWME();
+				this.fileIdMap.remove(file);
+			}
+		}
 	}
 	
+	private void createAndAddFileIdentifier(File file){
+		Identifier fileId = this.objectsId.CreateIdWME("object");
+		fileId.CreateStringWME("name", file.getName());
+		if(file.isFile()) fileId.CreateStringWME("type", "file_object");
+		else if (file.isDirectory()) fileId.CreateStringWME("type", "folder_object");
+		this.fileIdMap.put(file, fileId);
+	}
 	
-	public String getCurrentPath() {
-		return currentPath;
+	private void clearWorldLink(){
+		if(this.currentFolderName != null){
+			this.currentFolderName.DestroyWME();
+		}
+		
+		if(this.objectsId != null){
+			this.objectsId.DestroyWME();
+		}
+		
+		if(this.fileIdMap != null){
+			for (Map.Entry<File, Identifier> entry : this.fileIdMap.entrySet()) {
+				SoarHelper.deleteAllChildren(entry.getValue());
+			}
+		}
+	}
+	
+
+	public World getWorld() {
+		return world;
 	}
 
-	public void setCurrentPath(String currentPath) {
-		this.currentPath = currentPath;
+	public void setWorld(World world) {
+		this.world = world;
+	}
+
+	public WMElement getCurrentFolderName() {
+		return currentFolderName;
+	}
+
+	public void setCurrentFolderName(WMElement currentFolderName) {
+		this.currentFolderName = currentFolderName;
+	}
+
+	public Map<File, Identifier> getFileIdMap() {
+		return fileIdMap;
+	}
+
+	public void setFileIdMap(HashMap<File, Identifier> fileIdMap) {
+		this.fileIdMap = fileIdMap;
 	}
 	
 	

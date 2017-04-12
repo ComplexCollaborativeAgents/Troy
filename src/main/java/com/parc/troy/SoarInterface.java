@@ -17,6 +17,7 @@ import sml.Identifier;
 import sml.Kernel;
 import sml.smlRunEventId;
 
+import com.parc.troy.world.World;
 import com.parc.troy.world.WorldInputWriter;
 import com.parc.xi.dm.Config;
 import com.parc.xi.dm.DispatchCallback;
@@ -37,6 +38,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	
 	private InteractionInputWriter interactionIW;
 	private WorldInputWriter worldIW;
+	private World world;
 	
 	private boolean isRunning = false;
 	private boolean queueStop = false;
@@ -60,7 +62,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.setWorldLink(this.inputLink.CreateIdWME("world"));
 		
 		this.interactionIW = new InteractionInputWriter(this.interactionLink);
-		this.worldIW = new WorldInputWriter(dmName, this.worldLink);
+		this.world = new World(dmName);
+		this.worldIW = new WorldInputWriter(dmName, this.worldLink, this.world);
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
@@ -100,7 +103,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
     	class AgentThread implements Runnable{
     		public void run(){
     	    	isRunning = true;
-    			sendCommand("run");
+    			//sendCommand("run");
     			isRunning = false;
     		}
     	}
@@ -119,8 +122,10 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	public void runEventHandler(int eventID, Object data, Agent agent, int phase) {
 		stopAgentIfRequested();
 		triggerOttoCallback();
+		this.world.updateWorld();
 		writeInteractionInputToSoar();
 		writeWorldInputToSoar();
+		
 		
 	}
 
@@ -129,7 +134,6 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.troySoarAgent.Commit();
 	}
 
-	
 
 	private void stopAgentIfRequested() {
 		if(queueStop){

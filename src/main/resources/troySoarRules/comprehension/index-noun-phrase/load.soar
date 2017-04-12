@@ -9,4 +9,6 @@ source "proposals.soar"
 
 source "create-set.soar"
 
-source "find-objects/load.soar"
+source "find-object/load.soar"
+
+source "preferences.soar"

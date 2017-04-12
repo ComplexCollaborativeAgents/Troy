@@ -18,11 +18,14 @@ sp {index-noun-phrase*propose*create-set
 sp {index-noun-phrase*propose*find-objects
     (state <s> ^name index-noun-phrase
                ^description.noun <noun>
+               ^world.objects <objs>
                -^found-objects.description <noun>)
                
 -->
     (<s> ^operator <op> +)
-    (<op> ^name find-objects
-          ^description <noun>)
+    (<op> ^name find-object
+          ^object-set <objs>
+          ^attribute name
+          ^label <noun>)
     }
                

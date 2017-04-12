@@ -15,3 +15,17 @@ sp {all*elaborate*topstate
 -->
 	(<s> ^topstate <ts>)
  }
+
+sp {topstate*elaborate*world
+	(state <s> ^topstate <s>
+            	^io.input-link.world <w>)
+-->
+	(<s> ^world <w>)
+ }
+
+sp {all*elaborate*world
+	(state <s> ^superstate.world <w>)
+-->
+	(<s> ^world <w>)
+ }
+	
