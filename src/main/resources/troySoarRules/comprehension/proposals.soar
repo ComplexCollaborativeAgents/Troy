@@ -4,8 +4,10 @@
 # @created smohan 20170407
 sp {comprehension*propose*index-noun-phrase
     (state <s> ^name comprehension
-               ^message <m>)
+               ^message <m>
+               ^grounding <g>)
     (<m> ^noun-phrase <np>)
+    (<g> -^noun-phrase <any>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name index-noun-phrase

@@ -3,29 +3,37 @@
 #
 # @created smohan 20170407
 
-
-sp {index-noun-phrase*propose*create-set
-    (state <s> ^name index-noun-phrase
-               ^grounding <g>
-               ^resolution-type set)
-    (<g> -^set <any>)
--->
-    (<s> ^operator <op> +)
-    (<op> ^name create-set)
-}
-
-
-sp {index-noun-phrase*propose*find-objects
+sp {index-noun-phrase*propose*find-object
     (state <s> ^name index-noun-phrase
                ^description.noun <noun>
                ^world.objects <objs>
-               -^found-objects.description <noun>)
-               
+               -^found-objects.description <noun>)   
 -->
     (<s> ^operator <op> +)
     (<op> ^name find-object
           ^object-set <objs>
-          ^attribute name
-          ^label <noun>)
+          ^description <noun>)
+    }
+               
+
+sp {index-noun-phrase*propose*resolve-grounding
+    (state <s> ^name index-noun-phrase
+               ^grounding <g>
+               ^resolution <res>
+               ^found-objects.objects <objs>)
+    (<g> -^<any>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name resolve-grounding
+          ^grounding <g>
+          ^resolution <res>
+          ^found-objects.objects <objs>)
+    }
+
+sp {index-noun-phrase*propose*complete-index-noun-phrase
+    (state <s> ^name index-noun-phrase)
+-->
+    (<s> ^operator <op> + <)
+    (<op> ^name complete-index-noun-phrase)
     }
                

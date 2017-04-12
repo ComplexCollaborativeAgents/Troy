@@ -27,7 +27,7 @@ public class WorldInputWriter {
 	
 	public void writeWorldInput(){
 		if (!this.world.isCurrentPathSameAsPreviousPath()){
-			System.out.println("First time in this directory. Writing the world structure.");
+			//System.out.println("First time in this directory. Writing the world structure.");
 			this.clearWorldLink();
 			this.writeFolderStructure();
 			this.world.setPreviousPath(this.world.getCurrentPath());
@@ -37,7 +37,7 @@ public class WorldInputWriter {
 	}
 	
 	private void writeFolderStructure(){
-		System.out.println("Writing new folder structure");
+		//System.out.println("Writing new folder structure");
 		this.currentFolderName = this.worldId.CreateStringWME("current-folder", this.world.getFolder().getName());
 		this.objectsId = this.worldId.CreateIdWME("objects");
 		this.fileIdMap = new HashMap<File, Identifier>();
@@ -48,10 +48,10 @@ public class WorldInputWriter {
 	}
 	
 	private void updateFileFolderObjects(){
-		System.out.println("Already have the structure");
+		//System.out.println("Already have the structure");
 		Set<File> setOfFiles = this.world.getObjectSet();
 		Set<File> filesToKeep = Collections.emptySet();
-		System.out.println("Number of items in fileIdMap " + this.fileIdMap.size());
+		//System.out.println("Number of items in fileIdMap " + this.fileIdMap.size());
 		
 		for (File file: setOfFiles){
 			if(!this.fileIdMap.keySet().contains(file)){
@@ -62,7 +62,7 @@ public class WorldInputWriter {
 		
 		for (File file: this.fileIdMap.keySet()){
 			if(!setOfFiles.contains(file)){
-				System.out.println("Deleting file " + file.toString());
+				//System.out.println("Deleting file " + file.toString());
 				SoarHelper.deleteAllChildren(this.fileIdMap.get(file));
 				this.fileIdMap.get(file).DestroyWME();
 				this.fileIdMap.remove(file);

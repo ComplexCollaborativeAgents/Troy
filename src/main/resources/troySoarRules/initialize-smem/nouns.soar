@@ -5,6 +5,6 @@
 
 
 smem --add {
-        (<o1> ^noun file ^attribute type ^value file_object)
-        (<o2> ^noun folder ^attribute type ^value folder_object)
+        (<o1> ^word file ^lex noun ^attribute type ^value file_object)
+        (<o2> ^word folder ^lex noun ^attribute type ^value folder_object)
 }

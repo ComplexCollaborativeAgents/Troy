@@ -35,9 +35,9 @@ public class World {
 	}
 	
 	public void updateWorld(){
-		System.out.println("Updating world");
+		//System.out.println("Updating world");
 		Set<File> newFileSet = this.getSetofFilesFolders();
-		System.out.println("Number of new files: " + newFileSet.size());
+		//System.out.println("Number of new files: " + newFileSet.size());
 		
 		// add new files
 		for(File newFile: newFileSet){
@@ -53,7 +53,7 @@ public class World {
 			}
 		}
 		
-		System.out.println("Number of objects: " + this.objectSet.size());
+		//System.out.println("Number of objects: " + this.objectSet.size());
 		
 	}
 	

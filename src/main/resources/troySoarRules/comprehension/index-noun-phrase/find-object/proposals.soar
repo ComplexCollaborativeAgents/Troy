@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170412
+
+sp {find-object*propose*complete-find-object
+    (state <s> ^name find-object)
+-->
+    (<s> ^operator <op> + <)
+    (<op> ^name complete-find-object)
+    }
+
+
+               

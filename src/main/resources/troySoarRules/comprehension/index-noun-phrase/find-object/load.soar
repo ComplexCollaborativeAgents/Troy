@@ -4,3 +4,7 @@
 # @created smohan 20170407
 
 source "elaborations.soar"
+
+source "proposals.soar"
+
+source "complete-find-object.soar"

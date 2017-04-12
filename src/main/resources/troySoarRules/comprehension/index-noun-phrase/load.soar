@@ -7,8 +7,10 @@ source "elaborations.soar"
 
 source "proposals.soar"
 
-source "create-set.soar"
-
 source "find-object/load.soar"
 
 source "preferences.soar"
+
+source "resolve-grounding.soar"
+
+source "complete-index-noun-phrase.soar"
