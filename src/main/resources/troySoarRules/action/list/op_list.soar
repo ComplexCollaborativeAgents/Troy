@@ -10,8 +10,17 @@ sp {action*apply*op_list
     (<op> ^name op_list
           ^argument <arg>)
 -->
-    (<ol> ^send-message <sm>)
+    (<ol> ^message <sm>)
     (<sm> ^dialog-act inform
-          ^predicate exists
-          ^objects <arg>)
+          ^content <cont>)
+    }
+
+sp {action*apply*op_list*names
+    (state <s> ^name action
+               ^operator <op>
+               ^io.output-link.message.content <c>)
+    (<op> ^name op_list
+          ^argument.object.name <filename>)
+-->
+    (<c> ^name <filename>)
     }

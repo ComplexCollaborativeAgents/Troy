@@ -17,6 +17,8 @@ import sml.Identifier;
 import sml.Kernel;
 import sml.smlRunEventId;
 
+import com.parc.troy.interaction.InteractionInputWriter;
+import com.parc.troy.interaction.InteractionOutputReader;
 import com.parc.troy.world.World;
 import com.parc.troy.world.WorldInputWriter;
 import com.parc.xi.dm.Config;
@@ -37,6 +39,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private Identifier worldLink;
 	
 	private InteractionInputWriter interactionIW;
+	private InteractionOutputReader interactionOR;
 	private WorldInputWriter worldIW;
 	private World world;
 	
@@ -62,6 +65,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.setWorldLink(this.inputLink.CreateIdWME("world"));
 		
 		this.interactionIW = new InteractionInputWriter(this.interactionLink);
+		this.interactionOR = new InteractionOutputReader(this.troySoarAgent);
 		this.world = new World(dmName);
 		this.worldIW = new WorldInputWriter(dmName, this.worldLink, this.world);
 		
@@ -83,7 +87,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 			setCallToProcess(call);
 		}
 		if (call.op.equals("readFromSoar")){
-			LogicalForm da  = readFromSoar();
+			LogicalForm da  = this.interactionOR.readSoarMessage();
 			if (da == null) return resultList;
 			Result result = new Result();
             result.newCall = call.clone();
@@ -121,7 +125,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	
 	public void runEventHandler(int eventID, Object data, Agent agent, int phase) {
 		stopAgentIfRequested();
-		triggerOttoCallback();
+		readOutputFromSoar();
 		this.world.updateWorld();
 		writeInteractionInputToSoar();
 		writeWorldInputToSoar();
@@ -133,14 +137,6 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.worldIW.writeWorldInput();
 		this.troySoarAgent.Commit();
 	}
-
-
-	private void stopAgentIfRequested() {
-		if(queueStop){
-			sendCommand("stop");
-			queueStop = false;
-		}
-	}
 	
 	private void writeInteractionInputToSoar() {
 		if (this.messageToWrite != null) {
@@ -150,31 +146,35 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 			this.messageToWrite = null;
 		}
 	}
-	
-	
-	private void triggerOttoCallback(){
-		if(this.dialogStateToCallback != null && this.troySoarAgent.GetOutputLink() != null && this.troySoarAgent.GetOutputLink().GetNumberChildren() > 0){
-			DispatchCallback callback = this.dialogStateToCallback.getDispatchCallback();
-            callback.setUserTimeout("readOutputFromSoar", 0, REQUEST(new LogicalForm("readOutputFromSoar")), this.dialogStateToCallback); 
-            this.dialogStateToCallback = null;
+
+
+	private void stopAgentIfRequested() {
+		if(queueStop){
+			sendCommand("stop");
+			queueStop = false;
 		}
 	}
-
-	private LogicalForm readFromSoar(){
-		LogicalForm responseDialogAct = new LogicalForm();
-		for (int i = 0; i < this.troySoarAgent.GetOutputLink().GetNumberChildren(); i++){
-			Identifier messageId = this.troySoarAgent.GetOutputLink().GetChild(i).ConvertToIdentifier();
-			if (messageId.GetAttribute().equals("message")){
-				String dialogAct = messageId.GetParameterValue("dialog-act");
-				String content = messageId.GetParameterValue("content");
-				if(dialogAct.equals("inform")){
-				responseDialogAct = INFORM(new LogicalForm(content));
+	
+	private void readOutputFromSoar(){
+		Boolean shouldOttoCallback = false;
+		if(this.dialogStateToCallback != null && this.troySoarAgent.GetOutputLink() != null && this.troySoarAgent.GetOutputLink().GetNumberChildren() > 0){
+			for (int i = 0; i < this.troySoarAgent.GetOutputLink().GetNumberChildren(); i++) {
+				Identifier messageId = this.troySoarAgent.GetOutputLink().GetChild(i).ConvertToIdentifier();
+					if (messageId.GetAttribute().equals("message")){
+			            shouldOttoCallback = true;
+					}
+					if (messageId.GetAttribute().equals("manipulate")){
+						// plug-in for changing the world
+					}
 				}
+			
+			if (shouldOttoCallback){
+				DispatchCallback callback = this.dialogStateToCallback.getDispatchCallback();
+				callback.setUserTimeout("readOutputFromSoar", 0, REQUEST(new LogicalForm("readOutputFromSoar")), this.dialogStateToCallback); 
+				this.dialogStateToCallback = null;
 			}
 		}
-		return responseDialogAct;
 	}
-	
 	
 	public String getErrorMessage(LogicalForm call) {
 		return null;
@@ -218,6 +218,14 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 
 	public void setWorldLink(Identifier worldLink) {
 		this.worldLink = worldLink;
+	}
+
+	public InteractionOutputReader getInteractionOR() {
+		return interactionOR;
+	}
+
+	public void setInteractionOR(InteractionOutputReader interactionOR) {
+		this.interactionOR = interactionOR;
 	}
 	
 

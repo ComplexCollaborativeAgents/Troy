@@ -1,10 +1,11 @@
-package com.parc.troy;
+package com.parc.troy.interaction;
 
 import java.util.Iterator;
 import java.util.List;
 
 import sml.Identifier;
 
+import com.parc.troy.SoarHelper;
 import com.parc.xi.dm.LogicalForm;
 
 public class InteractionInputWriter {
@@ -15,7 +16,7 @@ public class InteractionInputWriter {
 		this.interactionLink = interactionLink;
 	}
 	
-	void writeMessage(LogicalForm messageToWrite) {
+	public void writeMessage(LogicalForm messageToWrite) {
 		//System.out.println("writeMessage");
 		clearInteractionLink();
 		Identifier commandId = this.interactionLink.CreateIdWME("message");

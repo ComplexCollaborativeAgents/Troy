@@ -53,7 +53,7 @@ public class WorldInputWriter {
 		
 		for (File file: setOfFiles){
 			if(!this.fileIdMap.keySet().contains(file)){
-				System.out.println("Adding file " + file.toString());
+				//System.out.println("Adding file " + file.toString());
 				this.createAndAddFileIdentifier(file);
 			}
 		}
