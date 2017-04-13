@@ -103,7 +103,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
     	class AgentThread implements Runnable{
     		public void run(){
     	    	isRunning = true;
-    			//sendCommand("run");
+    			sendCommand("run");
     			isRunning = false;
     		}
     	}

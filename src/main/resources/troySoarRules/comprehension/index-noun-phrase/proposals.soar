@@ -6,7 +6,7 @@
 sp {index-noun-phrase*propose*find-object
     (state <s> ^name index-noun-phrase
                ^description.noun <noun>
-               ^world.objects <objs>
+               ^world <objs>
                -^found-objects.description <noun>)   
 -->
     (<s> ^operator <op> +)
@@ -29,6 +29,8 @@ sp {index-noun-phrase*propose*resolve-grounding
           ^resolution <res>
           ^found-objects.objects <objs>)
     }
+
+
 
 sp {index-noun-phrase*propose*complete-index-noun-phrase
     (state <s> ^name index-noun-phrase)

@@ -11,7 +11,8 @@ sp {interaction*apply*create-segment
           ^message <m1>)
 -->
     (<stack> ^segment <segment>)
-    (<segment> ^message <m1>)
+    (<segment> ^message <m1>
+               ^groundings <g1>)
     }
                
     

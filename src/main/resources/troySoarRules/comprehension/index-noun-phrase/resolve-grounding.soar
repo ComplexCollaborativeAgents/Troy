@@ -12,6 +12,6 @@ sp {index-noun-phrase*apply*resolve-grounding
     (<res> ^arity multiple
            ^preference all)
 -->
-    (<g> ^objects <objs>)
+    (<g> ^set <objs>)
     }
     

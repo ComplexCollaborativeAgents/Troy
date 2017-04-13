@@ -1,0 +1,25 @@
+##!
+# @file
+#
+# @created smohan 20170413
+
+
+sp {action*propose*op_list*set
+    (state <s> ^name action
+               ^world <w>)
+    (<w> ^set <set-obj>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name op_list
+          ^argument <set-obj>)
+    }
+
+sp {action*propose*op_list*obj
+    (state <s> ^name action
+               ^world <w>)
+    (<w> ^object <obj>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name op_list
+          ^argument <obj>)
+    }

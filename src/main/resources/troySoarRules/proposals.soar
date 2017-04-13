@@ -20,10 +20,23 @@ sp {topstate*propose*comprehension
     (state <s> ^name troy
                ^interaction.stack.segment <seg>)
     (<seg> ^message <m>
-           -^groundings)
+           ^groundings <g>)
+    (<g> -^<any>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name comprehension
           ^message <m>
           ^segment <seg>)
+    }
+
+
+sp {topstate*propose*action
+    (state <s> ^name troy
+               ^interaction.stack.segment <seg>)
+    (<seg> ^groundings <g>)
+    (<g> ^indexed-action <ia>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name action
+          ^indexed-action <ia>)
     }

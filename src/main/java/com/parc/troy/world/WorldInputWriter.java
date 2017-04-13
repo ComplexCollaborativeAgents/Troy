@@ -16,7 +16,6 @@ public class WorldInputWriter {
 	private World world;
 	private Identifier worldId;
 	private WMElement currentFolderName;
-	private Identifier objectsId;
 	private Map<File, Identifier> fileIdMap;
 
 	public WorldInputWriter(String dmName, Identifier worldId, World world){
@@ -39,7 +38,6 @@ public class WorldInputWriter {
 	private void writeFolderStructure(){
 		//System.out.println("Writing new folder structure");
 		this.currentFolderName = this.worldId.CreateStringWME("current-folder", this.world.getFolder().getName());
-		this.objectsId = this.worldId.CreateIdWME("objects");
 		this.fileIdMap = new HashMap<File, Identifier>();
 		Set<File> setOfFiles = this.world.getObjectSet();
 		for(File file: setOfFiles){
@@ -71,7 +69,7 @@ public class WorldInputWriter {
 	}
 	
 	private void createAndAddFileIdentifier(File file){
-		Identifier fileId = this.objectsId.CreateIdWME("object");
+		Identifier fileId = this.worldId.CreateIdWME("object");
 		fileId.CreateStringWME("name", file.getName());
 		if(file.isFile()) fileId.CreateStringWME("type", "file_object");
 		else if (file.isDirectory()) fileId.CreateStringWME("type", "folder_object");
@@ -81,10 +79,6 @@ public class WorldInputWriter {
 	private void clearWorldLink(){
 		if(this.currentFolderName != null){
 			this.currentFolderName.DestroyWME();
-		}
-		
-		if(this.objectsId != null){
-			this.objectsId.DestroyWME();
 		}
 		
 		if(this.fileIdMap != null){

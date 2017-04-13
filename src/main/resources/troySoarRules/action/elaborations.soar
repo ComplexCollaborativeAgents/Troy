@@ -1,0 +1,24 @@
+##!
+# @file
+#
+# @created smohan 20170413
+
+sp {action*elaborate*indexed-action
+    (state <s> ^name action
+               ^superstate.operator <sop>)
+    (<sop> ^indexed-action <ia>)
+-->
+    (<s> ^indexed-action <ia>)
+    }
+
+
+
+### this probably needs to be moved to the comprehension stage where the input changes how the world is perceived.
+sp {action*elaborate*sets
+    (state <s> ^name action
+               ^indexed-action <ia>
+               ^world <w>)
+    (<ia> ^<any-argument>.set <set-obj>)
+-->
+    (<w> ^set <set-obj>)
+    }

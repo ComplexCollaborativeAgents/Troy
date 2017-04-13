@@ -28,4 +28,10 @@ sp {all*elaborate*world
 -->
 	(<s> ^world <w>)
  }
+
+sp {all*elaborate*io
+    (state <s> ^superstate.io <io>)
+-->
+    (<s> ^io <io>)
+    }
 	

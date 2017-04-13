@@ -1,0 +1,64 @@
+##!
+# @file
+#
+# @created smohan 20170412
+
+sp {composition*elaborate*grounding*message
+    (state <s> ^name composition
+               ^superstate.operator <sop>)
+    (<sop> ^grounding <g>
+           ^message <m>)
+-->
+    (<s> ^grounding <g>
+         ^message <m>)
+    }
+
+
+sp {composition*elaborate*map
+    (state <s> ^name composition
+               ^grounding.verb.map <map>)
+-->
+    (<s> ^map <map>)
+    }
+
+sp {composition*indexed-action
+    (state <s> ^name composition)
+-->
+    (<s> ^indexed-action <a>)
+    }
+
+
+sp {composition*indexed-action*name
+    (state <s> ^name composition
+               ^indexed-action <a>
+               ^map <map>)
+    (<map> ^procedural.op_name <op-name>)
+-->
+    (<a> ^name <op-name>)
+    }
+
+sp {composition*indexed-action*object*arguments
+    (state <s> ^name composition
+               ^indexed-action <a>
+               ^map <map>
+               ^grounding <g>)
+    (<map> ^procedural.{<argument> <> op_name} <arg-id>
+           ^linguistic.<lex> <arg-id>)
+    (<g> ^<lex> <element>)
+    (<element> -^set <any>)
+-->
+    (<a> ^<argument> <element>)
+    }
+
+sp {composition*indexed-action*set*arguments
+    (state <s> ^name composition
+               ^indexed-action <a>
+               ^map <map>
+               ^grounding <g>)
+    (<map> ^procedural.{<argument> <> op_name} <arg-id>
+           ^linguistic.<lex> <arg-id>)
+    (<g> ^<lex> <element>)
+    (<element> ^set <set-obj>)
+-->
+    (<a> ^<argument> <set-obj>)
+    }

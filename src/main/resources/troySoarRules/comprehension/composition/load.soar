@@ -2,3 +2,9 @@
 # @file: 
 #
 # @created smohan 20170412
+
+source "elaborations.soar"
+
+source "proposals.soar"
+
+source "complete-composition.soar"

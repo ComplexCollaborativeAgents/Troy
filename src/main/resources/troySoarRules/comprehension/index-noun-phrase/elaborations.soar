@@ -37,4 +37,13 @@ sp {index-noun-phrase*elaborate*grounding
     (<s> ^grounding <g>)
     }
 
-               
+sp {index-noun-phrase*elaborate*segment*world
+    (state <s> ^name index-noun-phrase
+               ^resolution <res>
+               ^grounding <g>
+               ^world <w>)
+    (<g> ^set <obj-set>)
+    (<res> ^arity multiple)
+-->
+    (<w> ^set <obj-set>)
+    }

@@ -1,0 +1,11 @@
+##!
+# @file
+#
+# @created smohan 20170413
+sp {composition*propose*complete-composition
+    (state <s> ^name composition)
+-->
+    (<s> ^operator <op> + <)
+    (<op> ^name complete-composition)
+    }
+               
