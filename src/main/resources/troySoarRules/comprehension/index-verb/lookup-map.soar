@@ -1,0 +1,20 @@
+##!
+# @file
+#
+# @created smohan 20170412
+sp {lookup-map*query-smem
+    (state <s> ^name lookup-map
+               ^superstate.operator <sop>)
+    (<sop> ^linguistic <l>)
+-->
+    (<s> ^smem-query-cue <que>)
+    (<que> ^linguistic <l>)
+    }
+
+sp {lookup-map*write-to-superstate
+    (state <s> ^name lookup-map
+               ^retrieved-lti-cue.retrieved-lti <res>
+               ^superstate <ss>)
+-->
+    (<ss> ^map <res>)
+    }

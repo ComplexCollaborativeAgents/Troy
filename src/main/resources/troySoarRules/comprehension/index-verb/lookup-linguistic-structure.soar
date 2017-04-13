@@ -1,0 +1,21 @@
+##!
+# @file
+#
+# @created smohan 20170412
+
+sp {lookup-linguistic-structure*query-smem
+    (state <s> ^name lookup-linguistic-structure
+               ^superstate.operator <sop>)
+    (<sop> ^description <d>)
+-->
+    (<s> ^smem-query-cue <que>)
+    (<que> ^verb <d>)
+    }
+
+sp {lookup-linguistic-structure*write-to-superstate
+    (state <s> ^name lookup-linguistic-structure
+               ^retrieved-lti-cue.retrieved-lti <res>
+               ^superstate <ss>)
+-->
+    (<ss> ^linguistic <res>)
+    }

@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170412
+sp {index-verb*elaborate*description
+    (state <s> ^name index-verb
+               ^superstate.operator <sop>)
+    (<sop> ^description <d>)
+-->
+    (<s> ^description <d>)
+    }
+
+

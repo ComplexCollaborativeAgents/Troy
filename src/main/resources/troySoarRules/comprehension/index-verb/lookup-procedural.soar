@@ -1,0 +1,11 @@
+##!
+# @file
+#
+# @created smohan 20170412
+sp {lookup-procedural*query-smem
+    (state <s> ^name lookup-procedural
+               ^superstate.operator <sop>)
+    (<sop> ^procedural <proc>)
+-->
+    (<s> ^retrieve-lti <proc>)
+    }

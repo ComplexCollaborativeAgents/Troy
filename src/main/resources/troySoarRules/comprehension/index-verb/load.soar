@@ -1,0 +1,16 @@
+##!
+# @file: 
+#
+# @created smohan 20170412
+
+source "elaboration.soar"
+
+source "proposals.soar"
+
+source "lookup-linguistic-structure.soar"
+
+source "lookup-map.soar"
+
+source "lookup-procedural.soar"
+
+source "complete-index-verb.soar"

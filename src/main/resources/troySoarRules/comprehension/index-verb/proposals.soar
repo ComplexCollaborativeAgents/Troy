@@ -1,0 +1,45 @@
+##!
+# @file
+#
+# @created smohan 20170412
+
+sp {index-verb*propose*lookup-linguistic-structure
+    (state <s> ^name index-verb
+               ^description <d>
+               -^linguistic <any>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name lookup-linguistic-structure
+          ^description <d>)
+    }
+
+sp {index-verb*propose*lookup-map
+    (state <s> ^name index-verb
+               ^linguistic <ling>
+               -^map <any>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name lookup-map
+          ^linguistic <ling>)
+    }
+
+sp {index-verb*propose*lookup-procedural
+    (state <s> ^name index-verb
+               ^map <m>)
+    (<m> ^procedural <proc>)
+    (<proc> -^<any>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name lookup-procedural
+          ^procedural <proc>)
+    }
+               
+sp {index-verb*propose*complete-index-verb
+    (state <s> ^name index-verb)
+-->
+    (<s> ^operator <op> + <)
+    (<op> ^name complete-index-verb)
+    }
+          
+               
+               

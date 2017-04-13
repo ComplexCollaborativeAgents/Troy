@@ -1,0 +1,12 @@
+##!
+# @file
+#
+# @created smohan 20170412
+sp {index-verb*apply*complete-index-verb
+    (state <s> ^name index-verb
+               ^operator.name complete-index-verb
+               ^map <m>
+               ^superstate.grounding <gs>)
+-->
+    (<gs> ^verb.map <m>)
+    }

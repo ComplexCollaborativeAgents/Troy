@@ -13,3 +13,28 @@ sp {comprehension*propose*index-noun-phrase
     (<op> ^name index-noun-phrase
           ^description <np>)
     }
+
+sp {comprehension*propose*index-verb
+    (state <s> ^name comprehension
+               ^message <m>
+               ^grounding <g>)
+    (<m> ^verb <verb>)
+    (<g> -^verb <any>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name index-verb
+          ^description <verb>)
+    }
+
+sp {comprehension*propose*composition
+    (state <s> ^name comprehension
+               ^message <m>
+               ^grounding <g>)
+    -{(<m> ^{<attr> <> type} <val>)
+      (<g> -^<attr>)}
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name composition
+          ^message <m>
+          ^grounding <g>)
+    }
