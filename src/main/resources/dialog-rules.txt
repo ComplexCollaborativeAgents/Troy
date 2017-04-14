@@ -1,7 +1,7 @@
 rank(100) => Inform(Welcome)
 Agent: Inform(Welcome) -> Hi! I am Troy, your office secretary. 
 
-rank(40) Instruct(ActionCommand($1, $2)) => writeToSoar(ActionCommand, $1, $2) Inform()
+rank(40) Instruct(ActionCommand($1, $2)) => Inform() writeToSoar(ActionCommand, $1, $2) 
 rank(40) Instruct(ActionCommand($1, $2, $3)) => writeToSoar(ActionCommand, $1, $2, $3) Inform()
 rank(30) Request(readOutputFromSoar) => readFromSoar($1) say($1)
 
@@ -29,5 +29,5 @@ DT[all] <- all the
 DT[a] <- a
 DT[the] <- the
 Verb[put-together] <-> put together
-Inform($1) -> The file is {$1}.
 Inform(And($1)) -> The files are {$1}.
+Inform($1) -> The file is {$1}.
