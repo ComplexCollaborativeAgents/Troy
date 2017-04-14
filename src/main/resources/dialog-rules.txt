@@ -29,3 +29,5 @@ DT[all] <- all the
 DT[a] <- a
 DT[the] <- the
 Verb[put-together] <-> put together
+Inform($1) -> The file is {$1}.
+Inform(And($1)) -> The files are {$1}.

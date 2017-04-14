@@ -133,8 +133,6 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	}
 	
 	private void deleteOutputIdentifiers(){
-		if(this.getIdentifiersToRemove().size() > 0)
-			System.out.println("Deleting identifiers " + this.getIdentifiersToRemove().size());
 		for(Identifier id: this.getIdentifiersToRemove()){
 			id.AddStatusComplete();
 		}
