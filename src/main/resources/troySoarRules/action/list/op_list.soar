@@ -15,12 +15,23 @@ sp {action*apply*op_list
           ^content <cont>)
     }
 
-sp {action*apply*op_list*names
+sp {action*apply*op_list*names*set
     (state <s> ^name action
                ^operator <op>
                ^io.output-link.message.content <c>)
     (<op> ^name op_list
           ^argument.object.name <filename>)
+-->
+    (<c> ^name <filename>)
+    (<s> ^listed true)
+    }
+
+sp {action*apply*op_list*names
+    (state <s> ^name action
+               ^operator <op>
+               ^io.output-link.message.content <c>)
+    (<op> ^name op_list
+          ^argument.name <filename>)
 -->
     (<c> ^name <filename>)
     (<s> ^listed true)

@@ -21,6 +21,8 @@ Verb[show] <-> show
 NN[home-directory] <-> home directory
 NN[file] <-> file
 NN[file] <-> files
+NN[folder] <-> folder
+NN[folder] <-> folder
 NN[sales-brochure] <-> sales brochure
 NN[sales-document] <-> sales document
 NN[sales-proposal] <-> sales proposal

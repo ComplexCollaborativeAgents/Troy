@@ -11,6 +11,6 @@ source "find-object/load.soar"
 
 source "preferences.soar"
 
-source "resolve-grounding.soar"
-
 source "complete-index-noun-phrase.soar"
+
+source "resolve-grounding/load.soar"

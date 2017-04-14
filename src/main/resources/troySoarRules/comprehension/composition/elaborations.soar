@@ -45,9 +45,10 @@ sp {composition*indexed-action*object*arguments
     (<map> ^procedural.{<argument> <> op_name} <arg-id>
            ^linguistic.<lex> <arg-id>)
     (<g> ^<lex> <element>)
-    (<element> -^set <any>)
+    (<element> -^set <any>
+                ^object <obj>)
 -->
-    (<a> ^<argument> <element>)
+    (<a> ^<argument> <obj>)
     }
 
 sp {composition*indexed-action*set*arguments

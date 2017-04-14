@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170414
+sp {resolve-grounding*apply*resolve-collection
+    (state <s> ^name resolve-grounding
+               ^operator <op>)
+    (<op> ^name resolve-collection
+          ^grounding <g>
+          ^objects <objs>)
+-->
+    (<g> ^set <objs>)
+    }

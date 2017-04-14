@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170414
+sp {resolve-grounding*apply*resolve-single-equal
+    (state <s> ^name resolve-grounding
+               ^operator <op>)
+    (<op> ^name resolve-single-equal
+          ^grounding <g>
+          ^object <obj>)
+-->
+    (<g> ^object <obj>)
+    }
