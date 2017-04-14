@@ -26,7 +26,6 @@ public class TroyAgent extends PlanStateAgent{
 		engine = new DialogRuleEngine(name, dmName, kb);
 		engine.addAction("writeToSoar", this.soarInterface);
 		engine.addAction("readFromSoar", this.soarInterface);
-		engine.readRules(Config.getProperty(dmName+".dialogRules",null));
 		addGenerator(engine);
 	}
 }
