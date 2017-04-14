@@ -12,7 +12,6 @@ Agent: Ask(UnknownConcept($1)) <-> I do not know what {$1} is. Can you please de
 Agent: Inform(unknown-task) <-> I'm sorry. I do not know how to do this task. Can you please train me?
 
 
-
 NP[np(dt($1), n($2))] <-> {DT[$1]} {NN[$2]}
 
 Verb[print] <-> print

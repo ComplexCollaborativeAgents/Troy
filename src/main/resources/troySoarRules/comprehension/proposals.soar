@@ -30,7 +30,7 @@ sp {comprehension*propose*composition
     (state <s> ^name comprehension
                ^message <m>
                ^grounding <g>)
-    -{(<m> ^{<attr> <> type} <val>)
+    -{(<m> ^{<attr> <> type <> processed} <val>)
       (<g> -^<attr>)}
 -->
     (<s> ^operator <op> +)

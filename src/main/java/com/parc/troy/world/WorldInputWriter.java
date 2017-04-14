@@ -48,7 +48,6 @@ public class WorldInputWriter {
 	private void updateFileFolderObjects(){
 		//System.out.println("Already have the structure");
 		Set<File> setOfFiles = this.world.getObjectSet();
-		Set<File> filesToKeep = Collections.emptySet();
 		//System.out.println("Number of items in fileIdMap " + this.fileIdMap.size());
 		
 		for (File file: setOfFiles){

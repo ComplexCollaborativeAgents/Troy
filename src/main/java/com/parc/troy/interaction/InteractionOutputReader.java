@@ -6,6 +6,7 @@ import static com.parc.xi.dm.LogicalFormConstants.BOOLAND;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.parc.troy.SoarInterface;
 import com.parc.xi.dm.LogicalForm;
 
 import sml.Agent;
@@ -14,12 +15,12 @@ import sml.Identifier;
 public class InteractionOutputReader {
 	
 	private Agent troySoarAgent;
+	private SoarInterface soarI;
 	
-	public InteractionOutputReader(Agent troySoarAgent){
+	public InteractionOutputReader(Agent troySoarAgent, SoarInterface soarI){
 		this.troySoarAgent = troySoarAgent;
+		this.soarI = soarI;
 	}
-	
-	
 	
 	public LogicalForm readSoarMessage(){
 		LogicalForm responseDialogAct = new LogicalForm();
@@ -32,6 +33,8 @@ public class InteractionOutputReader {
 					responseDialogAct = INFORM(this.parseContent(contentId));
 				}
 			}
+			this.soarI.getIdentifiersToRemove().add(messageId);
+			//System.out.println("size " + this.soarI.getIdentifiersToRemove().size());
 		}
 		return responseDialogAct;
 	}

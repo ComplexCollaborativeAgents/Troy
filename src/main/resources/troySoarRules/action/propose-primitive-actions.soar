@@ -6,7 +6,8 @@
 
 sp {action*propose*op_list*set
     (state <s> ^name action
-               ^world <w>)
+               ^world <w>
+               -^listed true)
     (<w> ^set <set-obj>)
 -->
     (<s> ^operator <op> +)
@@ -16,7 +17,8 @@ sp {action*propose*op_list*set
 
 sp {action*propose*op_list*obj
     (state <s> ^name action
-               ^world <w>)
+               ^world <w>
+               -^listed true)
     (<w> ^object <obj>)
 -->
     (<s> ^operator <op> +)

@@ -10,3 +10,7 @@ source "list/load.soar"
 source "propose-primitive-actions.soar"
 
 source "preferences.soar"
+
+source "proposals.soar"
+
+source "complete-action.soar"

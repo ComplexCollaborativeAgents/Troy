@@ -1,9 +1,7 @@
 package com.parc.troy;
 
-import static com.parc.xi.dm.LogicalFormConstants.INFORM;
 import static com.parc.xi.dm.LogicalFormConstants.REQUEST;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -40,6 +38,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	
 	private InteractionInputWriter interactionIW;
 	private InteractionOutputReader interactionOR;
+	private List<Identifier> identifiersToRemove;
 	private WorldInputWriter worldIW;
 	private World world;
 	
@@ -65,7 +64,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.setWorldLink(this.inputLink.CreateIdWME("world"));
 		
 		this.interactionIW = new InteractionInputWriter(this.interactionLink);
-		this.interactionOR = new InteractionOutputReader(this.troySoarAgent);
+		this.setIdentifiersToRemove(new ArrayList<Identifier>());
+		this.interactionOR = new InteractionOutputReader(this.troySoarAgent, this);
 		this.world = new World(dmName);
 		this.worldIW = new WorldInputWriter(dmName, this.worldLink, this.world);
 		
@@ -94,7 +94,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
             result.newCall.setArg(0, da);
             resultList.add(result);
 		}
-		else{
+		else {
 			new IllegalArgumentException("Unknown call: " + call.toString());
 		}
 		return resultList;
@@ -126,11 +126,20 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	public void runEventHandler(int eventID, Object data, Agent agent, int phase) {
 		stopAgentIfRequested();
 		readOutputFromSoar();
+		deleteOutputIdentifiers();
 		this.world.updateWorld();
 		writeInteractionInputToSoar();
 		writeWorldInputToSoar();
+	}
+	
+	private void deleteOutputIdentifiers(){
+		if(this.getIdentifiersToRemove().size() > 0)
+			System.out.println("Deleting identifiers " + this.getIdentifiersToRemove().size());
+		for(Identifier id: this.getIdentifiersToRemove()){
+			id.AddStatusComplete();
+		}
 		
-		
+		this.setIdentifiersToRemove(new ArrayList<Identifier> ());
 	}
 
 	private void writeWorldInputToSoar() {
@@ -226,6 +235,14 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 
 	public void setInteractionOR(InteractionOutputReader interactionOR) {
 		this.interactionOR = interactionOR;
+	}
+
+	public List<Identifier> getIdentifiersToRemove() {
+		return identifiersToRemove;
+	}
+
+	public void setIdentifiersToRemove(List<Identifier> identifiersToRemove) {
+		this.identifiersToRemove = identifiersToRemove;
 	}
 	
 

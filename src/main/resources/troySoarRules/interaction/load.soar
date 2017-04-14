@@ -8,3 +8,7 @@ source "proposals.soar"
 source "elaborations.soar"
 
 source "create-segment.soar"
+
+source "delete-segment.soar"
+
+source "complete-interaction.soar"

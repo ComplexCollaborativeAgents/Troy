@@ -6,14 +6,23 @@
 sp {topstate*propose*interaction
 	(state <s> ^name troy
                ^io.input-link.interaction.message <message>
-               ^topstate <s>
-               -^interaction.stack.segment.message <message>)
+               ^topstate <s>)
+    (<message> -^processed true)
 -->
 	(<s> ^operator <op> +)
  	(<op> 	^name interaction
         	^type incoming-message
          	^message <message>)
   }
+
+sp {topstate*propose*interaction*2
+    (state <s> ^name troy
+               ^interaction.stack.segment <segment>)
+    (<segment> ^status complete)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name interaction)
+    }
 
 
 sp {topstate*propose*comprehension
@@ -22,6 +31,7 @@ sp {topstate*propose*comprehension
     (<seg> ^message <m>
            ^groundings <g>)
     (<g> -^<any>)
+    (<m> ^processed true)
 -->
     (<s> ^operator <op> +)
     (<op> ^name comprehension
@@ -33,10 +43,12 @@ sp {topstate*propose*comprehension
 sp {topstate*propose*action
     (state <s> ^name troy
                ^interaction.stack.segment <seg>)
-    (<seg> ^groundings <g>)
+    (<seg> ^groundings <g>
+           -^status complete)
     (<g> ^indexed-action <ia>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name action
-          ^indexed-action <ia>)
+          ^indexed-action <ia>
+          ^segment <seg>)
     }

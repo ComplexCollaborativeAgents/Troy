@@ -1,0 +1,12 @@
+##!
+# @file
+#
+# @created smohan 20170413
+
+sp {action*apply*complete-action
+    (state <s> ^name action
+               ^operator.name complete-action
+               ^segment <seg>)
+-->
+    (<seg> ^status complete)
+    }

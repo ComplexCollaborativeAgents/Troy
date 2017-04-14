@@ -1,0 +1,11 @@
+##!
+# @file
+#
+# @created smohan 20170413
+sp {interaction*apply*complete-interaction
+    (state <s> ^name interaction
+               ^message <m>
+               ^operator.name complete-interaction)
+-->
+    (<m> ^processed true)
+    }

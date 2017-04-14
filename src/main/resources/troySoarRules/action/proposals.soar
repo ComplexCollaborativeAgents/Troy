@@ -1,0 +1,12 @@
+##!
+# @file
+#
+# @created smohan 20170413
+
+sp {action*propose*complete-action
+    (state <s> ^name action)
+-->
+    (<s> ^operator <op> + <)
+    (<op> ^name complete-action
+          ^type maintenance)
+    }

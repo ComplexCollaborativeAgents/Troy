@@ -11,14 +11,20 @@ sp {action*elaborate*indexed-action
     (<s> ^indexed-action <ia>)
     }
 
-
-
-### this probably needs to be moved to the comprehension stage where the input changes how the world is perceived.
-sp {action*elaborate*sets
+sp {action*elaborate*segment
     (state <s> ^name action
-               ^indexed-action <ia>
-               ^world <w>)
-    (<ia> ^<any-argument>.set <set-obj>)
+               ^superstate.operator <sop>)
+    (<sop> ^segment <seg>)
 -->
-    (<w> ^set <set-obj>)
+    (<s> ^segment <seg>)
     }
+
+sp {action*apply*operator*remove*successful*command
+   (state <s>  ^operator <op>
+               ^io.output-link <ol>)
+   (<op> ^name interaction)
+   (<ol> ^<command> <com>)
+   (<com> ^status complete)
+-->
+   (<ol> ^<command> <com> -)
+}

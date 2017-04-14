@@ -23,4 +23,5 @@ sp {action*apply*op_list*names
           ^argument.object.name <filename>)
 -->
     (<c> ^name <filename>)
+    (<s> ^listed true)
     }
