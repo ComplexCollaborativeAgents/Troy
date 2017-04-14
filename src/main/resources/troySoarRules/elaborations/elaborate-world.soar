@@ -1,0 +1,35 @@
+##!
+# @file
+#
+# @created smohan 20170414
+
+sp {topstate*elaborate*world
+    (state <s> ^topstate <s>)
+-->
+    (<s> ^world <w>)
+    }
+
+sp {allstates*elaborate*world
+    (state <s> ^superstate.world <w>)
+-->
+    (<s> ^world <w>)
+    }
+
+sp {topstate*copy*world*information
+    (state <s> ^topstate <s>
+               ^io.input-link.world <w>
+               ^world <sw>)
+    (<w> ^<attr> <val>)
+-->
+    (<sw> ^<attr> <val>)
+    }
+
+sp {topstate*elaborate*enhancements
+    (state <s> ^topstate <s>
+               ^world <w>
+               ^interaction.stack.segment.world-enhancements <we>)
+    (<we> ^<attr> <val>)
+-->
+    (<w> ^<attr> <val>)
+    }
+               

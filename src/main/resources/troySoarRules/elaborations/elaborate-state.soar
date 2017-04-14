@@ -23,12 +23,6 @@ sp {topstate*elaborate*world
 	(<s> ^world <w>)
  }
 
-sp {all*elaborate*world
-	(state <s> ^superstate.world <w>)
--->
-	(<s> ^world <w>)
- }
-
 sp {all*elaborate*io
     (state <s> ^superstate.io <io>)
 -->

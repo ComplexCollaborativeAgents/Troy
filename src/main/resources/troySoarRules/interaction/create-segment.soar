@@ -12,7 +12,8 @@ sp {interaction*apply*create-segment
 -->
     (<stack> ^segment <segment>)
     (<segment> ^message <m1>
-               ^groundings <g1>)
+               ^groundings <g1>
+               ^world-enhancements <w1>)
     }
                
     

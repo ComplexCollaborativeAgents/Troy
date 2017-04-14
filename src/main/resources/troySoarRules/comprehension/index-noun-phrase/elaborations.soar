@@ -10,6 +10,14 @@ sp {index-noun-phrase*elaborate*description
     (<s> ^description <d>)
     }
 
+sp {index-noun-phrase*elaborate*segment
+    (state <s> ^name index-noun-phrase
+               ^superstate <ss>)
+    (<ss> ^segment <seg>)
+-->
+    (<s> ^segment <seg>)
+    }
+
 
 sp {index-noun-phrase*elaborate*resolution-type*set
     (state <s> ^name index-noun-phrase
@@ -41,7 +49,7 @@ sp {index-noun-phrase*elaborate*segment*world
     (state <s> ^name index-noun-phrase
                ^resolution <res>
                ^grounding <g>
-               ^world <w>)
+               ^segment.world-enhancements <w>)
     (<g> ^set <obj-set>)
     (<res> ^arity multiple)
 -->
