@@ -6,6 +6,7 @@ rank(40) Instruct(ActionCommand($1, $2, $3)) => writeToSoar(ActionCommand, $1, $
 rank(30) Request(readOutputFromSoar) => readFromSoar($1) say($1)
 
 User: Instruct(ActionCommand($1, $2)) <-> {Verb[$1]} {NP[$2]}.
+User: Instruct(ActionCommand($1, $2)) <-> {Verb[$1]} {To[to]} {NP[$2]}.
 User: Instruct(ActionCommand($1, $2, $3)) <-> {Verb[$1]} {NP[$2]} to {NP[$3]}.
 
 Agent: Ask(UnknownConcept($1)) <-> I do not know what {$1} is. Can you please describe it?
@@ -13,11 +14,15 @@ Agent: Inform(unknown-task) <-> I'm sorry. I do not know how to do this task. Ca
 
 
 NP[np(dt($1), n($2))] <-> {DT[$1]} {NN[$2]}
+NP[np(n($1))] <-> {NN[$1]}
+
 
 Verb[print] <-> print
 Verb[email] <-> email
 Verb[list] <-> list
 Verb[show] <-> show
+Verb[go] <-> go
+To[to] <-> to
 NN[home-directory] <-> home directory
 NN[file] <-> file
 NN[file] <-> files
@@ -26,6 +31,7 @@ NN[folder] <-> folder
 NN[sales-brochure] <-> sales brochure
 NN[sales-document] <-> sales document
 NN[sales-proposal] <-> sales proposal
+NN[proposals] <-> proposals
 DT[all] <- all
 DT[all] <- all the
 DT[a] <- a

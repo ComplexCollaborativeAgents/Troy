@@ -124,6 +124,12 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	}
 	
 	public void runEventHandler(int eventID, Object data, Agent agent, int phase) {
+		try {
+			Thread.sleep(4);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		stopAgentIfRequested();
 		readOutputFromSoar();
 		deleteOutputIdentifiers();
@@ -133,11 +139,13 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	}
 	
 	private void deleteOutputIdentifiers(){
+//		if(this.identifiersToRemove.size() > 0){
+//			System.out.println(this.identifiersToRemove.size() + " identifiers to delete");
+//		}
 		for(Identifier id: this.getIdentifiersToRemove()){
 			id.AddStatusComplete();
 		}
-		
-		this.setIdentifiersToRemove(new ArrayList<Identifier> ());
+		this.identifiersToRemove.clear();
 	}
 
 	private void writeWorldInputToSoar() {

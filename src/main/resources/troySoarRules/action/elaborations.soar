@@ -22,7 +22,6 @@ sp {action*elaborate*segment
 sp {action*apply*operator*remove*successful*command
    (state <s>  ^operator <op>
                ^io.output-link <ol>)
-   (<op> ^name interaction)
    (<ol> ^<command> <com>)
    (<com> ^status complete)
 -->
