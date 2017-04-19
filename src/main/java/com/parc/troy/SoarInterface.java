@@ -55,7 +55,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	
 	void configureAndStartSoarAgent(String name, String dmName) throws URISyntaxException, FileNotFoundException
 	{
-		this.kernel = Kernel.CreateKernelInNewThread();
+		this.kernel = Kernel.CreateKernelInCurrentThread();
 		this.troySoarAgent = kernel.CreateAgent(name);
 		
 		this.inputLink = troySoarAgent.GetInputLink();
