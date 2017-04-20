@@ -36,6 +36,7 @@ public class World {
 	
 	public void updateWorld(){
 		//System.out.println("Updating world");
+		this.folder = new File(this.currentPath);
 		Set<File> newFileSet = this.getSetofFilesFolders();
 		//System.out.println("Number of new files: " + newFileSet.size());
 		

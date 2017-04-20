@@ -3,6 +3,19 @@
 #
 # @created smohan 20170412
 
+sp {find-object*propose*find-named-objects
+    (state <s> ^name find-object
+               ^description <noun>
+               ^object-set <set>
+               -^found-named-objects.description <noun>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name find-named-object
+          ^description <noun>
+          ^object-set <set>)
+    }
+               
+
 sp {find-object*propose*complete-find-object
     (state <s> ^name find-object)
 -->

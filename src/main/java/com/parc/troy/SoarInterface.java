@@ -19,6 +19,7 @@ import com.parc.troy.interaction.InteractionInputWriter;
 import com.parc.troy.interaction.InteractionOutputReader;
 import com.parc.troy.world.World;
 import com.parc.troy.world.WorldInputWriter;
+import com.parc.troy.world.WorldOutputReader;
 import com.parc.xi.dm.Config;
 import com.parc.xi.dm.DispatchCallback;
 import com.parc.xi.dm.LogicalForm;
@@ -39,8 +40,9 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private InteractionInputWriter interactionIW;
 	private InteractionOutputReader interactionOR;
 	private List<Identifier> identifiersToRemove;
-	private WorldInputWriter worldIW;
-	private World world;
+	private static WorldInputWriter worldIW;
+	private static WorldOutputReader worldOR;
+	private static World world;
 	
 	private boolean isRunning = false;
 	private boolean queueStop = false;
@@ -55,7 +57,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	
 	void configureAndStartSoarAgent(String name, String dmName) throws URISyntaxException, FileNotFoundException
 	{
-		this.kernel = Kernel.CreateKernelInCurrentThread();
+		this.kernel = Kernel.CreateKernelInNewThread();
 		this.troySoarAgent = kernel.CreateAgent(name);
 		
 		this.inputLink = troySoarAgent.GetInputLink();
@@ -68,6 +70,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.interactionOR = new InteractionOutputReader(this.troySoarAgent, this);
 		this.world = new World(dmName);
 		this.worldIW = new WorldInputWriter(dmName, this.worldLink, this.world);
+		this.worldOR = new WorldOutputReader(this.world, this);
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
@@ -174,12 +177,12 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		Boolean shouldOttoCallback = false;
 		if(this.dialogStateToCallback != null && this.troySoarAgent.GetOutputLink() != null && this.troySoarAgent.GetOutputLink().GetNumberChildren() > 0){
 			for (int i = 0; i < this.troySoarAgent.GetOutputLink().GetNumberChildren(); i++) {
-				Identifier messageId = this.troySoarAgent.GetOutputLink().GetChild(i).ConvertToIdentifier();
-					if (messageId.GetAttribute().equals("message")){
+				Identifier outputId = this.troySoarAgent.GetOutputLink().GetChild(i).ConvertToIdentifier();
+					if (outputId.GetAttribute().equals("message")){
 			            shouldOttoCallback = true;
 					}
-					if (messageId.GetAttribute().equals("manipulate")){
-						// plug-in for changing the world
+					if (outputId.GetAttribute().equals("command")){
+						this.worldOR.applySoarCommand(outputId);
 					}
 				}
 			

@@ -14,3 +14,5 @@ source "preferences.soar"
 source "proposals.soar"
 
 source "complete-action.soar"
+
+source "go-into/load.soar"

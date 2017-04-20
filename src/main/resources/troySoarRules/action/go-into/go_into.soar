@@ -1,0 +1,15 @@
+##!
+# @file
+#
+# @created smohan 20170419
+sp {action*apply*op_go_into
+    (state <s> ^name action
+               ^operator <op>
+               ^io.output-link <ol>)
+    (<op> ^name op_go_into
+          ^argument <arg>)
+-->
+    (<ol> ^command <c>)
+    (<c> ^name change-directory
+         ^directory <arg>)
+    }

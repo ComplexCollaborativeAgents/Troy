@@ -16,15 +16,16 @@ public class WorldInputWriter {
 	private World world;
 	private Identifier worldId;
 	private WMElement currentFolderName;
-	private Map<File, Identifier> fileIdMap;
+	private Map<File, Identifier> fileIdentifierMap;
 
 	public WorldInputWriter(String dmName, Identifier worldId, World world){
 		this.world = world;
 		this.worldId = worldId;
-		fileIdMap = new HashMap<File, Identifier>();
+		fileIdentifierMap = new HashMap<File, Identifier>();
 	}
 	
 	public void writeWorldInput(){
+		//System.out.println("Previous path is " + this.world.getPreviousPath());
 		if (!this.world.isCurrentPathSameAsPreviousPath()){
 			//System.out.println("First time in this directory. Writing the world structure.");
 			this.clearWorldLink();
@@ -38,10 +39,20 @@ public class WorldInputWriter {
 	private void writeFolderStructure(){
 		//System.out.println("Writing new folder structure");
 		this.currentFolderName = this.worldId.CreateStringWME("current-folder", this.world.getFolder().getName());
-		this.fileIdMap = new HashMap<File, Identifier>();
+		if (this.fileIdentifierMap != null && this.fileIdentifierMap.size() > 0){
+			this.deleteAllFileIdentifiers();
+		}
+		this.fileIdentifierMap = new HashMap<File, Identifier>();
 		Set<File> setOfFiles = this.world.getObjectSet();
 		for(File file: setOfFiles){
 			this.createAndAddFileIdentifier(file);
+		}
+	}
+	
+	private void deleteAllFileIdentifiers(){
+		for(File file: this.fileIdentifierMap.keySet()){
+			SoarHelper.deleteAllChildren(this.fileIdentifierMap.get(file));
+			this.fileIdentifierMap.get(file).DestroyWME();
 		}
 	}
 	
@@ -51,18 +62,18 @@ public class WorldInputWriter {
 		//System.out.println("Number of items in fileIdMap " + this.fileIdMap.size());
 		
 		for (File file: setOfFiles){
-			if(!this.fileIdMap.keySet().contains(file)){
+			if(!this.fileIdentifierMap.keySet().contains(file)){
 				//System.out.println("Adding file " + file.toString());
 				this.createAndAddFileIdentifier(file);
 			}
 		}
 		
-		for (File file: this.fileIdMap.keySet()){
+		for (File file: this.fileIdentifierMap.keySet()){
 			if(!setOfFiles.contains(file)){
 				//System.out.println("Deleting file " + file.toString());
-				SoarHelper.deleteAllChildren(this.fileIdMap.get(file));
-				this.fileIdMap.get(file).DestroyWME();
-				this.fileIdMap.remove(file);
+				SoarHelper.deleteAllChildren(this.fileIdentifierMap.get(file));
+				this.fileIdentifierMap.get(file).DestroyWME();
+				this.fileIdentifierMap.remove(file);
 			}
 		}
 	}
@@ -72,7 +83,7 @@ public class WorldInputWriter {
 		fileId.CreateStringWME("name", file.getName());
 		if(file.isFile()) fileId.CreateStringWME("type", "file_object");
 		else if (file.isDirectory()) fileId.CreateStringWME("type", "folder_object");
-		this.fileIdMap.put(file, fileId);
+		this.fileIdentifierMap.put(file, fileId);
 	}
 	
 	private void clearWorldLink(){
@@ -80,8 +91,8 @@ public class WorldInputWriter {
 			this.currentFolderName.DestroyWME();
 		}
 		
-		if(this.fileIdMap != null){
-			for (Map.Entry<File, Identifier> entry : this.fileIdMap.entrySet()) {
+		if(this.fileIdentifierMap != null){
+			for (Map.Entry<File, Identifier> entry : this.fileIdentifierMap.entrySet()) {
 				SoarHelper.deleteAllChildren(entry.getValue());
 			}
 		}
@@ -105,11 +116,11 @@ public class WorldInputWriter {
 	}
 
 	public Map<File, Identifier> getFileIdMap() {
-		return fileIdMap;
+		return fileIdentifierMap;
 	}
 
 	public void setFileIdMap(HashMap<File, Identifier> fileIdMap) {
-		this.fileIdMap = fileIdMap;
+		this.fileIdentifierMap = fileIdMap;
 	}
 	
 	

@@ -1,0 +1,35 @@
+##!
+# @file
+#
+# @created smohan 20170419
+sp {find-named-object*elaborate*description*object-set
+    (state <s> ^name find-named-object
+               ^superstate.operator <sop>)
+    (<sop> ^name find-named-object
+           ^description <noun>
+           ^object-set <objs>)
+-->
+    (<s> ^description <noun>
+         ^object-set <objs>)
+    }
+
+sp {find-named-object*elaborate*found-named-object
+    (state <s> ^name find-named-object
+               ^description <d>)
+-->
+    (<s> ^found-named-objects <fno>)
+    (<fno> ^description <d>
+           ^objects <objs>)  
+    }
+
+
+sp {find-named-object*elaborate*objects
+    (state <s> ^name find-named-object
+               ^found-named-objects.objects <fno>
+               ^description <noun>
+               ^object-set <objs>)
+    (<objs> ^object <obj>)
+    (<obj> ^name <noun>)
+-->
+    (<fno> ^object <obj>)
+    }

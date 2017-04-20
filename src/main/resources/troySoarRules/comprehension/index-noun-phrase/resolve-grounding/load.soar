@@ -10,3 +10,5 @@ source "proposals.soar"
 source "resolve-collection.soar"
 
 source "resolve-single-equal.soar"
+
+source "resolve-single-unique.soar"

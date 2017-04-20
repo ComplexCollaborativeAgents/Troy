@@ -4,7 +4,14 @@
 # @created smohan 20170407
 
 smem --add {
+
+	### list objects
     (<a1> ^linguistic <al1> ^procedural <ap1> ^type action)
     (<al1> ^verb list ^noun-phrase <obj>)
     (<ap1> ^op_name op_list ^argument <obj>)
+    
+    ### go into a folder
+	(<a2> ^linguistic <al2> ^procedural <ap2> ^type action)
+ 	(<al2> ^verb go ^noun-phrase <obj>)
+  	(<ap2> ^op_name op_go_into ^argument <obj>)
 }

@@ -39,6 +39,16 @@ sp {index-noun-phrase*elaborate*resolution-type*a
            ^arity single)
     }
 
+sp {index-noun-phrase*elaborate*resolution-type*no-determiner
+    (state <s> ^name index-noun-phrase
+               ^description <d>)
+    (<d> -^determiner <any>)
+-->
+    (<s> ^resolution <res>)
+    (<res> ^preference unique
+           ^arity single)
+    }
+
 sp {index-noun-phrase*elaborate*grounding
     (state <s> ^name index-noun-phrase)
 -->
