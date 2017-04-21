@@ -59,7 +59,6 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	{
 		this.kernel = Kernel.CreateKernelInNewThread();
 		this.troySoarAgent = kernel.CreateAgent(name);
-		
 		this.inputLink = troySoarAgent.GetInputLink();
 		this.setOutputLink(troySoarAgent.GetOutputLink());
 		this.interactionLink = this.inputLink.CreateIdWME("interaction");
@@ -68,9 +67,9 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.interactionIW = new InteractionInputWriter(this.interactionLink);
 		this.setIdentifiersToRemove(new ArrayList<Identifier>());
 		this.interactionOR = new InteractionOutputReader(this.troySoarAgent, this);
-		this.world = new World(dmName);
-		this.worldIW = new WorldInputWriter(dmName, this.worldLink, this.world);
-		this.worldOR = new WorldOutputReader(this.world, this);
+		SoarInterface.world = new World(dmName);
+		SoarInterface.worldIW = new WorldInputWriter(dmName, this.worldLink, SoarInterface.world);
+		SoarInterface.worldOR = new WorldOutputReader(SoarInterface.world, this);
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
@@ -136,7 +135,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		stopAgentIfRequested();
 		readOutputFromSoar();
 		deleteOutputIdentifiers();
-		this.world.updateWorld();
+		SoarInterface.world.updateWorld();
 		writeInteractionInputToSoar();
 		writeWorldInputToSoar();
 	}
@@ -152,7 +151,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	}
 
 	private void writeWorldInputToSoar() {
-		this.worldIW.writeWorldInput();
+		SoarInterface.worldIW.writeWorldInput();
 		this.troySoarAgent.Commit();
 	}
 	
@@ -182,7 +181,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 			            shouldOttoCallback = true;
 					}
 					if (outputId.GetAttribute().equals("command")){
-						this.worldOR.applySoarCommand(outputId);
+						SoarInterface.worldOR.applySoarCommand(outputId);
 					}
 				}
 			
