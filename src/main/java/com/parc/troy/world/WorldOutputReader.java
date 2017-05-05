@@ -22,6 +22,9 @@ public class WorldOutputReader {
 			this.processChangeDirectory(directory);
 			this.soarI.getIdentifiersToRemove().add(commandId);
 		}
+		if(command.equals("create-directory")){
+			
+		}
 	}
 	
 	private void processChangeDirectory(String directory){

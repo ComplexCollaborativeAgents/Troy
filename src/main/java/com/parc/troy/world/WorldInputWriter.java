@@ -15,10 +15,10 @@ public class WorldInputWriter {
 	
 	private World world;
 	private Identifier worldId;
-	private WMElement currentFolderName;
+	private WMElement currentFolderNameId;
 	private Map<File, Identifier> fileIdentifierMap;
 
-	public WorldInputWriter(String dmName, Identifier worldId, World world){
+	public WorldInputWriter(Identifier worldId, World world){
 		this.world = world;
 		this.worldId = worldId;
 		fileIdentifierMap = new HashMap<File, Identifier>();
@@ -38,7 +38,7 @@ public class WorldInputWriter {
 	
 	private void writeFolderStructure(){
 		//System.out.println("Writing new folder structure");
-		this.currentFolderName = this.worldId.CreateStringWME("current-folder", this.world.getFolder().getName());
+		this.currentFolderNameId = this.worldId.CreateStringWME("current-folder", this.world.getFolder().getName());
 		if (this.fileIdentifierMap != null && this.fileIdentifierMap.size() > 0){
 			this.deleteAllFileIdentifiers();
 		}
@@ -87,8 +87,8 @@ public class WorldInputWriter {
 	}
 	
 	private void clearWorldLink(){
-		if(this.currentFolderName != null){
-			this.currentFolderName.DestroyWME();
+		if(this.currentFolderNameId != null){
+			this.currentFolderNameId.DestroyWME();
 		}
 		
 		if(this.fileIdentifierMap != null){
@@ -108,11 +108,11 @@ public class WorldInputWriter {
 	}
 
 	public WMElement getCurrentFolderName() {
-		return currentFolderName;
+		return currentFolderNameId;
 	}
 
 	public void setCurrentFolderName(WMElement currentFolderName) {
-		this.currentFolderName = currentFolderName;
+		this.currentFolderNameId = currentFolderName;
 	}
 
 	public Map<File, Identifier> getFileIdMap() {

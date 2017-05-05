@@ -68,7 +68,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.setIdentifiersToRemove(new ArrayList<Identifier>());
 		this.interactionOR = new InteractionOutputReader(this.troySoarAgent, this);
 		SoarInterface.world = new World(dmName);
-		SoarInterface.worldIW = new WorldInputWriter(dmName, this.worldLink, SoarInterface.world);
+		SoarInterface.worldIW = new WorldInputWriter(this.worldLink, SoarInterface.world);
 		SoarInterface.worldOR = new WorldOutputReader(SoarInterface.world, this);
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))

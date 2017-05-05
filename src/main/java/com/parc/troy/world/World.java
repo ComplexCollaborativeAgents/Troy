@@ -3,6 +3,7 @@ package com.parc.troy.world;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import com.parc.xi.dm.Config;
@@ -16,13 +17,13 @@ public class World {
 	private Set<File> objectSet;
 	
 	public World(String dmName){
-		// SM: put in a test if this file is not null.
-		this.homePath = Config.getProperty(dmName +".Home",null);;
-		currentPath = this.homePath;
+		this.homePath = Config.getProperty(dmName +".Home",null);
 		previousPath = null;
-		
-		folder = new File(this.currentPath);
-		objectSet = this.getSetofFilesFolders();
+		if(this.homePath != null) {
+			currentPath = this.homePath;
+			folder = new File(this.currentPath);
+			objectSet = this.getSetofFilesFolders();
+		}
 	}
 	
 	public Boolean isCurrentPathSameAsPreviousPath(){
@@ -48,11 +49,21 @@ public class World {
 		}
 		
 		// remove deleted files
-		for(File oldFile: this.objectSet){
+		
+		Iterator<File> iterFile = this.objectSet.iterator();
+		
+		while(iterFile.hasNext()){
+			File oldFile = iterFile.next();
 			if(!newFileSet.contains(oldFile)){
-				this.objectSet.remove(oldFile);
+				iterFile.remove();
 			}
 		}
+		
+//		for(File oldFile: this.objectSet){
+//			if(!newFileSet.contains(oldFile)){
+//				this.objectSet.remove(oldFile);
+//			}
+//		}
 		
 		//System.out.println("Number of objects: " + this.objectSet.size());
 		
