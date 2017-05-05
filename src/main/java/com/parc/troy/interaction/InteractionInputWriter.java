@@ -17,7 +17,7 @@ public class InteractionInputWriter {
 	}
 	
 	public void writeMessage(LogicalForm messageToWrite) {
-		//System.out.println("writeMessage");
+		//System.out.println(messageToWrite);
 		clearInteractionLink();
 		Identifier commandId = this.interactionLink.CreateIdWME("message");
 		if(messageToWrite.getArg(0).toString().equals("ActionCommand")){
@@ -30,7 +30,7 @@ public class InteractionInputWriter {
 		SoarHelper.deleteAllChildren(this.interactionLink);
 	}
 
-	void writeActionCommand(LogicalForm messageToWrite, Identifier commandId) {
+	private void writeActionCommand(LogicalForm messageToWrite, Identifier commandId) {
 		Iterator<LogicalForm> argListIterator = messageToWrite.getArgList().iterator();
 		argListIterator.next();
 		commandId.CreateStringWME("verb", argListIterator.next().toString());
@@ -44,7 +44,7 @@ public class InteractionInputWriter {
 		}
 	}
 	
-	void writeNounPhrase(LogicalForm nounPhrase, Identifier id){
+	private void writeNounPhrase(LogicalForm nounPhrase, Identifier id){
 		//System.out.println("Noun phrase id is " + id.toString());
 		Iterator<LogicalForm> argListIterator = nounPhrase.getArgList().iterator();
 		while(argListIterator.hasNext()){
@@ -58,12 +58,12 @@ public class InteractionInputWriter {
 		}
 	}
 	
-	void writeDeterminer(LogicalForm determiner, Identifier id){
+	private void writeDeterminer(LogicalForm determiner, Identifier id){
 		//System.out.println("writing determiner " + determiner.op +  " on " + id.toString());
 		id.CreateStringWME("determiner", determiner.op);
 	}
 	
-	void writeNoun(LogicalForm noun, Identifier id){
+	private void writeNoun(LogicalForm noun, Identifier id){
 		//System.out.println("writing noun " + noun.op + " on " + id.toString());
 		id.CreateStringWME("noun", noun.op);
 	}

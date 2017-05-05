@@ -27,7 +27,6 @@ public class WorldInputWriterTests {
 	private File testFile2;
 	private File subTestFile1;
 	
-	// 
 	
 	@Before
 	public void setUp() {
