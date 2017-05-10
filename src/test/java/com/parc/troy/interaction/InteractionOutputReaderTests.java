@@ -25,9 +25,7 @@ public class InteractionOutputReaderTests {
 		testKernel = Kernel.CreateKernelInCurrentThread();
 		testAgent = testKernel.CreateAgent("test-agent");
 		interactionOR = new InteractionOutputReader(testAgent, null);
-		
 	}
-	
 	
 	@After
 	public void tearDown() throws IOException {
@@ -44,6 +42,4 @@ public class InteractionOutputReaderTests {
 		String responseString = response.toString();
 		assertEquals(responseString, "Inform(And(test-generated-file2,test-generated-file1))");
 	}
-
-
 }

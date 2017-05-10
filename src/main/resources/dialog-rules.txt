@@ -21,6 +21,7 @@ Verb[print] <-> print
 Verb[email] <-> email
 Verb[list] <-> list
 Verb[show] <-> show
+Verb[create] <-> create
 Verb[go] <-> go
 To[to] <-> to
 NN[home-directory] <-> home directory
