@@ -20,5 +20,3 @@ sp {topstate*apply*init-agent
          ^interaction <inter>)
     (<inter> ^stack <stack>)
  }
-
-

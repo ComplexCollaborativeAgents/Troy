@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170510
+sp {test-rule 
+	(state <s> ^superstate nil 
+			   ^io.output-link <ol>) 
+-->
+	(<ol> ^message <m>)
+	(<m> ^dialog-act inform
+		 ^content <cont>)
+	(<cont> ^file |test-generated-file1|
+			^file |test-generated-file2|)
+}

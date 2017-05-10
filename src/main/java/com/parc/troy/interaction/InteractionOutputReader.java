@@ -6,7 +6,10 @@ import static com.parc.xi.dm.LogicalFormConstants.BOOLAND;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.parc.troy.SoarInterface;
+import com.parc.troy.TroyConsole;
 import com.parc.xi.dm.LogicalForm;
 
 import sml.Agent;
@@ -16,6 +19,8 @@ public class InteractionOutputReader {
 	
 	private Agent troySoarAgent;
 	private SoarInterface soarI;
+	
+	private static Logger LOGGER = Logger.getLogger(TroyConsole.class.getName());
 	
 	public InteractionOutputReader(Agent troySoarAgent, SoarInterface soarI){
 		this.troySoarAgent = troySoarAgent;
@@ -33,8 +38,10 @@ public class InteractionOutputReader {
 					responseDialogAct = INFORM(this.parseContent(contentId));
 				}
 			}
-			this.soarI.getIdentifiersToRemove().add(messageId);
-			//System.out.println("size " + this.soarI.getIdentifiersToRemove().size());
+			if (this.soarI != null){
+			 this.soarI.getIdentifiersToRemove().add(messageId);
+			 System.out.println("Number of identifiers to remove from soarAgent outputLink: " + this.soarI.getIdentifiersToRemove().size());
+			}
 		}
 		return responseDialogAct;
 	}

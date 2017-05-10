@@ -51,6 +51,5 @@ public class InteractionInputWriterTests {
 		assertEquals(npId.GetAttribute(), "noun-phrase");
 		assertEquals(npId.GetParameterValue("determiner"), "all");
 		assertEquals(npId.GetParameterValue("noun"), "file");
-		
 	}
 }
