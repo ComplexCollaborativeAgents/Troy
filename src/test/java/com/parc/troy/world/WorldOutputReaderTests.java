@@ -16,8 +16,6 @@ import sml.Agent;
 import sml.Identifier;
 import sml.Kernel;
 
-import com.parc.troy.interaction.InteractionOutputReader;
-
 public class WorldOutputReaderTests {
 	private Kernel testKernel;
 	private Agent testAgent;
@@ -30,10 +28,7 @@ public class WorldOutputReaderTests {
 	public void setUp() {
 		testKernel = Kernel.CreateKernelInCurrentThread();
 		testAgent = testKernel.CreateAgent("test-agent");
-		
 		testWorld = new World("DM.troy");
-		
-		
 	}
 	
 	@After

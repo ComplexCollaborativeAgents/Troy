@@ -8,11 +8,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.parc.troy.SoarInterface;
 import com.parc.xi.dm.LogicalForm;
 
 import sml.Agent;
-import sml.Identifier;
 import sml.Kernel;
 
 public class InteractionOutputReaderTests {

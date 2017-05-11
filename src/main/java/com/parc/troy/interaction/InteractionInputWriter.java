@@ -1,7 +1,6 @@
 package com.parc.troy.interaction;
 
 import java.util.Iterator;
-import java.util.List;
 
 import sml.Identifier;
 

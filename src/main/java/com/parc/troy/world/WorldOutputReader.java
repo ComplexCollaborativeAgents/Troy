@@ -5,16 +5,14 @@ import java.io.File;
 import org.apache.log4j.Logger;
 
 import com.parc.troy.SoarInterface;
-import com.parc.troy.TroyConsole;
 
-import sml.Agent;
 import sml.Identifier;
 
 public class WorldOutputReader {
 	
 	private World world;
 	private SoarInterface soarI;
-	private static Logger LOGGER = Logger.getLogger(TroyConsole.class.getName());
+	private static Logger LOGGER = Logger.getLogger(WorldOutputReader.class.getName());
 	
 	public WorldOutputReader (World world, SoarInterface soarI){
 		this.world = world;

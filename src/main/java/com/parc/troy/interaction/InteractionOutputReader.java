@@ -20,7 +20,7 @@ public class InteractionOutputReader {
 	private Agent troySoarAgent;
 	private SoarInterface soarI;
 	
-	private static Logger LOGGER = Logger.getLogger(TroyConsole.class.getName());
+	private static Logger LOGGER = Logger.getLogger(InteractionOutputReader.class.getName());
 	
 	public InteractionOutputReader(Agent troySoarAgent, SoarInterface soarI){
 		this.troySoarAgent = troySoarAgent;
@@ -40,7 +40,7 @@ public class InteractionOutputReader {
 			}
 			if (this.soarI != null){
 			 this.soarI.getIdentifiersToRemove().add(messageId);
-			 System.out.println("Number of identifiers to remove from soarAgent outputLink: " + this.soarI.getIdentifiersToRemove().size());
+			 LOGGER.debug("Number of identifiers to remove from soarAgent outputLink: " + this.soarI.getIdentifiersToRemove().size());
 			}
 		}
 		return responseDialogAct;
