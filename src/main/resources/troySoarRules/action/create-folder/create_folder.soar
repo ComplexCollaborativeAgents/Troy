@@ -1,0 +1,16 @@
+##!
+# @file
+#
+# @created smohan 20170510
+sp {action*apply*op_create_folder
+    (state <s> ^name action
+               ^operator <op>
+               ^io.output-link <ol>)
+    (<op> ^name op_create_folder
+          ^argument1 <name>
+          ^argument2 folder_object)
+-->
+    (<ol> ^command <c>)
+    (<c> ^name create-directory
+         ^directory <arg>)
+    }

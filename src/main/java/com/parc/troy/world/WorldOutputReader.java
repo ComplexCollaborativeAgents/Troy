@@ -29,6 +29,7 @@ public class WorldOutputReader {
 				}
 			}
 		}
+		
 		if(command.equals("create-directory")){
 			for(int i = 0; i < commandId.GetNumberChildren(); i++) {
 				if(commandId.GetChild(i).GetAttribute().equals("directory")){

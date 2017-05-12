@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
 
 import sml.Agent;
@@ -29,6 +30,9 @@ import com.parc.xi.dm.state.Plan;
 
 
 public class SoarInterface implements DialogRuleFn, RunEventInterface {
+	
+	private static Logger LOGGER = Logger.getLogger(SoarInterface.class.getName());
+	
 	private Kernel kernel;
 	private Agent troySoarAgent;
 	private String troySource;
@@ -84,6 +88,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	public List<Result> apply(LogicalForm call, Plan plan, DialogState state) {
 		List <Result> resultList = new ArrayList<Result>();
 		if (call.op.equals("writeToSoar")){
+			LOGGER.debug("Message from Otto: " + call);
 			messageToWrite = call;
 			dialogStateToCallback = state;
 			setCallToProcess(call);

@@ -16,3 +16,5 @@ source "proposals.soar"
 source "complete-action.soar"
 
 source "go-into/load.soar"
+
+source "create-folder/load.soar"

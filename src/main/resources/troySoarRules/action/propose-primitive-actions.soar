@@ -36,6 +36,19 @@ sp {action*propose*op_go_into
  	(<op> ^name op_go_into
           ^argument <obj>)
   }
+
+sp {action*propose*op_create_folder
+	(state <s> ^name action
+            	^world <w>)
+ 	-{(<w> ^object <obj>)
+      (<obj> ^type folder_object
+             ^name <name>)}
+-->
+	(<s> ^operator <op> +)
+ 	(<op> ^name op_create_folder
+          ^argument1 <name>
+          ^argument2 folder_object)
+  }
          
                
              	
