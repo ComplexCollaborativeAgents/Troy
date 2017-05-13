@@ -1,0 +1,68 @@
+##!
+# @file
+#
+# @created smohan 20170407
+sp {index-entity*elaborate*description
+    (state <s> ^name index-entity
+               ^superstate.operator <sop>)
+    (<sop> ^description <d>)
+-->
+    (<s> ^description <d>)
+    }
+
+sp {index-entity*elaborate*segment
+    (state <s> ^name index-entity
+               ^superstate <ss>)
+    (<ss> ^segment <seg>)
+-->
+    (<s> ^segment <seg>)
+    }
+
+
+sp {index-entity*elaborate*resolution-type*set
+    (state <s> ^name index-entity
+               ^description <d>)
+    (<d> ^set-property.determiner distributive-all)
+-->
+    (<s> ^resolution <res>)
+    (<res> ^preference all
+           ^arity multiple)
+    }
+
+sp {index-entity*elaborate*resolution-type*a
+    (state <s> ^name index-entity
+               ^description <d>)
+    (<d> ^set-property.determiner indefinite)
+-->
+    (<s> ^resolution <res>)
+    (<res> ^preference equal
+           ^arity single)
+    }
+
+sp {index-entity*elaborate*resolution-type*no-determiner
+    (state <s> ^name index-entity
+               ^description <d>)
+    -{(<d> ^set-property <set-p>)
+     (<set-p> ^determiner <any>)}
+-->
+    (<s> ^resolution <res>)
+    (<res> ^preference unique
+           ^arity single)
+    }
+
+sp {index-entity*elaborate*grounding
+    (state <s> ^name index-entity)
+-->
+    (<s> ^grounding <g>)
+    }
+
+sp {index-entity*elaborate*segment*world
+    (state <s> ^name index-entity
+               ^resolution <res>
+               ^grounding <g>
+               ^segment.world-enhancements <w>)
+    (<g> ^set <obj-set>)
+    (<res> ^arity multiple)
+-->
+    (<w> ^set <obj-set>)
+    }

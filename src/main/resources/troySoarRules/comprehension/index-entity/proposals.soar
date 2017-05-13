@@ -1,0 +1,41 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+sp {index-entity*propose*find-object
+    (state <s> ^name index-entity
+               ^description.type <type>
+               ^world <objs>
+               -^found-objects.description <type>)   
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name find-object
+          ^object-set <objs>
+          ^description <type>)
+    }
+               
+
+sp {index-entity*propose*resolve-grounding
+    (state <s> ^name index-entity
+               ^grounding <g>
+               ^resolution <res>
+               ^found-objects.objects <objs>)
+    (<g> -^<any>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name resolve-grounding
+          ^grounding <g>
+          ^resolution <res>
+          ^found-objects.objects <objs>)
+    }
+
+
+
+sp {index-entity*propose*complete-index-entity
+    (state <s> ^name index-entity)
+-->
+    (<s> ^operator <op> + <)
+    (<op> ^name complete-index-entity)
+    }
+               

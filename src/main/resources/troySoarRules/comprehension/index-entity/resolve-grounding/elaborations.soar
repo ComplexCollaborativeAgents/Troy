@@ -1,0 +1,17 @@
+##!
+# @file
+#
+# @created smohan 20170414
+
+sp {resolve-grounding*elaborate*grounding
+    (state <s> ^name resolve-grounding
+               ^superstate.operator <sop>)
+    (<sop> ^name resolve-grounding
+           ^grounding <g>
+           ^resolution <res>
+           ^found-objects.objects <objs>)
+-->
+    (<s> ^grounding <g>
+         ^resolution <res>
+         ^objects <objs>)
+    }

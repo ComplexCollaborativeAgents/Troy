@@ -1,0 +1,16 @@
+##!
+# @file: 
+#
+# @created smohan 20170407
+
+source "elaborations.soar"
+
+source "proposals.soar"
+
+source "find-object/load.soar"
+
+source "preferences.soar"
+
+source "complete-index-entity.soar"
+
+source "resolve-grounding/load.soar"

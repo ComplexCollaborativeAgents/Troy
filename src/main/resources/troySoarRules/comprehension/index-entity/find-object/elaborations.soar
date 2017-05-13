@@ -1,0 +1,72 @@
+##!
+# @file
+#
+# @created smohan 20170407
+
+sp {find-object*elaborate*found-objects
+    (state <s> ^name find-object
+               ^superstate.operator <sop>)
+    (<sop> ^description <d>)
+-->
+    (<s> ^found-objects <fo>)
+    (<fo> ^description <d>
+          ^objects <objs>)
+    }
+
+sp {find-object*elaborate*description
+    (state <s> ^name find-object
+               ^superstate.operator <sop>)
+    (<sop> ^description <noun>)
+-->
+    (<s> ^description <noun>)
+    }
+
+sp {find-object*elaborate*object-set
+    (state <s> ^name find-object
+               ^superstate.operator <sop>)
+    (<sop> ^object-set <os>)
+-->
+    (<s> ^object-set <os>)
+    }
+
+sp {find-object*lookup-smem
+    (state <s> ^name find-object
+               ^smem.command <scomm>
+               ^description <noun>)
+-->
+    (<scomm> ^query <q>)
+    (<q> ^word <noun>)
+    }
+
+sp {find-object*elaborate*attribute
+    (state <s> ^name find-object
+               ^smem.result <sres>)
+    (<sres> ^retrieved <ret>
+            ^success <any-cue>)
+-->
+    (<s> ^attribute-info <ret>)
+    }
+
+sp {find-object*elaborate*objects
+    (state <s> ^name find-object
+               ^attribute-info <info>
+               ^superstate.operator <sop>
+               ^found-objects.objects <fo>
+               ^object-set <os>)
+    (<info> ^attribute <attr>
+            ^value <val>)
+    (<os> ^object <obj>)
+    (<obj> ^<attr> <val>)
+-->
+    (<fo> ^object <obj>)
+    }
+
+sp {find-object*elaborate*named-objects
+    (state <s> ^name find-object
+               ^found-named-objects.objects <nobjs>
+               ^found-objects.objects <objs>)
+    (<nobjs> ^object <obj>)
+-->
+    (<objs> ^object <obj>)
+    }
+    

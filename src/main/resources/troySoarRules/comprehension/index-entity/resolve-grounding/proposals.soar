@@ -1,0 +1,48 @@
+##!
+# @file
+#
+# @created smohan 20170414
+
+sp {resolve-grounding*propose*resolve-collection
+    (state <s> ^name resolve-grounding
+               ^grounding <g>
+               ^objects <objs>
+               ^resolution <res>)
+    (<res> ^arity multiple
+           ^preference all)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name resolve-collection
+          ^grounding <g>
+          ^objects <objs>)
+    }
+
+sp {resolve-grounding*propose*resolve-single*equal
+    (state <s> ^name resolve-grounding
+               ^objects <objs>
+               ^resolution <res>
+               ^grounding <g>)
+    (<objs> ^object <obj>)
+    (<res> ^arity single
+           ^preference equal)
+-->
+    (<s> ^operator <op> + =)
+    (<op> ^name resolve-single-equal
+          ^grounding <g>
+          ^object <obj>)
+    }
+
+sp {resolve-grounding*propose*resolve-single*unique
+    (state <s> ^name resolve-grounding
+               ^objects <objs>
+               ^resolution <res>
+               ^grounding <g>)
+    (<objs> ^object <obj>)
+    (<res> ^arity single
+           ^preference unique)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name resolve-single-unique
+          ^grounding <g>
+          ^object <obj>)
+    }

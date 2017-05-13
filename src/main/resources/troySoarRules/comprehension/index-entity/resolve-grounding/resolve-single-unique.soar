@@ -1,0 +1,15 @@
+##!
+# @file
+#
+# @created smohan 20170419
+sp {resolve-grounding*apply*resolve-single*unique
+    (state <s> ^name resolve-grounding
+               ^operator <op> +
+               ^objects.object <obj>)
+    (<res> ^arity single
+           ^preference unique)
+    (<op> ^object <obj>)
+-->
+    (<s> ^operator <op> >)
+    (<op> ^name resolve-single-equal)
+    }
