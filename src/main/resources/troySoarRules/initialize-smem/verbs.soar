@@ -7,17 +7,17 @@ smem --add {
 
 	### list objects
     (<a1> ^linguistic <al1> ^procedural <ap1> ^type action)
-    (<al1> ^verb list ^noun-phrase <arg1>)
+    (<al1> ^verb list ^entity <arg1>)
     (<ap1> ^op_name op_list ^argument <arg1>)
     
     ### go into a folder
 	(<a2> ^linguistic <al2> ^procedural <ap2> ^type action)
- 	(<al2> ^verb go ^noun-phrase <arg2>)
+ 	(<al2> ^verb go ^entity <arg2>)
   	(<ap2> ^op_name op_go_into ^argument <arg2>)
    
    ### create a folder
 	(<a3> ^linguistic <al3> ^procedural <ap3> ^type action)
- 	(<al3> ^verb create ^noun-phrase <arg31>)
+ 	(<al3> ^verb create ^entity <arg31>)
   	(<ap3> ^op_name op_create_folder ^argument1 <arg31>)
     (<arg32> ^default folder_object)
 }

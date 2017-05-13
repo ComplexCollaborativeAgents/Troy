@@ -36,10 +36,10 @@ public class InteractionInputWriterTests {
 
 	@Test
 	public void testWriteActionCommandList() {
-		LogicalForm nounPhrase = new LogicalForm("np", 
-				new LogicalForm("dt", new LogicalForm ("all")), 
-						new LogicalForm("n", new LogicalForm ("file")));
-		LogicalForm message = new LogicalForm("writeToSoar", new LogicalForm("ActionCommand"), new LogicalForm("list"), nounPhrase);
+		LogicalForm entity = new LogicalForm("entity", 
+				new LogicalForm("has-set-property", new LogicalForm("determiner"), new LogicalForm ("distributive-all")), 
+				new LogicalForm("type", new LogicalForm ("file")));
+		LogicalForm message = new LogicalForm("writeToSoar", new LogicalForm("ActionCommand"), new LogicalForm("verb", new LogicalForm("list")), entity);
 		interactionIW.writeMessage(message);
 		assertEquals(interactionId.GetNumberChildren(), 1);
 		assertEquals(interactionId.GetChild(0).GetAttribute(), "message");
@@ -47,9 +47,10 @@ public class InteractionInputWriterTests {
 		assertEquals(messageId.GetNumberChildren(), 3);
 		assertEquals(messageId.GetParameterValue("type"), "action-command");
 		assertEquals(messageId.GetParameterValue("verb"), "list");
-		Identifier npId = messageId.GetChild(2).ConvertToIdentifier();
-		assertEquals(npId.GetAttribute(), "noun-phrase");
-		assertEquals(npId.GetParameterValue("determiner"), "all");
-		assertEquals(npId.GetParameterValue("noun"), "file");
+		Identifier entityId = messageId.GetChild(2).ConvertToIdentifier();
+		assertEquals(entityId.GetAttribute(), "entity");
+		assertEquals(entityId.GetParameterValue("type"), "file");
+		Identifier setPropertyId = entityId.GetChild(0).ConvertToIdentifier();
+		assertEquals(setPropertyId.GetParameterValue("determiner"), "distributive-all");
 	}
 }

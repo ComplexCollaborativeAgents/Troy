@@ -7,7 +7,7 @@ source "elaborations.soar"
 
 source "proposals.soar"
 
-source "index-noun-phrase/load.soar"
+source "index-entity/load.soar"
 
 source "index-verb/load.soar"
 

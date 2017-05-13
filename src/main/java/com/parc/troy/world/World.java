@@ -35,6 +35,9 @@ public class World {
 			return false;
 	}
 	
+	
+	
+	// refactor to move updateFileState as a separate function 
 	public void updateWorld(){
 		//System.out.println("Updating world");
 		this.folder = new File(this.currentPath);

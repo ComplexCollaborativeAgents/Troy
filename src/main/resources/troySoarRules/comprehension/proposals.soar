@@ -2,15 +2,15 @@
 # @file
 #
 # @created smohan 20170407
-sp {comprehension*propose*index-noun-phrase
+sp {comprehension*propose*index-entity
     (state <s> ^name comprehension
                ^message <m>
                ^grounding <g>)
-    (<m> ^noun-phrase <np>)
-    (<g> -^noun-phrase <any>)
+    (<m> ^entity <np>)
+    (<g> -^entity <any>)
 -->
     (<s> ^operator <op> +)
-    (<op> ^name index-noun-phrase
+    (<op> ^name index-entity
           ^description <np>)
     }
 

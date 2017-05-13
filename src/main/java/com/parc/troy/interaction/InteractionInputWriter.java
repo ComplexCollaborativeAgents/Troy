@@ -2,15 +2,20 @@ package com.parc.troy.interaction;
 
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
+
 import sml.Identifier;
 
 import com.parc.troy.SoarHelper;
 import com.parc.xi.dm.LogicalForm;
 
+
+
 public class InteractionInputWriter {
 	
-	private Identifier interactionLink;
+	private static Logger LOGGER = Logger.getLogger(InteractionInputWriter.class.getName());
 	
+	private Identifier interactionLink;
 	public InteractionInputWriter(Identifier interactionLink){
 		this.interactionLink = interactionLink;
 	}
@@ -32,39 +37,59 @@ public class InteractionInputWriter {
 	private void writeActionCommand(LogicalForm messageToWrite, Identifier commandId) {
 		Iterator<LogicalForm> argListIterator = messageToWrite.getArgList().iterator();
 		argListIterator.next();
-		commandId.CreateStringWME("verb", argListIterator.next().toString());
 		while(argListIterator.hasNext()){
 			LogicalForm lf = argListIterator.next();
-			if(lf.op != null & lf.op.equals("np")){
+			if(lf.op != null){
+				if(lf.op.equals("verb")){
+					writeVerb(lf, commandId);
+				}
+			if(lf.op != null & lf.op.equals("entity")){
 				//System.out.println("writing noun-phrase");
-				Identifier npId = commandId.CreateIdWME("noun-phrase");
-				writeNounPhrase(lf, npId);
+				Identifier entityId = commandId.CreateIdWME("entity");
+				writeEntity(lf, entityId);
+				}
 			}
-		}
+		}	
 	}
 	
-	private void writeNounPhrase(LogicalForm nounPhrase, Identifier id){
-		//System.out.println("Noun phrase id is " + id.toString());
-		Iterator<LogicalForm> argListIterator = nounPhrase.getArgList().iterator();
+	private void writeVerb(LogicalForm verb, Identifier id){
+		id.CreateStringWME("verb", verb.getArg(0).toString());
+	}
+	
+	private void writeEntity(LogicalForm entity, Identifier id){
+		LOGGER.debug("Writing entity: " + entity);
+		Iterator<LogicalForm> argListIterator = entity.getArgList().iterator();
 		while(argListIterator.hasNext()){
 			LogicalForm lf = argListIterator.next();
-			if(lf.op != null && lf.op.equals("dt")){
-				writeDeterminer(lf.getArg(0), id);
-			}
-			if(lf.op != null && lf.op.equals("n")){
-				writeNoun(lf.getArg(0), id);
-			}
+			if(lf.op != null){
+				if(lf.op.equals("type")){
+					writeEntityType(lf, id);
+				}
+				if(lf.op.equals("has-set-property")){
+					writeSetProperty(lf, id);
+				}
+				if(lf.op.equals("has-property")){
+					writeProperty(lf, id);
+				}
+			}	
 		}
 	}
 	
-	private void writeDeterminer(LogicalForm determiner, Identifier id){
-		//System.out.println("writing determiner " + determiner.op +  " on " + id.toString());
-		id.CreateStringWME("determiner", determiner.op);
+	private void writeEntityType(LogicalForm type, Identifier id){
+		LOGGER.debug("Writing type: " + type);
+		id.CreateStringWME("type", type.getArg(0).toString());
 	}
 	
-	private void writeNoun(LogicalForm noun, Identifier id){
-		//System.out.println("writing noun " + noun.op + " on " + id.toString());
-		id.CreateStringWME("noun", noun.op);
+	private void writeSetProperty(LogicalForm setProperty, Identifier id){
+		LOGGER.debug("Writing set-property: " + setProperty);
+		Identifier setPropertyId = id.CreateIdWME("set-property");
+		setPropertyId.CreateStringWME(setProperty.getArg(0).toString(), setProperty.getArg(1).toString());
+	}
+	
+	private void writeProperty(LogicalForm property, Identifier id){
+		LOGGER.debug("Writing property: " + property);
+		Identifier propertyId = id.CreateIdWME("property");
+		propertyId.CreateStringWME(property.getArg(0).toString(), property.getArg(1).toString());
 	}
 	
 }
