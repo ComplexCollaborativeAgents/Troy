@@ -43,10 +43,9 @@ public class InteractionInputWriter {
 				if(lf.op.equals("verb")){
 					writeVerb(lf, commandId);
 				}
-			if(lf.op != null & lf.op.equals("entity")){
-				//System.out.println("writing noun-phrase");
-				Identifier entityId = commandId.CreateIdWME("entity");
-				writeEntity(lf, entityId);
+				if(lf.op.equals("entity")){
+					Identifier entityId = commandId.CreateIdWME("entity");
+					writeEntity(lf, entityId);
 				}
 			}
 		}	
@@ -71,8 +70,16 @@ public class InteractionInputWriter {
 				if(lf.op.equals("has-property")){
 					writeProperty(lf, id);
 				}
+				if(lf.op.equals("name")){
+					writeEntityName(lf,id);
+				}
 			}	
 		}
+	}
+	
+	private void writeEntityName(LogicalForm name, Identifier id){
+		LOGGER.debug("Writing type: " + name);
+		id.CreateStringWME("name", name.getArg(0).toString());
 	}
 	
 	private void writeEntityType(LogicalForm type, Identifier id){

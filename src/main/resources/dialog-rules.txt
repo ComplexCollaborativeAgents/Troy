@@ -6,8 +6,7 @@ rank(40) Instruct(ActionCommand($1, $2, $3)) => Inform() writeToSoar(ActionComma
 rank(30) Request(readOutputFromSoar) => readFromSoar($1) say($1)
 
 User: Instruct(ActionCommand($1, $2)) <-> {ActionName[$1]} {Entity[$2]}.
-User: Instruct(ActionCommand($1, $2, $3)) <-> {ActionName[$1]} {Entity[$2]} {Entity[$3]}
-
+User: Instruct(ActionCommand($1, $2, $3)) <-> {ActionName[$1]} {Entity[$2]} {Entity[$3]}.
 
 ActionName[verb(print)] <-> print
 ActionName[verb(email)] <-> email
@@ -25,16 +24,19 @@ EntityConstraint[has-set-property(determiner, definite)] <-> the
 EntityConstraint[has-set-property(determiner, distributive-all)] <-> all
 EntityConstraint[has-set-property(determiner, distributive-all)] <-> all the
 EntityConstraint[has-property(color, red)] <-> red
+
+Entity[entity($1)] <-> {EntityName[$1]}
 Entity[entity($1,$2)] <-> {EntityConstraint[$2]}{EntityType[$1]}
 Entity[entity($1,$2,$3)] <-> {EntityConstraint[$3]}{EntityConstraint[$2]}{EntityType[$1]}
 
-Entity[named-entity($1)] <-> with name {Tokens[$1]}
-Entity[named-entity($1)] <-> named {Tokens[$1]}
-Entity[named-entity($1)] <-> name it {Tokens[$1]}
+
+EntityName[name($1)] <-> with name {Tokens[$1]}
+EntityName[name($1)] <-> named {Tokens[$1]}
+EntityName[name($1)] <-> name {Tokens[$1]}
+EntityName[name($1)] <-> {ActionName[$_2]} {Tokens[$1]}
 
 Tokens <-> {Token+}
 Token[$1] <-> {matches($1,.+)}
-
 
 Inform(And($1)) -> The files are {$1}.
 Inform($1) -> The file is {$1}.
