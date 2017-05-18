@@ -19,8 +19,6 @@ import sml.smlRunEventId;
 import com.parc.troy.interaction.InteractionInputWriter;
 import com.parc.troy.interaction.InteractionOutputReader;
 import com.parc.troy.world.World;
-import com.parc.troy.world.WorldInputWriter;
-import com.parc.troy.world.WorldOutputReader;
 import com.parc.xi.dm.Config;
 import com.parc.xi.dm.DispatchCallback;
 import com.parc.xi.dm.LogicalForm;
@@ -44,9 +42,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	private InteractionInputWriter interactionIW;
 	private InteractionOutputReader interactionOR;
 	private List<Identifier> identifiersToRemove;
-	private static WorldInputWriter worldIW;
-	private static WorldOutputReader worldOR;
-	private static World world;
+	private World world;
 	
 	private boolean isRunning = false;
 	private boolean queueStop = false;
@@ -71,9 +67,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		this.interactionIW = new InteractionInputWriter(this.interactionLink);
 		this.setIdentifiersToRemove(new ArrayList<Identifier>());
 		this.interactionOR = new InteractionOutputReader(this.troySoarAgent, this);
-		SoarInterface.world = new World(dmName);
-		SoarInterface.worldIW = new WorldInputWriter(this.worldLink, SoarInterface.world);
-		SoarInterface.worldOR = new WorldOutputReader(SoarInterface.world, this);
+		this.world = new World(dmName, this, this.worldLink);
 		
 		if (Config.getProperty(dmName + ".config.runType", null).equals("debug"))
 			troySoarAgent.SpawnDebugger(kernel.GetListenerPort());
@@ -140,9 +134,9 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		stopAgentIfRequested();
 		readOutputFromSoar();
 		deleteOutputIdentifiers();
-		SoarInterface.world.updateWorld();
-		writeInteractionInputToSoar();
-		writeWorldInputToSoar();
+		this.world.update();
+		writeInteractionInputToSoar();                                                                                                                   
+		this.world.writeToSoar();
 	}
 	
 	private void deleteOutputIdentifiers(){
@@ -153,11 +147,6 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 			id.AddStatusComplete();
 		}
 		this.identifiersToRemove.clear();
-	}
-
-	private void writeWorldInputToSoar() {
-		SoarInterface.worldIW.writeWorldInput();
-		this.troySoarAgent.Commit();
 	}
 	
 	private void writeInteractionInputToSoar() {
@@ -186,7 +175,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 			            shouldOttoCallback = true;
 					}
 					if (outputId.GetAttribute().equals("command")){
-						SoarInterface.worldOR.applySoarCommand(outputId);
+						this.world.readSoarOutputAndApply(outputId);
 					}
 				}
 			
@@ -256,6 +245,14 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 
 	public void setIdentifiersToRemove(List<Identifier> identifiersToRemove) {
 		this.identifiersToRemove = identifiersToRemove;
+	}
+
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
 	}
 	
 

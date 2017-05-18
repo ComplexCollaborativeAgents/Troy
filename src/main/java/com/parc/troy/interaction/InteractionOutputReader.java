@@ -9,7 +9,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.parc.troy.SoarInterface;
-import com.parc.troy.TroyConsole;
 import com.parc.xi.dm.LogicalForm;
 
 import sml.Agent;
