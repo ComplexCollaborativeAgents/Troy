@@ -84,6 +84,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 		troySoarAgent.RegisterForRunEvent(smlRunEventId.smlEVENT_BEFORE_INPUT_PHASE, this, null);
 	}
 
+	@Override
 	@NonNull
 	public List<Result> apply(LogicalForm call, Plan plan, DialogState state) {
 		List <Result> resultList = new ArrayList<Result>();
@@ -112,6 +113,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 			return;
 		}
     	class AgentThread implements Runnable{
+    	    @Override
     		public void run(){
     	    	isRunning = true;
     			sendCommand("run");
@@ -129,7 +131,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	public String sendCommand(String command){
 		return troySoarAgent.ExecuteCommandLine(command);
 	}
-	
+
+	@Override
 	public void runEventHandler(int eventID, Object data, Agent agent, int phase) {
 		try {
 			Thread.sleep(4);
@@ -197,7 +200,8 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public String getErrorMessage(LogicalForm call) {
 		return null;
 	}

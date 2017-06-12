@@ -1,7 +1,7 @@
 package com.parc.troy.interaction;
 
-import static com.parc.xi.dm.LogicalFormConstants.INFORM;
 import static com.parc.xi.dm.LogicalFormConstants.BOOLAND;
+import static com.parc.xi.dm.LogicalFormConstants.INFORM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.parc.troy.SoarInterface;
-import com.parc.troy.TroyConsole;
 import com.parc.xi.dm.LogicalForm;
 
 import sml.Agent;
