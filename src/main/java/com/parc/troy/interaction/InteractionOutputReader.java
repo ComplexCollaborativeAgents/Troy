@@ -1,7 +1,7 @@
 package com.parc.troy.interaction;
 
-import static com.parc.xi.dm.LogicalFormConstants.INFORM;
 import static com.parc.xi.dm.LogicalFormConstants.BOOLAND;
+import static com.parc.xi.dm.LogicalFormConstants.INFORM;
 
 import java.util.ArrayList;
 import java.util.List;
