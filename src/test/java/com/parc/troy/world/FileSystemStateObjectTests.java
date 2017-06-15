@@ -25,7 +25,7 @@ import sml.Kernel;
  */
 public class FileSystemStateObjectTests {
 	
-	private FileSystemStateObject fsObject;
+	private LocalFileCollectionStateObject fsObject;
 	private String homeFolderPath;
 	private Identifier worldId;
 	private Agent testAgent;
@@ -44,7 +44,7 @@ public class FileSystemStateObjectTests {
 		testAgent = testKernel.CreateAgent("test-agent");
 		worldId = testAgent.GetInputLink().CreateIdWME("world");
 		
-		fsObject = new FileSystemStateObject("DM.troy");
+		fsObject = new LocalFileCollectionStateObject("DM.troy");
 		homeFolderPath = FileSystemStateObjectTests.class.getResource("").getPath()+"/testHome";
 		homeFolder = new File(homeFolderPath);
 		homeFolder.mkdir();
@@ -107,8 +107,6 @@ public class FileSystemStateObjectTests {
 	
 	@Test
 	public void testWriteWorldInputPreviousPathisNull() throws IOException{
-		homeFolder = new File(homeFolderPath);
-		homeFolder.mkdir();
 		testFile1 = new File(homeFolderPath+"/test_generated_file1.txt");
 		testFile1.createNewFile();
 		
@@ -131,8 +129,6 @@ public class FileSystemStateObjectTests {
 	
 	@Test
 	public void testWriteWorldInputPreviousPathIsDifferent() throws IOException{
-		homeFolder = new File(homeFolderPath);
-		homeFolder.mkdir();
 		String subFolderPath = homeFolderPath+"/testSubFolder";
 		subFolder = new File(subFolderPath);
 		subFolder.mkdir();
@@ -158,8 +154,6 @@ public class FileSystemStateObjectTests {
 	
 	@Test
 	public void testWriteWorldInputFileAdded() throws IOException{
-		homeFolder = new File(homeFolderPath);
-		homeFolder.mkdir();
 		testFile1 = new File(homeFolderPath+"/test_generated_file1.txt");
 		testFile1.createNewFile();
 		
@@ -194,8 +188,6 @@ public class FileSystemStateObjectTests {
 	
 	@Test
 	public void testWriteWorldInputFileDeleted() throws IOException{
-		homeFolder = new File(homeFolderPath);
-		homeFolder.mkdir();
 		testFile1 = new File(homeFolderPath+"/test_generated_file1.txt");
 		testFile1.createNewFile();
 		testFile2 = new File (homeFolderPath+"/test_generated_file2.txt");
@@ -227,9 +219,7 @@ public class FileSystemStateObjectTests {
 	}
 	
 	@Test
-	public void testChangeDirectory(){
-		homeFolder = new File(homeFolderPath);
-		homeFolder.mkdir();
+	public void testChangeFolder(){
 		String subFolderPath = homeFolderPath+"/testSubFolder";
 		File subFolder = new File(subFolderPath);
 		subFolder.mkdir();
@@ -241,7 +231,7 @@ public class FileSystemStateObjectTests {
 		
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
-		commandId.CreateStringWME("name", "change-directory");
+		commandId.CreateStringWME("name", "change-folder");
 		Identifier directoryId = commandId.CreateIdWME("directory");
 		directoryId.CreateStringWME("name", "testSubFolder");
 		
@@ -251,27 +241,243 @@ public class FileSystemStateObjectTests {
 	}
 	
 	@Test
-	public void testCreateDirectory(){
-		homeFolder = new File(homeFolderPath);
-		homeFolder.mkdir();
-		
+	public void testCreateFolder(){
 		fsObject.setCurrentPath(homeFolderPath);
 		fsObject.setPreviousPath(null);
 		fsObject.setFolder(homeFolder);
 		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
-		commandId.CreateStringWME("name", "create-directory");
-		Identifier directoryId = commandId.CreateIdWME("directory");
-		directoryId.CreateStringWME("name", "testSubFolder");
+		commandId.CreateStringWME("name", "create-folder");
+		Identifier folderId = commandId.CreateIdWME("folder");
+		folderId.CreateStringWME("name", "testSubFolder");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
 		String subFolderPath = homeFolderPath+"/testSubFolder";
 		File subFolder = new File(subFolderPath);
 		
-		assertNotNull(subFolder);	
+		assertTrue(subFolder.isDirectory());	
 	}
 	
+	@Test
+	public void testCopyFile() throws IOException{
+		fsObject.setCurrentPath(homeFolderPath);
+		fsObject.setPreviousPath(null);
+		fsObject.setFolder(homeFolder);
+		testFile1 = new File(homeFolderPath+"/test_generated_file1.txt");
+		testFile1.createNewFile();
+		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		
+		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
+		commandId.CreateStringWME("name", "copy");
+		Identifier fileId = commandId.CreateIdWME("file");
+		fileId.CreateStringWME("name", "test_generated_file1.txt");
+		
+		fsObject.readSoarCommandAndApply(commandId, null);
+		
+		assertEquals(fsObject.getPathToCopy(), homeFolderPath+"/test_generated_file1.txt");
+		assertEquals(fsObject.getObjectNameToCopy(), "test_generated_file1.txt");
+		assertEquals(fsObject.getObjectTypeToCopy(), "file");
+		assertFalse(fsObject.getShouldDeleteOldPath());
+		
+		
+	}
+	
+	@Test
+	public void testCopyFolder() throws IOException{
+		fsObject.setCurrentPath(homeFolderPath);
+		fsObject.setPreviousPath(null);
+		fsObject.setFolder(homeFolder);
+		File testFolder1 = new File(homeFolderPath+"/subTestFolder");
+		testFolder1.mkdir();
+		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		
+		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
+		commandId.CreateStringWME("name", "copy");
+		Identifier fileId = commandId.CreateIdWME("folder");
+		fileId.CreateStringWME("name", "subTestFolder");
+		
+		fsObject.readSoarCommandAndApply(commandId, null);
+		
+		assertEquals(fsObject.getPathToCopy(), homeFolderPath+"/subTestFolder");
+		assertEquals(fsObject.getObjectNameToCopy(), "subTestFolder");
+		assertEquals(fsObject.getObjectTypeToCopy(), "folder");
+		assertFalse(fsObject.getShouldDeleteOldPath());
+		
+	}
+	
+	@Test
+	public void testCutFile() throws IOException{
+		fsObject.setCurrentPath(homeFolderPath);
+		fsObject.setPreviousPath(null);
+		fsObject.setFolder(homeFolder);
+		testFile1 = new File(homeFolderPath+"/test_generated_file1.txt");
+		testFile1.createNewFile();
+		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		
+		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
+		commandId.CreateStringWME("name", "cut");
+		Identifier fileId = commandId.CreateIdWME("file");
+		fileId.CreateStringWME("name", "test_generated_file1.txt");
+		
+		fsObject.readSoarCommandAndApply(commandId, null);
+		
+		assertEquals(fsObject.getPathToCopy(), homeFolderPath+"/test_generated_file1.txt");
+		assertEquals(fsObject.getObjectNameToCopy(), "test_generated_file1.txt");
+		assertEquals(fsObject.getObjectTypeToCopy(), "file");
+		assertTrue(fsObject.getShouldDeleteOldPath());
+		
+		
+	}
+	
+	@Test
+	public void testCutFolder() throws IOException{
+		fsObject.setCurrentPath(homeFolderPath);
+		fsObject.setPreviousPath(null);
+		fsObject.setFolder(homeFolder);
+		File testFolder1 = new File(homeFolderPath+"/subTestFolder");
+		testFolder1.mkdir();
+		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		
+		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
+		commandId.CreateStringWME("name", "cut");
+		Identifier fileId = commandId.CreateIdWME("folder");
+		fileId.CreateStringWME("name", "subTestFolder");
+		
+		fsObject.readSoarCommandAndApply(commandId, null);
+		
+		assertEquals(fsObject.getPathToCopy(), homeFolderPath+"/subTestFolder");
+		assertEquals(fsObject.getObjectNameToCopy(), "subTestFolder");
+		assertEquals(fsObject.getObjectTypeToCopy(), "folder");
+		assertTrue(fsObject.getShouldDeleteOldPath());
+	}
+	
+	@Test
+	public void testPasteCopiedFile() throws IOException{
+		fsObject.setPreviousPath(homeFolderPath);
+		testFile1 = new File(homeFolderPath+"/test_generated_file1.txt");
+		testFile1.createNewFile();
+		File testFolder1 = new File(homeFolderPath+"/subTestFolder");
+		testFolder1.mkdir();
+		fsObject.setCurrentPath(homeFolderPath+"/subTestFolder");
+		fsObject.setFolder(testFolder1);
+		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		
+		fsObject.setPathToCopy(homeFolderPath+"/test_generated_file1.txt");
+		fsObject.setObjectNameToCopy("test_generated_file1.txt");
+		fsObject.setObjectTypeToCopy("file");
+		fsObject.setShouldDeleteOldPath(false);
+		
+		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
+		commandId.CreateStringWME("name", "paste");
+		
+		fsObject.readSoarCommandAndApply(commandId, null);
+		
+		assertTrue(new File(homeFolderPath+"/subTestFolder/test_generated_file1.txt").isFile());
+		assertTrue(testFile1.exists());
+		assert(fsObject.getPathToCopy() == null);
+		assert(fsObject.getObjectNameToCopy() == null);
+		assert(fsObject.getObjectTypeToCopy() == null);
+		assertFalse(fsObject.getShouldDeleteOldPath());
+		
+	}
+	
+	@Test
+	public void testPasteCutFile() throws IOException{
+		fsObject.setPreviousPath(homeFolderPath);
+		testFile1 = new File(homeFolderPath+"/test_generated_file1.txt");
+		testFile1.createNewFile();
+		File testFolder1 = new File(homeFolderPath+"/subTestFolder");
+		testFolder1.mkdir();
+		fsObject.setCurrentPath(homeFolderPath+"/subTestFolder");
+		fsObject.setFolder(testFolder1);
+		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		
+		fsObject.setPathToCopy(homeFolderPath+"/test_generated_file1.txt");
+		fsObject.setObjectNameToCopy("test_generated_file1.txt");
+		fsObject.setObjectTypeToCopy("file");
+		fsObject.setShouldDeleteOldPath(true);
+		
+		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
+		commandId.CreateStringWME("name", "paste");
+		
+		fsObject.readSoarCommandAndApply(commandId, null);
+		
+		assertTrue(new File(homeFolderPath+"/subTestFolder/test_generated_file1.txt").isFile());
+		assertFalse(testFile1.exists());
+		assert(fsObject.getPathToCopy() == null);
+		assert(fsObject.getObjectNameToCopy() == null);
+		assert(fsObject.getObjectTypeToCopy() == null);
+		assertFalse(fsObject.getShouldDeleteOldPath());
+		
+	}
+	
+	@Test
+	public void testPasteCopiedFolder() throws IOException{
+		fsObject.setPreviousPath(homeFolderPath);
+		File testFolder1 = new File(homeFolderPath+"/subTestFolder");
+		testFolder1.mkdir();
+		File testFolder2 = new File(homeFolderPath+"/subTestFolder2");
+		testFolder2.mkdir();
+		new File(homeFolderPath+"/subTestFolder/subTestFile1.txt").createNewFile();
+		new File(homeFolderPath+"/subTestFolder/subTestFile2.txt").createNewFile();
+		fsObject.setCurrentPath(homeFolderPath+"/subTestFolder2");
+		fsObject.setFolder(testFolder2);
+		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		
+		fsObject.setPathToCopy(homeFolderPath+"/subTestFolder");
+		fsObject.setObjectNameToCopy("subTestFolder");
+		fsObject.setObjectTypeToCopy("folder");
+		fsObject.setShouldDeleteOldPath(false);
+		
+		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
+		commandId.CreateStringWME("name", "paste");
+		
+		fsObject.readSoarCommandAndApply(commandId, null);
+		
+		assertTrue(new File(homeFolderPath+"/subTestFolder2/subTestFolder").isDirectory());
+		assertTrue(new File(homeFolderPath+"/subTestFolder2/subTestFolder/subTestFile1.txt").isFile());
+		assertTrue(new File(homeFolderPath+"/subTestFolder2/subTestFolder/subTestFile2.txt").isFile());
+		assertTrue(testFolder1.exists());
+		assert(fsObject.getPathToCopy() == null);
+		assert(fsObject.getObjectNameToCopy() == null);
+		assert(fsObject.getObjectTypeToCopy() == null);
+		assertFalse(fsObject.getShouldDeleteOldPath());
+		
+	}
+	@Test
+	public void testPasteCutFolder() throws IOException{
+		fsObject.setPreviousPath(homeFolderPath);
+		File testFolder1 = new File(homeFolderPath+"/subTestFolder");
+		testFolder1.mkdir();
+		File testFolder2 = new File(homeFolderPath+"/subTestFolder2");
+		testFolder2.mkdir();
+		new File(homeFolderPath+"/subTestFolder/subTestFile1.txt").createNewFile();
+		new File(homeFolderPath+"/subTestFolder/subTestFile2.txt").createNewFile();
+		fsObject.setCurrentPath(homeFolderPath+"/subTestFolder2");
+		fsObject.setFolder(testFolder2);
+		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		
+		fsObject.setPathToCopy(homeFolderPath+"/subTestFolder");
+		fsObject.setObjectNameToCopy("subTestFolder");
+		fsObject.setObjectTypeToCopy("folder");
+		fsObject.setShouldDeleteOldPath(true);
+		
+		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
+		commandId.CreateStringWME("name", "paste");
+		
+		fsObject.readSoarCommandAndApply(commandId, null);
+		
+		assertTrue(new File(homeFolderPath+"/subTestFolder2/subTestFolder").isDirectory());
+		assertTrue(new File(homeFolderPath+"/subTestFolder2/subTestFolder/subTestFile1.txt").isFile());
+		assertTrue(new File(homeFolderPath+"/subTestFolder2/subTestFolder/subTestFile2.txt").isFile());
+		assertFalse(testFolder1.exists());
+		assert(fsObject.getPathToCopy() == null);
+		assert(fsObject.getObjectNameToCopy() == null);
+		assert(fsObject.getObjectTypeToCopy() == null);
+		assertFalse(fsObject.getShouldDeleteOldPath());
+		
+	}
 
 }

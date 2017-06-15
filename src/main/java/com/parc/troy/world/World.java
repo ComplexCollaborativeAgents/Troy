@@ -22,7 +22,7 @@ public class World {
 		}
 		
 		private void addStateObjects(String dmName, Identifier worldLink){
-			this.stateObjects.put(worldLink, new FileSystemStateObject(dmName));
+			this.stateObjects.put(worldLink, new LocalFileCollectionStateObject(dmName));
 			
 		}
 		
