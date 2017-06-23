@@ -8,6 +8,6 @@ sp {find-named-object*apply*complete-find-named-object
                ^found-named-objects <fno>
                ^superstate <ss>)
 -->
-    (<ss> ^found-named-objects <fno>)
+    (<ss> ^found-objects <fno>)
     }
                

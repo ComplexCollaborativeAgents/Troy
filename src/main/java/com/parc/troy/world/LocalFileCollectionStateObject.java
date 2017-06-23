@@ -41,14 +41,15 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	private String homePath;
 	
 	
-	private String pathToCopy;
-	private String objectNameToCopy;
-	private String objectTypeToCopy;
+	private String selectedObjectPath;
+	private String selectedObjectName;
+	private String selectedObjectType;
+	private File selectedObject;
+	private Map<File, Identifier> selectedObjectIdentifierMap;
 	private boolean shouldDeleteOldPath;
 
 	private File folder;
 	private Set<File> objectSet;
-
 	private Map<File, Identifier> fileIdentifierMap;
 
 	private static Logger LOGGER = Logger.getLogger(LocalFileCollectionStateObject.class
@@ -64,7 +65,12 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		}
 
 		fileIdentifierMap = new HashMap<File, Identifier>();
-		pathToCopy = null;
+		selectedObjectIdentifierMap = new HashMap<File, Identifier>();
+		selectedObjectPath = null;
+		selectedObjectName = null;
+		selectedObjectType = null;
+		selectedObject = null;
+		shouldDeleteOldPath = false;
 	}
 
 	private Set<File> getSetofFilesFolders() {
@@ -82,7 +88,6 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	}
 
 	public void update() {
-		LOGGER.info("Updating the local filesystem state.");
 		this.folder = new File(this.currentPath);
 		Set<File> newFileSet = this.getSetofFilesFolders();
 
@@ -112,6 +117,9 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 			previousPath = currentPath;
 		} else
 			this.updateFileFolderObjects(worldId);
+		
+		
+		this.updateSelectedObject(worldId);
 
 	}
 
@@ -119,22 +127,13 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		if (this.currentFolderNameId != null) {
 			this.currentFolderNameId.DestroyWME();
 		}
-
-		if (this.fileIdentifierMap != null) {
-			for (Map.Entry<File, Identifier> entry : this.fileIdentifierMap
-					.entrySet()) {
-				SoarHelper.deleteAllChildren(entry.getValue());
-			}
-		}
+		if (this.fileIdentifierMap != null && this.fileIdentifierMap.size() > 0) 
+			this.deleteAllFileIdentifiers();
 	}
 
 	private void writeFolderStructure(Identifier worldId) {
-		// System.out.println("Writing new folder structure");
 		this.currentFolderNameId = worldId.CreateStringWME("current-folder",
 				this.folder.getName());
-		if (this.fileIdentifierMap != null && this.fileIdentifierMap.size() > 0) {
-			this.deleteAllFileIdentifiers();
-		}
 		this.fileIdentifierMap = new HashMap<File, Identifier>();
 		for (File file : this.objectSet) {
 			this.createAndAddFileIdentifier(file, worldId);
@@ -143,7 +142,9 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 
 	private void deleteAllFileIdentifiers() {
 		for (File file : this.fileIdentifierMap.keySet()) {
-			SoarHelper.deleteAllChildren(this.fileIdentifierMap.get(file));
+			if(!selectedObjectIdentifierMap.containsKey(file)) {
+				SoarHelper.deleteAllChildren(this.fileIdentifierMap.get(file));
+			}
 			this.fileIdentifierMap.get(file).DestroyWME();
 		}
 	}
@@ -182,23 +183,55 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 			}
 		}
 	}
+	
+	private void updateSelectedObject(Identifier worldId) {
+		Identifier selectedObjectId = null;
+		
+		// Get what Soar agent thinks the selected object is
+		for (int i = 0; i < worldId.GetNumberChildren(); i++) {
+			Identifier childId = worldId.GetChild(i).ConvertToIdentifier();
+			if(childId != null && childId.GetAttribute().equals("selected")){
+				selectedObjectId = childId;
+			}
+		}
+		
+		// If the interface does not think there is a selected object, but Soar 
+		// has a selected object, delete Soar's selected object
+		if(selectedObject == null && selectedObjectId != null ) 
+				selectedObjectId.DestroyWME();
+	
+		if(selectedObject != null && selectedObjectId == null) {
+			if(selectedObjectIdentifierMap.size() != 0)
+				LOGGER.error("There should be no selected object yet.");
+			Identifier newSelectedObjectId = fileIdentifierMap.get(selectedObject);
+			worldId.CreateSharedIdWME("selected", newSelectedObjectId);
+			selectedObjectIdentifierMap.put(selectedObject, newSelectedObjectId);
+		}
+		
+		if(selectedObject != null && selectedObjectId != null) {
+			if(selectedObjectIdentifierMap.size() != 1) 
+				LOGGER.error("There should be one key,value pair in the selectedObjectIdentifierMap");
+		}
+			
+	}
 
 	public void readSoarCommandAndApply(Identifier commandId,
 			SoarInterface soarI) {
 		String command = commandId.GetParameterValue("name");
+		LOGGER.info("Received " + command + " command from Soar.");
 		switch (command) {
 		case "change-folder":
 			for (int i = 0; i < commandId.GetNumberChildren(); i++) {
-				if (commandId.GetChild(i).GetAttribute().equals("directory")) {
-					String directory = commandId.GetChild(i)
+				if (commandId.GetChild(i).GetAttribute().equals("folder_object")) {
+					String folder = commandId.GetChild(i)
 							.ConvertToIdentifier().GetParameterValue("name");
-					this.processChangeDirectory(directory);
+					this.processChangeFolder(folder);
 				}
 			}
 			break;
 		case "create-folder":
 			for (int i = 0; i < commandId.GetNumberChildren(); i++) {
-				if (commandId.GetChild(i).GetAttribute().equals("folder")) {
+				if (commandId.GetChild(i).GetAttribute().equals("folder_object")) {
 					String folderName = commandId.GetChild(i)
 							.ConvertToIdentifier().GetParameterValue("name");
 					this.processCreateFolder(folderName);
@@ -208,7 +241,7 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		case "cut":
 			for (int i = 0; i < commandId.GetNumberChildren(); i++) {
 				String objectType = commandId.GetChild(i).GetAttribute();
-				if (objectType.equals("folder") || objectType.equals("file")) {
+				if (objectType.equals("folder_object") || objectType.equals("file_object")) {
 					String objectName = commandId.GetChild(i)
 							.ConvertToIdentifier().GetParameterValue("name");
 					this.processCutObject(objectName, objectType);
@@ -217,9 +250,10 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 			break;
 
 		case "copy":
+			LOGGER.info("Received copy command from Soar.");
 			for (int i = 0; i < commandId.GetNumberChildren(); i++) {
 				String objectType = commandId.GetChild(i).GetAttribute();
-				if (objectType.equals("folder") || objectType.equals("file")) {
+				if (objectType.equals("folder_object") || objectType.equals("file_object")) {
 					String objectName = commandId.GetChild(i)
 							.ConvertToIdentifier().GetParameterValue("name");
 					this.processCopyObject(objectName,objectType);
@@ -228,7 +262,14 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 			break;
 
 		case "paste":
-			this.processPasteObject();
+			for (int i = 0; i < commandId.GetNumberChildren(); i++) {
+				String objectType = commandId.GetChild(i).GetAttribute();
+				if (objectType.equals("folder_object") || objectType.equals("file_object")) {
+					String objectName = commandId.GetChild(i)
+							.ConvertToIdentifier().GetParameterValue("name");
+					this.processPasteObject(objectName, objectType);
+				}
+			}
 			break;
 
 		default:
@@ -242,44 +283,67 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	}
 	
 	protected void processCutObject(String objectName, String objectType) {
-		pathToCopy = currentPath + "/" + objectName;
-		objectNameToCopy = objectName;
-		objectTypeToCopy = objectType;
+		selectedObjectPath = currentPath + "/" + objectName;
+		selectedObjectName = objectName;
+		selectedObjectType = objectType;
+		
+		for(File object : objectSet){
+			if (object.getName().equals(objectName)) {
+				selectedObject = object;
+			}
+		}
+		LOGGER.info("Object copied to clipboard: " + objectName);
+		
 		shouldDeleteOldPath = true;
 	}
 
 	protected void processCopyObject(String objectName, String objectType) {
-		pathToCopy = currentPath + "/" + objectName;
-		objectNameToCopy = objectName;
-		objectTypeToCopy = objectType;
+		selectedObjectPath = currentPath + "/" + objectName;
+		selectedObjectName = objectName;
+		selectedObjectType = objectType;
+		
+		for(File object : objectSet){
+			if (object.getName().equals(objectName)) {
+				selectedObject = object;
+			}
+		}
+		
+		if(selectedObject == null){
+			LOGGER.error("Selected object is null, but should not be.");
+		}
+		LOGGER.info("Object copied to clipboard: " + objectName);
 	}
 
-	protected void processPasteObject() {
+	protected void processPasteObject(String objectName, String objectType) {
+		if(selectedObjectPath == null || objectType == null || objectType != selectedObjectType){
+			LOGGER.error("Trying to paste an object that does not exist.");
+		}
+		
 		String finalPath = currentPath;
-		if (objectTypeToCopy.equals("file")) {
+		if (selectedObjectType.equals("file_object")) {
 			try {
-				FileUtils.copyFileToDirectory(new File(pathToCopy), new File(
+				FileUtils.copyFileToDirectory(new File(selectedObjectPath), new File(
 						finalPath));
 			} catch (IOException e) {
-				LOGGER.error("Either source: " + pathToCopy
+				LOGGER.error("Either source: " + selectedObjectPath
 						+ " or destination: " + finalPath + " is invalid.");
 				e.printStackTrace();
 			} catch (NullPointerException e) {
-				LOGGER.error("Either source path: " + pathToCopy
+				LOGGER.error("Either source path: " + selectedObjectPath
 						+ " or destination path: " + finalPath + " is null.");
 			}
 		}
 
-		if (objectTypeToCopy.equals("folder")) {
+		if (selectedObjectType.equals("folder_object")) {
 			try {
-				FileUtils.copyDirectoryToDirectory(new File(pathToCopy),
+				FileUtils.copyDirectoryToDirectory(new File(selectedObjectPath),
 						new File(finalPath));
 			} catch (IOException e) {
-				LOGGER.error("Either source: " + pathToCopy
+				LOGGER.error("Either source: " + selectedObjectPath
 						+ " or destination: " + finalPath + " is invalid.");
 				e.printStackTrace();
 			} catch (NullPointerException e) {
-				LOGGER.error("Either source path: " + pathToCopy
+				LOGGER.error("Either source path: " + selectedObjectPath
 						+ " or destination path: " + finalPath + " is null.");
 			}
 		}
@@ -287,23 +351,24 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		if (shouldDeleteOldPath == true) deleteObject();
 
 		setObjectNameToCopy(null);
-		objectTypeToCopy = null;
-		pathToCopy = null;
+		selectedObjectType = null;
+		selectedObjectPath = null;
+		setSelectedObject(null);
 		shouldDeleteOldPath = false;
 	}
 
 	protected void deleteObject() {
 
-		if (objectTypeToCopy.equals("folder")) {
+		if (selectedObjectType.equals("folder")) {
 			try {
-				FileUtils.deleteDirectory(new File(pathToCopy));
+				FileUtils.deleteDirectory(new File(selectedObjectPath));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 
-		if (objectTypeToCopy.equals("file")) {
-			File fileToDelete = new File(pathToCopy);
+		if (selectedObjectType.equals("file")) {
+			File fileToDelete = new File(selectedObjectPath);
 			fileToDelete.delete();
 		}
 
@@ -315,7 +380,7 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		newFolder.mkdir();
 	}
 
-	protected void processChangeDirectory(String directory) {
+	protected void processChangeFolder(String directory) {
 		String newCurrentPath = currentPath + "/" + directory;
 		currentPath = newCurrentPath;
 		LOGGER.debug("Changed to directory " + currentPath);
@@ -354,27 +419,27 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	}
 
 	public String getObjectNameToCopy() {
-		return objectNameToCopy;
+		return selectedObjectName;
 	}
 
 	public void setObjectNameToCopy(String objectNameToCopy) {
-		this.objectNameToCopy = objectNameToCopy;
+		this.selectedObjectName = objectNameToCopy;
 	}
 	
 	public String getPathToCopy() {
-		return pathToCopy;
+		return selectedObjectPath;
 	}
 	
 	public void setPathToCopy(String pathToCopy) {
-		this.pathToCopy = pathToCopy;
+		this.selectedObjectPath = pathToCopy;
 	}
 	
 	public String getObjectTypeToCopy() {
-		return objectTypeToCopy;
+		return selectedObjectType;
 	}
 	
 	public void setObjectTypeToCopy(String objectTypeToCopy) {
-		this.objectTypeToCopy = objectTypeToCopy;
+		this.selectedObjectType = objectTypeToCopy;
 	}
 	
 	
@@ -384,6 +449,14 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	
 	public void setShouldDeleteOldPath(Boolean bool) {
 		this.shouldDeleteOldPath = bool;
+	}
+
+	public File getSelectedObject() {
+		return selectedObject;
+	}
+
+	public void setSelectedObject(File selectedObject) {
+		this.selectedObject = selectedObject;
 	}
 
 }

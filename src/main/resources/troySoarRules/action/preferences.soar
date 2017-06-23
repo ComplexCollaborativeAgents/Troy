@@ -7,7 +7,7 @@ sp {action*reject*operator*different-name
     (state <s> ^name action
                ^indexed-action <ia>
                ^operator <op> +)
-    (<ia> ^op_name <ia_name>)
+    (<ia> ^name <ia_name>)
     (<op> ^name {<op_name> <> <ia_name>}
           -^type maintenance)
 -->
@@ -18,8 +18,10 @@ sp {action*reject*operator*different-argument
     (state <s> ^name action
                ^indexed-action <ia>
                ^operator <op> +)
-    (<ia> ^{<argument> <> op_name} <ia-arg>)
-    (<op> ^<argument> {<op-arg> <> <ia-arg>}
+    (<ia> ^name <op_name>
+          ^{<argument> <> name} <ia-arg>)
+    (<op> ^name <op_name>
+           ^<argument> {<> <ia-arg>}
           -^type maintenance)
 -->
     (<s> ^operator <op> -)

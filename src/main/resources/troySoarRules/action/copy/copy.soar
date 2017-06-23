@@ -1,0 +1,16 @@
+##!
+# @file
+#
+# @created smohan 20170619
+sp {action*apply*op_copy
+	(state <s> ^name action
+               ^operator <op>
+               ^io.output-link <ol>)
+    (<op> ^name op_copy
+          ^argument <obj>)
+    (<obj> ^type <type>)
+-->
+    (<ol> ^command <c>)
+    (<c> ^name copy
+         ^<type> <obj>)
+    }

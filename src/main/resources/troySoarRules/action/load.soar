@@ -18,3 +18,11 @@ source "complete-action.soar"
 source "go-into/load.soar"
 
 source "create-folder/load.soar"
+
+source "cut/load.soar"
+
+source "copy/load.soar"
+
+source "paste/load.soar"
+
+source "delete/load.soar"

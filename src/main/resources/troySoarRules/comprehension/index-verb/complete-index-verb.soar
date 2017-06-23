@@ -5,8 +5,17 @@
 sp {index-verb*apply*complete-index-verb
     (state <s> ^name index-verb
                ^operator.name complete-index-verb
-               ^map <m>
+               ^map {<m> <> failure}
                ^superstate.grounding <gs>)
 -->
     (<gs> ^verb.map <m>)
+    }
+
+sp {index-verb*apply*complete-index-verb*report-failure
+    (state <s> ^name index-verb
+               ^operator.name complete-index-verb
+               ^map failure
+               ^superstate.grounding <gs>)
+-->
+    (write |Error :: Verb not found|)
     }

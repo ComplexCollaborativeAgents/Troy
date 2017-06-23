@@ -3,6 +3,12 @@
   <startfile path="load.soar" />
   <members>
     <member path="load.soar" />
+    <member path="action/go-into/go_into.soar" />
+    <member path="action/propose-primitive-actions.soar" />
+    <member path="action/copy/copy.soar" />
+    <member path="action/paste/paste.soar" />
+    <member path="action/cut/cut.soar" />
+    <member path="action/proposals.soar" />
   </members>
 </soaragent>
 

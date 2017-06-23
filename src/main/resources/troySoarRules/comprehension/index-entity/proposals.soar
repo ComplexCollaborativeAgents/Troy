@@ -14,7 +14,18 @@ sp {index-entity*propose*find-object
           ^object-set <objs>
           ^description <type>)
     }
-               
+           
+sp {index-entity*propose*find-named-object
+	(state <s> ^name index-entity
+               ^description.name <name>
+               ^world <objs>
+               -^found-objects.description <name>)
+-->
+	(<s> ^operator <op> +)
+    (<op> ^name find-named-object
+          ^object-set <objs>
+          ^description <name>)
+    }
 
 sp {index-entity*propose*resolve-grounding
     (state <s> ^name index-entity

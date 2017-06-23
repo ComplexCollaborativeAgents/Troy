@@ -11,9 +11,11 @@ User: Instruct(ActionCommand($1, $2, $3)) <-> {ActionName[$1]} {Entity[$2]} {Ent
 ActionName[verb(print)] <-> print
 ActionName[verb(email)] <-> email
 ActionName[verb(list)] <-> list
-ActionName[verb(show)] <-> show
 ActionName[verb(create)] <-> create
 ActionName[verb(go)] <-> go
+ActionName[verb(cut)] <-> cut
+ActionName[verb(copy)] <-> copy
+ActionName[verb(paste)] <-> paste
 
 EntityType[type(file)] <-> file
 EntityType[type(folder)] <-> folder
@@ -29,12 +31,12 @@ Entity[entity($1)] <-> {EntityName[$1]}
 Entity[entity($1,$2)] <-> {EntityConstraint[$2]}{EntityType[$1]}
 Entity[entity($1,$2,$3)] <-> {EntityConstraint[$3]}{EntityConstraint[$2]}{EntityType[$1]}
 
-
 EntityName[name($1)] <-> with name {Tokens[$1]}
 EntityName[name($1)] <-> named {Tokens[$1]}
 EntityName[name($1)] <-> name {Tokens[$1]}
 EntityName[name($1)] <-> {ActionName[$_2]} {Tokens[$1]}
 EntityName[name($1)] <-> to {Tokens[$1]}
+EntityName[name($1)] <-> {Tokens[$1]}
 
 Tokens <-> {Token+}
 Token[$1] <-> {matches($1,.+)}

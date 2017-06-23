@@ -12,5 +12,5 @@ sp {action*apply*op_create_folder
 -->
     (<ol> ^command <c>)
     (<c> ^name create-directory
-         ^directory <arg>)
+         ^folder <arg>)
     }

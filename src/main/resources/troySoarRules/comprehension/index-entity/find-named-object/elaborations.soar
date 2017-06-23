@@ -28,7 +28,7 @@ sp {find-named-object*elaborate*objects
                ^found-named-objects.objects <fno>
                ^description <noun>
                ^object-set <objs>)
-    (<objs> ^object <obj>)
+    (<objs> ^<< object selected >> <obj>)
     (<obj> ^name <noun>)
 -->
     (<fno> ^object <obj>)

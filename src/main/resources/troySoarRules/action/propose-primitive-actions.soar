@@ -49,6 +49,37 @@ sp {action*propose*op_create_folder
           ^argument1 <name>
           ^argument2 folder_object)
   }
-         
+
+sp {action*propose*op_copy
+	(state <s> ^name action
+            	^world <w>)
+    (<w> ^object <obj>
+         -^selected <obj>)
+-->
+	(<s> ^operator <op> +)
+ 	(<op> ^name op_copy
+          ^argument <obj>)
+  }
+
+sp {action*propose*op_cut
+   (state <s> ^name action
+              ^world <w>)
+   (<w> ^object <obj>
+        -^selected <obj>)
+-->
+   (<s> ^operator <op> +)
+   (<op> ^name op_cut
+         ^argument <obj>)
+   }
+
+sp {action*propose*op_paste
+	(state <s> ^name action
+               ^world <w>)
+    (<w> ^selected <obj>)
+-->
+	(<s> ^operator <op> +)
+    (<op> ^name op_paste
+          ^argument <obj>)
+    }
                
              	

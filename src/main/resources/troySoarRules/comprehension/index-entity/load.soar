@@ -14,3 +14,5 @@ source "preferences.soar"
 source "complete-index-entity.soar"
 
 source "resolve-grounding/load.soar"
+
+source "find-named-object/load.soar"

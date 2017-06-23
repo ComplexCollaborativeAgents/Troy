@@ -232,7 +232,7 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "change-folder");
-		Identifier directoryId = commandId.CreateIdWME("directory");
+		Identifier directoryId = commandId.CreateIdWME("folder_object");
 		directoryId.CreateStringWME("name", "testSubFolder");
 		
 		String testString = fsObject.getCurrentPath()+"/"+"testSubFolder";
@@ -249,7 +249,7 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "create-folder");
-		Identifier folderId = commandId.CreateIdWME("folder");
+		Identifier folderId = commandId.CreateIdWME("folder_object");
 		folderId.CreateStringWME("name", "testSubFolder");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
@@ -271,14 +271,14 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "copy");
-		Identifier fileId = commandId.CreateIdWME("file");
+		Identifier fileId = commandId.CreateIdWME("file_object");
 		fileId.CreateStringWME("name", "test_generated_file1.txt");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
 		assertEquals(fsObject.getPathToCopy(), homeFolderPath+"/test_generated_file1.txt");
 		assertEquals(fsObject.getObjectNameToCopy(), "test_generated_file1.txt");
-		assertEquals(fsObject.getObjectTypeToCopy(), "file");
+		assertEquals(fsObject.getObjectTypeToCopy(), "file_object");
 		assertFalse(fsObject.getShouldDeleteOldPath());
 		
 		
@@ -295,14 +295,14 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "copy");
-		Identifier fileId = commandId.CreateIdWME("folder");
+		Identifier fileId = commandId.CreateIdWME("folder_object");
 		fileId.CreateStringWME("name", "subTestFolder");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
 		assertEquals(fsObject.getPathToCopy(), homeFolderPath+"/subTestFolder");
 		assertEquals(fsObject.getObjectNameToCopy(), "subTestFolder");
-		assertEquals(fsObject.getObjectTypeToCopy(), "folder");
+		assertEquals(fsObject.getObjectTypeToCopy(), "folder_object");
 		assertFalse(fsObject.getShouldDeleteOldPath());
 		
 	}
@@ -318,14 +318,14 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "cut");
-		Identifier fileId = commandId.CreateIdWME("file");
+		Identifier fileId = commandId.CreateIdWME("file_object");
 		fileId.CreateStringWME("name", "test_generated_file1.txt");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
 		assertEquals(fsObject.getPathToCopy(), homeFolderPath+"/test_generated_file1.txt");
 		assertEquals(fsObject.getObjectNameToCopy(), "test_generated_file1.txt");
-		assertEquals(fsObject.getObjectTypeToCopy(), "file");
+		assertEquals(fsObject.getObjectTypeToCopy(), "file_object");
 		assertTrue(fsObject.getShouldDeleteOldPath());
 		
 		
@@ -342,14 +342,14 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "cut");
-		Identifier fileId = commandId.CreateIdWME("folder");
+		Identifier fileId = commandId.CreateIdWME("folder_object");
 		fileId.CreateStringWME("name", "subTestFolder");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
 		assertEquals(fsObject.getPathToCopy(), homeFolderPath+"/subTestFolder");
 		assertEquals(fsObject.getObjectNameToCopy(), "subTestFolder");
-		assertEquals(fsObject.getObjectTypeToCopy(), "folder");
+		assertEquals(fsObject.getObjectTypeToCopy(), "folder_object");
 		assertTrue(fsObject.getShouldDeleteOldPath());
 	}
 	
@@ -369,8 +369,11 @@ public class FileSystemStateObjectTests {
 		fsObject.setObjectTypeToCopy("file");
 		fsObject.setShouldDeleteOldPath(false);
 		
+		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "paste");
+		Identifier fileId = commandId.CreateIdWME("file_object");
+		fileId.CreateStringWME("name", "test_generated_file1.txt");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
@@ -401,6 +404,8 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "paste");
+		Identifier fileId = commandId.CreateIdWME("file_object");
+		fileId.CreateStringWME("name", "test_generated_file1.txt");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
@@ -433,6 +438,8 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "paste");
+		Identifier fileId = commandId.CreateIdWME("folder_object");
+		fileId.CreateStringWME("name", "subTestFolder");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
@@ -466,6 +473,8 @@ public class FileSystemStateObjectTests {
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
 		commandId.CreateStringWME("name", "paste");
+		Identifier fileId = commandId.CreateIdWME("folder_object");
+		fileId.CreateStringWME("name", "subTestFolder");
 		
 		fsObject.readSoarCommandAndApply(commandId, null);
 		
