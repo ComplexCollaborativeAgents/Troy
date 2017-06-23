@@ -359,7 +359,7 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 
 	protected void deleteObject() {
 
-		if (selectedObjectType.equals("folder")) {
+		if (selectedObjectType.equals("folder_object")) {
 			try {
 				FileUtils.deleteDirectory(new File(selectedObjectPath));
 			} catch (IOException e) {
@@ -367,7 +367,7 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 			}
 		}
 
-		if (selectedObjectType.equals("file")) {
+		if (selectedObjectType.equals("file_object")) {
 			File fileToDelete = new File(selectedObjectPath);
 			fileToDelete.delete();
 		}

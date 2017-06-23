@@ -26,9 +26,13 @@ smem --add {
     (<al4> ^verb copy ^entity <arg41>)
     (<ap4> ^op_name op_copy ^argument <arg41>)
     
-    
     ### paste a file
     (<a5> ^linguistic <al5> ^procedural <ap5> ^type action)
     (<al5> ^verb paste ^entity <arg51>)
     (<ap5> ^op_name op_paste ^argument <arg51>)
+    
+    ### cut a file
+    (<a6> ^linguistic <al6> ^procedural <ap6> ^type action)
+    (<al6> ^verb cut ^entity <arg61>)
+    (<ap6> ^op_name op_cut ^argument <arg61>)
 }
