@@ -6,7 +6,8 @@ rank(40) Instruct(ActionCommand($1, $2, $3)) => Inform() writeToSoar(ActionComma
 rank(30) Request(readOutputFromSoar) => readFromSoar($1) say($1)
 
 User: Instruct(ActionCommand($1, $2)) <-> {ActionName[$1]} {Entity[$2]}.
-User: Instruct(ActionCommand($1, $2, $3)) <-> {ActionName[$1]} {Entity[$2]} {Entity[$3]}.
+User: Instruct(ActionCommand($1, $2, $3)) <-> {ActionName[$1]} {Entity[$2]} {ActionObject[$3]}. {exact}
+User: Instruct(ActionCommand($1, $2, $3, $4)) <-> {ActionName[$1]} {Entity[$2]} {ActionObject[$3]} {ActionObject[$4]}. {exact}
 
 ActionName[verb(print)] <-> print
 ActionName[verb(email)] <-> email
@@ -16,6 +17,13 @@ ActionName[verb(go)] <-> go
 ActionName[verb(cut)] <-> cut
 ActionName[verb(copy)] <-> copy
 ActionName[verb(paste)] <-> paste
+ActionName[verb(transfer)] <-> transfer
+
+ActionSpecifier[action-specifier(from)] <-> from
+ActionSpecifier[action-specifier(to)] <-> to
+
+ActionObject[action-object($1, $2)] <-> {ActionSpecifier[$1]}{Entity[$2]}
+
 
 EntityType[type(file)] <-> file
 EntityType[type(folder)] <-> folder
@@ -34,8 +42,6 @@ Entity[entity($1,$2,$3)] <-> {EntityConstraint[$3]}{EntityConstraint[$2]}{Entity
 EntityName[name($1)] <-> with name {Tokens[$1]}
 EntityName[name($1)] <-> named {Tokens[$1]}
 EntityName[name($1)] <-> name {Tokens[$1]}
-EntityName[name($1)] <-> {ActionName[$_2]} {Tokens[$1]}
-EntityName[name($1)] <-> to {Tokens[$1]}
 EntityName[name($1)] <-> {Tokens[$1]}
 
 Tokens <-> {Token+}

@@ -31,11 +31,12 @@ sp {topstate*propose*comprehension
     (<seg> ^message <m>
            ^groundings <g>)
     (<g> -^<any>)
-    (<m> ^processed true)
+    (<m> ^processed true
+         ^lexical <lex>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name comprehension
-          ^message <m>
+          ^message <lex>
           ^segment <seg>)
     }
 

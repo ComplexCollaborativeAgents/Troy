@@ -9,6 +9,8 @@
     <member path="action/paste/paste.soar" />
     <member path="action/cut/cut.soar" />
     <member path="action/proposals.soar" />
+    <member path="comprehension/composition/complete-composition.soar" />
+    <member path="proposals.soar" />
   </members>
 </soaragent>
 

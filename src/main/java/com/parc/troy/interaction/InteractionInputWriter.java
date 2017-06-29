@@ -26,7 +26,8 @@ public class InteractionInputWriter {
 		Identifier commandId = this.interactionLink.CreateIdWME("message");
 		if(messageToWrite.getArg(0).toString().equals("ActionCommand")){
 			commandId.CreateStringWME("type", "action-command");
-			this.writeActionCommand(messageToWrite, commandId);
+			Identifier lexId = commandId.CreateIdWME("lexical");
+			this.writeActionCommand(messageToWrite, lexId);
 		}
 	}
 	
@@ -35,6 +36,7 @@ public class InteractionInputWriter {
 	}
 
 	private void writeActionCommand(LogicalForm messageToWrite, Identifier commandId) {
+		LOGGER.debug("Messaged received from Otto is: " + messageToWrite.toString());
 		Iterator<LogicalForm> argListIterator = messageToWrite.getArgList().iterator();
 		argListIterator.next();
 		while(argListIterator.hasNext()){
@@ -47,13 +49,35 @@ public class InteractionInputWriter {
 					Identifier entityId = commandId.CreateIdWME("entity");
 					writeEntity(lf, entityId);
 				}
+				if(lf.op.equals("action-object")){
+					Identifier id = commandId.CreateIdWME("action-object");
+					writeActionObject(lf, id);
+				}
 			}
 		}	
 	}
 	
+	private void writeActionObject(LogicalForm actionObject, Identifier id) {
+		LOGGER.debug("Writing action object: " + actionObject);
+		Iterator<LogicalForm> argListIterator = actionObject.getArgList().iterator();
+		while(argListIterator.hasNext()) {
+			LogicalForm lf = argListIterator.next();
+			if(lf.op.equals("entity")) {
+				Identifier entityId = id.CreateIdWME("entity");
+				writeEntity(lf, entityId);
+			}
+			if(lf.op.equals("action-specifier")) {
+				writeActionSpecifier(lf, id);
+			}
+		}
+	}
+	
 	private void writeVerb(LogicalForm verb, Identifier id){
+		
 		id.CreateStringWME("verb", verb.getArg(0).toString());
 	}
+	
+	
 	
 	private void writeEntity(LogicalForm entity, Identifier id){
 		LOGGER.debug("Writing entity: " + entity);
@@ -97,6 +121,11 @@ public class InteractionInputWriter {
 		LOGGER.debug("Writing property: " + property);
 		Identifier propertyId = id.CreateIdWME("property");
 		propertyId.CreateStringWME(property.getArg(0).toString(), property.getArg(1).toString());
+	}
+	
+	private void writeActionSpecifier(LogicalForm specifier, Identifier id) {
+		LOGGER.debug("Writing action specifier: " + specifier);
+		id.CreateStringWME("specifier", specifier.getArg(0).toString());
 	}
 	
 }
