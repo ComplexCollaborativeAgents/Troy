@@ -1,0 +1,11 @@
+##!
+# @file
+#
+# @created smohan 20170707
+sp {index-action-specifier*apply*complete-index-action-specifier
+    (state <s>    ^name index-action-specifier
+                  ^grounding <g>
+                  ^superstate.grounding <sg>)
+-->
+    (<sg> ^specifier <g>)
+    }

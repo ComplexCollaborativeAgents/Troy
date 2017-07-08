@@ -18,14 +18,26 @@ sp {comprehension*propose*index-verb
     (state <s> ^name comprehension
                ^message <m>
                ^grounding <g>)
-    (<m> ^verb <verb>)
+    #(<m> ^verb <verb>)
     (<g> -^verb <any>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name index-verb
-          ^description <verb>)
+          ^description <m>)
     }
 
+sp {comprehension*propose*index-action-object
+	(state <s>	^name comprehension
+            	^message <m>
+             	^grounding <g>)
+ 	(<m> ^action-object <ao>)
+  	(<g> -^action-object <any>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name index-action-object
+        	^description <ao>)
+  }
+        
 
 sp {comprehension*propose*composition
     (state <s> ^name comprehension

@@ -14,12 +14,36 @@ sp {composition*elaborate*grounding*message
     }
 
 
+
 sp {composition*elaborate*map
     (state <s> ^name composition
                ^grounding.verb.map <map>)
 -->
     (<s> ^map <map>)
     }
+
+sp {composition*retrieve*linguistic-id
+    (state <s>    ^name composition
+                  ^map.linguistic <ltid>)
+-->
+    (<s> ^retrieve-lti <ltid>)
+    }
+
+sp {composition*retrieve*linguistic-id*substructure
+    (state <s>    ^name composition
+                  ^map.linguistic.{<sub-arg> <> verb} <subid>)
+-->
+    (<s>    ^retrieve-lti <subid>)
+    }
+
+sp {composition*retrieve*procedural-id
+    (state <s>    ^name composition
+                  ^map.procedural <pid>)
+-->
+    (<s> ^retrieve-lti <pid>)
+    }
+    
+
 
 sp {composition*indexed-action
     (state <s> ^name composition)

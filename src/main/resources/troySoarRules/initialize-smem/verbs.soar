@@ -19,7 +19,7 @@ smem --add {
 	(<a3> ^linguistic <al3> ^procedural <ap3> ^type action)
  	(<al3> ^verb create ^entity <arg31>)
   	(<ap3> ^op_name op_create_folder ^argument1 <arg31>)
-    (<arg32> ^default folder_object)
+    (<arg31> ^default folder_object)
     
    ### copy a file
     (<a4> ^linguistic <al4> ^procedural <ap4> ^type action)

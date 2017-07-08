@@ -1,0 +1,38 @@
+##!
+# @file
+#
+# @created smohan 20170705
+
+sp {index-action-object*propose*index-action-specifier
+	(state <s>	^name index-action-object
+            	^description <d>
+             	^grounding <g>)
+ 	(<d> ^specifier <spec>)
+    (<g> -^specifier <any>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name index-action-specifier
+        	^description <spec>)
+}
+
+sp {index-action-object*propose*index-entity
+	(state <s>	^name index-action-object
+            	^description <d>
+             	^grounding <g>)
+ 	(<d>	^entity <entity>)
+  	(<g>	-^entity <any>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name index-entity
+        	^description <entity>)
+  }
+
+sp {index-action-object*propose*complete-index-action-object
+	(state <s>	^name index-action-object)
+-->
+	(<s>	^operator <op> + <)
+ 	(<op>	^name complete-index-action-object)
+  }
+
+
+            	

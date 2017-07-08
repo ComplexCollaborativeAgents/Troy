@@ -14,3 +14,7 @@ source "index-verb/load.soar"
 source "preferences.soar"
 
 source "composition/load.soar"
+
+source "index-action-object/load.soar"
+
+source "index-action-specifier/load.soar"

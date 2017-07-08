@@ -1,0 +1,18 @@
+##!
+# @file
+#
+# @created smohan 20170705
+
+sp {index-action-object*elaborate*description
+	(state <s>	^name index-action-object
+           		^superstate.operator.description <d>)
+-->
+	(<s>	^description <d>)
+}
+
+sp {index-action-object*elaborate*grounding
+	(state <s>	^name index-action-object)
+-->
+	(<s>	^grounding <g>)
+ }
+            	

@@ -1,0 +1,44 @@
+##!
+# @file
+#
+# @created smohan 20170707
+sp {compose-action-object*elaborate*procedural-argument*linguistic-id*indexed-action
+    (state <s>    ^name compose-action-object
+                  ^superstate.operator <sop>)
+    (<sop>    ^name compose-action-object
+              ^indexed-action <ia>
+              ^linguistic <ltid>
+              ^procedural-argument <parg>
+              ^procedural-argument-id <pid>
+              ^grounding <g>)
+-->
+    (<s> ^indexed-action <ia>
+         ^linguistic <ltid>
+         ^procedural-argument <parg>
+         ^procedural-argument-id <pid>
+         ^grounding <g>)
+    }
+
+
+sp {compose-action-object*retrieve*procedural*argument-id
+    (state <s>    ^name compose-action-object
+                  ^procedural-argument-id <parg>)
+-->
+    (<s> ^retrieve-lti <parg>)
+    }
+              
+
+sp {compose-action-object*action-object*objects
+    (state <s>    ^name compose-action-object
+                  ^procedural-argument-id <pid>
+                  ^procedural-argument <parg>
+                  ^linguistic <lid>
+                  ^indexed-action <ia>
+                  ^grounding <g>)
+    (<pid>    ^object <obj-id>)
+    (<lid>    ^<ling-arg>.entity <obj-id>)
+    (<g>    ^<ling-arg>.entity.object <gobj>)
+-->
+    (<ia>    ^<parg> <arg-val>)
+    (<arg-val>    ^object <gobj>)
+    }

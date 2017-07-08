@@ -1,0 +1,10 @@
+##!
+# @file
+#
+# @created smohan 20170630
+sp {create-new-map*propose*complete-create-new-map
+	(state <s>	^name create-new-map)
+-->
+	(<s>	^operator <op> + <)
+ 	(<op>	^name complete-create-new-map)
+  }

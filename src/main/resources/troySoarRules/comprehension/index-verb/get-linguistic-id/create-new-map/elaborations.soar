@@ -1,0 +1,105 @@
+##!
+# @file
+#
+# @created smohan 20170628
+sp {create-new-map*elaborate*description
+	(state <s> ^name create-new-map
+            ^superstate.operator <sop>)
+	(<sop> ^description <d>
+        ^name create-new-map)
+-->
+	(<s> ^description <d>
+      ^op_name op_
+      ^argument argument)
+}
+
+sp {create-new-map*store*map
+	(state <s> ^name create-new-map
+               ^description <d>
+               ^smem.command <scomm>
+               ^op_name <opname>)
+-->
+	(<s> ^map <map>)
+ 	(<map> ^type action
+  		   ^procedural <proc>
+       	   ^linguistic <ling>)
+    (<proc> ^op_name (make-constant-symbol <opname>))
+ 	(<scomm> ^store <map> <proc> <ling>)
+  }
+
+sp {create-new-map*store*verb
+	(state <s> ^name create-new-map
+               ^description.verb <verb>
+               ^map.linguistic <ling>)
+-->
+	(<ling> ^verb <verb>)
+ }
+
+sp {create-new-map*store*entity*long-termid
+	(state <s>	^name create-new-map
+            	^description.entity <entity>
+             	^map <map>
+              	^smem.command <scomm>
+               	^argument <argument>)
+ 	(<map>	^linguistic <ling>
+         	^procedural <proc>)
+--> 
+	(<ling> ^entity <obj>)
+ 	(<proc> ^(make-constant-symbol <argument>) <obj>)
+  	(<scomm> ^store <ling> <proc>)
+}
+
+sp {create-new-map*store*action-object*structure
+	(state <s>	^name create-new-map
+            	^description.action-object <ao>
+                ^map <map> 
+                ^smem.command <scomm>
+                ^argument <argument>)
+ 	(<map>	^linguistic <ling>
+         	^procedural <proc>)
+-->
+	(<ling>	^action-object <aobject>)
+ 	(<proc> ^(make-constant-symbol <argument>) <parg>)
+  	(<s>	^pair-linguistic-procedural <p>
+        	^pair-description-linguistic <p1>)
+   	(<p> ^<aobject> <parg>)
+    (<p1> ^<ao> <aobject>)
+	}
+
+sp {create-new-map*store*action-object*entity
+	(state <s>	^name create-new-map
+            	^description.action-object <dao>
+             	^map <map>
+              	^smem.command <scomm>
+               	^pair-linguistic-procedural.<ao> <po>
+                ^pair-description-linguistic.<dao> <ao>)
+ 	(<dao>	^entity <dao-entity>)
+ 	(<map>	^linguistic <ling>
+         	^procedural <proc>)
+  	(<ling> ^action-object <ao>)
+   	(<proc> ^<arg> <po>)
+-->
+	(<ao> ^entity <object>)
+ 	(<po> ^object <object>)
+    (<scomm> ^store <ao> <po>)
+}
+
+
+### SM:: does not store prepositions yet. Figure out a general theory here.
+#sp {create-new-map*store*action-object*specifier
+#    (state <s>    ^name create-new-map
+#                  ^description.action-object <dao>
+#                  ^map <map>
+#                  ^smem.command <scomm>
+#                  ^pair-linguistic-procedural.<ao> <po>
+#                  ^pair-description-linguistic.<dao> <ao>)
+#    (<dao>    ^specifier <dao-specifier>)
+#    (<map>    ^linguistic <ling>
+#              ^procedural <proc>)
+#    (<ling> ^action-object <ao>)
+#    (<proc> ^<arg> <po>)
+#-->
+#    (<ao> ^entity <object>)
+#    (<po> ^object <object>)
+#    (<scomm> ^store <ao> <po>)
+#}

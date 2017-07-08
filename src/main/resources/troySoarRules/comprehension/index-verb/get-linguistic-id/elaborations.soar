@@ -1,0 +1,37 @@
+##!
+# @file
+#
+# @created smohan 20170412
+
+sp {get-linguistic-id*elaborate*description
+	(state <s> ^name get-linguistic-id
+               ^superstate.operator <sop>)
+ 	(<sop> ^description <d>)
+-->
+	(<s> ^description <d>)
+ }
+
+sp {get-linguistic-id*query-smem
+    (state <s> ^name get-linguistic-id
+               ^description <d>)
+    (<d> ^verb <verb>)
+-->
+    (<s> ^smem-query-cue <que>)
+    (<que> ^verb <verb>)
+    }
+
+sp {get-linguistic-id*elaborate*retrieved-success
+	(state <s>	^name get-linguistic-id
+            	^retrieved-lti-cue.retrieved-lti {<res> <> failure})
+-->
+	(<s> ^linguistic <res>)
+ }
+             
+
+sp {get-linguistic-id*write-to-superstate
+    (state <s> ^name get-linguistic-id
+               ^linguistic <res>
+               ^superstate <ss>)
+-->
+    (<ss> ^linguistic <res>)
+    }

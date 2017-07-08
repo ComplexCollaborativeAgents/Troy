@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170707
+
+sp {index-action-object*apply*complete-index-action-object
+	(state <s>	^name index-action-object
+            	^operator.name complete-index-action-object
+            	^grounding <g>
+             	^superstate.grounding <sg>)
+-->
+	(<sg> ^action-object <g>)
+ }

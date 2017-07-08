@@ -1,0 +1,9 @@
+##!
+# @file
+#
+# @created smohan 20170630
+
+smem    --add {
+        (<p1> ^word from ^lex preposition ^type directional ^information final)
+        (<p2> ^word to	^lex preposition ^type directional	^information initial)
+        }

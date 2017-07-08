@@ -1,0 +1,8 @@
+##!
+# @file: 
+#
+# @created smohan 20170628
+
+source "proposals.soar"
+source "elaborations.soar"
+source "create-new-map/load.soar"

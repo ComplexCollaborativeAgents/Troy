@@ -6,3 +6,5 @@
 source "verbs.soar"
 
 source "nouns.soar"
+
+source "prepositions.soar"

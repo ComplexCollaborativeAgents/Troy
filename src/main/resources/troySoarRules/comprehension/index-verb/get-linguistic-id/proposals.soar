@@ -1,0 +1,17 @@
+##!
+# @file
+#
+# @created smohan 20170628
+
+sp {get-linguistic-id*propose*create-new-map
+	(state <s> ^name get-linguistic-id
+               ^retrieved-lti-cue.retrieved-lti failure
+               ^description <d>
+               -^map <any>)
+-->
+	(<s> ^operator <op> +)
+    (<op> ^name create-new-map
+          ^description <d>)
+     (write |Verb not found. Attempting to learn it.|)
+    }
+               

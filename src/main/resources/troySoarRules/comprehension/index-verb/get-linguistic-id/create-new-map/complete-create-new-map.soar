@@ -1,0 +1,12 @@
+##!
+# @file
+#
+# @created smohan 20170630
+sp {create-new-map*apply*complete-create-new-map
+	(state <s>	^name create-new-map
+            	^map.linguistic <l>
+             	^operator.name complete-create-new-map
+              	^superstate <ss>)
+-->
+	(<ss> ^linguistic <m>)
+ }

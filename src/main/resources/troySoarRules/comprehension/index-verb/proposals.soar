@@ -6,16 +6,16 @@
 sp {index-verb*propose*lookup-linguistic-structure
     (state <s> ^name index-verb
                ^description <d>
-               -^linguistic <any>)
+               -^linguistic {<any> <> failure})
 -->
     (<s> ^operator <op> +)
-    (<op> ^name lookup-linguistic-structure
+    (<op> ^name get-linguistic-id
           ^description <d>)
     }
 
 sp {index-verb*propose*lookup-map
     (state <s> ^name index-verb
-               ^linguistic <ling>
+               ^linguistic {<ling> <> failure}
                -^map <any>)
 -->
     (<s> ^operator <op> +)
