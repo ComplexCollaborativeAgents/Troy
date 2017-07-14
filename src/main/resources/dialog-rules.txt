@@ -43,6 +43,7 @@ EntityName[name($1)] <-> with name {Tokens[$1]}
 EntityName[name($1)] <-> named {Tokens[$1]}
 EntityName[name($1)] <-> name {Tokens[$1]}
 EntityName[name($1)] <-> {Tokens[$1]}
+EntityName[name($1)] <-> into {Tokens[$1]}
 
 Tokens <-> {Token+}
 Token[$1] <-> {matches($1,.+)}

@@ -1,0 +1,15 @@
+##!
+# @file
+#
+# @created smohan 20170713
+
+
+sp {action-state-no-change*instantiate-goal
+	(state <s>	^name action-state-no-change
+            	-^desired <d>
+              	^indexed-action <ia>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name instantiate-goal
+        	^indexed-action <ia>)
+  }

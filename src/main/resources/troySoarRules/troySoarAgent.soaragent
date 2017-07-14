@@ -22,6 +22,7 @@
     <member path="comprehension/index-action-specifier/complete-index-action-specifier.soar" />
     <member path="comprehension/index-entity/find-object/elaborations.soar" />
     <member path="comprehension/index-action-specifier/proposals.soar" />
+    <member path="wait.soar" />
   </members>
 </soaragent>
 

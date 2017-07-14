@@ -4,7 +4,9 @@
 # @created smohan 20170413
 
 sp {action*propose*complete-action
-    (state <s> ^name action)
+    (state <s> ^name action
+               ^indexed-action <ia>)
+    (<ia>	^executed true)
 -->
     (<s> ^operator <op> + <)
     (<op> ^name complete-action

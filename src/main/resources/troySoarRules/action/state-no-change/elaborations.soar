@@ -1,0 +1,29 @@
+##!
+# @file
+#
+# @created smohan 20170713
+
+sp {action*state-no-change*elaborate*state-name
+	(state <s>	^impasse no-change
+            	^superstate.name action)
+-->
+	(<s>	^name action-state-no-change
+      		^learning-phase <lp>)
+ }
+
+
+sp {action-state-no-change*elaborate*indexed-action
+	(state <s>	^name action-state-no-change
+            	^superstate.indexed-action <ia>)
+-->
+	(<s>	^indexed-action <ia>)
+ }
+
+
+sp {action-state-no-change*elaborate*desired-state
+	(state <s>	^name action-state-no-change
+            	^superstate.desired <d>)
+-->
+	(<s>	^desired <d>)
+ }
+             

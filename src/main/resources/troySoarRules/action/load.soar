@@ -26,3 +26,5 @@ source "copy/load.soar"
 source "paste/load.soar"
 
 source "delete/load.soar"
+
+source "state-no-change/load.soar"

@@ -12,7 +12,8 @@ sp {action*propose*op_list*set
 -->
     (<s> ^operator <op> +)
     (<op> ^name op_list
-          ^argument <set-obj>)
+          ^argument <set-obj>
+          ^action-type primitive)
     }
 
 sp {action*propose*op_list*obj
@@ -23,7 +24,8 @@ sp {action*propose*op_list*obj
 -->
     (<s> ^operator <op> +)
     (<op> ^name op_list
-          ^argument <obj>)
+          ^argument <obj>
+          ^action-type primitive)
     }
 
 sp {action*propose*op_go_into
@@ -34,7 +36,8 @@ sp {action*propose*op_go_into
 -->
 	(<s> ^operator <op> +)
  	(<op> ^name op_go_into
-          ^argument <obj>)
+          ^argument <obj>
+          ^action-type primitive)
   }
 
 sp {action*propose*op_create_folder
@@ -47,7 +50,8 @@ sp {action*propose*op_create_folder
 	(<s> ^operator <op> +)
  	(<op> ^name op_create_folder
           ^argument1 <name>
-          ^argument2 folder_object)
+          ^argument2 folder_object
+          ^action-type primitive)
   }
 
 sp {action*propose*op_copy
@@ -58,7 +62,8 @@ sp {action*propose*op_copy
 -->
 	(<s> ^operator <op> +)
  	(<op> ^name op_copy
-          ^argument <obj>)
+          ^argument <obj>
+          ^action-type primitive)
   }
 
 sp {action*propose*op_cut
@@ -69,7 +74,8 @@ sp {action*propose*op_cut
 -->
    (<s> ^operator <op> +)
    (<op> ^name op_cut
-         ^argument <obj>)
+         ^argument <obj>
+         ^action-type primitive)
    }
 
 sp {action*propose*op_paste
@@ -79,7 +85,7 @@ sp {action*propose*op_paste
 -->
 	(<s> ^operator <op> +)
     (<op> ^name op_paste
-          ^argument <obj>)
-    }
-               
+          ^argument <obj>
+          ^action-type primitive)
+    }         
              	

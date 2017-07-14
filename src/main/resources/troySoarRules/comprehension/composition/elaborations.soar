@@ -49,7 +49,16 @@ sp {composition*indexed-action
     (state <s> ^name composition)
 -->
     (<s> ^indexed-action <a>)
+    (<a>	^_metadata <met>)
     }
+
+sp	{composition*elaborate*indexed-action*semantic-structure
+	(state	<s>	^name composition
+            	^indexed-action._metadata <met>
+             	^map <map>)
+-->
+	(<met>	^map <map>)
+ }
 
 
 sp {composition*indexed-action*name

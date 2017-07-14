@@ -17,12 +17,12 @@ sp {action*reject*operator*different-name
 sp {action*reject*operator*different-argument
     (state <s> ^name action
                ^indexed-action <ia>
-               ^operator <op> +)
+               ^operator <op> +
+          		-^dont-match.arg <argument>)
     (<ia> ^name <op_name>
-          ^{<argument> <> name} <ia-arg>)
+          ^<argument> <ia-arg>)
     (<op> ^name <op_name>
-           ^<argument> {<> <ia-arg>}
-          -^type maintenance)
+           ^<argument> {<> <ia-arg>})
 -->
     (<s> ^operator <op> -)
     }

@@ -27,3 +27,20 @@ sp {action*apply*operator*remove*successful*command
 -->
    (<ol> ^<command> <com> -)
 }
+
+sp {action*elaborate*indexed-action*primitive*executed
+	(state <s>	^operator <op>
+            	^indexed-action <ia>)
+ 	(<op>	^action-type primitive)
+-->
+	(<ia>	^executed true)
+ }
+
+sp {action*elaborate*dont-match*arguments
+	(state <s>	^name action)
+-->
+	(<s>	^dont-match <dm>)
+ 	(<dm>	^arg	name
+        	^arg	_metadata
+         	^arg	executed)
+  }
