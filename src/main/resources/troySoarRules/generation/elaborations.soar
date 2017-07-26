@@ -1,0 +1,11 @@
+##!
+# @file
+#
+# @created smohan 20170721
+
+sp {generation*elaborate*segment
+	(state <s>	^name generation
+            	^interaction.stack.segment <seg>)
+-->
+	(<s>	^segment <seg>)
+ }

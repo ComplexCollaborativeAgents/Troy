@@ -3,7 +3,7 @@
 #
 # @created smohan 20170330
 
-sp {topstate*propose*interaction
+sp {topstate*propose*interaction*message
 	(state <s> ^name troy
                ^io.input-link.interaction.message <message>
                ^topstate <s>)
@@ -13,6 +13,17 @@ sp {topstate*propose*interaction
  	(<op> 	^name interaction
         	^type incoming-message
          	^message <message>)
+  }
+
+sp {topstate*propose*interaction*status
+	(state	<s>	^name troy
+            	^interaction.processing-status <status>)
+ 	(<status> ^id <any-id>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interaction
+        	^type processing-status
+         	^status <status>)
   }
 
 sp {topstate*propose*interaction*2
@@ -40,10 +51,23 @@ sp {topstate*propose*comprehension
           ^segment <seg>)
     }
 
+sp {topstate*propose*generation
+	(state <s>	^name troy
+            	^interaction.stack.segment <seg>)
+ 	(<seg>	^purpose <purpose-type>
+         	^information-type <i-type>
+          	-^response-generated true)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name generation)
+   }
+
 
 sp {topstate*propose*action
     (state <s> ^name troy
-               ^interaction.stack.segment <seg>)
+               ^interaction <inter>)
+    (<inter>	^stack.segment <seg>
+             	-^processing-status.<status> <any>)
     (<seg> ^groundings <g>
            -^status complete)
     (<g> ^indexed-action <ia>)

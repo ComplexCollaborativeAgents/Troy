@@ -28,4 +28,10 @@ sp {all*elaborate*io
 -->
     (<s> ^io <io>)
     }
+
+sp {all*elaborate*interaction
+	(state <s>	^superstate.interaction <i>)
+-->
+	(<s>	^interaction <i>)
+ }
 	

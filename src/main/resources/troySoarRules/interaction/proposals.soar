@@ -4,15 +4,40 @@
 # @created smohan 20170407
 
 
-sp {interaction*propose*create-segment
+sp {interaction*propose*create-segment*human-initiated
     (state <s> ^name interaction
                ^message <m1>
+               -^segment.message <m1>
                -^interaction.stack.segment.message <m1>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name create-segment
-          ^message <m1>)
+          ^message <m1>
+          ^type human-initiated)
     }
+
+sp {interaction*propose*create-segment*troy-initiated
+	(state <s>	^name interaction
+            	^interaction.processing-status <status>
+             	-^segment.processing-status <status>
+               	-^interaction.stack.processing-status <status>)
+ 	(<status>	^id <id>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name create-segment
+        	^processing-status <status>
+         	^type troy-initiated)
+  }
+
+sp {interaction*propose*add-segment-to-stack
+	(state <s>	^name interaction
+             	^segment <new-seg>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name add-segment
+        	^segment <new-seg>)
+  }
+
 
 sp {interaction*propose*delete-segment
     (state <s> ^name interaction
@@ -22,11 +47,4 @@ sp {interaction*propose*delete-segment
     (<s> ^operator <op> +)
     (<op> ^name delete-segment
           ^segment <seg>)
-    }
-
-sp {interaction*propose*complete-interaction
-    (state <s> ^name interaction)
--->
-    (<s> ^operator <op> + <)
-    (<op> ^name complete-interaction)
     }

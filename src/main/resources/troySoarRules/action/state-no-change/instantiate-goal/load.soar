@@ -7,4 +7,4 @@ source "elaborations.soar"
 
 source "proposals.soar"
 
-source "instantiate-goal/load.soar"
+source "report-unknown-goal-definition.soar"

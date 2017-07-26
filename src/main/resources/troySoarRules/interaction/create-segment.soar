@@ -3,17 +3,37 @@
 #
 # @created smohan 20170407
 
-sp {interaction*apply*create-segment
+sp {interaction*apply*create-segment*user-initated*user-message
     (state <s> ^name interaction
-               ^operator <op>
-               ^interaction.stack <stack>)
+               ^operator <op>)
     (<op> ^name create-segment
-          ^message <m1>)
+          ^message <m1>
+          ^type human-initiated)
 -->
-    (<stack> ^segment <segment>)
+    (<s> ^segment <segment>)
     (<segment> ^message <m1>
                ^groundings <g1>
                ^world-enhancements <w1>)
     }
                
-    
+
+sp {interaction*apply*create-segment*troy-initiated*processing-status*unknown-goal
+	(state <s>	^name interaction
+            	^operator <op>
+             	^interaction.stack.segment <segment>)
+ 	(<segment>	^groundings <g>
+             	^message <m1>)
+ 	(<op>	^name create-segment
+        	^processing-status <status>
+         	^type troy-initiated)
+   	(<status>	^id unknown-goal
+              	^information <info>
+               	^type missing-knowledge)
+-->
+	(<s>	^segment <seg-new>)
+ 	(<seg-new>	^purpose ask 
+             	^information-type goal
+              	^previous-segment-grounding <g>
+               	^previous-segment-message <m1>
+                ^processing-status <status>)
+  }

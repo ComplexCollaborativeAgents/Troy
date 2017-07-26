@@ -1,0 +1,19 @@
+##!
+# @file
+#
+# @created smohan 20170719
+
+sp {instantiate-goal*apply*report-unknown-goal-definition
+	(state <s>	^name instantiate-goal
+            	^operator <sop>
+             	^interaction <i>)
+ 	(<i>	^processing-status <status>)
+ 	(<sop>	^name report-unknown-goal-definition
+         	^map <map>)
+-->
+ 	(<status>	^id unknown-goal
+            	^type missing-knowledge
+            	^information <info>)
+  	(<info>	^map <map>)
+   }
+              

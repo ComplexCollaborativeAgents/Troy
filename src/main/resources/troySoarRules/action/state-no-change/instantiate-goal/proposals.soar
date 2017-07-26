@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170713
+sp {instantiate-goal*propose*update-status*no-goal-definition
+	(state <s>	^name instantiate-goal
+            	^indexed-action._metadata.map <map>)
+ 	(<map>	-^goal-id <gid>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name report-unknown-goal-definition
+        	^map <map>)
+  }

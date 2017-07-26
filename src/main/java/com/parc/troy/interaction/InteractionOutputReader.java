@@ -2,6 +2,7 @@ package com.parc.troy.interaction;
 
 import static com.parc.xi.dm.LogicalFormConstants.BOOLAND;
 import static com.parc.xi.dm.LogicalFormConstants.INFORM;
+import static com.parc.xi.dm.LogicalFormConstants.ASK;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,11 @@ public class InteractionOutputReader {
 				String dialogAct = messageId.GetParameterValue("dialog-act");
 				if(dialogAct.equals("inform")){
 					Identifier contentId = messageId.GetChild(0).ConvertToIdentifier();
-					responseDialogAct = INFORM(this.parseContent(contentId));
+					responseDialogAct = INFORM(this.parseInformContent(contentId));
+				}
+				if(dialogAct.equals("ask")){
+					Identifier contentId = messageId.GetChild(0).ConvertToIdentifier();
+					responseDialogAct = ASK(this.parseQuestionContent(contentId));
 				}
 			}
 			if (this.soarI != null){
@@ -45,7 +50,13 @@ public class InteractionOutputReader {
 		return responseDialogAct;
 	}
 	
-	private LogicalForm parseContent(Identifier contentId){
+	private String parseQuestionContent(Identifier contentId) {
+		String questionType = contentId.GetChild(0).ConvertToStringElement().GetValueAsString();
+		return questionType;
+		
+	}
+	
+	private LogicalForm parseInformContent(Identifier contentId){
 		List<LogicalForm> itemList = new ArrayList<LogicalForm>();
 		int i = 0;
 		for(i = 0 ;i < contentId.GetNumberChildren(); i++){

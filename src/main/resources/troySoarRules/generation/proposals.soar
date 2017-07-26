@@ -1,0 +1,18 @@
+##!
+# @file
+#
+# @created smohan 20170721
+
+
+sp {generation*propose*write-dialog-act
+	(state <s>	^name generation
+             	^segment <seg>)
+    (<seg>	^purpose ask
+         	^information-type <i-type>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name write-dialog-act
+        	^dialog-act ask
+         	^content <cont>)
+    (<cont>	^question-type <i-type>)
+    }

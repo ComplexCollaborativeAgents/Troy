@@ -23,6 +23,7 @@
     <member path="comprehension/index-entity/find-object/elaborations.soar" />
     <member path="comprehension/index-action-specifier/proposals.soar" />
     <member path="wait.soar" />
+    <member path="generation/proposals.soar" />
   </members>
 </soaragent>
 

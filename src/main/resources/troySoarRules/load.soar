@@ -20,3 +20,5 @@ source "initialize-smem/load.soar"
 source "_soar_parameters.soar"
 
 source "memory-operators/load.soar"
+
+source "generation/load.soar"

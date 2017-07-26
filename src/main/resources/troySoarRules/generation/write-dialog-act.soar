@@ -1,0 +1,19 @@
+##!
+# @file
+#
+# @created smohan 20170721
+
+sp {generation*apply*write-dialog-act
+	(state <s>	^name generation
+            	^operator <op>
+             	^io.output-link <ol>
+              	^segment <seg>)
+ 	(<op>	^name write-dialog-act
+        	^dialog-act <act>
+         	^content <cont>)
+-->
+	(<ol>	^message <m>)
+ 	(<m>	^dialog-act ask
+       		^content <cont>)
+  	(<seg>	^response-generated true)
+   }

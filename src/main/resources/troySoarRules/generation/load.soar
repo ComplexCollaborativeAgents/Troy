@@ -1,10 +1,10 @@
 ##!
 # @file: 
 #
-# @created smohan 20170713
+# @created smohan 20170721
 
 source "elaborations.soar"
 
 source "proposals.soar"
 
-source "instantiate-goal/load.soar"
+source "write-dialog-act.soar"

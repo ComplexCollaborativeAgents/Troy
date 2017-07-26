@@ -1,0 +1,12 @@
+##!
+# @file
+#
+# @created smohan 20170713
+sp {instantiate-goal*elaborate*indexed-action
+	(state <s>	^name instantiate-goal
+            	^superstate.operator <sop>)
+ 	(<sop>	^name instantiate-goal
+         	^indexed-action <ia>)
+-->
+	(<s>	^indexed-action <ia>)
+ }
