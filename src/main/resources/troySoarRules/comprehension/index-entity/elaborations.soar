@@ -51,9 +51,11 @@ sp {index-entity*elaborate*resolution-type*no-determiner
     }
 
 sp {index-entity*elaborate*grounding
-    (state <s> ^name index-entity)
+    (state <s> ^name index-entity
+               ^description <d>)
 -->
     (<s> ^grounding <g>)
+    (<g>    ^_metadata.description <d>)
     }
 
 sp {index-entity*elaborate*segment*world

@@ -7,8 +7,10 @@ source "proposals.soar"
 
 source "elaborations.soar"
 
-source "create-segment.soar"
+source "preferences.soar"
 
-source "delete-segment.soar"
+source "interpret-message/load.soar"
 
-source "add-segment.soar"
+source "interpret-status/load.soar"
+
+source "update-stack.soar"

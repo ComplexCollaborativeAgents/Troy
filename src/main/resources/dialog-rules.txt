@@ -3,11 +3,13 @@ Agent: Inform(Welcome) -> Hi! I am Troy, your office secretary.
 
 rank(40) Instruct(ActionCommand($1, $2)) => Inform() writeToSoar(ActionCommand, $1, $2) 
 rank(40) Instruct(ActionCommand($1, $2, $3)) => Inform() writeToSoar(ActionCommand, $1, $2, $3) 
+rank(40) Instruct(RelationDescription($1)) => Inform() writeToSoar(RelationDescription, $1)
 rank(30) Request(readOutputFromSoar) => readFromSoar($1) say($1)
 
 User: Instruct(ActionCommand($1, $2)) <-> {ActionName[$1]} {Entity[$2]}.
 User: Instruct(ActionCommand($1, $2, $3)) <-> {ActionName[$1]} {Entity[$2]} {ActionObject[$3]}. {exact}
 User: Instruct(ActionCommand($1, $2, $3, $4)) <-> {ActionName[$1]} {Entity[$2]} {ActionObject[$3]} {ActionObject[$4]}. {exact}
+User: Instruct(RelationDescription($1)) <-> {Tokens[$_]} {Relation[$1]}
 
 ActionName[verb(print)] <-> print
 ActionName[verb(email)] <-> email
@@ -21,7 +23,9 @@ ActionName[verb(transfer)] <-> transfer
 
 ActionSpecifier[action-specifier(from)] <-> from
 ActionSpecifier[action-specifier(to)] <-> to
+RelationSpecifier[relation-specifier(in)] <-> in
 
+Relation[relation($1, $2, $3)] <-> {Entity[$1]}{RelationSpecifier[$2]}{Entity[$3]}
 ActionObject[action-object($1, $2)] <-> {ActionSpecifier[$1]}{Entity[$2]}
 
 
@@ -39,11 +43,11 @@ Entity[entity($1)] <-> {EntityName[$1]}
 Entity[entity($1,$2)] <-> {EntityConstraint[$2]}{EntityType[$1]}
 Entity[entity($1,$2,$3)] <-> {EntityConstraint[$3]}{EntityConstraint[$2]}{EntityType[$1]}
 
-EntityName[name($1)] <-> with name {Tokens[$1]}
-EntityName[name($1)] <-> named {Tokens[$1]}
-EntityName[name($1)] <-> name {Tokens[$1]}
-EntityName[name($1)] <-> {Tokens[$1]}
-EntityName[name($1)] <-> into {Tokens[$1]}
+EntityName[name($1)] <-> with name {Token[$1]}
+EntityName[name($1)] <-> named {Token[$1]}
+EntityName[name($1)] <-> name {Token[$1]}
+EntityName[name($1)] <-> {Token[$1]}
+EntityName[name($1)] <-> into {Token[$1]}
 
 Tokens <-> {Token+}
 Token[$1] <-> {matches($1,.+)}

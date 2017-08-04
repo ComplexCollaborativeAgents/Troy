@@ -1,0 +1,8 @@
+##!
+# @file: 
+#
+# @created smohan 20170804
+
+source "interpret-unknown-goal.soar"
+
+source "interpret-acquired-goal.soar"

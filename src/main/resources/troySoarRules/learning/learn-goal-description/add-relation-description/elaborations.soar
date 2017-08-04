@@ -1,0 +1,88 @@
+##!
+# @file
+#
+# @created smohan 20170728
+
+sp {add-relation-description*elaborate*relation-description
+    (state <s>    ^name add-relation-description
+                  ^superstate.operator.relation <rel>)
+-->
+    (<s>    ^relation-description <rel>)
+    }
+
+sp {add-relation-description*elaborate*map
+    (state <s>    ^name add-relation-description
+                  ^superstate.operator.indexed-action._metadata.map <map>)
+-->
+    (<s>    ^map <map>)
+    }
+
+sp {add-relation-description*elaborate*indexed-action
+    (state <s>    ^name add-relation-description
+                  ^superstate.operator.indexed-action <ia>)
+-->
+    (<s>    ^indexed-action <ia>)
+    }
+
+sp {add-relation-description*store*relation*node
+    (state <s>    ^name add-relation-description
+                  ^relation-description <d>
+                  ^map.goal <gid>
+                  ^smem.command <scomm>)
+-->
+    (<gid>    ^relation <rel-id>)
+    (<scomm>    ^store <gid>)}
+
+
+sp {add-relation-description*store*entity*level*1
+    (state    <s>    ^name add-relation-description
+                     ^relation-description <d>
+                     ^indexed-action <ia>
+                     ^map <map>
+                     ^smem.command <scomm>)
+    (<d>    ^entity <entity>
+            ^_metadata.description.<earg>.entity <entityd>)
+    (<entity> ^object <obj>
+              ^_metadata.description <entityd>)
+    (<ia>   ^{<arg> <> _metadata} <obj>)
+    (<map>  ^procedural.<arg>    <obj-id>
+            ^goal.relation <rel-id>)
+-->
+    (<rel-id>    ^<earg> <obj-id>)
+    (<scomm>    ^store <rel>)
+    (<s>    ^added <entity>)
+    }
+    
+
+sp {add-relation-description*store*entity*level*2
+    (state    <s>    ^name add-relation-description
+                     ^relation-description <d>
+                     ^indexed-action <ia>
+                     ^map <map>
+                     ^smem.command <scomm>)
+    (<d>    ^entity <entity>
+            ^_metadata.description.<earg>.entity <entityd>)
+    (<entity> ^object <obj>
+              ^_metadata.description <entityd>)
+    (<ia>   ^{<arg> <> _metadata}.object <obj>)
+    (<map>  ^procedural.<arg>.object    <obj-id>
+            ^goal.relation <rel-id>)
+-->
+    (<rel-id>    ^<earg> <obj-id>)
+    (<scomm>    ^store <rel>)
+    (<s>    ^added <entity>)
+    }
+
+sp {add-relation-description*store*specifier
+    (state <s>    ^name add-relation-description
+                  ^relation-description <d>
+                  ^map.goal.relation <rel-id>
+                  ^smem.command <scomm>)
+    (<d>    ^specifier <spec>)
+-->
+    (<rel-id>    ^specifier <spec>)
+    (<scomm>     ^store <rel-id>)
+    (<s>    ^added <spec>)
+    }
+    
+                     

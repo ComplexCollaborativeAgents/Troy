@@ -1,0 +1,32 @@
+##!
+# @file
+#
+# @created smohan 20170804
+
+sp {interpret-status*propose*interpret-acquired-goal-status
+	(state <s>	^name interpret-status
+            	^superstate.operator <op>
+             	^interaction.stack.segment <seg>)
+ 	(<op>	^name interpret-status
+        	^processing-status <ps>)
+  	(<seg>	^purpose learn
+          	^knowledge-type goal)
+   	(<ps>	^completed-purpose learn
+          	^knowledge-type goal)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interpret-acquired-goal-status
+        	^processing-status <ps>
+         	^segment <seg>)
+  }
+
+sp {interpret-status*apply*interpret-acquired-goal-status
+	(state <s>	^name interpret-status
+            	^operator <op>
+             	^superstate <ss>)
+ 	(<op>	^name interpret-acquired-goal-status
+        	^processing-status <ps>
+         	^segment <seg>)
+-->
+	(<ss>	^terminate-segment <seg>)
+ }

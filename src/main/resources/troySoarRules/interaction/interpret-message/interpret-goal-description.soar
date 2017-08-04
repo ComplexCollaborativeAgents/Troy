@@ -1,0 +1,36 @@
+##!
+# @file
+#
+# @created smohan 20170804
+
+sp {interpret-message*propose*interpret-goal-description
+	(state <s>	^name interpret-message
+            	^superstate.operator <sop>
+             	^interaction.stack.segment <seg>)
+ 	(<sop>	^message <m1>)
+  	(<m1>	^type relation-description)
+   	(<seg>	^purpose ask
+           	^information-type goal)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interpret-goal-description
+        	^message <m1>)
+  }
+
+sp {interpret-message*apply*interpret-goal-description
+	(state <s>	^name interpret-message
+            	^operator <op>
+             	^superstate <ss>
+ 				^interaction.stack.segment <seg>)
+ 	(<op>	^name interpret-goal-description
+        	^message <m1>)
+-->
+	(<ss>	^new-segment <seg-new>)
+ 	(<ss>	^terminate-segment <seg>)
+ 	(<seg-new>	^message <m1>
+         	^groundings <g>
+          	^world-enhancements <w1>
+           	^purpose learn
+            ^knowledge-type goal
+            ^satisfaction learning-event)
+  }

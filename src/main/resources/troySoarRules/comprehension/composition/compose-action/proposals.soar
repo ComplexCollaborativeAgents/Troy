@@ -1,0 +1,33 @@
+##!
+# @file
+#
+# @created smohan 20170413
+
+sp {compose-action*propose*compose-action-object
+    (state <s>    ^name compose-action
+                  ^map <map>
+                  ^indexed-action <ia>
+                  ^grounding <g>)
+    (<map>    ^procedural <pid>
+              ^linguistic <lid>)
+    (<pid> ^{<argument> <> op_name} <arg-id>)
+    (<lid>    -^<any-arg> <arg-id>)
+    (<ia> -^<argument> <any-value>)
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name compose-action-object
+             ^procedural-argument <argument>
+             ^procedural-argument-id <arg-id>
+             ^linguistic <lid>
+             ^indexed-action <ia>
+             ^grounding <g>)
+    }
+           
+
+sp {compose-action*propose*complete-compose-action
+    (state <s> ^name compose-action)
+-->
+    (<s> ^operator <op> + <)
+    (<op> ^name complete-compose-action)
+    }
+               

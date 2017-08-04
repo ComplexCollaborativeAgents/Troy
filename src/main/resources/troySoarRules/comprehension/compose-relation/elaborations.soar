@@ -1,0 +1,22 @@
+##!
+# @file
+#
+# @created smohan 20170727
+
+sp {compose-relation*elaborate*description
+	(state <s>	^name compose-relation
+            	^superstate.operator <sop>)
+ 	(<sop>	^name compose-relation
+         	^description <d>)
+-->
+	(<s>	^description <d>)
+ }
+
+sp {compose-relation*elaborate*grounding
+	(state	<s>	^name compose-relation
+                ^description <d>)
+-->
+	(<s>	^grounding <g>)
+    (<g>    ^_metadata.description <d>)
+ }
+            	

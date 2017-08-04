@@ -1,0 +1,12 @@
+##!
+# @file
+#
+# @created smohan 20170707
+
+sp {index-specifier*propose*complete-index-specifier
+    (state <s>    ^name index-specifier)
+-->
+    (<s> ^operator <op> + <)
+    (<op> ^name complete-index-specifier)
+    }
+                  

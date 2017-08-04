@@ -7,15 +7,20 @@ sp {interaction*elaborate*message
     (state <s> ^name interaction
                ^superstate.operator <sop>)
     (<sop> ^name interaction
-           ^message <m>)
+           ^message <m>
+           ^interaction <inter>)
 -->
-    (<s> ^message <m>)
+    (<s> ^message <m>
+         ^interaction <inter>)
     }
 
-sp {interaction*elaborate*interaction-stack
-    (state <s> ^name interaction
-               ^superstate.interaction <inter>)
+sp {interaction*elaborate*processing-status
+	(state <s>	^name interaction
+            	^superstate.operator <sop>)
+ 	(<sop>	^name interaction
+         	^processing-status <status>
+          	^interaction <inter>)
 -->
-    (<s> ^interaction <inter>)
-    }
-
+	(<s>	^processing-status <status>
+      		^interaction <inter>)
+ }

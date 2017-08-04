@@ -1,0 +1,15 @@
+##!
+# @file
+#
+# @created smohan 20170728
+
+sp {learning*propose*learn-goal-description
+    (state <s>    ^name learning
+                  ^segment <seg>)
+    (<seg>    ^purpose learn
+              ^knowledge-type goal)
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name learn-goal-description
+             ^segment <seg>)
+    }

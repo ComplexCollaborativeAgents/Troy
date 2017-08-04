@@ -1,0 +1,8 @@
+##!
+# @file: 
+#
+# @created smohan 20170804
+
+source "interpret-action-command.soar"
+
+source "interpret-goal-description.soar"

@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170804
+
+sp {troy*prefer*interaction*generation*comprehension
+	(state <s>	^topstate <s>
+            	^operator <op1> +
+             	^operator <op2> +)
+ 	(<op1> 	^name interaction)
+  	(<op2> 	^name << generation comprehension >>)
+-->
+	(<s>	^operator <op1> > <op2>)
+ }

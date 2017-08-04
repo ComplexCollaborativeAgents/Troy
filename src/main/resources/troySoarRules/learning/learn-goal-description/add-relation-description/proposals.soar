@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170728
+
+sp {add-relation-description*propose*complete-add-relation-description
+    (state <s>    ^name add-relation-description
+                  ^relation-description <d>)
+    -{(<d>    ^{<arg> <> _metadata} <val>)
+      -(<s>    ^added <val>)}
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name complete-add-relation-description)
+    }

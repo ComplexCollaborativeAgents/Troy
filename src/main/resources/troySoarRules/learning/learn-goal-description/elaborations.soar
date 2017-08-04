@@ -1,0 +1,23 @@
+##!
+# @file
+#
+# @created smohan 20170728
+
+sp {learn-goal-description*elaborate*segment
+    (state <s>    ^name learn-goal-description
+                  ^superstate.operator <sop>)
+    (<sop>    ^name learn-goal-description
+              ^segment <seg>)
+-->
+    (<s>    ^goal-description-segment <seg>)
+    }
+
+sp {learn-goal-description*elaborate*action*segment
+    (state <s>    ^name learn-goal-description
+                  ^interaction.stack.segment.next <next>)
+-->
+    (<s>    ^action-segment <next>)
+    }
+
+                
+    

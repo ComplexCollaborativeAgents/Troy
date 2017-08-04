@@ -1,0 +1,35 @@
+##!
+# @file
+#
+# @created smohan 20170804
+
+sp {interpret-status*propose*interpret-unknown-goal-status
+	(state <s>	^name interpret-status
+            	^superstate.operator <sop>)
+ 	(<sop>	^processing-status <p>)
+  	(<p>	^id unknown-goal)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interpret-unknown-goal-status
+        	^processing-status <p>)
+  }
+
+
+sp {interpret-status*apply*interpret-unknown-goal-status
+	(state <s>	^name interpret-status
+            	^operator <op>
+             	^superstate <ss>)
+ 	(<op>	^name interpret-unknown-goal-status
+        	^processing-status <p>)
+  	(<p>	^id unknown-goal
+        	^information <info>
+         	^type missing-knowledge)
+-->
+	(<ss>	^new-segment <seg-new>)
+ 	(<seg-new>	^purpose ask 
+             	^originator troy
+             	^information-type goal
+                ^processing-status <p>
+                ^satisfaction <sat>)
+  	(<sat>	^response-type relation-description)
+  }

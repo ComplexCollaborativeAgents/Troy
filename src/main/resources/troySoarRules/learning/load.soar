@@ -1,0 +1,12 @@
+##!
+# @file: 
+#
+# @created smohan 20170728
+
+source "proposals.soar"
+
+source "elaborations.soar"
+
+source "learn-goal-description/load.soar"
+
+

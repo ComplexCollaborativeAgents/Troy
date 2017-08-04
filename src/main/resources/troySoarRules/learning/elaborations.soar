@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170728
+
+sp {learning*propose*goal-description-learning
+    (state <s>    ^name learning
+                  ^superstate.operator <sop>)
+    (<sop>    ^name learning
+              ^segment <segment>)
+-->
+    (<s>    ^segment <segment>)
+    }

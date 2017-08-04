@@ -1,0 +1,32 @@
+##!
+# @file
+#
+# @created smohan 20170707
+sp {index-specifier*elaborate*description
+    (state <s>    ^name index-specifier
+                  ^superstate.operator <sop>)
+    (<sop>    ^name index-specifier
+              ^description <d>)
+-->
+    (<s>    ^description <d>)
+    }
+
+sp {index-specifier*elaborate*grounding
+    (state <s>    ^name index-specifier
+                  ^retrieved-lti-cue.retrieved-lti <g>
+                  ^description <d>)
+-->
+    (<s>    ^grounding <g>)
+    (<g>    ^_metadata.description <d>)
+    }
+
+
+sp {index-specifier*elaborate*smem-query-cue
+    (state <s>    ^name index-specifier
+                  ^description <d>)
+-->
+    (<s> ^smem-query-cue <cue>)
+    (<cue> ^word <d>)
+    }
+
+                  

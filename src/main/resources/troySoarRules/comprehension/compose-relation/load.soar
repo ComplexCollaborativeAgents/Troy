@@ -1,0 +1,12 @@
+##!
+# @file: 
+#
+# @created smohan 20170727
+
+source "proposals.soar"
+
+source "elaborations.soar"
+
+source "preferences.soar"
+
+source "complete-compose-relation.soar"

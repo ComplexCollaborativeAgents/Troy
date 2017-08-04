@@ -7,18 +7,32 @@ sp {comprehension*propose*index-entity
                ^message <m>
                ^grounding <g>)
     (<m> ^entity <np>)
-    (<g> -^entity <any>)
+    - {(<g> ^entity <any>)
+    (<any> ^_metadata.description <np>)}
 -->
     (<s> ^operator <op> +)
     (<op> ^name index-entity
           ^description <np>)
-    }
+}
+
+sp {comprehension*propose*index-relation
+	(state	<s>	^name comprehension
+            	^message <m>
+             	^grounding <g>)
+ 	(<m>	^relation <rel>)
+   - {(<g> ^relation <any>)
+    (<any> ^_metadata.description <rel>)}
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name compose-relation
+        	^description <rel>)
+  }
 
 sp {comprehension*propose*index-verb
     (state <s> ^name comprehension
                ^message <m>
                ^grounding <g>)
-    #(<m> ^verb <verb>)
+    (<m> ^verb <verb>)
     (<g> -^verb <any>)
 -->
     (<s> ^operator <op> +)
@@ -31,7 +45,8 @@ sp {comprehension*propose*index-action-object
             	^message <m>
              	^grounding <g>)
  	(<m> ^action-object <ao>)
-  	(<g> -^action-object <any>)
+  	- {(<g> ^action-object <any>)
+    (<any> ^_metadata.description <ao>)}
 -->
 	(<s>	^operator <op> +)
  	(<op>	^name index-action-object

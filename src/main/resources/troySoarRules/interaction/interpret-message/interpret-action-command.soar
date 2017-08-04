@@ -1,0 +1,34 @@
+##!
+# @file
+#
+# @created smohan 20170804
+
+
+sp {interpret-message*propose*interpret-action-command
+    (state <s> ^name interpret-message
+               ^superstate.operator <op>)
+    (<op> ^name interpret-message
+          ^message <m1>)
+    (<m1>	^type action-command)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interpret-action-command
+        	^message <m1>)
+}
+
+
+sp {interpret-message*apply*interpret-action-command
+	(state <s>	^name interpret-message
+            	^operator <op>
+             	^superstate <ss>)
+ 	(<op>	^name interpret-action-command
+        	^message <m1>)
+-->
+    (<ss> ^new-segment <segment>)
+    (<segment> ^message <m1>
+               ^groundings <g1>
+               ^world-enhancements <w1>
+               ^purpose execute
+               ^originator human
+               ^satisfaction action-event)
+    }

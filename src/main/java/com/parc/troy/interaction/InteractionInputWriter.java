@@ -29,8 +29,53 @@ public class InteractionInputWriter {
 			Identifier lexId = commandId.CreateIdWME("lexical");
 			this.writeActionCommand(messageToWrite, lexId);
 		}
+		
+		if(messageToWrite.getArg(0).toString().equals("RelationDescription")){
+			commandId.CreateStringWME("type", "relation-description");
+			Identifier lexId = commandId.CreateIdWME("lexical");
+			this.writeRelationDescription(messageToWrite, lexId);
+		}
 	}
 	
+	private void writeRelationDescription(LogicalForm messageToWrite,
+			Identifier commandId) {
+		LOGGER.debug("Message received from Otto is: " + messageToWrite.toString());
+		Iterator<LogicalForm> argListIterator = messageToWrite.getArgList().iterator();
+		argListIterator.next();
+		
+		while(argListIterator.hasNext()) {
+			LogicalForm lf = argListIterator.next();
+			if(lf.op != null){
+				if(lf.op.equals("relation")) {
+					Identifier relationId = commandId.CreateIdWME("relation");
+					writeRelation(lf, relationId);
+				}
+			}
+		}
+		
+	}
+
+	private void writeRelation(LogicalForm relation, Identifier commandId) {
+		LOGGER.debug("Writing relation: " + relation);
+		Iterator<LogicalForm> argListIterator = relation.getArgList().iterator();
+		Integer objectCounter = 1;
+		while(argListIterator.hasNext()) {
+			LogicalForm lf = argListIterator.next();
+			if(lf.op != null) {
+				if(lf.op.equals("entity")) {
+					Identifier numberId = commandId.CreateIdWME("e" + objectCounter.toString());
+					Identifier entityId = numberId.CreateIdWME("entity");
+					writeEntity(lf, entityId);
+					objectCounter++;
+				}
+				if(lf.op.equals("relation-specifier")) {
+					writeActionSpecifier(lf, commandId);
+				}
+			}
+		}
+		
+	}
+
 	private void clearInteractionLink() {
 		SoarHelper.deleteAllChildren(this.interactionLink);
 	}

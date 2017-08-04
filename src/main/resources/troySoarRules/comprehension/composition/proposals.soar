@@ -1,33 +1,36 @@
 ##!
 # @file
 #
-# @created smohan 20170413
+# @created smohan 20170727
 
-sp {composition*propose*compose-action-object
+sp {composition*propose*compose-action
     (state <s>    ^name composition
-                  ^map <map>
-                  ^indexed-action <ia>
-                  ^grounding <g>)
-    (<map>    ^procedural <pid>
-              ^linguistic <lid>)
-    (<pid> ^{<argument> <> op_name} <arg-id>)
-    (<lid>    -^<any-arg> <arg-id>)
-    (<ia> -^<argument> <any-value>)
+                  ^interaction.stack.segment <seg>
+                  ^grounding <g>
+                  ^message <m>)
+    (<seg>    ^purpose execute
+              ^groundings <sg>)
+    (<sg>    -^indexed-action <ia>)
 -->
     (<s>    ^operator <op> +)
-    (<op>    ^name compose-action-object
-             ^procedural-argument <argument>
-             ^procedural-argument-id <arg-id>
-             ^linguistic <lid>
-             ^indexed-action <ia>
-             ^grounding <g>)
+    (<op>    ^name compose-action
+             ^grounding <g>
+             ^message <m>)
     }
-           
 
-sp {composition*propose*complete-composition
-    (state <s> ^name composition)
+
+sp {composition*propose*compose-goal-description
+    (state <s>    ^name composition
+                  ^interaction.stack.segment <seg>
+                  ^grounding <g>
+                  ^message <m>)
+    (<seg>    ^purpose learn
+              ^knowledge-type goal
+              ^groundings <sg>)
+    (<sg>    -^goal-description <gd>)
 -->
-    (<s> ^operator <op> + <)
-    (<op> ^name complete-composition)
+    (<s>    ^operator <op> +)
+    (<op>    ^name compose-goal-description
+             ^grounding <g>
+             ^message <m>)
     }
-               

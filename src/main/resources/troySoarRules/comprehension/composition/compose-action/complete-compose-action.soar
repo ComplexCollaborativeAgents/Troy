@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170413
+sp {compose-action*complete-composition
+    (state <s> ^name compose-action
+               ^interaction.stack.segment <seg>
+               ^indexed-action <ia>
+               ^operator.name complete-compose-action)
+    (<seg> ^groundings <g>)
+-->
+    (<g> ^indexed-action <ia>)
+    }
+

@@ -4,6 +4,7 @@
 # @created smohan 20170630
 
 smem    --add {
-        (<p1> ^word from ^lex preposition ^type directional ^information final)
-        (<p2> ^word to	^lex preposition ^type directional	^information initial)
+        (<p1> ^word from ^lex preposition ^type directional ^information final ^p_symbol rel_from)
+        (<p2> ^word to	^lex preposition ^type directional	^information initial ^p_sympbol rel_to)
+        (<p3> ^word in	^lex preposition ^type spatial	^information none ^p_symbol rel_in)
         }

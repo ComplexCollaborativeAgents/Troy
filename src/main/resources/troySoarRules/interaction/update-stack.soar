@@ -1,0 +1,73 @@
+##!
+# @file
+#
+# @created smohan 20170804
+
+
+sp {interaction*apply*update-stack*add-segment*only*message
+	(state <s>	^name interaction
+            	^operator <op>
+             	^interaction.stack <stack>
+             	^new-segment <new-seg>
+              	-^terminate-segment <seg>)
+ 	(<stack> ^segment <seg>)
+ 	(<op>	^name update-stack)
+  	(<new-seg>	^message <m1>)
+-->
+	(<new-seg>	^next <seg>)
+ 	(<stack>	^segment <new-seg>	
+           		^segment <seg> -)
+  	(<m1>	^processed true)
+  }
+
+sp {interaction*apply*update-stack*add-segment*only*status
+	(state <s>	^name interaction
+            	^operator <op>
+             	^interaction <inter> 
+             	^new-segment <new-seg>
+              	-^terminate-segment <seg>)
+ 	(<inter>	^stack <stack>
+           		^processing-status <ps>)
+ 	(<stack> ^segment <seg>)
+ 	(<op>	^name update-stack)
+  	(<new-seg>	^processing-status <ps>)
+-->
+	(<new-seg>	^next <seg>)
+ 	(<stack>	^segment <new-seg>	
+           		^segment <seg> -)
+  	(<inter>	^processing-status <ps> -
+            	^processing-status <ps-new>)
+  }
+
+sp {interaction*apply*update-stack*terminate-segment*only*status
+	(state <s>	^name interaction
+            	^operator.name update-stack
+             	^interaction <inter>
+              	^terminate-segment <seg>)
+ 	(<inter>	^stack <stack>
+           		^processing-status <ps>)
+ 	(<stack>	^segment <seg>)
+  	(<seg>	^next <next-seg>)
+-->
+	(<stack>	^segment <next-seg>
+          		^segment <seg> -)
+ 	(<inter>	^processing-status <ps> -
+            	^processing-status <ps-new>)
+  }
+
+sp {interaction*apply*update-stack*add-segment*terminate-previous*message
+	(state <s>	^name interaction
+            	^operator <op>
+             	^interaction.stack <stack>
+              	^new-segment <new-seg>
+               	^terminate-segment <seg>)
+ 	(<stack>	^segment <seg>)
+  	(<op>	^name update-stack)
+   	(<seg>	^next <next-seg>)
+    (<new-seg>	^message <m1>)
+-->
+	(<new-seg>	^next <next-seg>)
+ 	(<stack>	^segment <new-seg>
+           		^segment <seg> -)
+  	(<m1>	^processed true)
+  }

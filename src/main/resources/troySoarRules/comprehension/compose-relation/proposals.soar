@@ -1,0 +1,37 @@
+##!
+# @file
+#
+# @created smohan 20170727
+
+sp {compose-relation*propose*index-specifier
+	(state	<s>	^name compose-relation
+            	^description <d>
+             	^grounding <g>)
+ 	(<d> ^specifier <spec>)
+    - {(<g> ^specifier <any>)
+    (<any> ^_metadata.description <spec>)}
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name index-specifier
+        	^description <spec>)
+}
+
+sp {compose-relation*propose*index-entity
+	(state <s>	^name compose-relation
+            	^description <d>
+             	^grounding <g>)
+ 	(<d>	^<e>.entity <np>)
+  	- {(<g> ^entity <any>)
+    (<any> ^_metadata.description <np>)}
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name index-entity
+        	^description <np>)
+  }
+
+sp {compose-relation*propose*complete-compose-relation
+	(state <s>	^name compose-relation)
+-->
+	(<s>	^operator <op> + <)
+ 	(<op>	^name complete-compose-relation)
+  }

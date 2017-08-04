@@ -1,0 +1,29 @@
+##!
+# @file
+#
+# @created smohan 20170726
+
+
+sp {interaction*prefer*create-segment*terminate-segment
+	(state <s>	^name interaction
+            	^operator <op1> +
+             	^operator <op2> +)
+ 	(<op1>	^name create-segment
+            ^type human-initiated)
+  	(<op2>	^name terminate-segment
+            ^type human-response)
+-->
+	(<s>	^operator <op1> > <op2>)
+ }
+
+
+
+sp {interaction*prefer*terminate-segment*add-segment
+	(state <s>	^name interaction
+            	^operator <op1> +
+             	^operator <op2> +)
+ 	(<op1>	^name terminate-segment)
+  	(<op2>	^name add-segment)
+-->
+	(<s>	^operator <op1> > <op2>)
+ }

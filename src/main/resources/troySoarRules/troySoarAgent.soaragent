@@ -9,7 +9,6 @@
     <member path="action/paste/paste.soar" />
     <member path="action/cut/cut.soar" />
     <member path="action/proposals.soar" />
-    <member path="comprehension/composition/complete-composition.soar" />
     <member path="proposals.soar" />
     <member path="comprehension/index-verb/get-linguistic-id/create-new-map/load.soar" />
     <member path="initialize-smem/verbs.soar" />
@@ -19,11 +18,13 @@
     <member path="comprehension/index-action-object/elaborations.soar" />
     <member path="comprehension/preferences.soar" />
     <member path="memory-operators/smem-query.soar" />
-    <member path="comprehension/index-action-specifier/complete-index-action-specifier.soar" />
     <member path="comprehension/index-entity/find-object/elaborations.soar" />
-    <member path="comprehension/index-action-specifier/proposals.soar" />
     <member path="wait.soar" />
     <member path="generation/proposals.soar" />
+    <member path="comprehension/index-entity/proposals.soar" />
+    <member path="comprehension/composition/proposals.soar" />
+    <member path="interaction/load.soar" />
+    <member path="interaction/proposals.soar" />
   </members>
 </soaragent>
 

@@ -2,8 +2,8 @@
 # @file
 #
 # @created smohan 20170707
-sp {index-action-specifier*apply*complete-index-action-specifier
-    (state <s>    ^name index-action-specifier
+sp {index-specifier*apply*complete-index-specifier
+    (state <s>    ^name index-specifier
                   ^grounding <g>
                   ^superstate.grounding <sg>)
 -->

@@ -32,7 +32,7 @@ sp {index-entity*propose*resolve-grounding
                ^grounding <g>
                ^resolution <res>
                ^found-objects.objects <objs>)
-    (<g> -^<any>)
+    (<g> -^<< set object >>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name resolve-grounding

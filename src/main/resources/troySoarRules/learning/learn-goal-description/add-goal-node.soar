@@ -1,0 +1,15 @@
+##!
+# @file
+#
+# @created smohan 20170728
+
+sp {learn-goal-description*apply*add-goal-node
+    (state <s>    ^name learn-goal-description
+                  ^operator <op>
+                  ^smem.command <scomm>)
+    (<op>    ^name add-goal-node
+             ^map <map>)
+-->
+    (<map>    ^goal <gid>)
+    (<scomm>    ^store <map> <gid>)
+    }

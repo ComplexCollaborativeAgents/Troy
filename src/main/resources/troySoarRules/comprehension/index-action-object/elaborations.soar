@@ -11,8 +11,10 @@ sp {index-action-object*elaborate*description
 }
 
 sp {index-action-object*elaborate*grounding
-	(state <s>	^name index-action-object)
+	(state <s>	^name index-action-object
+                ^description <d>)
 -->
 	(<s>	^grounding <g>)
+    (<g>    ^_metadata.description <d>)
  }
             	

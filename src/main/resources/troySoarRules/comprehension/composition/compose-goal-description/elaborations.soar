@@ -1,0 +1,26 @@
+##!
+# @file
+#
+# @created smohan 20170727
+
+sp {compose-goal-description*elaborate*grounding*message
+    (state <s>    ^name compose-goal-description
+                  ^superstate.operator <sop>)
+    (<sop>    ^name compose-goal-description
+              ^grounding <g>
+              ^message <m>)
+-->
+    (<s>    ^grounding <g>
+            ^message <m>)
+    (<g>    ^_metadata.description <m>)
+    }
+
+sp {compose-goal-description*elaborate*goal-description
+    (state <s>    ^name compose-goal-description
+                  ^grounding <g>
+                  ^interaction.stack.segment.groundings <seg-g>)
+-->
+    (<seg-g>    ^goal-description <g>)
+    }
+
+

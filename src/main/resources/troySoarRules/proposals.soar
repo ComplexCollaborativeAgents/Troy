@@ -6,35 +6,29 @@
 sp {topstate*propose*interaction*message
 	(state <s> ^name troy
                ^io.input-link.interaction.message <message>
+               ^interaction <inter>
                ^topstate <s>)
     (<message> -^processed true)
 -->
 	(<s> ^operator <op> +)
  	(<op> 	^name interaction
         	^type incoming-message
-         	^message <message>)
+         	^message <message>
+          	^interaction <inter>)
   }
 
 sp {topstate*propose*interaction*status
 	(state	<s>	^name troy
-            	^interaction.processing-status <status>)
+            	^interaction <inter>)
+ 	(<inter>	^processing-status <status>)
  	(<status> ^id <any-id>)
 -->
 	(<s>	^operator <op> +)
  	(<op>	^name interaction
-        	^type processing-status
-         	^status <status>)
+        	^type new-processing-status
+         	^processing-status <status>
+          	^interaction <inter>)
   }
-
-sp {topstate*propose*interaction*2
-    (state <s> ^name troy
-               ^interaction.stack.segment <segment>)
-    (<segment> ^status complete)
--->
-    (<s> ^operator <op> +)
-    (<op> ^name interaction)
-    }
-
 
 sp {topstate*propose*comprehension
     (state <s> ^name troy
@@ -53,7 +47,8 @@ sp {topstate*propose*comprehension
 
 sp {topstate*propose*generation
 	(state <s>	^name troy
-            	^interaction.stack.segment <seg>)
+            	^interaction <inter>)
+ 	(<inter> ^stack.segment <seg>)
  	(<seg>	^purpose <purpose-type>
          	^information-type <i-type>
           	-^response-generated true)
@@ -69,11 +64,26 @@ sp {topstate*propose*action
     (<inter>	^stack.segment <seg>
              	-^processing-status.<status> <any>)
     (<seg> ^groundings <g>
-           -^status complete)
+           -^status complete
+            ^purpose execute)
     (<g> ^indexed-action <ia>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name action
           ^indexed-action <ia>
           ^segment <seg>)
+    }
+
+sp {topstate*propose*learning
+    (state <s>    ^name troy
+                  ^interaction <inter>)
+    (<inter>    ^stack.segment <seg>
+                -^processing-status.<status> <any>)
+    (<seg>    ^groundings <g>
+              ^purpose learn)
+    (<g>    ^goal-description <gd>)
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name learning
+             ^segment <seg>)
     }

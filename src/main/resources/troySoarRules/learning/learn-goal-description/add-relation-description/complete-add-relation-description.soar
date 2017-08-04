@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170728
+sp {add-relation-description*apply*complete-add-relation-description
+    (state <s>    ^name add-relation-description
+                  ^relation-description <rd>
+                  ^map.goal <gid>
+                  ^operator <op>
+                  ^superstate <ss>)
+    (<op>    ^name complete-add-relation-description)
+-->
+    (<ss>    ^added <rd>)
+    }

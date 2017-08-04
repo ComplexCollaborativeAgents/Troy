@@ -1,0 +1,42 @@
+##!
+# @file
+#
+# @created smohan 20170728
+
+sp {learning*propose*add-goal-node
+    (state <s>    ^name learn-goal-description
+                  ^action-segment.groundings.indexed-action <ia>)
+    (<ia>    ^_metadata.map <map>)
+    (<map> -^goal)
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name add-goal-node
+             ^map <map>)
+    }
+
+
+sp {learning*propose*add-relation-description
+    (state <s>    ^name learn-goal-description
+                  ^action-segment.groundings.indexed-action <ia>
+                  ^goal-description-segment.groundings.goal-description <gd>
+                  -^added <rel>)
+    (<gd> ^relation <rel>)
+    (<ia> ^_metadata.map.goal)
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name add-relation-description
+             ^relation <rel>
+             ^indexed-action <ia>)
+    }
+    
+
+sp {learning*propose*complete-learn-goal-description
+    (state <s>    ^name learn-goal-description
+                  ^goal-description-segment.groundings.goal-description <gd>)
+    -{(<gd>    ^{<arg> <> _metadata} <val>)
+      (<s>    -^added <val>)}
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name complete-learn-goal-description)
+    }
+             

@@ -3,10 +3,11 @@
 #
 # @created smohan 20170412
 
-source "elaborations.soar"
 
+
+source "compose-action/load.soar"
+
+source "compose-goal-description/load.soar"
 source "proposals.soar"
 
-source "complete-composition.soar"
-
-source "compose-action-object/load.soar"
+source "elaborations.soar"

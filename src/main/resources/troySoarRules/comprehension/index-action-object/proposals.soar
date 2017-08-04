@@ -11,7 +11,7 @@ sp {index-action-object*propose*index-action-specifier
     (<g> -^specifier <any>)
 -->
 	(<s>	^operator <op> +)
- 	(<op>	^name index-action-specifier
+ 	(<op>	^name index-specifier
         	^description <spec>)
 }
 

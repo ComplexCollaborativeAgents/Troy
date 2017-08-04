@@ -1,98 +1,15 @@
 ##!
 # @file
 #
-# @created smohan 20170412
+# @created smohan 20170727
 
 sp {composition*elaborate*grounding*message
-    (state <s> ^name composition
-               ^superstate.operator <sop>)
-    (<sop> ^grounding <g>
-           ^message <m>)
+    (state    <s>    ^name composition
+                     ^superstate.operator <sop>)
+    (<sop>    ^name composition
+              ^message <m>
+              ^grounding <g>)
 -->
-    (<s> ^grounding <g>
-         ^message <m>)
-    }
-
-
-
-sp {composition*elaborate*map
-    (state <s> ^name composition
-               ^grounding.verb.map <map>)
--->
-    (<s> ^map <map>)
-    }
-
-sp {composition*retrieve*linguistic-id
-    (state <s>    ^name composition
-                  ^map.linguistic <ltid>)
--->
-    (<s> ^retrieve-lti <ltid>)
-    }
-
-sp {composition*retrieve*linguistic-id*substructure
-    (state <s>    ^name composition
-                  ^map.linguistic.{<sub-arg> <> verb} <subid>)
--->
-    (<s>    ^retrieve-lti <subid>)
-    }
-
-sp {composition*retrieve*procedural-id
-    (state <s>    ^name composition
-                  ^map.procedural <pid>)
--->
-    (<s> ^retrieve-lti <pid>)
-    }
-    
-
-
-sp {composition*indexed-action
-    (state <s> ^name composition)
--->
-    (<s> ^indexed-action <a>)
-    (<a>	^_metadata <met>)
-    }
-
-sp	{composition*elaborate*indexed-action*semantic-structure
-	(state	<s>	^name composition
-            	^indexed-action._metadata <met>
-             	^map <map>)
--->
-	(<met>	^map <map>)
- }
-
-
-sp {composition*indexed-action*name
-    (state <s> ^name composition
-               ^indexed-action <a>
-               ^map <map>)
-    (<map> ^procedural.op_name <op-name>)
--->
-    (<a> ^name <op-name>)
-    }
-
-sp {composition*indexed-action*object*arguments
-    (state <s> ^name composition
-               ^indexed-action <a>
-               ^map <map>
-               ^grounding <g>)
-    (<map> ^procedural.{<argument> <> op_name} <arg-id>
-           ^linguistic.<lex> <arg-id>)
-    (<g> ^<lex> <element>)
-    (<element> -^set <any>
-                ^object <obj>)
--->
-    (<a> ^<argument> <obj>)
-    }
-
-sp {composition*indexed-action*set*arguments
-    (state <s> ^name composition
-               ^indexed-action <a>
-               ^map <map>
-               ^grounding <g>)
-    (<map> ^procedural.{<argument> <> op_name} <arg-id>
-           ^linguistic.<lex> <arg-id>)
-    (<g> ^<lex> <element>)
-    (<element> ^set <set-obj>)
--->
-    (<a> ^<argument> <set-obj>)
+    (<s>    ^message <m>
+            ^grounding <g>)
     }

@@ -1,0 +1,24 @@
+##!
+# @file
+#
+# @created smohan 20170727
+
+sp {compose-relation*prefer*index-entity*index-specifier
+    (state <s>    ^name compose-relation
+                  ^operator <op1> +
+                  ^operator <op2> +)
+    (<op1>    ^name index-entity)
+    (<op2>    ^name index-specifier)
+-->
+    (<s>    ^operator <op1> > <op2>)
+    }
+
+sp {compose-relation*equal*index-entity
+    (state <s>    ^name compose-relation
+                  ^operator <op1> +
+                  ^operator <op2> +)
+    (<op1>    ^name index-entity)
+    (<op2>    ^name index-entity)
+-->
+    (<s>    ^operator <op1> = <op2>)
+    }

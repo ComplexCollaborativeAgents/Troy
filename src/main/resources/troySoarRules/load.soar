@@ -22,3 +22,7 @@ source "_soar_parameters.soar"
 source "memory-operators/load.soar"
 
 source "generation/load.soar"
+
+source "learning/load.soar"
+
+source "preferences.soar"
