@@ -19,14 +19,7 @@ sp {action*elaborate*segment
     (<s> ^segment <seg>)
     }
 
-sp {action*apply*operator*remove*successful*command
-   (state <s>  ^operator <op>
-               ^io.output-link <ol>)
-   (<ol> ^<command> <com>)
-   (<com> ^status complete)
--->
-   (<ol> ^<command> <com> -)
-}
+
 
 sp {action*elaborate*indexed-action*primitive*executed
 	(state <s>	^operator <op>

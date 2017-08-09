@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170804
+
+sp {instantiate-goal*apply*complete-instantiate-goal
+	(state <s>	^name instantiate-goal
+            	^desired <d>
+             	^operator.name complete-instantiate-goal
+             	^superstate <ss>)
+-->
+	(<ss>	^desired <d>)
+ }

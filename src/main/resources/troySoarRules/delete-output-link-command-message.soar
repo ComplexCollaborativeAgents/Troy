@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170809
+
+
+sp {action*apply*operator*remove*successful*command*message
+	:o-support
+   (state <s>  ^io.output-link <ol>)
+   (<ol> ^<command> <com>)
+   (<com> ^status complete)
+-->
+   (<ol> ^<command> <com> -)
+}

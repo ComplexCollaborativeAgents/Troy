@@ -2,12 +2,36 @@
 # @file
 #
 # @created smohan 20170713
+
+sp {instantiate-goal*propose*instantiate-relation
+	(state <s>	^name instantiate-goal
+            	^goal.relation <relid>)
+ 	-{(<s>	^<relid> <rel>
+			^desired.relation <rel>)
+       (<rel>	^specifier)}
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name instantiate-relation
+        	^relation-id <relid>)
+  }
+
+
 sp {instantiate-goal*propose*update-status*no-goal-definition
 	(state <s>	^name instantiate-goal
             	^indexed-action._metadata.map <map>)
- 	(<map>	-^goal-id <gid>)
+ 	(<map>	-^goal <gid>)
 -->
 	(<s>	^operator <op> +)
  	(<op>	^name report-unknown-goal-definition
         	^map <map>)
+  }
+
+sp {instantiate-goal*propose*complete-instantiate-goal
+	(state <s>	^name instantiate-goal
+            	^goal <gid>)
+ 	-{(<gid>	^relation <relid>)
+	  (<s>	-^<relid> <rel>)}
+-->
+	(<s>	^operator <op> + <)
+ 	(<op>	^name complete-instantiate-goal)
   }

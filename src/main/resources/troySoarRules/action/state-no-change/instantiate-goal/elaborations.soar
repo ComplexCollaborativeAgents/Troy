@@ -10,3 +10,21 @@ sp {instantiate-goal*elaborate*indexed-action
 -->
 	(<s>	^indexed-action <ia>)
  }
+
+sp {instantiate-goal*elaborate*map
+	(state <s>	^name instantiate-goal
+             	^indexed-action <ia>)
+ 	(<ia>	^_metadata.map <map>)
+  	(<map>	^goal <gid>
+          	^procedural <pid>)
+-->
+	(<s>	^goal <gid>
+      		^procedural <pid>)
+ }
+
+sp {instantiate-goal*elaborate*desired
+	(state <s>	^name instantiate-goal
+            	^indexed-action <ia>)
+-->
+	(<s>	^desired <d>)
+ }

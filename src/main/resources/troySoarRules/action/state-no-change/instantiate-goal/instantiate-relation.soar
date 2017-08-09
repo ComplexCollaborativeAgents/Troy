@@ -1,0 +1,58 @@
+##!
+# @file
+#
+# @created smohan 20170804
+
+sp {instantiate-goal*apply*instantiate-relation*desired*relation
+	(state <s>	^name instantiate-goal
+            	^operator <op>
+             	^desired <d>)
+ 	(<op>	^name instantiate-relation
+        	^relation-id <rel-id>)
+-->
+	(<s>	^<rel-id> <rel>)
+ 	(<d>	^relation <rel>)
+ }
+
+
+sp {instantiate-goal*apply*instantiate-relation*level1
+	(state <s>	^name instantiate-goal
+            	^operator <op>
+             	^<relid> <rel>
+             	^procedural <pid>
+              	^indexed-action <ia>)
+ 	(<op>	^name instantiate-relation
+        	^relation-id <relid>)
+ 	(<relid>	^{<arg> << e1 e2 >>} <obj-id>)
+  	(<pid>	^<parg> <obj-id>)
+   	(<ia> ^<parg>	<obj>)
+-->
+	(<rel>	^<arg> <obj>)
+ }
+
+sp {instantiate-goal*apply*instantiate-relation*level2
+	(state <s>	^name instantiate-goal
+            	^operator <op>
+             	^<relid> <rel>
+             	^procedural <pid>
+              	^indexed-action <ia>)
+ 	(<op>	^name instantiate-relation
+        	^relation-id <relid>)
+ 	(<relid>	^{<arg> << e1 e2 >>} <obj-id>)
+  	(<pid>	^<parg>.object <obj-id>)
+   	(<ia> ^<parg>.object	<obj>)
+-->
+	(<rel>	^<arg> <obj>)
+ }
+
+sp {instantiate-goal*apply*instantiate-relation*specifier*not-in-task-command
+	(state <s>	^name instantiate-goal
+            	^operator <op>
+             	^<relid> <rel>
+              	^indexed-action <ia>)
+ 	(<op>	^name instantiate-relation
+        	^relation-id <relid>)
+ 	(<relid>	^specifier <obj-id>)
+-->
+	(<rel>	^specifier <obj-id>)
+ }

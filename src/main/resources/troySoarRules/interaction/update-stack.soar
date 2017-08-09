@@ -43,7 +43,8 @@ sp {interaction*apply*update-stack*terminate-segment*only*status
 	(state <s>	^name interaction
             	^operator.name update-stack
              	^interaction <inter>
-              	^terminate-segment <seg>)
+              	^terminate-segment <seg>
+               	-^new-segment <new-seg>)
  	(<inter>	^stack <stack>
            		^processing-status <ps>)
  	(<stack>	^segment <seg>)
