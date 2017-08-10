@@ -1,0 +1,12 @@
+##!
+# @file
+#
+# @created smohan 20170810
+
+sp {task*operatator-tie*elaborate*name
+	(state <s>	^impasse tie
+            	^attribute operator
+             	^superstate.name task)
+-->
+	(<s>	^name task-operator-tie)
+ }

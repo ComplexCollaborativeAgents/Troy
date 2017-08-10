@@ -1,0 +1,33 @@
+##!
+# @file
+#
+# @created smohan 20170810
+
+
+sp {interpret-status*propose*interpret-executed-action
+	(state <s>	^name interpret-status
+            	^superstate.operator <op>
+             	^interaction.stack.segment <seg>)
+ 	(<op>	^name interpret-status
+        	^processing-status <ps>)
+  	(<seg>	^purpose execute
+          	^message <m>)
+   	(<ps>	^completed-purpose execute
+          	^message <m>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interpret-executed-action
+        	^processing-status <ps>
+         	^segment <seg>)
+  }
+
+sp {interpret-status*apply*interpret-executed-action
+	(state <s>	^name interpret-status
+            	^operator <op>
+             	^superstate <ss>)
+ 	(<op>	^name interpret-executed-action
+        	^processing-status <ps>
+         	^segment <seg>)
+-->
+	(<ss>	^terminate-segment <seg>)
+ }

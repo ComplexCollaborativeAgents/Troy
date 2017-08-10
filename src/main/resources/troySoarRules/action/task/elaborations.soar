@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170810
+
+sp {task*elaborate*problemspace
+	(state <s>	^superstate <ss>)
+    (<ss>   ^indexed-action <ia>
+            ^operator <ia>)
+-->
+	(<s>	^problemspace.type actionable
+      		^name task)
+ }

@@ -13,3 +13,11 @@ sp {action-state-no-change*instantiate-goal
  	(<op>	^name instantiate-goal
         	^indexed-action <ia>)
   }
+
+sp {action-state-no-change*propose-indexed-action
+	(state <s>	^name action-state-no-change
+            	^desired <d>
+             	^indexed-action <ia>)
+-->
+	(<s>	^operator <ia> +)
+ }

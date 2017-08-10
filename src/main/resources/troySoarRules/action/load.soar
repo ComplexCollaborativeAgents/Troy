@@ -28,3 +28,5 @@ source "paste/load.soar"
 source "delete/load.soar"
 
 source "state-no-change/load.soar"
+
+source "task/load.soar"

@@ -1,0 +1,16 @@
+##!
+# @file
+#
+# @created smohan 20170810
+
+
+sp {task*prefer*instantiate-goal
+	(state <s>	^name task
+            	^operator <op1> +
+             	^operator <op2> +)
+ 	(<op1>	^name instantiate-goal)
+  	(<op2> 	-^name instantiate-goal)
+-->
+	(<s>	^operator <op1> > <op2>)
+ }
+         

@@ -6,3 +6,7 @@
 source "interpret-unknown-goal.soar"
 
 source "interpret-acquired-goal.soar"
+
+source "interpret-unknown-next-action.soar"
+
+source "interpret-executed-action.soar"

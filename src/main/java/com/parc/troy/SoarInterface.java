@@ -147,7 +147,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 //			System.out.println(this.identifiersToRemove.size() + " identifiers to delete");
 //		}
 		for(Identifier id: this.getIdentifiersToRemove()){
-			System.out.println("Deleted: " + id.GetAttribute());
+			LOGGER.info("Deleted output command:" + id.GetAttribute());
 			id.AddStatusComplete();
 		}
 		this.identifiersToRemove.clear();

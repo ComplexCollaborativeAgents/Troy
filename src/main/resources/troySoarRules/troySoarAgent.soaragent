@@ -26,6 +26,9 @@
     <member path="interaction/load.soar" />
     <member path="interaction/proposals.soar" />
     <member path="action/state-no-change/instantiate-goal/complete-instantiate-goal.soar" />
+    <member path="action/state-no-change/instantiate-goal/proposals.soar" />
+    <member path="action/task/operator-tie/elaborations.soar" />
+    <member path="generation/elaborations.soar" />
   </members>
 </soaragent>
 

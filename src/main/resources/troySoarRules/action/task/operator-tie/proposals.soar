@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20170810
+
+sp {task-operator-tie*propose*report-unknown-next-action
+	(state <s>	^name task-operator-tie)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name report-unknown-next-action)
+  }
+  
+            	

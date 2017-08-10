@@ -55,5 +55,6 @@ Token[$1] <-> {matches($1,.+)}
 Inform(And($1)) -> The files are {$1}.
 Inform($1) -> The file is {$1}.
 Ask(goal) -> I do not know this task. Can you describe its goal?
+Ask(next-action) -> I do not know what to do now. Can you tell me?
 
 

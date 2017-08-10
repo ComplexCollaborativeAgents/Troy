@@ -1,0 +1,17 @@
+##!
+# @file
+#
+# @created smohan 20170810
+
+sp {task-operator-tie*apply*report-unknown-next-action
+	(state <s>	^name task-operator-tie
+            	^superstate.superstate.indexed-action <ia>
+            	^topstate.interaction <i>
+            	^operator.name report-unknown-next-action)
+ 	(<i>	^processing-status <status>)
+-->
+ 	(<status>	^id unknown-next-action
+            	^type missing-knowledge
+            	^information <info>)
+  	(<info>	^indexed-action <ia>)
+   }

@@ -32,3 +32,16 @@ sp {interpret-message*apply*interpret-action-command
                ^originator human
                ^satisfaction action-event)
     }
+
+sp {interpret-message*apply*interpret-action-command*response
+	(state <s>	^name interpret-message
+            	^operator <op>
+             	^interaction.stack.segment <seg>
+             	^superstate <ss>)
+ 	(<op>	^name interpret-action-command
+        	^message <m1>)
+  	(<seg>	^purpose ask
+          	^information-type next-action)
+-->
+    (<ss> ^terminate-segment <seg>)
+    }

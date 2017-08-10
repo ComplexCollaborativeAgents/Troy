@@ -5,8 +5,21 @@
 
 sp {action*apply*complete-action
     (state <s> ^name action
+               ^topstate.interaction.processing-status <ps>
                ^operator.name complete-action
-               ^segment <seg>)
+               ^segment.message <m>)
 -->
-    (<seg> ^status complete)
+    (<ps> ^completed-purpose execute
+          ^id executed-action
+          ^message <m>)
     }
+
+
+sp {learn-goal-description*apply*complete-learn-goal-description
+    (state <s>    ^name learn-goal-description
+                  ^interaction.processing-status <ps>
+                  ^operator.name complete-learn-goal-description)
+-->
+    (<ps>    ^completed-purpose learn
+             ^knowledge-type goal
+             ^id acquired-goal)}

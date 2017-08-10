@@ -37,3 +37,11 @@ sp {action*elaborate*dont-match*arguments
         	^arg	_metadata
          	^arg	executed)
   }
+
+sp {action*elaborate*space
+	(state <s>	^name action)
+-->
+	(<s>	^problemspace <p>)
+ 	(<p>	^type actionable)
+  }
+            	

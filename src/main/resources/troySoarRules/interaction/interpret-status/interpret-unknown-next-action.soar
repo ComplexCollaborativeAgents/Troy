@@ -1,0 +1,34 @@
+##!
+# @file
+#
+# @created smohan 20170810
+
+sp {interpret-status*propose*interpret-unknown-next-action
+	(state <s>	^name interpret-status
+            	^superstate.operator <sop>)
+ 	(<sop>	^processing-status <p>)
+  	(<p>	^id unknown-next-action)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interpret-unknown-next-action
+        	^processing-status <p>)
+  }
+
+sp {interpret-status*apply*interpret-unknown-next-action
+	(state <s>	^name interpret-status
+            	^operator <op>
+             	^superstate <ss>)
+ 	(<op>	^name interpret-unknown-next-action
+        	^processing-status <p>)
+  	(<p>	^id unknown-next-action
+        	^information <info>
+         	^type missing-knowledge)
+-->
+	(<ss>	^new-segment <seg-new>)
+ 	(<seg-new>	^purpose ask 
+             	^originator troy
+             	^information-type next-action
+                ^processing-status <p>
+                ^satisfaction <sat>)
+  	(<sat>	^response-type action-command)
+  }
