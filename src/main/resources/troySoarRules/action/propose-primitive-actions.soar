@@ -5,7 +5,7 @@
 
 
 sp {action*propose*op_list*set
-    (state <s> ^problemspace.type actionable
+    (state <s> ^problemspace.action-info actionable
                ^world <w>
                -^listed true)
     (<w> ^set <set-obj>)
@@ -17,7 +17,7 @@ sp {action*propose*op_list*set
     }
 
 sp {action*propose*op_list*obj
-    (state <s> ^problemspace.type actionable
+    (state <s> ^problemspace.action-info actionable
                ^world <w>
                -^listed true)
     (<w> ^object <obj>)
@@ -29,7 +29,7 @@ sp {action*propose*op_list*obj
     }
 
 sp {action*propose*op_go_into
-	(state <s> ^problemspace.type actionable
+	(state <s> ^problemspace.action-info actionable
                ^world <w>)
  	(<w> ^object <obj>)
     (<obj> ^type folder_object)
@@ -41,7 +41,7 @@ sp {action*propose*op_go_into
   }
 
 sp {action*propose*op_create_folder
-	(state <s> ^problemspace.type actionable
+	(state <s> ^problemspace.action-info actionable
             	^world <w>)
  	-{(<w> ^object <obj>)
       (<obj> ^type folder_object
@@ -55,7 +55,7 @@ sp {action*propose*op_create_folder
   }
 
 sp {action*propose*op_copy
-	(state <s> ^problemspace.type actionable
+	(state <s> ^problemspace.action-info actionable
             	^world <w>)
     (<w> ^object <obj>
          -^selected <obj>)
@@ -67,7 +67,7 @@ sp {action*propose*op_copy
   }
 
 sp {action*propose*op_cut
-   (state <s> ^problemspace.type actionable
+   (state <s> ^problemspace.action-info actionable
               ^world <w>)
    (<w> ^object <obj>
         -^selected <obj>)
@@ -79,7 +79,7 @@ sp {action*propose*op_cut
    }
 
 sp {action*propose*op_paste
-	(state <s> ^problemspace.type actionable
+	(state <s> ^problemspace.action-info actionable
                ^world <w>)
     (<w> ^selected <obj>)
 -->

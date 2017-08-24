@@ -1,0 +1,26 @@
+##!
+# @file
+#
+# @created smohan 20170817
+
+sp {recreate-initial-state*apply*write-world-info-superstate
+	(state <s>	^name recreate-initial-state
+            	^operator <op>
+             	^superstate <ss>)
+ 	(<op>	^name write-world-info-superstate
+        	^episode <ep>)
+  	(<ep>	^world <w>)
+-->
+	(<ss>	^world <w>)
+ }
+   
+sp {recreate-initial-state*apply*write-interaction-info-superstate
+	(state <s>	^name recreate-initial-state
+            	^operator <op>
+             	^superstate <ss>)
+ 	(<op>	^name write-world-info-superstate
+        	^episode <ep>)
+  	(<ep>	^interaction <inter>)
+-->
+	(<ss>	^initial-interaction-state <inter>)
+ }

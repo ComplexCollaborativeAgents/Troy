@@ -35,3 +35,27 @@ sp {all*elaborate*interaction
 	(<s>	^interaction <i>)
  }
 	
+
+sp {all*elaborate*problemspace
+	(state <s>	^superstate <ss>)
+-->
+	(<s>	^problemspace <ps>)
+ }
+
+sp {all*elaborate*problemspace*learning-info
+	(state <s>	^superstate <ss>
+            	^problemspace <ps>)
+ 	(<ss>	^problemspace <sps>)
+  	(<sps>	^learning-info <info>)
+-->
+	(<ps>	^learning-info <info>)
+ }
+
+#sp {all*elaborate*problemspace*action-info
+#	(state <s>	^superstate <ss>
+#            	^problemspace <ps>)
+# 	(<ss>	^problemspace <sps>)
+#  	(<sps>	^action-info <info>)
+#-->
+#	(<ps>	^action-info <info>)
+# }

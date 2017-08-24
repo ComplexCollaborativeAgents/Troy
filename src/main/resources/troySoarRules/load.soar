@@ -28,3 +28,5 @@ source "learning/load.soar"
 source "preferences.soar"
 
 source "delete-output-link-command-message.soar"
+
+source "default/selection.soar"

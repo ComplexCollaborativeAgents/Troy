@@ -1,0 +1,25 @@
+##!
+# @file
+#
+# @created smohan 20170816
+
+
+sp {recreate-initial-state*propose*retrieve-first-task-episode
+	(state <s>	^name recreate-initial-state
+            	^task-segment._metadata.grounding-episode-id <eid>
+             	-^retrieved-first-task-episode)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name retrieve-first-task-episode
+        	^episode-id <eid>)
+  }
+
+
+sp {recreate-initial-state*propose*write-world-superstate
+	(state <s>	^name recreate-initial-state
+            	^retrieved-first-task-episode <episode>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name write-world-info-superstate 
+        	^episode <episode>)
+  }

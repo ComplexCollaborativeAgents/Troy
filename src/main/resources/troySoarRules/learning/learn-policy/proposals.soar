@@ -1,0 +1,25 @@
+##!
+# @file
+#
+# @created smohan 20170816
+
+sp {learn-policy*propose*recreate*world*state
+	(state <s>	^name learn-policy
+            	^task-segment <seg>
+             	-^world <any>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name recreate-initial-state
+        	^task-segment <seg>)
+  }
+        	
+sp {learn-policy*propose*action
+	(state <s>	^name learn-policy
+            	^initial-interaction-state.stack.segment <seg>)
+ 	(<seg> ^groundings.indexed-action <ia>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name action
+        	^indexed-action <ia>
+         	^segment <seg>)
+  }

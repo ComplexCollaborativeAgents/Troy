@@ -3,6 +3,7 @@ Agent: Inform(Welcome) -> Hi! I am Troy, your office secretary.
 
 rank(40) Instruct(ActionCommand($1, $2)) => Inform() writeToSoar(ActionCommand, $1, $2) 
 rank(40) Instruct(ActionCommand($1, $2, $3)) => Inform() writeToSoar(ActionCommand, $1, $2, $3) 
+rank(40) Instruct(SignalEnd) => Inform writeToSoar(SignalEnd)
 rank(40) Instruct(RelationDescription($1)) => Inform() writeToSoar(RelationDescription, $1)
 rank(30) Request(readOutputFromSoar) => readFromSoar($1) say($1)
 
@@ -10,6 +11,7 @@ User: Instruct(ActionCommand($1, $2)) <-> {ActionName[$1]} {Entity[$2]}.
 User: Instruct(ActionCommand($1, $2, $3)) <-> {ActionName[$1]} {Entity[$2]} {ActionObject[$3]}. {exact}
 User: Instruct(ActionCommand($1, $2, $3, $4)) <-> {ActionName[$1]} {Entity[$2]} {ActionObject[$3]} {ActionObject[$4]}. {exact}
 User: Instruct(RelationDescription($1)) <-> {Tokens[$_]} {Relation[$1]}
+User: Instruct(SignalEnd) <-> You are done.
 
 ActionName[verb(print)] <-> print
 ActionName[verb(email)] <-> email
@@ -56,5 +58,7 @@ Inform(And($1)) -> The files are {$1}.
 Inform($1) -> The file is {$1}.
 Ask(goal) -> I do not know this task. Can you describe its goal?
 Ask(next-action) -> I do not know what to do now. Can you tell me?
+
+
 
 

@@ -12,3 +12,13 @@ sp {troy*prefer*interaction*generation*comprehension
 -->
 	(<s>	^operator <op1> > <op2>)
  }
+
+sp {troy*prefer*comprehension*learning*action
+	(state <s>	^topstate <s>
+            	^operator <op1> +
+             	^operator <op2> +)
+ 	(<op1>	^name comprehension)
+  	(<op2>	^name << action learning >>)
+-->
+	(<s>	^operator <op1> > <op2>)
+ }

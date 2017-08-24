@@ -13,3 +13,15 @@ sp {learning*propose*learn-goal-description
     (<op>    ^name learn-goal-description
              ^segment <seg>)
     }
+
+sp {learning*propose*learn-policy
+	(state <s>	^name learning
+            	^segment <seg>)
+ 	(<seg>	^purpose learn
+         	^knowledge-type policy)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name learn-policy
+        	^segment <seg>)
+  }
+	

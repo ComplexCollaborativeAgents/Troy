@@ -1,0 +1,24 @@
+##!
+# @file
+#
+# @created smohan 20170816
+sp {recreate-initial-state*apply*retrieve-first-task-episode
+	(state <s>	^name recreate-initial-state
+            	^operator <op>
+             	^epmem.command <ecomm>)
+ 	(<op>	^name retrieve-first-task-episode
+        	^episode-id <eid>)
+-->
+	(<ecomm>	^retrieve <eid>)
+ }
+
+
+sp {recreate-initial-state*apply*retrieve-first-task-episode*elaborate*retrieved-episode
+	(state <s>	^name recreate-initial-state
+            	^epmem.result.retrieved <rete>
+             	^operator <op>)
+ 	(<op>	^name retrieve-first-task-episode
+        	^episode-id <eid>)
+-->
+	(<s>	^retrieved-first-task-episode <rete>)
+ }

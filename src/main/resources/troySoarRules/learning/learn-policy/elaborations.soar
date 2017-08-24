@@ -1,0 +1,20 @@
+##!
+# @file
+#
+# @created smohan 20170816
+
+
+sp {learn-policy*elaborate*relevant-task-segment
+	(state <s>	^name learn-policy
+            	^superstate.operator.segment.next <sn>)
+-->
+	(<s>	^task-segment <sn>)
+ }
+
+sp {learn-policy*elaborate*problemspace
+	(state <s>	^name learn-policy
+            	^problemspace <ps>)
+-->
+	(<ps>	^world-info recreate
+       		^learning-info explanation)
+ }

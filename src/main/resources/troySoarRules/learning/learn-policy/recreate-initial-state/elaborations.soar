@@ -1,0 +1,11 @@
+##!
+# @file
+#
+# @created smohan 20170816
+
+sp {recreate-initial-state*elaborate*segment
+	(state <s>	^name recreate-initial-state
+            	^superstate.operator.task-segment <seg>)
+-->
+	(<s>	^task-segment <seg>)
+ }

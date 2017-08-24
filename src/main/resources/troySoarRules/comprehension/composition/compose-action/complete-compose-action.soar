@@ -6,9 +6,12 @@ sp {compose-action*complete-composition
     (state <s> ^name compose-action
                ^interaction.stack.segment <seg>
                ^indexed-action <ia>
+               ^epmem.present-id <pid>
                ^operator.name complete-compose-action)
-    (<seg> ^groundings <g>)
+    (<seg> ^groundings <g>
+           ^_metadata <met>)
 -->
     (<g> ^indexed-action <ia>)
+    (<met>	^grounding-episode-id <pid>)
     }
 

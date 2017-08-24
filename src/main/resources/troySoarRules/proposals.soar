@@ -81,7 +81,6 @@ sp {topstate*propose*learning
                 -^processing-status.<status> <any>)
     (<seg>    ^groundings <g>
               ^purpose learn)
-    (<g>    ^goal-description <gd>)
 -->
     (<s>    ^operator <op> +)
     (<op>    ^name learning

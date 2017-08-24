@@ -10,3 +10,5 @@ source "elaborations.soar"
 source "learn-goal-description/load.soar"
 
 
+
+source "learn-policy/load.soar"

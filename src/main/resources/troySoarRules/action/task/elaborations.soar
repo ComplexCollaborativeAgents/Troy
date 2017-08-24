@@ -8,6 +8,6 @@ sp {task*elaborate*problemspace
     (<ss>   ^indexed-action <ia>
             ^operator <ia>)
 -->
-	(<s>	^problemspace.type actionable
+	(<s>	^problemspace.action-info actionable
       		^name task)
  }

@@ -1,0 +1,10 @@
+##!
+# @file: 
+#
+# @created smohan 20170816
+
+source "proposals.soar"
+
+source "elaborations.soar"
+
+source "recreate-initial-state/load.soar"

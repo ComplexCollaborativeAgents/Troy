@@ -7,6 +7,7 @@
 sp {interaction*apply*update-stack*add-segment*only*message
 	(state <s>	^name interaction
             	^operator <op>
+             	^epmem.present-id <pid>
              	^interaction.stack <stack>
              	^new-segment <new-seg>
               	-^terminate-segment <seg>)
@@ -18,12 +19,14 @@ sp {interaction*apply*update-stack*add-segment*only*message
  	(<stack>	^segment <new-seg>	
            		^segment <seg> -)
   	(<m1>	^processed true)
+   	(<new-seg>	^_metadata.episode-id <pid>)
   }
 
 sp {interaction*apply*update-stack*add-segment*only*status
 	(state <s>	^name interaction
             	^operator <op>
              	^interaction <inter> 
+             	^epmem.present-id <pid>
              	^new-segment <new-seg>
               	-^terminate-segment <seg>)
  	(<inter>	^stack <stack>
@@ -37,6 +40,7 @@ sp {interaction*apply*update-stack*add-segment*only*status
            		^segment <seg> -)
   	(<inter>	^processing-status <ps> -
             	^processing-status <ps-new>)
+   	(<new-seg>	^_metadata.episode-id <pid>)
   }
 
 sp {interaction*apply*update-stack*terminate-segment*only*status
@@ -60,6 +64,7 @@ sp {interaction*apply*update-stack*add-segment*terminate-previous*message
 	(state <s>	^name interaction
             	^operator <op>
              	^interaction.stack <stack>
+              	^epmem.present-id <pid>
               	^new-segment <new-seg>
                	^terminate-segment <seg>)
  	(<stack>	^segment <seg>)
@@ -71,4 +76,5 @@ sp {interaction*apply*update-stack*add-segment*terminate-previous*message
  	(<stack>	^segment <new-seg>
            		^segment <seg> -)
   	(<m1>	^processed true)
+   	(<new-seg>	^_metadata.episode-id <pid>)
   }

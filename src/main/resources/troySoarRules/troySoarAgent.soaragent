@@ -29,6 +29,8 @@
     <member path="action/state-no-change/instantiate-goal/proposals.soar" />
     <member path="action/task/operator-tie/elaborations.soar" />
     <member path="generation/elaborations.soar" />
+    <member path="interaction/interpret-status/interpret-unknown-next-action.soar" />
+    <member path="elaborations/elaborate-world.soar" />
   </members>
 </soaragent>
 

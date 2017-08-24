@@ -6,3 +6,5 @@
 source "interpret-action-command.soar"
 
 source "interpret-goal-description.soar"
+
+source "interpret-signal-end.soar"

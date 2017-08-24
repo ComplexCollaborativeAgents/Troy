@@ -7,3 +7,7 @@
 
 ### semantic memory settings
 smem --set learning on
+
+
+### epmem memory settings
+epmem --set learning on

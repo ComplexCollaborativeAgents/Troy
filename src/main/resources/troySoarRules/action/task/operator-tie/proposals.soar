@@ -4,9 +4,10 @@
 # @created smohan 20170810
 
 sp {task-operator-tie*propose*report-unknown-next-action
-	(state <s>	^name task-operator-tie)
+	(state <s>	^name task-operator-tie
+            	-^problemspace.learning-info)
 -->
-	(<s>	^operator <op> +)
+	(<s>	^operator <op> +!)
  	(<op>	^name report-unknown-next-action)
   }
   

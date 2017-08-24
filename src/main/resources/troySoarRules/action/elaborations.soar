@@ -39,9 +39,9 @@ sp {action*elaborate*dont-match*arguments
   }
 
 sp {action*elaborate*space
-	(state <s>	^name action)
+	(state <s>	^name action
+            	^problemspace <p>)
 -->
-	(<s>	^problemspace <p>)
- 	(<p>	^type actionable)
+ 	(<p>	^action-info actionable)
   }
             	

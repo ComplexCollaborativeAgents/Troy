@@ -35,6 +35,10 @@ public class InteractionInputWriter {
 			Identifier lexId = commandId.CreateIdWME("lexical");
 			this.writeRelationDescription(messageToWrite, lexId);
 		}
+		
+		if(messageToWrite.getArg(0).toString().equals("SignalEnd")){
+			commandId.CreateStringWME("type", "signal-end");
+		}
 	}
 	
 	private void writeRelationDescription(LogicalForm messageToWrite,

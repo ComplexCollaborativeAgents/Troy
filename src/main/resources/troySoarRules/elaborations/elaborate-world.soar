@@ -10,7 +10,8 @@ sp {topstate*elaborate*world
     }
 
 sp {allstates*elaborate*world
-    (state <s> ^superstate.world <w>)
+    (state <s> ^superstate.world <w>
+               -^problemspace.world-info recreate)
 -->
     (<s> ^world <w>)
     }
