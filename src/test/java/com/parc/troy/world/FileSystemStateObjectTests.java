@@ -8,7 +8,9 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -45,7 +47,7 @@ public class FileSystemStateObjectTests {
 		worldId = testAgent.GetInputLink().CreateIdWME("world");
 		
 		fsObject = new LocalFileCollectionStateObject("DM.troy");
-		homeFolderPath = FileSystemStateObjectTests.class.getResource("").getPath()+"/testHome";
+		homeFolderPath = FileSystemStateObjectTests.class.getResource("").getPath()+"testHome";
 		homeFolder = new File(homeFolderPath);
 		homeFolder.mkdir();
 	}
@@ -119,7 +121,7 @@ public class FileSystemStateObjectTests {
 		fsObject.writeToSoar(worldId);
 		
 		assertEquals(worldId.GetNumberChildren(), 2);
-		assertEquals(worldId.GetParameterValue("current-folder"), "testHome");
+		assertEquals(worldId.GetChild(0).ConvertToIdentifier().GetParameterValue("name"), "testHome");
 		assertNotNull(worldId.GetChild(1).ConvertToIdentifier());
 		assertEquals(worldId.GetChild(1).ConvertToIdentifier().GetParameterValue("type"),"file_object");
 		assertEquals(worldId.GetChild(1).ConvertToIdentifier().GetParameterValue("name"),"test_generated_file1.txt");
@@ -137,14 +139,27 @@ public class FileSystemStateObjectTests {
 		
 		fsObject.setCurrentPath(subFolderPath);
 		fsObject.setPreviousPath(homeFolderPath);
+		homeFolder = new File(homeFolderPath);
 		fsObject.setFolder(subFolder);
 		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
+		fsObject.currentFolderId = worldId.CreateIdWME("current-folder");
+		fsObject.currentFolderId.CreateStringWME("name", homeFolder.getName());
+		fsObject.currentFolderId.CreateStringWME("type", "folder_object");
+		
+		Identifier objectId = worldId.CreateIdWME("object");
+		objectId.CreateStringWME("name", "testSubFolder");
+		objectId.CreateStringWME("type", "file_object");
+		HashMap<File, Identifier> map = new HashMap<File,Identifier>();
+		map.put(subFolder, objectId);
+		fsObject.setFileIdentifierMap(map);
+		
 		
 		fsObject.update();
 		fsObject.writeToSoar(worldId);
 		
+		
 		assertEquals(worldId.GetNumberChildren(), 2);
-		assertEquals(worldId.GetParameterValue("current-folder"), "testSubFolder");
+		assertEquals(worldId.GetChild(0).ConvertToIdentifier().GetParameterValue("name"), "testSubFolder");
 		assertNotNull(worldId.GetChild(1).ConvertToIdentifier());
 		assertEquals(worldId.GetChild(1).ConvertToIdentifier().GetParameterValue("type"),"file_object");
 		assertEquals(worldId.GetChild(1).ConvertToIdentifier().GetParameterValue("name"),"test_generated_subFile1.txt");
@@ -175,7 +190,7 @@ public class FileSystemStateObjectTests {
 		fsObject.writeToSoar(worldId);
 		
 		assertEquals(worldId.GetNumberChildren(), 3);
-		assertEquals(worldId.GetParameterValue("current-folder"), "testHome");
+		assertEquals(worldId.GetChild(0).ConvertToIdentifier().GetParameterValue("name"), "testHome");
 		assertNotNull(worldId.GetChild(1).ConvertToIdentifier());
 		assertEquals(worldId.GetChild(1).ConvertToIdentifier().GetParameterValue("type"),"file_object");
 		assertEquals(worldId.GetChild(1).ConvertToIdentifier().GetParameterValue("name"),"test_generated_file1.txt");
@@ -194,8 +209,12 @@ public class FileSystemStateObjectTests {
 		testFile2.createNewFile();
 		
 		fsObject.setCurrentPath(homeFolderPath);
-		fsObject.setPreviousPath(null);
+		fsObject.setPreviousPath(homeFolderPath);
 		fsObject.setFolder(homeFolder);
+		
+		fsObject.currentFolderId = worldId.CreateIdWME("current-folder");
+		fsObject.currentFolderId.CreateStringWME("name", homeFolder.getName());
+		fsObject.currentFolderId.CreateStringWME("type", "folder_object");
 		
 		fsObject.setObjectSet(new HashSet<File>(Arrays.asList(fsObject.getFolder().listFiles())));
 		
@@ -210,7 +229,7 @@ public class FileSystemStateObjectTests {
 		fsObject.writeToSoar(worldId);
 		
 		assertEquals(worldId.GetNumberChildren(), 2);
-		assertEquals(worldId.GetParameterValue("current-folder"), "testHome");
+		assertEquals(worldId.GetChild(0).ConvertToIdentifier().GetParameterValue("name"), "testHome");
 		assertNotNull(worldId.GetChild(1).ConvertToIdentifier());
 		assertEquals(worldId.GetChild(1).ConvertToIdentifier().GetParameterValue("type"),"file_object");
 		assertEquals(worldId.GetChild(1).ConvertToIdentifier().GetParameterValue("name"),"test_generated_file1.txt");
@@ -366,7 +385,7 @@ public class FileSystemStateObjectTests {
 		
 		fsObject.setPathToCopy(homeFolderPath+"/test_generated_file1.txt");
 		fsObject.setObjectNameToCopy("test_generated_file1.txt");
-		fsObject.setObjectTypeToCopy("file");
+		fsObject.setObjectTypeToCopy("file_object");
 		fsObject.setShouldDeleteOldPath(false);
 		
 		
@@ -399,7 +418,7 @@ public class FileSystemStateObjectTests {
 		
 		fsObject.setPathToCopy(homeFolderPath+"/test_generated_file1.txt");
 		fsObject.setObjectNameToCopy("test_generated_file1.txt");
-		fsObject.setObjectTypeToCopy("file");
+		fsObject.setObjectTypeToCopy("file_object");
 		fsObject.setShouldDeleteOldPath(true);
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
@@ -433,7 +452,7 @@ public class FileSystemStateObjectTests {
 		
 		fsObject.setPathToCopy(homeFolderPath+"/subTestFolder");
 		fsObject.setObjectNameToCopy("subTestFolder");
-		fsObject.setObjectTypeToCopy("folder");
+		fsObject.setObjectTypeToCopy("folder_object");
 		fsObject.setShouldDeleteOldPath(false);
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");
@@ -468,7 +487,7 @@ public class FileSystemStateObjectTests {
 		
 		fsObject.setPathToCopy(homeFolderPath+"/subTestFolder");
 		fsObject.setObjectNameToCopy("subTestFolder");
-		fsObject.setObjectTypeToCopy("folder");
+		fsObject.setObjectTypeToCopy("folder_object");
 		fsObject.setShouldDeleteOldPath(true);
 		
 		Identifier commandId = testAgent.GetInputLink().CreateIdWME("command");

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -71,20 +73,13 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		selectedObjectType = null;
 		selectedObject = null;
 		shouldDeleteOldPath = false;
+		
+		currentFolderId = null;
 	}
 
 	private Set<File> getSetofFilesFolders() {
 		Set<File> set = new HashSet<File>(Arrays.asList(folder.listFiles()));
 		return set;
-	}
-
-	private Boolean isCurrentPathSameAsPreviousPath() {
-		if (this.previousPath == null)
-			return false;
-		if (this.currentPath == this.previousPath)
-			return true;
-		else
-			return false;
 	}
 
 	public void update() {
@@ -98,7 +93,6 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		}
 
 		Iterator<File> iterFile = this.objectSet.iterator();
-
 		while (iterFile.hasNext()) {
 			File oldFile = iterFile.next();
 			if (!newFileSet.contains(oldFile)) {
@@ -107,37 +101,65 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		}
 
 	}
-
+	
 	public void writeToSoar(Identifier stateId) {
+		
 		Identifier worldId = stateId;
-		if (!this.isCurrentPathSameAsPreviousPath()) {
-			// System.out.println("First time in this directory. Writing the world structure.");
-			this.clearWorldLink();
-			this.writeFolderStructure(worldId);
-			previousPath = currentPath;
-		} else
-			this.updateFileFolderObjects(worldId);
 		
-		
-		this.updateSelectedObject(worldId);
-
-	}
-
-	private void clearWorldLink() {
-		if (this.currentFolderNameId != null) {
-			this.currentFolderNameId.DestroyWME();
+		if (this.previousPath == null) { // the agent is in home directory
+			writeHomeFolder(worldId);
+			this.previousPath = this.currentPath;
 		}
-		if (this.fileIdentifierMap != null && this.fileIdentifierMap.size() > 0) 
-			this.deleteAllFileIdentifiers();
+		else if (this.previousPath != this.currentPath) { // the agent is in a new directory
+			writeNewFolder(worldId);
+			this.previousPath = this.currentPath;
+		}
+		else
+			updateFileFolderObjects(worldId);
+		
+		
+		updateSelectedObject(worldId);
 	}
-
-	private void writeFolderStructure(Identifier worldId) {
-		this.currentFolderNameId = worldId.CreateStringWME("current-folder",
-				this.folder.getName());
+	
+	
+	private void writeHomeFolder(Identifier worldId) {
+		this.currentFolderId = worldId.CreateIdWME("current-folder");
+		currentFolderId.CreateStringWME("name", folder.getName());
+		currentFolderId.CreateStringWME("type", "folder_object");
+		
 		this.fileIdentifierMap = new HashMap<File, Identifier>();
 		for (File file : this.objectSet) {
 			this.createAndAddFileIdentifier(file, worldId);
 		}
+	}
+	
+	private void writeNewFolder(Identifier worldId) {
+		
+		Identifier navigatedToFolderId = null;
+		Entry<File,Identifier> entryToRemove = null;
+		for (Entry<File,Identifier> entry: this.fileIdentifierMap.entrySet()){
+			if(Objects.equals(currentPath, entry.getKey().getAbsolutePath())) {
+				navigatedToFolderId = entry.getValue();
+				entryToRemove = entry;
+			}
+		}
+		
+		this.fileIdentifierMap.remove(entryToRemove.getKey());
+		
+		this.currentFolderId.DestroyWME();
+		worldId.CreateSharedIdWME("current-folder", navigatedToFolderId);
+		this.currentFolderId = navigatedToFolderId;
+		
+		if (this.fileIdentifierMap != null && this.fileIdentifierMap.size() > 0) 
+			this.deleteAllFileIdentifiers();
+		entryToRemove.getValue().DestroyWME();
+	
+		this.fileIdentifierMap = new HashMap<File, Identifier>();
+		
+		for (File file : this.objectSet) {
+			this.createAndAddFileIdentifier(file, worldId);
+		}
+		
 	}
 
 	private void deleteAllFileIdentifiers() {
@@ -160,27 +182,25 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	}
 
 	private void updateFileFolderObjects(Identifier worldId) {
-		// System.out.println("Already have the structure");
 		Set<File> setOfFiles = this.objectSet;
-		// System.out.println("Number of items in fileIdMap "
-		// + this.fileIdMap.size());
-
 		for (File file : setOfFiles) {
 			if (!this.fileIdentifierMap.keySet().contains(file)) {
-				// System.out.println("Adding file " +
-				// file.toString());
 				this.createAndAddFileIdentifier(file, worldId);
 			}
 		}
+		
+		HashSet<File> removeFileSet = new HashSet<File>();
 
 		for (File file : this.fileIdentifierMap.keySet()) {
 			if (!setOfFiles.contains(file)) {
-				// System.out.println("Deleting file " +
-				// file.toString());
-				SoarHelper.deleteAllChildren(this.fileIdentifierMap.get(file));
-				this.fileIdentifierMap.get(file).DestroyWME();
-				this.fileIdentifierMap.remove(file);
+				removeFileSet.add(file);
 			}
+		}
+		
+		for(File file: removeFileSet) {
+			SoarHelper.deleteAllChildren(this.fileIdentifierMap.get(file));
+			this.fileIdentifierMap.get(file).DestroyWME();
+			this.fileIdentifierMap.remove(file);
 		}
 	}
 	
@@ -223,9 +243,8 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		case "change-folder":
 			for (int i = 0; i < commandId.GetNumberChildren(); i++) {
 				if (commandId.GetChild(i).GetAttribute().equals("folder_object")) {
-					String folder = commandId.GetChild(i)
-							.ConvertToIdentifier().GetParameterValue("name");
-					this.processChangeFolder(folder);
+					Identifier folderId = commandId.GetChild(i).ConvertToIdentifier();
+					this.processChangeFolder(folderId);
 				}
 			}
 			break;
@@ -380,9 +399,11 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		newFolder.mkdir();
 	}
 
-	protected void processChangeFolder(String directory) {
-		String newCurrentPath = currentPath + "/" + directory;
+	protected void processChangeFolder(Identifier folderId) {
+		String folderName = folderId.GetParameterValue("name");
+		String newCurrentPath = currentPath + "/" + folderName;
 		currentPath = newCurrentPath;
+		
 		LOGGER.debug("Changed to directory " + currentPath);
 	}
 
@@ -416,6 +437,14 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 
 	public void setObjectSet(Set<File> objectList) {
 		this.objectSet = objectList;
+	}
+	
+	public Map <File, Identifier> getFileIdentifierMap() {
+		return fileIdentifierMap;
+	}
+
+	public void setFileIdentifierMap(Map<File, Identifier> map) {
+		this.fileIdentifierMap = map;
 	}
 
 	public String getObjectNameToCopy() {
