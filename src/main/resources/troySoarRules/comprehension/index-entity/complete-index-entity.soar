@@ -6,9 +6,10 @@ sp {index-entity*apply*complete-index-entity
     (state <s> ^name index-entity
                ^operator <op>
                ^grounding <g>
-               ^superstate <ss>)
+               ^superstate <ss>
+               ^argument <arg>)
     (<ss> ^grounding <sg>)
     (<op> ^name complete-index-entity)
 -->
-    (<sg> ^entity <g>)
+    (<sg> ^<arg> <g>)
     }

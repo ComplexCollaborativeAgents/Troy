@@ -3,8 +3,8 @@
 #
 # @created smohan 20170727
 
-sp {compose-relation*prefer*index-entity*index-specifier
-    (state <s>    ^name compose-relation
+sp {index-relation*prefer*index-entity*index-specifier
+    (state <s>    ^name index-relation
                   ^operator <op1> +
                   ^operator <op2> +)
     (<op1>    ^name index-entity)
@@ -13,8 +13,8 @@ sp {compose-relation*prefer*index-entity*index-specifier
     (<s>    ^operator <op1> > <op2>)
     }
 
-sp {compose-relation*equal*index-entity
-    (state <s>    ^name compose-relation
+sp {index-relation*equal*index-entity
+    (state <s>    ^name index-relation
                   ^operator <op1> +
                   ^operator <op2> +)
     (<op1>    ^name index-entity)

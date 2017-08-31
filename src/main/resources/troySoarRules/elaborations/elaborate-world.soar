@@ -34,3 +34,20 @@ sp {topstate*elaborate*enhancements
     (<w> ^<attr> <val>)
     }
                
+
+sp {topstate*elaborate*world*relations*in
+	(state <s>	^topstate <s>
+				^world <w>
+            	^hack.definitions.relation <rel>)
+ 	(<rel>	^word in)
+  	(<w>	^current-folder <cf>
+        	^object <obj>)
+-->
+	(<w>	^relation <r>)
+ 	(<r>	^e1 <obj>
+       		^e2	<cf>
+         	^specifier <rel>)
+  }
+
+
+ 	

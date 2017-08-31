@@ -1,0 +1,14 @@
+##!
+# @file: 
+#
+# @created smohan 20170830
+
+
+source "learn-goal-description/load.soar"
+source "proposals.soar"
+
+source "state-no-change/load.soar"
+
+source "elaborations.soar"
+
+source "complete-learn-goal.soar"

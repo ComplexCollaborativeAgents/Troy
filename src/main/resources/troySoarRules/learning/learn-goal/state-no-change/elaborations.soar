@@ -1,0 +1,23 @@
+##!
+# @file
+#
+# @created smohan 20170830
+
+sp {elaborate*learn-goal*state-no-change*name
+    (state <s>    ^superstate <ss>
+                  ^attribute state)
+    (<ss>    ^desired <d>)
+-->
+    (<s>    ^name learn-goal-recognition-rule)
+    (force-learn <s>)
+    }
+    
+
+sp {elaborate*learn-goal*state-no-change*desired
+    (state <s>    ^name learn-goal-recognition-rule
+                  ^superstate <ss>)
+    (<ss>    ^desired <d>)
+-->
+    (<s>   ^desired <d>)
+    }
+

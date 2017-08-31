@@ -22,3 +22,23 @@ sp {topstate*apply*init-agent
              ^processing-status <proc-stat>)
     (<stack> ^segment nil)
  }
+
+sp {topstate*apply*init-agent*query-relation
+	(state <s>	^operator.name init-agent
+            	^smem.command <scomm>)
+-->
+	(<scomm>	^query <cue>)
+ 	(<cue>	^word in)
+  }
+
+sp {topstate*apply*init-agent*copy-relation
+	(state <s>	^smem <smem>
+            	^hack <h>
+             	^topstate <s>)
+ 	(<smem>	^result.retrieved <ret>)
+-->
+	(<h>	^definitions <rdef>)
+ 	(<rdef>	^relation <ret>)
+  } 
+            	
+            	

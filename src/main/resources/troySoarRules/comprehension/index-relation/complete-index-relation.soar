@@ -1,0 +1,28 @@
+##!
+# @file
+#
+# @created smohan 20170727
+
+sp {index-relation*apply*complete-index-relation*generate
+    (state <s>    ^name index-relation
+                  ^grounding <rel>)
+    (<rel>    ^e1.object <obj1>
+              ^e2.object <obj2>
+              ^specifier <spec-id>
+              ^_metadata <met>)
+-->
+    (<s>    ^relation <rel1>)
+    (<rel1>    ^e1 <obj1>
+               ^e2 <obj2>
+               ^specifier <spec-id>
+               ^_metadata <met>)
+    }
+
+sp {index-relation*apply*complete-index-relation
+    (state <s>    ^name index-relation
+                  ^superstate.grounding <sg>
+                  ^relation <g>
+                  ^operator.name complete-index-relation)
+-->
+    (<sg>    ^relation <g>)
+    }

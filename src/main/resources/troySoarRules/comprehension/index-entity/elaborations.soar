@@ -5,9 +5,11 @@
 sp {index-entity*elaborate*description
     (state <s> ^name index-entity
                ^superstate.operator <sop>)
-    (<sop> ^description <d>)
+    (<sop> ^description <d>
+           ^argument <arg>)
 -->
-    (<s> ^description <d>)
+    (<s> ^description <d>
+         ^argument <arg>)
     }
 
 sp {index-entity*elaborate*segment

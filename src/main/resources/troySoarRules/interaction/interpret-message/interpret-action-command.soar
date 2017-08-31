@@ -6,8 +6,8 @@
 
 sp {interpret-message*propose*interpret-action-command
     (state <s> ^name interpret-message
-               ^superstate.operator <op>)
-    (<op> ^name interpret-message
+               ^superstate.operator <sop>)
+    (<sop> ^name interpret-message
           ^message <m1>)
     (<m1>	^type action-command)
 -->

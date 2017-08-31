@@ -1,0 +1,18 @@
+##!
+# @file
+#
+# @created smohan 20170830
+
+sp {learn-goal*elaborate*problemspace
+    (state <s>    ^name learn-goal
+                  ^problemspace <ps>)
+-->
+    (<ps>    ^world-info recreate)
+    }
+
+sp {learn-goal*elaborate*world
+    (state <s>    ^desired <d>
+                  ^name learn-goal)
+-->
+    (<s>    ^world <d>)
+    }

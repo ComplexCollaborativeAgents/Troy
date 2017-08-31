@@ -1,0 +1,20 @@
+##!
+# @file
+#
+# @created smohan 20170830
+sp {learn-goal-recognition-rule*apply*match-relation
+    (state <s>    ^name learn-goal-recognition-rule
+                  ^operator <op>)
+    (<op>    ^name match-relation
+             ^relation <rel>
+             ^world <w>)
+    (<w>    ^relation <rw>)
+    (<rw>    ^e1 <obj1>
+             ^e2 <obj2>
+             ^specifier <spec-id>)
+    (<rel>    ^e1 <obj1>
+              ^e2 <obj2>
+              ^specifier <spec-id>)
+-->
+    (<s>    ^matched <rel>)
+    }

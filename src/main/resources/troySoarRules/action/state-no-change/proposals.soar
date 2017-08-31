@@ -17,6 +17,7 @@ sp {action-state-no-change*instantiate-goal
 sp {action-state-no-change*propose-indexed-action
 	(state <s>	^name action-state-no-change
             	^desired <d>
+                -^problemspace.learning-info explanation
              	^indexed-action <ia>)
 -->
 	(<s>	^operator <ia> +)

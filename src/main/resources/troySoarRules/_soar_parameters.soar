@@ -11,3 +11,7 @@ smem --set learning on
 
 ### epmem memory settings
 epmem --set learning on
+
+
+### set chunking to designated states only
+chunk only

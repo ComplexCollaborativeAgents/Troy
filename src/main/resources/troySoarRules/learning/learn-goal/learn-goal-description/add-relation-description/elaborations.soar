@@ -40,17 +40,14 @@ sp {add-relation-description*store*entity*level*1
                      ^indexed-action <ia>
                      ^map <map>
                      ^smem.command <scomm>)
-    (<d>    ^entity <entity>
-            ^_metadata.description.<earg>.entity <entityd>)
-    (<entity> ^object <obj>
-              ^_metadata.description <entityd>)
+    (<d>    ^<earg> <obj>)
     (<ia>   ^{<arg> <> _metadata} <obj>)
     (<map>  ^procedural.<arg>    <obj-id>
             ^goal.relation <rel-id>)
 -->
     (<rel-id>    ^<earg> <obj-id>)
     (<scomm>    ^store <rel>)
-    (<s>    ^added <entity>)
+    (<s>    ^added <obj>)
     }
     
 
@@ -60,17 +57,14 @@ sp {add-relation-description*store*entity*level*2
                      ^indexed-action <ia>
                      ^map <map>
                      ^smem.command <scomm>)
-    (<d>    ^entity <entity>
-            ^_metadata.description.<earg>.entity <entityd>)
-    (<entity> ^object <obj>
-              ^_metadata.description <entityd>)
+    (<d>    ^<earg> <obj>)
     (<ia>   ^{<arg> <> _metadata}.object <obj>)
     (<map>  ^procedural.<arg>.object    <obj-id>
             ^goal.relation <rel-id>)
 -->
     (<rel-id>    ^<earg> <obj-id>)
     (<scomm>    ^store <rel>)
-    (<s>    ^added <entity>)
+    (<s>    ^added <obj>)
     }
 
 sp {add-relation-description*store*specifier

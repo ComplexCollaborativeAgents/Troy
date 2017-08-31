@@ -12,7 +12,8 @@ sp {comprehension*propose*index-entity
 -->
     (<s> ^operator <op> +)
     (<op> ^name index-entity
-          ^description <np>)
+          ^description <np>
+          ^argument entity)
 }
 
 sp {comprehension*propose*index-relation
@@ -24,7 +25,7 @@ sp {comprehension*propose*index-relation
     (<any> ^_metadata.description <rel>)}
 -->
 	(<s>	^operator <op> +)
- 	(<op>	^name compose-relation
+ 	(<op>	^name index-relation
         	^description <rel>)
   }
 

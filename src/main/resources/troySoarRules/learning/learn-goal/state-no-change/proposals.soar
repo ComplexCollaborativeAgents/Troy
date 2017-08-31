@@ -1,0 +1,31 @@
+##!
+# @file
+#
+# @created smohan 20170830
+sp {learn-goal-recognition-rule*propose*match*relation
+    (state <s>    ^name learn-goal-recognition-rule
+                  ^desired <d>
+                  ^world <w>
+                  -^matched <rel>)
+    (<d>    ^relation <rel>)
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name match-relation
+             ^relation <rel>
+             ^world <w>)
+    }
+
+
+sp {learn-goal-recognition-rule*propose*report-success-all-matched
+    (state <s>    ^name learn-goal-recognition-rule
+                  ^desired <d>
+                  ^matched <rel>)
+    (<d>    ^relation <rel>
+            -^relation {<rel1> <> <rel>})
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name report-success-all-matched
+             ^desired <d>)
+    }
+            
+                  

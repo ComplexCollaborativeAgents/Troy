@@ -1,0 +1,27 @@
+##!
+# @file
+#
+# @created smohan 20170830
+
+
+sp {learn-goal*propose*learn-goal-description
+    (state <s>    ^name learn-goal
+                  -^goal-description <gd>
+                  ^superstate.operator <sop>)
+    (<sop> ^name learn-goal
+           ^segment <seg>)
+-->
+    (<s>    ^operator <op> +)
+    (<op>   ^name learn-goal-description
+            ^segment <seg>)
+    }
+    
+sp {learn-goal*propose*complete-learn-goal
+     (state <s>    ^name learn-goal
+                   ^desired <d>
+                   ^success <d>)
+-->
+    (<s>    ^operator <op> +)
+    (<op>    ^name complete-learn-goal)
+    }
+             

@@ -38,11 +38,13 @@ sp {new*anystate*apply*smem-retrieve*create-cue*clear
    
 sp {new*anystate*apply*smem-retrieve*copy-result*copy
    (state <s> ^operator <o>
-              ^smem.result.{ << success failure >>}  <lti>)
+              ^smem.result <sres>)
+   (<sres> ^{ << success failure >>}  <lti>
+           ^retrieved <nlti>)
    (<o> ^name smem-retrieve
         ^identifier <lti>)
 -->
-   (<s> ^retrieved-lti <lti>)
+   (<s> ^retrieved-lti <nlti>)
 }
 
 sp {new*anystate*apply*smem-retrieve*copy-result*delete

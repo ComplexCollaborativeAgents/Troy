@@ -51,6 +51,19 @@ sp {all*elaborate*problemspace*learning-info
 	(<ps>	^learning-info <info>)
  }
 
+sp {topstate*elaborate*hack
+	(state <s>	^topstate <s>)
+-->
+	(<s>	^hack <hack>)
+ }
+
+sp {all*elaborate*hack
+	(state <s>	^superstate.hack <h>)
+-->
+	(<s>	^hack <h>)
+ }
+            
+
 #sp {all*elaborate*problemspace*action-info
 #	(state <s>	^superstate <ss>
 #            	^problemspace <ps>)

@@ -19,4 +19,4 @@ source "index-action-object/load.soar"
 
 source "index-specifier/load.soar"
 
-source "compose-relation/load.soar"
+source "index-relation/load.soar"

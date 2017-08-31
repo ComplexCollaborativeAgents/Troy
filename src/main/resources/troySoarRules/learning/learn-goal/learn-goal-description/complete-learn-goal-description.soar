@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170728
+
+sp {learn-goal-description*apply*complete-learn-goal-description
+    (state <s>    ^name learn-goal-description
+                  ^superstate <ss>
+                  ^goal-description-segment.groundings.goal-description <goal>
+                  ^action-segment.groundings.indexed-action._metadata.map.goal <gid>
+                  ^operator.name complete-learn-goal-description)
+-->
+    (<ss>    ^goal-description <gid>
+             ^desired <goal>)}

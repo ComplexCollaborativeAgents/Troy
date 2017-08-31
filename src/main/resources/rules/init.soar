@@ -1,0 +1,42 @@
+##!
+# @file
+#
+# @created smohan 20170330
+
+sp {interaction*name
+	(state <s>	^superstate.operator.name <any>)
+-->
+	(<s>	^name <any>)
+ }
+
+sp {topstate*propose*interaction*message
+	(state <s> ^superstate nil
+               ^io.input-link.interaction.message <message>)
+-->
+	(<s> ^operator <op> +)
+ 	(<op> 	^name interaction
+        	^type incoming-message
+         	^message <message>)
+  }
+
+
+sp {interaction*propose*interpret-message
+    (state <s> ^name interaction
+               ^superstate.io.input-link.interaction.message <m1>)
+-->
+    (<s> ^operator <op> +)
+    (<op> ^name interpret-message
+          ^message <m1>)
+    }
+
+sp {interpret-message*propose*interpret-action-command
+    (state <s> ^name interpret-message
+               ^superstate.operator <op>)
+    (<op> ^name interpret-message
+          ^message <m1>)
+    (<m1>	^type action-command)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interpret-action-command
+        	^message <m1>)
+}

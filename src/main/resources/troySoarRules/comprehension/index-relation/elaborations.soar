@@ -3,17 +3,17 @@
 #
 # @created smohan 20170727
 
-sp {compose-relation*elaborate*description
-	(state <s>	^name compose-relation
+sp {index-relation*elaborate*description
+	(state <s>	^name index-relation
             	^superstate.operator <sop>)
- 	(<sop>	^name compose-relation
+ 	(<sop>	^name index-relation
          	^description <d>)
 -->
 	(<s>	^description <d>)
  }
 
-sp {compose-relation*elaborate*grounding
-	(state	<s>	^name compose-relation
+sp {index-relation*elaborate*grounding
+	(state	<s>	^name index-relation
                 ^description <d>)
 -->
 	(<s>	^grounding <g>)

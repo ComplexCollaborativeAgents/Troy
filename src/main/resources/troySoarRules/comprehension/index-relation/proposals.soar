@@ -3,8 +3,8 @@
 #
 # @created smohan 20170727
 
-sp {compose-relation*propose*index-specifier
-	(state	<s>	^name compose-relation
+sp {index-relation*propose*index-specifier
+	(state	<s>	^name index-relation
             	^description <d>
              	^grounding <g>)
  	(<d> ^specifier <spec>)
@@ -16,22 +16,23 @@ sp {compose-relation*propose*index-specifier
         	^description <spec>)
 }
 
-sp {compose-relation*propose*index-entity
-	(state <s>	^name compose-relation
+sp {index-relation*propose*index-entity
+	(state <s>	^name index-relation
             	^description <d>
              	^grounding <g>)
  	(<d>	^<e>.entity <np>)
-  	- {(<g> ^entity <any>)
+  	- {(<g> ^<e> <any>)
     (<any> ^_metadata.description <np>)}
 -->
 	(<s>	^operator <op> +)
  	(<op>	^name index-entity
-        	^description <np>)
+        	^description <np>
+            ^argument <e>)
   }
 
-sp {compose-relation*propose*complete-compose-relation
-	(state <s>	^name compose-relation)
+sp {index-relation*propose*complete-index-relation
+	(state <s>	^name index-relation)
 -->
 	(<s>	^operator <op> + <)
- 	(<op>	^name complete-compose-relation)
+ 	(<op>	^name complete-index-relation)
   }

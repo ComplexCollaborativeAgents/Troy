@@ -24,7 +24,8 @@ sp {index-action-object*propose*index-entity
 -->
 	(<s>	^operator <op> +)
  	(<op>	^name index-entity
-        	^description <entity>)
+        	^description <entity>
+            ^argument entity)
   }
 
 sp {index-action-object*propose*complete-index-action-object

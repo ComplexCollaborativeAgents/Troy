@@ -5,8 +5,8 @@
 
 sp {interpret-message*propose*interpret-signal-end
     (state <s> ^name interpret-message
-               ^superstate.operator <op>)
-    (<op> ^name interpret-message
+               ^superstate.operator <sop>)
+    (<sop> ^name interpret-message
           ^message <m1>)
     (<m1>	^type signal-end)
 -->
