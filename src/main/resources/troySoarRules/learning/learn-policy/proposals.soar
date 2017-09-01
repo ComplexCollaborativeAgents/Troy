@@ -15,7 +15,7 @@ sp {learn-policy*propose*recreate*world*state
         	
 sp {learn-policy*propose*action
 	(state <s>	^name learn-policy
-            	^initial-interaction-state.stack.segment <seg>)
+            	^interaction.stack.segment <seg>)
  	(<seg> ^groundings.indexed-action <ia>)
 -->
 	(<s>	^operator <op> +)

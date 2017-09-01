@@ -31,6 +31,9 @@
     <member path="generation/elaborations.soar" />
     <member path="interaction/interpret-status/interpret-unknown-next-action.soar" />
     <member path="elaborations/elaborate-world.soar" />
+    <member path="elaborations/elaborate-state.soar" />
+    <member path="learning/learn-goal/learn-goal-description/elaborations.soar" />
+    <member path="interaction/update-stack.soar" />
   </members>
 </soaragent>
 

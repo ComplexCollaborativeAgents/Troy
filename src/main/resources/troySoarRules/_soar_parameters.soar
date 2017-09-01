@@ -14,4 +14,8 @@ epmem --set learning on
 
 
 ### set chunking to designated states only
-chunk only
+# 9.5 onwards 
+#chunk only
+
+#9.4
+learn --only

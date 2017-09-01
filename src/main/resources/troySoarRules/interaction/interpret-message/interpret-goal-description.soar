@@ -21,6 +21,7 @@ sp {interpret-message*apply*interpret-goal-description
 	(state <s>	^name interpret-message
             	^operator <op>
              	^superstate <ss>
+              	^epmem.present-id <pid>
  				^interaction.stack.segment <seg>)
  	(<op>	^name interpret-goal-description
         	^message <m1>)
@@ -32,5 +33,7 @@ sp {interpret-message*apply*interpret-goal-description
           	^world-enhancements <w1>
            	^purpose learn
             ^knowledge-type goal
-            ^satisfaction learning-event)
+            ^satisfaction learning-event
+            ^_metadata <met>)
+  	(<met> ^episode-id <pid>)
   }

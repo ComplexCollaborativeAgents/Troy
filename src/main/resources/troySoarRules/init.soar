@@ -20,7 +20,10 @@ sp {topstate*apply*init-agent
          ^interaction <inter>)
     (<inter> ^stack <stack>
              ^processing-status <proc-stat>)
-    (<stack> ^segment nil)
+    (<stack> ^segment <seg>)
+    (<seg>	^_metadata <met>)
+    (<met>	^counter 1
+           	^id 10)
  }
 
 sp {topstate*apply*init-agent*query-relation

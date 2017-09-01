@@ -20,17 +20,20 @@ sp {interpret-message*propose*interpret-action-command
 sp {interpret-message*apply*interpret-action-command
 	(state <s>	^name interpret-message
             	^operator <op>
+             	^epmem.present-id <pid>
              	^superstate <ss>)
  	(<op>	^name interpret-action-command
         	^message <m1>)
 -->
-    (<ss> ^new-segment <segment>)
+    (<s> ^new-segment <segment>)
     (<segment> ^message <m1>
                ^groundings <g1>
                ^world-enhancements <w1>
                ^purpose execute
                ^originator human
-               ^satisfaction action-event)
+               ^satisfaction action-event
+               ^_metadata <met>)
+    (<met>	^episode-id <pid>)
     }
 
 sp {interpret-message*apply*interpret-action-command*response
@@ -43,5 +46,46 @@ sp {interpret-message*apply*interpret-action-command*response
   	(<seg>	^purpose ask
           	^information-type next-action)
 -->
-    (<ss> ^terminate-segment <seg>)
+    (<s> ^terminate-segment <seg>)
     }
+
+sp {interpret-message*apply*interpret-action-command*indexing*information*terminate-segment
+	(state <s>	^name interpret-message
+            	^new-segment <new-seg>
+             	^superstate <ss>
+             	^terminate-segment <tseg>)
+ 	(<tseg> ^next <seg>)
+ 	(<new-seg>	^_metadata <met-new>)
+ 	(<seg>	^_metadata <met>)
+  	(<met>	^id <id>
+          	^counter <count>)
+-->
+	(<met-new>	^id (+ (* <id> 100) <count>)
+ 				^counter 1)
+ 	(<met>	^counter (+ 1 <count>))
+  	(<ss>	^new-segment <new-seg>
+         	^terminate-segment <tseg>
+          	^delete-counter-wme <dm>)
+   	(<dm>	^_metadata <met>
+          	^counter <count>)
+ }
+
+sp {interpret-message*apply*interpret-action-command*indexing*information*no*terminate-segment
+	(state <s>	^name interpret-message
+            	^new-segment <new-seg>
+             	^superstate <ss>
+             	-^terminate-segment <any>
+                ^interaction.stack.segment <seg>)
+ 	(<new-seg>	^_metadata <met-new>)
+ 	(<seg>	^_metadata <met>)
+  	(<met>	^id <id>
+          	^counter <count>)
+-->
+	(<met-new>	^id (+ (* <id> 100) <count>)
+ 				^counter 1)
+ 	(<met>	^counter (+ 1 <count>))
+  	(<ss>	^new-segment <new-seg>
+         	^delete-counter-wme <dm>)
+   	(<dm>	^_metadata <met>
+          	^counter <count>)
+ }

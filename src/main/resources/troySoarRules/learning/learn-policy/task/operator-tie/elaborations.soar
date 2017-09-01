@@ -1,0 +1,19 @@
+##!
+# @file
+#
+# @created smohan 20170831
+
+sp {selection*elaborate*not-indifferent
+	(state <s>	^name selection)
+-->
+	(<s>	^operator-selection not-indifferent)
+ }
+            	
+
+sp {selection*elaborate*subtask-segment-id
+	(state <s>	^name selection
+            	-^name search-control
+            	^superstate.subtask-segment-id <segid>)
+-->
+	(<s>	^subtask-segment-id (+ 1 <segid>))
+ }

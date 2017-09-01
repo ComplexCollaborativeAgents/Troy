@@ -1,0 +1,21 @@
+##!
+# @file
+#
+# @created smohan 20170831
+
+sp {find-next-episode*query*epmem
+	(state <s>	^name find-next-episode
+            	^epmem.command <ecomm>
+             	^episode-id <sid>
+             	^interaction <inter>)
+ 	(<inter>	^stack.segment <seg>)
+  	(<seg>	^groundings.indexed-action <t>)
+-->
+	(<ecomm>	^query <q>)
+ 	(<q>	^interaction.stack.segment <sub-seg>)
+  	(<sub-seg>	^next <seg>
+              	^_metadata <met>
+          		^satisfaction action-event)
+   	(<met>	^id <sid>)
+   }
+             	

@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170831
+
+sp {search-control*find-next-episode
+	(state <s>	^name search-control
+            	^subtask-segment-id <sid>)
+-->
+	(<s>	^operator <op> + !)
+ 	(<op>	^name find-next-episode
+        	^episode-id <sid>)
+  }
+

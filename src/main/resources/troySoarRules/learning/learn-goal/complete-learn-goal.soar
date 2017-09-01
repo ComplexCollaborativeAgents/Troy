@@ -3,8 +3,9 @@
 #
 # @created smohan 20170830
 sp {learn-goal*apply*complete-learn-goal
-	(state <s>	^topstate.interaction.processing-status <ps>
-                ^operator.name complete-learn-goal-description)
+	(state <s>	^name learn-goal
+				^topstate.interaction.processing-status <ps>
+                ^operator.name complete-learn-goal)
 -->
     (<ps>    ^completed-purpose learn
              ^knowledge-type goal

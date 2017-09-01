@@ -30,7 +30,8 @@ sp {all*elaborate*io
     }
 
 sp {all*elaborate*interaction
-	(state <s>	^superstate.interaction <i>)
+	(state <s>	^superstate.interaction <i>
+            	-^problemspace.world-info recreate)
 -->
 	(<s>	^interaction <i>)
  }

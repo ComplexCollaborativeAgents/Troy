@@ -12,6 +12,13 @@ sp {learn-goal-description*elaborate*segment
     (<s>    ^goal-description-segment <seg>)
     }
 
+sp {learn-goal-description*elaborate*interaction
+	(state <s>	^name learn-goal-description
+            	^topstate.interaction <inter>)
+-->
+	(<s>	^interaction <inter>)
+ }
+
 sp {learn-goal-description*elaborate*action*segment
     (state <s>    ^name learn-goal-description
                   ^interaction.stack.segment.next <next>)

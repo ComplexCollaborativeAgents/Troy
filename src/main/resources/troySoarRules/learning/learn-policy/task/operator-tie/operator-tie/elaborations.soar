@@ -1,0 +1,18 @@
+##!
+# @file
+#
+# @created smohan 20170831
+sp {operator-tie*selection*elaborate*name
+	(state <s>	^superstate.name selection
+            	^attribute operator
+             	^choices multiple)
+-->
+	(<s>	^name search-control)
+ }
+
+sp {search-control*elaborate*subtask-segment-id
+	(state <s>	^name search-control
+            	^superstate.subtask-segment-id <sid>)
+-->
+	(<s>	^subtask-segment-id <sid>)
+ }

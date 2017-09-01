@@ -5,7 +5,8 @@
 
 sp {elaborate*learn-goal*state-no-change*name
     (state <s>    ^superstate <ss>
-                  ^attribute state)
+                  ^attribute state
+                  -^indexed-action <any>)
     (<ss>    ^desired <d>)
 -->
     (<s>    ^name learn-goal-recognition-rule)

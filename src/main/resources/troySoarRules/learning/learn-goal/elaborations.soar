@@ -14,5 +14,31 @@ sp {learn-goal*elaborate*world
     (state <s>    ^desired <d>
                   ^name learn-goal)
 -->
-    (<s>    ^world <d>)
+    (<s>    ^world <w>)
     }
+
+sp {learn-goal*elaborate*world*relations
+	(state <s>	^desired <d>
+            	^name learn-goal
+             	^world <w>)
+ 	(<d>	^relation <rel>)
+-->
+	(<w>	^relation <rel-new>)
+ 	(<s>	^<rel> <rel-new>)
+  }
+
+sp {learn-goal*elaborate*world*relation*structure
+	(state <s>	^desired <d>
+            	^name learn-goal
+             	^world <w>
+              	^<rel> <rel-new>)
+ 	(<d>	^relation <rel>)
+  	(<w>	^relation <rel-new>)
+   	(<rel>	^e1 <obj1>
+           	^e2 <obj2>
+            ^specifier <spec>)
+-->
+	(<rel-new>	^e1 <obj1>
+            	^e2 <obj2>
+             	^specifier <spec>)
+ }

@@ -11,3 +11,17 @@ sp {task*elaborate*problemspace
 	(<s>	^problemspace.action-info actionable
       		^name task)
  }
+
+sp {task*elaborate*task-segment-id
+	(state <s>	^name task
+            	^interaction.stack.segment._metadata.id <id>)
+-->
+	(<s>	^task-segment-id <id>)
+ }
+
+sp {task*elaborate*subtask-segment-id
+	(state <s>	^name task
+            	^task-segment-id <id>)
+-->
+	(<s>	^subtask-segment-id (* 100 <id>))
+ }

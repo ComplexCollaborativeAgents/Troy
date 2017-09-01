@@ -8,3 +8,5 @@ source "proposals.soar"
 source "elaborations.soar"
 
 source "recreate-initial-state/load.soar"
+
+source "task/load.soar"
