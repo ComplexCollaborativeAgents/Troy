@@ -1,8 +1,0 @@
-##!
-# @file: 
-#
-# @created smohan 20170831
-
-source "query-epmem.soar"
-
-source "elaborations.soar"

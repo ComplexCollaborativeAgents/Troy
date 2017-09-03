@@ -14,3 +14,21 @@ sp {action*apply*op_paste
     (<c> ^name paste
          ^<type> <obj>)
     }
+
+
+sp {action*apply*op_paste*model
+	(state <s>	^operator <op>
+             	-^io
+               	^world <w>
+                ^topstate.hack.definitions.relation <rel-id>)
+ 	(<w>	^selected <obj>
+       		^current-folder <fobj>)
+ 	(<op>	^name op_paste
+        	^argument <obj>)
+-->
+	(<w>	^relation <rel>
+      		^selected <obj> -)
+ 	(<rel>	^e1 <obj>
+         	^e2 <fobj>
+          	^specifier <rel-id>)
+ }

@@ -33,10 +33,18 @@ sp {action*elaborate*dont-match*arguments
 	(state <s>	^name action)
 -->
 	(<s>	^dont-match <dm>)
- 	(<dm>	^arg	name
+ 	(<dm>	#^arg	name
         	^arg	_metadata
          	^arg	executed)
   }
+
+sp {action*copy*dont-match*substate
+	(state <s>	^superstate.dont-match <dm>)
+-->
+	(<s>	^dont-match <dm>)
+ }
+           
+            	
 
 sp {action*elaborate*space
 	(state <s>	^name action

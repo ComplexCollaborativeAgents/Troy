@@ -7,13 +7,64 @@ sp {selection*elaborate*not-indifferent
 	(state <s>	^name selection)
 -->
 	(<s>	^operator-selection not-indifferent)
+ }  
+
+sp {selection*elaborate*chunking
+	(state <s>	^name selection
+            	^problemspace.learning-info explanation)
+-->
+	(force-learn <s>)
  }
-            	
+
+sp {selection*elaborate*problemspace
+	(state <s>	^name selection
+            	^problemspace <ps>)
+-->
+	(<ps>	^world-info recreate)
+ }
 
 sp {selection*elaborate*subtask-segment-id
 	(state <s>	^name selection
             	-^name search-control
-            	^superstate.subtask-segment-id <segid>)
+            	^superstate <ss>)
+ 	(<ss>	^subtask-segment-id <segid>
+        	^superstate.superstate.name action)
 -->
 	(<s>	^subtask-segment-id (+ 1 <segid>))
  }
+
+sp {selection*elaborate*subtask-segment-id*superstate
+	(state <s>	^name selection
+            	-^name search-control
+            	^superstate <ss>)
+ 	(<ss>	^superstate.subtask-segment-id <segid>)
+-->
+	(<s>	^subtask-segment-id (+ 1 <segid>))
+ }
+
+
+sp {selection*match*evaluate-operator*superoperator*level1
+	(state <s>	^name selection
+           		^instructed-subtask <st>
+             	^operator <op> +)
+ 	(<op>	^name evaluate-operator
+         	^superoperator <sop>)
+ 	(<st>	^<arg> <val>)
+  	(<sop>	^<arg> <val>)
+-->
+	(<op>	^matched <arg>)
+ }
+
+sp {selection*match*evaluate-operator*superoperator*level2
+	(state <s>	^name selection
+           		^instructed-subtask <st>
+             	^operator <op> +)
+ 	(<op>	^name evaluate-operator
+         	^superoperator <sop>)
+ 	(<st>	^<arg>.name <val>)
+  	(<sop>	^<arg>.name <val>)
+-->
+	(<op>	^matched <arg>)
+ }
+
+

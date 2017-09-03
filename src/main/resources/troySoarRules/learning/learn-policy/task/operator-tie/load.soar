@@ -7,4 +7,6 @@ source "elaborations.soar"
 
 source "proposals.soar"
 
-source "operator-tie/load.soar"
+source "find-next-episode/load.soar"
+
+source "preferences.soar"

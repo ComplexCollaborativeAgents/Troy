@@ -2,3 +2,13 @@
 # @file
 #
 # @created smohan 20170831
+
+sp {selection*find-next-episode
+	(state <s>	^name selection
+            	^subtask-segment-id <sid>
+             	-^instructed-subtask <st>)
+-->
+	(<s>	^operator <op> + >)
+ 	(<op>	^name find-next-episode
+        	^episode-id <sid>)
+  }

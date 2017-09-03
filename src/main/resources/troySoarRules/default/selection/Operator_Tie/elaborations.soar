@@ -3,7 +3,8 @@
 
 sp {selection*elaborate*name*selection
    :default
-   (state <s> ^choices multiple)
+   (state <s> ^choices multiple
+              -^io)
 -->
    (<s> ^name selection)}
 

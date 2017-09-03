@@ -1,0 +1,18 @@
+##!
+# @file
+#
+# @created smohan 20170901
+sp {selection*prefer*fully*matched*evaluate-operator
+	(state <s>	^name selection
+            	^operator <op> +
+             	^instructed-subtask <is>)
+ 	(<op>	^name evaluate-operator)
+ 	-{(<is>	^<arg> <val>)
+      (<op>	-^matched <arg>)
+      (<s>	-^dont-match.arg <arg>)}
+-->
+	(<s>	^operator <op> >)
+ }
+ 	
+        	
+         

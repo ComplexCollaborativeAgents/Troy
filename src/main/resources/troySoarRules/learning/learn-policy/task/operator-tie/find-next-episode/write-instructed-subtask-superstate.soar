@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20170901
+
+sp {find-next-episode*apply*write-instructed-subtask-superstate
+	(state <s>	^name find-next-episode
+            	^operator <op>
+             	^superstate <ss>)
+ 	(<op>	^name write-instructed-subtask-superstate
+        	^subtask <task>)
+-->
+	(<ss>	^instructed-subtask <task>)
+ }

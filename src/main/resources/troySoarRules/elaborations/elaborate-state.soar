@@ -18,13 +18,14 @@ sp {all*elaborate*topstate
 
 sp {topstate*elaborate*world
 	(state <s> ^topstate <s>
-            	^io.input-link.world <w>)
+               ^io.input-link.world <w>)
 -->
 	(<s> ^world <w>)
  }
 
 sp {all*elaborate*io
-    (state <s> ^superstate.io <io>)
+    (state <s> ^superstate.io <io>
+               -^problemspace.learning-info explanation)
 -->
     (<s> ^io <io>)
     }
@@ -38,19 +39,24 @@ sp {all*elaborate*interaction
 	
 
 sp {all*elaborate*problemspace
-	(state <s>	^superstate <ss>)
+	(state <s>	^impasse <any>)
 -->
 	(<s>	^problemspace <ps>)
  }
 
 sp {all*elaborate*problemspace*learning-info
-	(state <s>	^superstate <ss>
-            	^problemspace <ps>)
- 	(<ss>	^problemspace <sps>)
-  	(<sps>	^learning-info <info>)
+	(state <s>	^superstate.problemspace.learning-info explanation
+				^problemspace <ps>)
 -->
-	(<ps>	^learning-info <info>)
- }
+	(<ps>	^learning-info explanation)
+}
+sp {all*elaborate*problemspace*action-info
+	(state <s>	^superstate.problemspace.action-info <any>
+				^problemspace <ps>
+    			^attribute operator)
+-->
+	(<ps>	^action-info <any>)
+}
 
 sp {topstate*elaborate*hack
 	(state <s>	^topstate <s>)
@@ -63,13 +69,15 @@ sp {all*elaborate*hack
 -->
 	(<s>	^hack <h>)
  }
-            
 
-#sp {all*elaborate*problemspace*action-info
-#	(state <s>	^superstate <ss>
-#            	^problemspace <ps>)
-# 	(<ss>	^problemspace <sps>)
-#  	(<sps>	^action-info <info>)
-#-->
-#	(<ps>	^action-info <info>)
-# }
+#### elaborate problem-space
+sp {new-operator*elaborate*problem-space
+   (state <s> ^name task)
+-->  
+   (<s> ^problem-space <p>)
+   (<p> ^name task
+   		^default-state-copy yes
+		^two-level-attributes world
+  		^one-level-attributes selected interaction)
+}
+            

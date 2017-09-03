@@ -5,8 +5,10 @@
 
 sp {task*operatator-tie*elaborate*name
 	(state <s>	^impasse tie
+            	^io <io-link>
             	^attribute operator
              	^superstate.name task)
 -->
 	(<s>	^name task-operator-tie)
+ 	(dont-learn <s>)
  }

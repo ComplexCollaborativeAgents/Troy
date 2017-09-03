@@ -14,3 +14,15 @@ sp {action*apply*op_cut
     (<c> ^name cut
          ^<type> <obj>)
     }
+
+
+## model
+sp {action*apply*op_cut*model
+	(state <s>	^operator <op>
+             	-^io
+               	^world <w>)
+ 	(<op>	^name op_cut
+        	^argument <obj>)
+-->
+	(<w>	^selected <obj>)
+ }

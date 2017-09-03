@@ -3,6 +3,9 @@
   <startfile path="load.soar" />
   <members>
     <member path="load.soar" />
+    <member path="../troySoarRules/action/elaborations.soar" />
+    <member path="../troySoarRules/learning/learn-policy/task/operator-tie/find-next-episode/query-epmem.soar" />
+    <member path="../troySoarRules/action/preferences.soar" />
   </members>
 </soaragent>
 

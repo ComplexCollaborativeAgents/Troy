@@ -13,3 +13,16 @@ sp {action*apply*op_go_into
     (<c> ^name change-folder
          ^folder_object <arg>)
     }
+
+
+sp {action*apply*op_go_into*model
+	(state <s>	^operator <op>
+             	-^io
+               	^world <w>)
+ 	(<w>	^object <obj>)
+ 	(<op>	^name op_go_into
+        	^argument <obj>)
+-->
+	(<w>	^current-folder <obj>
+      		^object <obj> -)
+ }

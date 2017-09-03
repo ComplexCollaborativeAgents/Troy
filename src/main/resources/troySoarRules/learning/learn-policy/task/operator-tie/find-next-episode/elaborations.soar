@@ -1,0 +1,26 @@
+##!
+# @file
+#
+# @created smohan 20170831
+sp {find-next-episode*elaborate*subtask-segment-id
+	(state <s>	^name find-next-episode
+            	^superstate.operator <sop>)
+ 	(<sop>	^episode-id <sid>)
+-->
+	(<s>	^episode-id <sid>)
+ }
+
+sp {find-next-episode*elaborate*instructed-subtask
+	(state <s>	^name find-next-episode
+            	^epmem.result.retrieved <ret-episode>)
+ 	(<ret-episode>	^interaction.stack.segment.groundings.indexed-action <ia>)
+-->
+	(<s>	^instructed-subtask <ia>)
+ }
+
+sp {find-next-episode*elaborate*interaction
+	(state <s>	^name find-next-episode
+            	^superstate.superstate.interaction <inter>)
+-->
+	(<s>	^interaction <inter>)
+ }
