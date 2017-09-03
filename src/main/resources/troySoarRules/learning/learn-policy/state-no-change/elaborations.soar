@@ -1,0 +1,29 @@
+##!
+# @file
+#
+# @created smohan 20170903
+
+sp {action-state-no-change*elaborate*world
+	(state <s>	^name action-state-no-change)
+-->
+	(<s>	^world <w>)
+ }
+
+#sp {action-state-no-change*elaborate*chunking
+#	(state <s>	^name action-state-no-change)
+#-->
+#	(force-learn <s>)
+# }
+#            	
+
+sp {action-state-no-change*elaborate*world*args
+	(state <s>	^name action-state-no-change
+            	^world <w>
+            	^superstate.world.<arg> <val>)
+-->
+	(<w>	^<arg> <val>)
+ }
+            	
+
+#sp {action-state-no-change*elaborate*desired
+#	(state <s>	^name action-state

@@ -37,6 +37,7 @@
     <member path="learning/learn-policy/task/operator-tie/load.soar" />
     <member path="learning/learn-policy/proposals.soar" />
     <member path="learning/learn-policy/task/operator-tie/elaborations.soar" />
+    <member path="learning/learn-policy/load.soar" />
   </members>
 </soaragent>
 
