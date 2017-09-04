@@ -53,6 +53,7 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	private File folder;
 	private Set<File> objectSet;
 	private Map<File, Identifier> fileIdentifierMap;
+	//private Identifier navigatedToFolderId;
 
 	private static Logger LOGGER = Logger.getLogger(LocalFileCollectionStateObject.class
 			.getName());
@@ -73,6 +74,7 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		selectedObjectType = null;
 		selectedObject = null;
 		shouldDeleteOldPath = false;
+	//	navigatedToFolderId = null;
 		
 		currentFolderId = null;
 	}
@@ -134,9 +136,9 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	}
 	
 	private void writeNewFolder(Identifier worldId) {
-		
 		Identifier navigatedToFolderId = null;
 		Entry<File,Identifier> entryToRemove = null;
+		
 		for (Entry<File,Identifier> entry: this.fileIdentifierMap.entrySet()){
 			if(Objects.equals(currentPath, entry.getKey().getAbsolutePath())) {
 				navigatedToFolderId = entry.getValue();
@@ -146,9 +148,10 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		
 		this.fileIdentifierMap.remove(entryToRemove.getKey());
 		
+		SoarHelper.deleteAllChildren(this.currentFolderId);
 		this.currentFolderId.DestroyWME();
-		worldId.CreateSharedIdWME("current-folder", navigatedToFolderId);
-		this.currentFolderId = navigatedToFolderId;
+		
+		this.currentFolderId = worldId.CreateSharedIdWME("current-folder", navigatedToFolderId);
 		
 		if (this.fileIdentifierMap != null && this.fileIdentifierMap.size() > 0) 
 			this.deleteAllFileIdentifiers();
@@ -403,6 +406,7 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		String folderName = folderId.GetParameterValue("name");
 		String newCurrentPath = currentPath + "/" + folderName;
 		currentPath = newCurrentPath;
+		//navigatedToFolderId = folderId;
 		
 		LOGGER.debug("Changed to directory " + currentPath);
 	}
