@@ -7,6 +7,7 @@ sp {task-operator-tie*apply*report-unknown-next-action
 	(state <s>	^name task-operator-tie
             	^superstate.superstate.indexed-action <ia>
             	^topstate.interaction <i>
+             	^quiescence t
             	^operator.name report-unknown-next-action)
  	(<i>	^processing-status <status>)
 -->

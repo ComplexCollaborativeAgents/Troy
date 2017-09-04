@@ -7,7 +7,7 @@ sp {instantiate-goal*apply*complete-instantiate-goal
 	(state <s>	^name instantiate-goal
             	^desired <d>
              	^operator.name complete-instantiate-goal
-             	^superstate <ss>)
+             	^superstate.superstate <ss>)
 -->
 	(<ss>	^desired <d>)
  }

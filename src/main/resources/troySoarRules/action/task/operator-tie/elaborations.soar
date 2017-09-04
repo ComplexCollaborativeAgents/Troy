@@ -10,5 +10,4 @@ sp {task*operatator-tie*elaborate*name
              	^superstate.name task)
 -->
 	(<s>	^name task-operator-tie)
- 	(dont-learn <s>)
  }

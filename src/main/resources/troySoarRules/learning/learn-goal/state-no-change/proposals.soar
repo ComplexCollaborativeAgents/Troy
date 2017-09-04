@@ -4,7 +4,7 @@
 # @created smohan 20170830
 sp {learn-goal-recognition-rule*propose*match*relation
     (state <s>    ^name learn-goal-recognition-rule
-                  ^desired <d>
+                  ^superstate.desired <d>
                   ^world <w>
                   -^matched <rel>)
     (<d>    ^relation <rel>)
@@ -18,7 +18,7 @@ sp {learn-goal-recognition-rule*propose*match*relation
 
 sp {learn-goal-recognition-rule*propose*report-success-all-matched
     (state <s>    ^name learn-goal-recognition-rule
-                  ^desired <d>
+                  ^superstate.desired <d>
                   ^matched <rel>)
     (<d>    ^relation <rel>
             -^relation {<rel1> <> <rel>})

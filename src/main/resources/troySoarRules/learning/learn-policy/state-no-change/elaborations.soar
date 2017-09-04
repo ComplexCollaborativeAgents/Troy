@@ -10,8 +10,7 @@ sp {action-state-no-change*elaborate*world
  }
 
 sp {action-state-no-change*elaborate*chunking
-	(state <s>	^name action-state-no-change
-            	-^io)
+	(state <s>	^name action-state-no-change)
 -->
 	(force-learn <s>)
  }
@@ -26,20 +25,28 @@ sp {action-state-no-change*elaborate*world*args
  }
             	
 
-sp {action-state-no-change*elaborate*desired
+sp {action-state-no-change*elaborate*success
 	(state <s>	^name action-state-no-change
-            	^desired <d>
+            	^success <d>
              	^superstate <ss>)
 -->
-	(<ss>	^desired <d>)
+	(<ss>	^success <d>)
  }
+
+#sp {action-state-no-change*elaborate*desired
+#	(state <s>	^name action-state-no-change
+#            	^desired <d>
+#             	^superstate <ss>)
+#-->
+#	(<ss>	^desired <d>)
+# }
 
 sp {action-state-no-change*propose*operator*superstate
 	(state <s>	^name action-state-no-change
-            	^desired <d>
-             	^success <d>
               	^superstate <ss>
-               	^indexed-action <ia>)
+              	^desired <d>
+        		^success <d>
+         		^indexed-action <ia>)
 -->
 	(<ss>	^operator <ia> +)
  }

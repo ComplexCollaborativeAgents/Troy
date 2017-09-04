@@ -5,6 +5,7 @@
 
 sp {instantiate-goal*apply*report-unknown-goal-definition
 	(state <s>	^name instantiate-goal
+            	^quiescence t
             	^operator <sop>
              	^interaction <i>)
  	(<i>	^processing-status <status>)
