@@ -27,7 +27,6 @@ sp {index-verb*propose*lookup-procedural
     (state <s> ^name index-verb
                ^map <m>)
     (<m> ^procedural <proc>)
-    (<proc> -^<any>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name lookup-procedural

@@ -9,3 +9,13 @@ sp {lookup-procedural*query-smem
 -->
     (<s> ^retrieve-lti <proc>)
     }
+
+sp {lookup-procedural*retract
+	(state <s>	^name lookup-procedural
+            	^superstate <ss>
+                ^retrieved-lti <procid>)
+ 	(<ss>	^operator <sop>)
+ 	(<sop> ^procedural <procid>)
+-->
+	(<ss>	^operator <sop> -)
+ }

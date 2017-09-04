@@ -15,7 +15,7 @@ sp {interpret-message*propose*interpret-signal-end
         	^message <m1>)
 }
 
-sp {interpret-message*apply*interpret-signal-end
+sp {interpret-message*apply*interpret-signal-end*terminate
 	(state <s>	^name interpret-message
             	^operator <op>
              	^superstate <ss>
@@ -23,15 +23,26 @@ sp {interpret-message*apply*interpret-signal-end
  				^interaction.stack.segment <seg>)
  	(<op>	^name interpret-signal-end
         	^message <m1>)
+  	(<seg>	^next <nseg>)
 -->
-	(<ss>	^new-segment <seg-new>)
- 	(<ss>	^terminate-segment <seg>)
- 	(<seg-new>	^message <m1>
-         	^groundings <g>
-          	^world-enhancements <w1>
-           	^purpose learn
-            ^knowledge-type policy
-            ^satisfaction learning-event
-            ^_metadata <met>)
-  	(<met> ^episode-id <pid>)
+	(<ss>	^modify-segment <nseg>
+       		^modifications <meg>
+         	^terminate-segment <seg>)
+ 	(<meg>	^purpose learn
+         	^knowledge-type policy
+          	^satisfaction learning-event
+            ^processed-message <m1>)
   }
+       
+       
+#       new-segment <seg-new>)
+# 	(<ss>	^terminate-segment <seg>)
+# 	(<seg-new>	^message <m1>
+#         	^groundings <g>
+#          	^world-enhancements <w1>
+#           	^purpose learn
+#            ^knowledge-type policy
+#            ^satisfaction learning-event
+#            ^_metadata <met>)
+#  	(<met> ^episode-id <pid>)
+#  }

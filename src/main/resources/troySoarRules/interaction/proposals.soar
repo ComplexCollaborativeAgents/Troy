@@ -7,7 +7,7 @@
 sp {interaction*propose*interpret-message
     (state <s> ^name interaction
                ^message <m1>
-               -^<< new-segment terminate-segment >>)
+               -^<< new-segment terminate-segment modify-segment >>)
 -->
     (<s> ^operator <op> +)
     (<op> ^name interpret-message
@@ -17,7 +17,7 @@ sp {interaction*propose*interpret-message
 sp {interaction*propose*interpret-status
 	(state <s>	^name interaction
             	^interaction.processing-status <stat>
-             	-^<< new-segment terminate-segment >>)
+             	-^<< new-segment terminate-segment modify-segment >>)
  	(<stat>	^id <any>)
 -->
 	(<s>	^operator <op> +)
@@ -27,7 +27,7 @@ sp {interaction*propose*interpret-status
   
 sp {interaction*propose*update-stack
 	(state <s>	^name interaction
-            	^{<seg-type> << new-segment terminate-segment >>}  <seg>)
+            	^{<seg-type> << new-segment terminate-segment modify-segment >>}  <seg>)
 -->
 	(<s>	^operator <op> + =)
  	(<op>	^name update-stack)

@@ -33,3 +33,12 @@ sp {task*elaborate*desired
 -->
 	(<s>	^desired <d>)
  }
+
+sp {task*write*indicate-successful-execution
+	(state <s>	^name task
+            	^desired <d>
+             	^success <d>
+              	^superstate <ss>)
+-->
+	(<ss> ^success <d>)
+  }

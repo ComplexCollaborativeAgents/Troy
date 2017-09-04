@@ -1,0 +1,28 @@
+##!
+# @file
+#
+# @created smohan 20170903
+
+sp {interpret-status*propose*interpret-learned-task
+	(state <s>	^name interpret-status
+            	^superstate.operator <sop>)
+ 	(<sop>	^processing-status <p>)
+  	(<p>	^id learned-task)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name interpret-learned-task
+        	^processing-status <p>)
+  }
+
+sp {interpret-status*apply*interpret-learned-task
+	(state <s>	^name interpret-status
+            	^operator <op>
+             	^superstate <ss>
+ 				^interaction.stack.segment <seg>)
+ 	(<op>	^name interpret-learned-task
+        	^processing-status <p>)
+  	(<seg>	^satisfaction learning-event)
+   	(<p>	^id learned-task)
+-->
+	(<ss>	^terminate-segment <seg>)
+   }

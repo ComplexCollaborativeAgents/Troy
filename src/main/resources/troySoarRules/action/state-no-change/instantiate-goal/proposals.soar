@@ -9,6 +9,7 @@ sp {instantiate-goal*propose*instantiate-relation
  	-{(<s>	^<relid> <rel>
 			^desired.relation <rel>)
        (<rel>	^specifier)}
+	(<relid>	^specifier <any>)
 -->
 	(<s>	^operator <op> +)
  	(<op>	^name instantiate-relation

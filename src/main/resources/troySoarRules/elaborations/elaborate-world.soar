@@ -11,8 +11,9 @@ sp {topstate*elaborate*world
 
 sp {allstates*elaborate*world
     (state <s> ^superstate.world <w>
-               -^problemspace.world-info recreate
-               -^name action-state-no-change)
+               -^problemspace.world-info recreate)
+    -{(<s>	^impasse no-change
+			^attribute state)}
 -->
     (<s> ^world <w>)
     }

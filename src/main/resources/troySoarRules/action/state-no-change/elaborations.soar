@@ -5,10 +5,10 @@
 
 sp {action*state-no-change*elaborate*state-name
 	(state <s>	^impasse no-change
-            	^superstate.name action)
+            	^superstate.name action
+             	^attribute state)
 -->
-	(<s>	^name action-state-no-change
-      		^learning-phase <lp>)
+	(<s>	^name action-state-no-change)
  }
 
 

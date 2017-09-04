@@ -12,3 +12,4 @@ sp {learn-goal-description*apply*complete-learn-goal-description
 -->
     (<ss>    ^goal-description <gid>
              ^desired <goal>)}
+

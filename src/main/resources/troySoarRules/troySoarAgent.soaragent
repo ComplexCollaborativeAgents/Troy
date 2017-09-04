@@ -38,6 +38,7 @@
     <member path="learning/learn-policy/proposals.soar" />
     <member path="learning/learn-policy/task/operator-tie/elaborations.soar" />
     <member path="learning/learn-policy/load.soar" />
+    <member path="interaction/interpret-status/interpret-learned-task.soar" />
   </members>
 </soaragent>
 

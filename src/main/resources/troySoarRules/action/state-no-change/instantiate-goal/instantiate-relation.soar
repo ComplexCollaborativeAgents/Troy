@@ -14,7 +14,6 @@ sp {instantiate-goal*apply*instantiate-relation*desired*relation
  	(<d>	^relation <rel>)
  }
 
-
 sp {instantiate-goal*apply*instantiate-relation*level1
 	(state <s>	^name instantiate-goal
             	^operator <op>

@@ -6,7 +6,7 @@
 
 sp {learn-policy*elaborate*relevant-task-segment
 	(state <s>	^name learn-policy
-            	^superstate.operator.segment.next <sn>)
+            	^superstate.operator.segment <sn>)
 -->
 	(<s>	^task-segment <sn>)
  }

@@ -10,3 +10,4 @@ source "preferences.soar"
 source "proposals.soar"
 
 source "operator-tie/load.soar"
+

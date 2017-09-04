@@ -5,13 +5,21 @@
 
 sp {elaborate*learn-goal*state-no-change*name
     (state <s>    ^superstate <ss>
-                  ^attribute state
-                  -^indexed-action <any>)
-    (<ss>    ^desired <d>)
+                  ^attribute state)
+    (<ss>    ^desired <d>
+             -^indexed-action <any>)
 -->
     (<s>    ^name learn-goal-recognition-rule)
     (force-learn <s>)
     }
+
+sp {elaborate*learn-goal-recognition-rule*world
+	(state <s>	^name learn-goal-recognition-rule
+            	^superstate.world <w>)
+-->
+	(<s>	^world <w>)
+ }
+
     
 
 sp {elaborate*learn-goal*state-no-change*desired

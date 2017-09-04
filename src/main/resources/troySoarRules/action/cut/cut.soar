@@ -3,8 +3,7 @@
 #
 # @created smohan 20170619
 sp {action*apply*op_cut
-	(state <s> ^name action
-               ^operator <op>
+	(state <s> ^operator <op>
                ^io.output-link <ol>)
     (<op> ^name op_cut
           ^argument <obj>)

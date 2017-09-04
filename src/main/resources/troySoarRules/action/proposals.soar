@@ -2,6 +2,16 @@
 # @file
 #
 # @created smohan 20170413
+#sp {action*retract*task
+#	(state <s>	^name action
+#            	^indexed-action <ia>
+#             	^desired <d>
+#              	^success <d>
+#               	^operator <ia>)
+#-->
+#	(<s>	^operator <ia> -)
+# }
+
 
 sp {action*propose*complete-action
     (state <s> ^name action
@@ -9,6 +19,17 @@ sp {action*propose*complete-action
     (<ia>	^executed true)
 -->
     (<s> ^operator <op> + <)
+    (<op> ^name complete-action
+          ^type maintenance)
+    }
+
+sp {action*propose*complete-task
+    (state <s> ^name action
+               ^indexed-action <ia>
+               ^success <d>
+               ^desired <d>)
+-->
+    (<s> ^operator <op> + >)
     (<op> ^name complete-action
           ^type maintenance)
     }

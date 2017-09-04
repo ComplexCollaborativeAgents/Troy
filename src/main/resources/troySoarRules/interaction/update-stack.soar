@@ -84,3 +84,35 @@ sp {interaction*apply*update-stack*delete-wmes
 -->
 	(<met> ^counter <count> -)
  }
+
+sp {interaction*apply*update-stack*modification*replace-values
+	(state <s>	^name interaction
+            	^operator <op>
+             	^terminate-segment <nseg>
+             	^modify-segment <seg>
+              	^modifications <meg>
+               	^interaction.stack <stack>)
+ 	(<meg>	^<arg> <val>
+         	^processed-message <m1>)
+  	(<seg>	^<arg> <oval>)
+   	(<stack> ^segment <nseg>)
+-->
+	(<seg>	^<arg> <oval> -
+        	^<arg> <val>)
+ 	(<stack> 	^segment <nseg> -)
+  	(<m1> ^processed true)
+ }
+
+sp {interaction*apply*update-stack*modification*add-values
+	(state <s>	^name interaction
+            	^operator <op>
+             	^terminate-segment <nseg>
+             	^modify-segment <seg>
+              	^modifications <meg>
+               	^interaction.stack <stack>)
+ 	(<meg>	^<arg> <val>)
+  	(<seg>	-^<arg> <oval>)
+   	(<stack> ^segment <nseg>)
+-->
+	(<seg>	^<arg> <val>)
+ }

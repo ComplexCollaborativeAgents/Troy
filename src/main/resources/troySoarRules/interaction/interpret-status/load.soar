@@ -10,3 +10,5 @@ source "interpret-acquired-goal.soar"
 source "interpret-unknown-next-action.soar"
 
 source "interpret-executed-action.soar"
+
+source "interpret-learned-task.soar"
