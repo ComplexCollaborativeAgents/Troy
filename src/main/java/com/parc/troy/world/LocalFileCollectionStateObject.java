@@ -54,6 +54,8 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	private Set<File> objectSet;
 	private Map<File, Identifier> fileIdentifierMap;
 	//private Identifier navigatedToFolderId;
+	private String pasteObjectPath;
+	private Identifier pasteObjectId;
 
 	private static Logger LOGGER = Logger.getLogger(LocalFileCollectionStateObject.class
 			.getName());
@@ -188,7 +190,13 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		Set<File> setOfFiles = this.objectSet;
 		for (File file : setOfFiles) {
 			if (!this.fileIdentifierMap.keySet().contains(file)) {
-				this.createAndAddFileIdentifier(file, worldId);
+				if(Objects.equals(file.getAbsolutePath(), pasteObjectPath)) {
+					//System.out.println("file identifier " + pasteObjectId.GetValueAsString());
+					Identifier newId = worldId.CreateSharedIdWME("object", pasteObjectId);
+					this.fileIdentifierMap.put(file, newId);
+				} 
+				else
+					this.createAndAddFileIdentifier(file, worldId);
 			}
 		}
 		
@@ -227,8 +235,8 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 			if(selectedObjectIdentifierMap.size() != 0)
 				LOGGER.error("There should be no selected object yet.");
 			Identifier newSelectedObjectId = fileIdentifierMap.get(selectedObject);
-			worldId.CreateSharedIdWME("selected", newSelectedObjectId);
-			selectedObjectIdentifierMap.put(selectedObject, newSelectedObjectId);
+			Identifier objectId = worldId.CreateSharedIdWME("selected", newSelectedObjectId);
+			selectedObjectIdentifierMap.put(selectedObject, objectId);
 		}
 		
 		if(selectedObject != null && selectedObjectId != null) {
@@ -369,6 +377,10 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 						+ " or destination path: " + finalPath + " is null.");
 			}
 		}
+		
+		pasteObjectPath = finalPath + "/" + selectedObjectName;
+		pasteObjectId = this.selectedObjectIdentifierMap.get(selectedObject);
+		//System.out.println("paste object arg " + pasteObjectId.GetAttribute() + " val " + pasteObjectId.GetValueAsString());
 		
 		if (shouldDeleteOldPath == true) deleteObject();
 

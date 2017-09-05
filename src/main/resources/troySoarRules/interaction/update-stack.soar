@@ -85,34 +85,49 @@ sp {interaction*apply*update-stack*delete-wmes
 	(<met> ^counter <count> -)
  }
 
-sp {interaction*apply*update-stack*modification*replace-values
-	(state <s>	^name interaction
-            	^operator <op>
-             	^terminate-segment <nseg>
-             	^modify-segment <seg>
-              	^modifications <meg>
-               	^interaction.stack <stack>)
- 	(<meg>	^<arg> <val>
-         	^processed-message <m1>)
-  	(<seg>	^<arg> <oval>)
-   	(<stack> ^segment <nseg>)
--->
-	(<seg>	^<arg> <oval> -
-        	^<arg> <val>)
- 	(<stack> 	^segment <nseg> -)
-  	(<m1> ^processed true)
- }
+#sp {interaction*apply*update-stack*modification*replace-values
+#	(state <s>	^name interaction
+#            	^operator <op>
+#             	^modify-segment <seg>
+#              	^modifications <meg>
+#               	^interaction.stack <stack>)
+# 	(<meg>	^<arg> <val>)
+#  	(<seg>	^<arg> <oval>)
+#   	(<stack> ^segment <nseg>)
+#-->
+#	(<seg>	^<arg> <oval> -
+#        	^<arg> <val>)
+# }
 
 sp {interaction*apply*update-stack*modification*add-values
 	(state <s>	^name interaction
-            	^operator <op>
-             	^terminate-segment <nseg>
+            	^operator.name update-stack
              	^modify-segment <seg>
               	^modifications <meg>
                	^interaction.stack <stack>)
- 	(<meg>	^<arg> <val>)
-  	(<seg>	-^<arg> <oval>)
-   	(<stack> ^segment <nseg>)
+ 	(<meg>	^add.<arg> <val>)
 -->
 	(<seg>	^<arg> <val>)
+ }
+
+sp {interaction*apply*update-stack*modification*remove-values
+	(state <s>	^name interaction
+            	^operator.name update-stack
+             	^modify-segment <seg>
+              	^modifications <meg>
+               	^interaction.stack <stack>)
+ 	(<meg>	^remove.<arg> <val>)
+-->
+	(<seg>	^<arg> <val> -)
+ }
+
+sp {interaction*apply*update-stack*remove-status
+	(state <s>	^name interaction
+            	^interaction <inter>
+             	^operator.name update-stack
+             	^modifications <meg>)
+ 	(<inter> ^processing-status <ps>)
+-->
+	(<inter> ^processing-status <ps> -
+          	^processing-status <ps-new>)
  }

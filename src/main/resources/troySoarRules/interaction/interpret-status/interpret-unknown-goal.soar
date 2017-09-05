@@ -18,18 +18,24 @@ sp {interpret-status*propose*interpret-unknown-goal-status
 sp {interpret-status*apply*interpret-unknown-goal-status
 	(state <s>	^name interpret-status
             	^operator <op>
-             	^superstate <ss>)
+             	^superstate <ss>
+                ^interaction.stack.segment <seg>)
  	(<op>	^name interpret-unknown-goal-status
         	^processing-status <p>)
   	(<p>	^id unknown-goal
         	^information <info>
          	^type missing-knowledge)
 -->
-	(<ss>	^new-segment <seg-new>)
+	(<ss>	^new-segment <seg-new>
+       		^modify-segment <seg>
+       		^modifications <meg>)
  	(<seg-new>	^purpose ask 
              	^originator troy
              	^information-type goal
                 ^processing-status <p>
                 ^satisfaction <sat>)
   	(<sat>	^response-type relation-description)
+    (<meg>	^add.purpose learn
+         	^add.knowledge-type policy
+          	^add.satisfaction learning-event)
   }
