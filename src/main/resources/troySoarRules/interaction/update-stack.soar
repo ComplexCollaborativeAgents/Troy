@@ -27,8 +27,7 @@ sp {interaction*apply*update-stack*add-segment*only*status
              	^interaction <inter> 
              	^new-segment <new-seg>
               	-^terminate-segment <seg>)
- 	(<inter>	^stack <stack>
-           		^processing-status <ps>)
+ 	(<inter>	^stack <stack>)
  	(<stack> ^segment <seg>)
  	(<op>	^name update-stack)
   	(<new-seg>	^processing-status <ps>)
@@ -36,8 +35,6 @@ sp {interaction*apply*update-stack*add-segment*only*status
 	(<new-seg>	^next <seg>)
  	(<stack>	^segment <new-seg>	
            		^segment <seg> -)
-  	(<inter>	^processing-status <ps> -
-            	^processing-status <ps-new>)
   }
 
 sp {interaction*apply*update-stack*terminate-segment*only*status
@@ -46,15 +43,12 @@ sp {interaction*apply*update-stack*terminate-segment*only*status
              	^interaction <inter>
               	^terminate-segment <seg>
                	-^new-segment <new-seg>)
- 	(<inter>	^stack <stack>
-           		^processing-status <ps>)
+ 	(<inter>	^stack <stack>)
  	(<stack>	^segment <seg>)
   	(<seg>	^next <next-seg>)
 -->
 	(<stack>	^segment <next-seg>
           		^segment <seg> -)
- 	(<inter>	^processing-status <ps> -
-            	^processing-status <ps-new>)
   }
 
 sp {interaction*apply*update-stack*add-segment*terminate-previous*message
@@ -124,9 +118,9 @@ sp {interaction*apply*update-stack*modification*remove-values
 sp {interaction*apply*update-stack*remove-status
 	(state <s>	^name interaction
             	^interaction <inter>
-             	^operator.name update-stack
-             	^modifications <meg>)
+             	^operator.name update-stack)
  	(<inter> ^processing-status <ps>)
+  	(<ps>	^id <any>)
 -->
 	(<inter> ^processing-status <ps> -
           	^processing-status <ps-new>)

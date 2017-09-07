@@ -22,6 +22,7 @@ ActionName[verb(cut)] <-> cut
 ActionName[verb(copy)] <-> copy
 ActionName[verb(paste)] <-> paste
 ActionName[verb(transfer)] <-> transfer
+ActionName[verb(duplicate)] <-> duplicate
 
 ActionSpecifier[action-specifier(from)] <-> from
 ActionSpecifier[action-specifier(to)] <-> to
