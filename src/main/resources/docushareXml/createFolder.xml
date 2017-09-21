@@ -1,0 +1,21 @@
+<!-- Used by CreateFolder.java -->
+<request>
+	<objects>
+		<object class="com.xerox.xcm.falcon.Folder">
+			<com.xerox.xcm.elf.BaseClassType>
+				<classType>com.xerox.xcm.falcon.Folder</classType>
+			</com.xerox.xcm.elf.BaseClassType>
+			<com.xerox.xcm.elf.Displayable>
+				<title>%s</title>
+			</com.xerox.xcm.elf.Displayable>
+			<com.xerox.xcm.falcon.Containable>
+				<parent>%d</parent>
+			</com.xerox.xcm.falcon.Containable>
+			<com.xerox.xcm.elf.Owned>
+				<owner>%d</owner>
+			</com.xerox.xcm.elf.Owned>
+			<com.xerox.xcm.elf.BaseProps />
+			<com.xerox.xcm.falcon.CanBeBookmarked />
+		</object>
+	</objects>
+</request>

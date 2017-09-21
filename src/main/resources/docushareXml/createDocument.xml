@@ -1,0 +1,23 @@
+<!-- Used by CreateDocument.java -->
+<request>
+	<objects>
+		<object class="com.xerox.xcm.falcon.Document">
+			<com.xerox.xcm.elf.BaseClassType>
+				<classType>com.xerox.xcm.falcon.Document</classType>
+			</com.xerox.xcm.elf.BaseClassType>
+			<com.xerox.xcm.elf.Displayable>
+				<title>%s</title>
+				<summary>Test Document from sample code</summary>
+			</com.xerox.xcm.elf.Displayable>
+			<com.xerox.xcm.falcon.Containable>
+				<parent>%d</parent>
+			</com.xerox.xcm.falcon.Containable>
+			<com.xerox.xcm.elf.ContentBearing>
+				<filename>%s</filename>
+			</com.xerox.xcm.elf.ContentBearing>
+			<com.xerox.xcm.elf.Owned>
+				<owner>%d</owner>
+			</com.xerox.xcm.elf.Owned>
+		</object>
+	</objects>
+</request>

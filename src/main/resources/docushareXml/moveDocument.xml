@@ -1,0 +1,8 @@
+<!-- Used by MoveObject.java -->
+<request>
+		<object class="com.xerox.xcm.falcon.Document">
+			<com.xerox.xcm.falcon.Containable>
+				<parent>%d</parent>
+			</com.xerox.xcm.falcon.Containable>
+		</object>
+</request>

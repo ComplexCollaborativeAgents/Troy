@@ -22,7 +22,9 @@ public class World {
 		}
 		
 		private void addStateObjects(String dmName, Identifier worldLink){
-			this.stateObjects.put(worldLink, new LocalFileCollectionStateObject(dmName));
+			//this.stateObjects.put(worldLink, new LocalFileCollectionStateObject(dmName));
+			this.stateObjects.put(worldLink, new DocuShareCollectionStateObject(537));
+
 			
 		}
 		
@@ -33,7 +35,7 @@ public class World {
 			}
 		}
 		
-		public void writeToSoar(){
+		public void writeToSoar(){		
 			for(Map.Entry<Identifier, StateObject> entry : this.stateObjects.entrySet()) {
 				StateObject stateObject = entry.getValue();
 				Identifier stateId = entry.getKey();

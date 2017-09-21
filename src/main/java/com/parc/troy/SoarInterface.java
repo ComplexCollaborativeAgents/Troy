@@ -129,7 +129,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 	@Override
 	public void runEventHandler(int eventID, Object data, Agent agent, int phase) {
 		try {
-			Thread.sleep(4);
+			Thread.sleep(400);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -182,6 +182,7 @@ public class SoarInterface implements DialogRuleFn, RunEventInterface {
 						this.world.readSoarOutputAndApply(outputId);
 					}
 				}
+
 			
 			if (shouldOttoCallback){
 				DispatchCallback callback = this.dialogStateToCallback.getDispatchCallback();
