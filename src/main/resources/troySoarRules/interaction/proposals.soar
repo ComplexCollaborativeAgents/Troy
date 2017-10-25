@@ -6,8 +6,10 @@
 
 sp {interaction*propose*interpret-message
     (state <s> ^name interaction
-               ^message <m1>
+               ^interaction.incoming.message <m1>
                -^<< new-segment terminate-segment modify-segment >>)
+    (<m1> ^dialog-act << inform instruct accept check ask reject request silent check accept reject >>
+          -^processed true)
 -->
     (<s> ^operator <op> +)
     (<op> ^name interpret-message
@@ -32,81 +34,3 @@ sp {interaction*propose*update-stack
 	(<s>	^operator <op> + =)
  	(<op>	^name update-stack)
   }
-             	
-
-
-#sp {interaction*propose*delete-segment*human-response
-#	(state <s>	^name interaction
-#            	^message <m1>
-#             	^interaction.stack.segment <seg>
-#              	-^terminate <seg>)
-# 	(<m1> ^type <mtype>)
-#  	(<seg> ^satisfaction.response-type <mtype>)
-#-->
-#	(<s>	^operator <op> +)
-#	(<op>	^name terminate-segment
-#       		^segment <seg>
-#            ^type human-response)
-# }
-#
-#sp {interaction*propose*delete-segment*troy
-#    (state <s>    ^name interaction
-#                  ^interaction <inter>
-#                  -^terminate <seg>)
-#    (<inter>    ^processing-status <ps>
-#                ^stack.segment <seg>)
-#    (<seg>    ^purpose <pur>
-#              ^knowledge-type <kt>)
-#    (<ps>    ^completed-purpose <pur>
-#             ^id <id>
-#             ^knowledge-type <kt>)
-#-->
-#    (<s>    ^operator <op> +)
-#    (<op>    ^name terminate-segment
-#             ^segment <seg>
-#             ^type  troy-response)
-#    }
-#                
-#
-#sp {interaction*propose*create-segment*troy-initiated
-#	(state <s>	^name interaction
-#            	^interaction.processing-status <status>
-#             	-^segment.processing-status <status>
-#               	-^interaction.stack.processing-status <status>)
-# 	(<status>	^id <id>
-#                -^completed-purpose <any>)
-#-->
-#	(<s>	^operator <op> +)
-# 	(<op>	^name create-segment
-#        	^processing-status <status>
-#         	^type troy-initiated)
-#  }
-#
-#sp {interaction*propose*add-segment-to-stack
-#	(state <s>	^name interaction
-#             	^segment <new-seg>)
-#-->
-#	(<s>	^operator <op> +)
-# 	(<op>	^name add-segment
-#        	^segment <new-seg>)
-#  }
-#
-#
-#sp {interaction*propose*delete-segment
-#    (state <s> ^name interaction
-#               ^interaction.stack.segment <seg>)
-#    (<seg> ^status complete)
-#-->
-#    (<s> ^operator <op> +)
-#    (<op> ^name delete-segment
-#          ^segment <seg>)
-#    }
-#
-#sp {interaction*propose*delete-segment
-#    (state <s> ^name interaction
-#               ^terminate <seg>)
-#-->
-#    (<s> ^operator <op> +)
-#    (<op> ^name delete-segment
-#          ^segment <seg>)
-#    }

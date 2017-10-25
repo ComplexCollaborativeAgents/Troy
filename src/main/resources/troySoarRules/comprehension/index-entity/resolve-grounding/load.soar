@@ -12,3 +12,7 @@ source "resolve-collection.soar"
 source "resolve-single-equal.soar"
 
 source "resolve-single-unique.soar"
+
+source "state-no-change.soar"
+
+source "report-no-object-found.soar"

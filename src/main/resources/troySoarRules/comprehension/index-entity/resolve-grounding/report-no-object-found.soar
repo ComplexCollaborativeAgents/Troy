@@ -1,0 +1,17 @@
+##!
+# @file
+#
+# @created smohan 20170929
+
+sp {resolve-grounding*apply*report-no-object-found
+	(state <s>	^name resolve-grounding
+            	^operator.name report-no-object-found
+             	^topstate.interaction <inter>
+              	^superstate.description <e>)
+ 	(<inter> ^processing-status <ps>)
+-->
+	(<ps> ^id object-not-found
+       	  ^type incorrect-reference
+          ^information <info>)
+ 	(<info>	^description <e>)
+  }

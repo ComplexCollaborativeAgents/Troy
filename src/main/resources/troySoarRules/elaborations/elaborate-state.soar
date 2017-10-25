@@ -16,6 +16,14 @@ sp {all*elaborate*topstate
 	(<s> ^topstate <ts>)
  }
 
+sp {all*elaborate*incoming-message
+	(state <s>	^topstate <s>
+            	^io.input-link.interaction.message <m1>
+             	^interaction.incoming <inc>)
+-->
+	(<inc> ^message <m1>)
+ }
+
 sp {topstate*elaborate*world
 	(state <s> ^topstate <s>
                ^io.input-link.world <w>)

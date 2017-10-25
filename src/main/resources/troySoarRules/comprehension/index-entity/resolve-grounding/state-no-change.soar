@@ -1,0 +1,15 @@
+##!
+# @file
+#
+# @created smohan 20170929
+
+sp {state-no-change*resolve-grounding
+	(state <s>	^attribute state
+            	^impasse no-change
+             	^superstate <ss>)
+ 	(<ss>	^name resolve-grounding)
+-->
+	(<ss>	^operator <op> +)
+ 	(<op>	^name report-no-object-found)
+  }
+            	

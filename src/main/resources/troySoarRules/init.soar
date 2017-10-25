@@ -19,7 +19,9 @@ sp {topstate*apply*init-agent
       	 ^name troy
          ^interaction <inter>)
     (<inter> ^stack <stack>
-             ^processing-status <proc-stat>)
+             ^processing-status <proc-stat>
+             ^incoming <inc>
+             ^outgoing <out>)
     (<stack> ^segment <seg>)
     (<seg>	^_metadata <met>)
     (<met>	^counter 1

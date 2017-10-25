@@ -24,19 +24,21 @@ public class InteractionInputWriter {
 		//System.out.println(messageToWrite);
 		clearInteractionLink();
 		Identifier commandId = this.interactionLink.CreateIdWME("message");
-		if(messageToWrite.getArg(0).toString().equals("ActionCommand")){
+		commandId.CreateStringWME("dialog-act", messageToWrite.getArg(0).toString());
+		LOGGER.debug("Incoming message is " + messageToWrite.toString());
+		if(messageToWrite.getArg(1).op.toString().equals("ActionCommand")){
 			commandId.CreateStringWME("type", "action-command");
 			Identifier lexId = commandId.CreateIdWME("lexical");
-			this.writeActionCommand(messageToWrite, lexId);
+			this.writeActionCommand(messageToWrite.getArg(1), lexId);
 		}
 		
-		if(messageToWrite.getArg(0).toString().equals("RelationDescription")){
+		if(messageToWrite.getArg(1).op.toString().equals("RelationDescription")){
 			commandId.CreateStringWME("type", "relation-description");
 			Identifier lexId = commandId.CreateIdWME("lexical");
 			this.writeRelationDescription(messageToWrite, lexId);
 		}
 		
-		if(messageToWrite.getArg(0).toString().equals("SignalEnd")){
+		if(messageToWrite.getArg(1).op.toString().equals("SignalEnd")){
 			commandId.CreateStringWME("type", "signal-end");
 		}
 	}
@@ -87,7 +89,6 @@ public class InteractionInputWriter {
 	private void writeActionCommand(LogicalForm messageToWrite, Identifier commandId) {
 		LOGGER.debug("Messaged received from Otto is: " + messageToWrite.toString());
 		Iterator<LogicalForm> argListIterator = messageToWrite.getArgList().iterator();
-		argListIterator.next();
 		while(argListIterator.hasNext()){
 			LogicalForm lf = argListIterator.next();
 			if(lf.op != null){
@@ -121,8 +122,8 @@ public class InteractionInputWriter {
 		}
 	}
 	
-	private void writeVerb(LogicalForm verb, Identifier id){
-		
+	private void writeVerb(LogicalForm verb, Identifier id) {
+		LOGGER.debug("Writing verb: " + verb);
 		id.CreateStringWME("verb", verb.getArg(0).toString());
 	}
 	

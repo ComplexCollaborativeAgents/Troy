@@ -4,7 +4,7 @@
 # @created smohan 20170721
 
 
-sp {generation*propose*write-dialog-act
+sp {generation*propose*write-dialog-act*ask
 	(state <s>	^name generation
              	^segment <seg>)
     (<seg>	^purpose ask
