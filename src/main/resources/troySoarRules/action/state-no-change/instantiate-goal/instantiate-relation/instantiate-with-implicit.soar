@@ -21,9 +21,16 @@ sp {instantiate-relation*apply*instantiate-with-implicit
  	(<s> ^grounded <objid>)
  }
 
-sp {instantiate-relation*apply*instantiate-with-implicit*retrieve
+sp {instantiate-relation*apply*instantiate-with-implicit*retrieve*object
 	(state <s>	^name instantiate-with-implicit
             ^superstate.operator.object-id <objid>)
+-->
+	(<s>	^retrieve-lti <objid>)
+ }
+
+sp {instantiate-relation*apply*instantiate-with-implicit*retrieve*implicit-object
+	(state <s>	^name instantiate-with-implicit
+            ^superstate.operator.object-id._implicit <objid>)
 -->
 	(<s>	^retrieve-lti <objid>)
  }

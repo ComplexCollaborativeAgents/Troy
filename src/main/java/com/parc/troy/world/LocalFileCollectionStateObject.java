@@ -140,7 +140,6 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	}
 	
 	private void writeNewFolder(Identifier worldId) {
-		System.out.println("in write new folder");
 		Identifier navigatedToFolderId = null;
 		Entry<File,Identifier> entryToRemove = null;
 		

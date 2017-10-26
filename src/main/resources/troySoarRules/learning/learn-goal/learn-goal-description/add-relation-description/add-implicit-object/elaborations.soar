@@ -38,7 +38,7 @@ sp {add-implicit-object*add*long-term-object*implicit-object
 -->
 	(<obj-ltid>	^_implicit <objs>)
  	(<objs>	^name <name>) ## ideally this should be a unique identifier for every folder
- 	(<scomm>	^store <obj-ltid>)
+ 	(<scomm>	^store <obj-ltid> <objs>)
   }
 
             	
