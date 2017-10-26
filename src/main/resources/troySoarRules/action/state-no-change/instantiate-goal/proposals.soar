@@ -16,6 +16,20 @@ sp {instantiate-goal*propose*instantiate-relation
         	^relation-id <relid>)
   }
 
+sp {instantiate-goal*elaborate*instantiate-relation
+	(state <s>	^name instantiate-goal
+            	^operator <op> +
+             	^<relid> <rel>
+              	^procedural <id>
+               ^indexed-action <ia>)
+ 	(<op>	^name instantiate-relation
+        	^relation-id <relid>)
+-->
+	(<op>	^grounded-relation <rel>
+       		^procedural <id>
+         	^indexed-action <ia>)
+ }
+
 
 sp {instantiate-goal*propose*update-status*no-goal-definition
 	(state <s>	^name instantiate-goal
@@ -26,6 +40,7 @@ sp {instantiate-goal*propose*update-status*no-goal-definition
  	(<op>	^name report-unknown-goal-definition
         	^map <map>)
   }
+
 
 sp {instantiate-goal*propose*complete-instantiate-goal
 	(state <s>	^name instantiate-goal

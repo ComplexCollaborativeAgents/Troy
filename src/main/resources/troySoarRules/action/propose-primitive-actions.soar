@@ -87,5 +87,15 @@ sp {action*propose*op_paste
     (<op> ^name op_paste
           ^argument <obj>
           ^action-type primitive)
-    }         
+    } 
+
+sp {action*propose*op_go-to-home
+	(state <s>	^problemspace.action-info actionable
+            	^world <w>)
+ 	(<w>	-^current-folder.name testHome)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name op_go-to-home
+        	^action-type primitive)
+  }
              	

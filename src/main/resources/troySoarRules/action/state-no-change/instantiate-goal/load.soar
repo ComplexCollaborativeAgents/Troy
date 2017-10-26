@@ -9,6 +9,6 @@ source "proposals.soar"
 
 source "report-unknown-goal-definition.soar"
 
-source "instantiate-relation.soar"
-
 source "complete-instantiate-goal.soar"
+
+source "instantiate-relation/load.soar"

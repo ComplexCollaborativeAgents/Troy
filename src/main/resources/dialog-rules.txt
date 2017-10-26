@@ -1,12 +1,14 @@
 rank(100) => Inform(Welcome)
 Agent: Inform(Welcome) -> Hi! I am Troy, your office secretary. 
 
-rank(40) Instruct(ActionCommand($1, $2)) => Inform() writeToSoar(ActionCommand, $1, $2) 
+rank(40) Instruct(ActionCommand($1, $2)) => Inform() writeToSoar(ActionCommand, $1, $2)
+rank(40) Instruct(ActionCommand($1)) => Inform() writeToSoar(ActionCommand, $1)
 rank(40) Instruct(ActionCommand($1, $2, $3)) => Inform() writeToSoar(ActionCommand, $1, $2, $3) 
 rank(40) Instruct(SignalEnd) => Inform writeToSoar(SignalEnd)
 rank(40) Instruct(RelationDescription($1)) => Inform() writeToSoar(RelationDescription, $1)
 rank(30) Request(readOutputFromSoar) => readFromSoar($1) say($1)
 
+User: Instruct(ActionCommand($1)) <-> {ActionName[$1]}
 User: Instruct(ActionCommand($1, $2)) <-> {ActionName[$1]} {Entity[$2]}.
 User: Instruct(ActionCommand($1, $2, $3)) <-> {ActionName[$1]} {Entity[$2]} {ActionObject[$3]}. {exact}
 User: Instruct(ActionCommand($1, $2, $3, $4)) <-> {ActionName[$1]} {Entity[$2]} {ActionObject[$3]} {ActionObject[$4]}. {exact}
@@ -22,7 +24,11 @@ ActionName[verb(cut)] <-> cut
 ActionName[verb(copy)] <-> copy
 ActionName[verb(paste)] <-> paste
 ActionName[verb(transfer)] <-> transfer
+ActionName[verb(backup)] <-> backup
+ActionName[verb(discard)] <-> discard
 ActionName[verb(duplicate)] <-> duplicate
+
+ActionName[verb(go-to-home)] <-> go to home
 
 ActionSpecifier[action-specifier(from)] <-> from
 ActionSpecifier[action-specifier(to)] <-> to
@@ -51,6 +57,7 @@ EntityName[name($1)] <-> named {Token[$1]}
 EntityName[name($1)] <-> name {Token[$1]}
 EntityName[name($1)] <-> {Token[$1]}
 EntityName[name($1)] <-> into {Token[$1]}
+
 
 Tokens <-> {Token+}
 Token[$1] <-> {matches($1,.+)}

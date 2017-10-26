@@ -1,0 +1,11 @@
+##!
+# @file
+#
+# @created smohan 20171025
+
+#sp {instantiate-relation*apply*complete-instantiate-relation
+#	(state <s>	^name instantiate-relation
+#            	^operator.name complete-instantiate-relation
+#             	^<relid> <rel>
+#              	^relation-id <relid>
+#               	^s

@@ -1,0 +1,16 @@
+##!
+# @file
+#
+# @created smohan 20171025
+
+sp {add-implicit-object*propose*complete-add-implicit-object
+	(state <s>	^name add-implicit-object
+            	^relation-ltid <relid>
+             	^argument <earg>
+              	^object.name <obj-name>)
+ 	(<relation-ltid>	^<earg>._implicit.name <obj-name>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name complete-add-implicit-object)
+  }
+        	

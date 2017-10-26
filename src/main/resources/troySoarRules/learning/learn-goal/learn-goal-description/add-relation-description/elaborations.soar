@@ -31,7 +31,8 @@ sp {add-relation-description*store*relation*node
                   ^smem.command <scomm>)
 -->
     (<gid>    ^relation <rel-id>)
-    (<scomm>    ^store <gid>)}
+    (<scomm>    ^store <gid>)
+    (<s> ^relation-ltid <rel-id>)}
 
 
 sp {add-relation-description*store*entity*level*1

@@ -56,3 +56,12 @@ sp {instantiate-goal*retrieve-procedural-id*sub
 -->
 	(<s>	^retrieve-lti <pid>)
  }
+
+sp {instantiate-goal*elaborate*desired*relation
+	(state <s>	^name instantiate-goal
+            	^goal.relation <rel-id>
+             	^desired <d>)
+-->
+	(<s>	^<rel-id> <rel>)
+ 	(<d>	^relation <rel>)
+ }

@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20171025
+
+sp {add-implicit-object*apply*complete-add-implicit-object
+	(state <s>	^name add-implicit-object
+            	^object <obj>
+            	^operator.name complete-add-implicit-object
+             	^superstate <ss>)
+-->
+	(<ss>	^added <obj>)
+ }

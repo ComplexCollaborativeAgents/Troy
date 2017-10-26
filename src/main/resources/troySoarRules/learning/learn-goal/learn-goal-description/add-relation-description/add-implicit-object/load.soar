@@ -1,0 +1,10 @@
+##!
+# @file: 
+#
+# @created smohan 20171025
+
+source "elaborations.soar"
+
+source "proposals.soar"
+
+source "complete-add-implicit-object.soar"

@@ -1,0 +1,44 @@
+##!
+# @file
+#
+# @created smohan 20171025
+
+sp {add-implicit-object*elaborate*state
+	(state <s>	^name add-implicit-object
+            	^superstate.operator <sop>)
+ 	(<sop> ^name add-implicit-object
+        	^object <obj>
+         	^argument <earg>
+         	^relation-ltid <relid>)
+-->
+	(<s>	^object <obj>
+      		^argument <earg>
+        	^relation-ltid <relid>)
+ }
+
+
+sp {add-implicit-object*add*long-term-object
+	(state <s>	^name add-implicit-object
+            	^relation-ltid <relid>
+             	^argument <earg>
+             	^smem.command <scomm>)
+-->
+	(<relid>	^<earg> <obj-new>)
+ 	(<scomm>	^store <relid>)
+  }
+
+sp {add-implicit-object*add*long-term-object*implicit-object
+	(state <s>	^name add-implicit-object
+            	^relation-ltid <relid>
+             	^argument <earg>
+              	^object <obj>
+             	^smem.command <scomm>)
+ 	(<relid>	^<earg> <obj-ltid>)
+  	(<obj> ^name <name>)
+-->
+	(<obj-ltid>	^_implicit <objs>)
+ 	(<objs>	^name <name>) ## ideally this should be a unique identifier for every folder
+ 	(<scomm>	^store <obj-ltid>)
+  }
+
+            	

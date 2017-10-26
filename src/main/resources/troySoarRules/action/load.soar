@@ -30,3 +30,5 @@ source "delete/load.soar"
 source "state-no-change/load.soar"
 
 source "task/load.soar"
+
+source "go-to-home/load.soar"

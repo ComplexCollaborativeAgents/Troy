@@ -1,0 +1,63 @@
+##!
+# @file
+#
+# @created smohan 20171025
+
+sp {instantiate-relation*elaborate*state
+	(state <s>	^name instantiate-relation
+            	^superstate.operator <sop>)
+ 	(<sop>	^name instantiate-relation
+         	^relation-id <relid>
+          	^procedural <id>
+           	^indexed-action <ia>
+            ^grounded-relation <grel>)
+-->
+	(<s>	^relation-id <relid>
+      		^procedural <id>
+        	^indexed-action <ia>
+         	^grounded-relation <grel>)}
+
+
+
+sp {instantiate-relation*level1*instantiation
+	(state <s>	^name instantiate-relation
+             	^grounded-relation <rel>
+             	^procedural <pid>
+              	^indexed-action <ia>
+               	^relation-id <relid>)
+ 	(<relid>	^{<arg> << e1 e2 >>} <obj-id>)
+  	(<pid>	^<parg> <obj-id>)
+   	(<ia> ^<parg>	<obj>)
+-->
+	(<rel>	^<arg> <obj>)
+ 	(<s>	^grounded <obj-id>)
+ }
+
+sp {instantiate-relation*level2*instantiation
+	(state <s>	^name instantiate-relation
+             	^grounded-relation <rel>
+             	^procedural <pid>
+              	^indexed-action <ia>
+               	^relation-id <relid>)
+ 	(<relid>	^{<arg> << e1 e2 >>} <obj-id>)
+  	(<pid>	^<parg>.object <obj-id>)
+   	(<ia> ^<parg>.object	<obj>)
+-->
+	(<rel>	^<arg> <obj>)
+ 	(<s>	^grounded <obj-id>)
+ }
+
+sp {instantiate-relation*instantiate-specifier*not-in-task-command
+	(state <s>	^name instantiate-relation
+             	^grounded-relation <rel>
+              	^indexed-action <ia>
+               	^relation-id <relid>
+                ^grounded <obj1>
+                ^grounded <obj2>)
+ 	(<relid>	^specifier <obj-id>
+           		^e1 <obj1>
+             	^e2 <obj2>)
+-->
+	(<rel>	^specifier <obj-id>)
+ 	(<s>	^grounded <obj-id>)
+ }

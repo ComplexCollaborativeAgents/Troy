@@ -12,3 +12,21 @@ sp {add-relation-description*propose*complete-add-relation-description
     (<s>    ^operator <op> +)
     (<op>    ^name complete-add-relation-description)
     }
+
+sp {add-relation-description*propose*add-implicit-object
+	(state <s>	^name add-relation-description
+            	^relation-description <d>
+             	^relation-ltid <relid>
+             	-^added <obj>)
+ 	(<d>	^{<earg> <> _metadata} <obj>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name add-implicit-object
+        	^object <obj>
+         	^argument <earg>
+         	^relation-ltid <relid>)
+  }
+
+
+         	
+             

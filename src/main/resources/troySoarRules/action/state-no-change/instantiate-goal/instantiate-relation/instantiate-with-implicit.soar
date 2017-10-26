@@ -1,0 +1,30 @@
+##!
+# @file
+#
+# @created smohan 20171025
+
+
+sp {instantiate-relation*apply*instantiate-with-implicit
+	(state <s>	^name instantiate-relation
+            	^operator <op>
+             	^relation-id <relid>
+             	^grounded-relation <rel>
+              	^world <world>)
+ 	(<relid> ^<earg> <objid>)
+ 	(<op>	^name instantiate-with-implicit
+        	^object-id <objid>)
+  	(<objid>	^_implicit.name <imp-name>)
+   	(<world>	^<< object current-folder >>  <obj>)
+    (<obj>	^name <imp-name>)
+-->
+	(<rel>	^<earg> <obj>)
+ 	(<s> ^grounded <objid>)
+ }
+
+sp {instantiate-relation*apply*instantiate-with-implicit*retrieve
+	(state <s>	^name instantiate-with-implicit
+            ^superstate.operator.object-id <objid>)
+-->
+	(<s>	^retrieve-lti <objid>)
+ }
+ 

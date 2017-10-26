@@ -127,6 +127,8 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	
 	
 	private void writeHomeFolder(Identifier worldId) {
+		
+		
 		this.currentFolderId = worldId.CreateIdWME("current-folder");
 		currentFolderId.CreateStringWME("name", folder.getName());
 		currentFolderId.CreateStringWME("type", "folder_object");
@@ -138,6 +140,7 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 	}
 	
 	private void writeNewFolder(Identifier worldId) {
+		System.out.println("in write new folder");
 		Identifier navigatedToFolderId = null;
 		Entry<File,Identifier> entryToRemove = null;
 		
@@ -301,6 +304,9 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 				}
 			}
 			break;
+			
+		case "go-to-home":
+			this.processGoToHome();
 
 		default:
 			LOGGER.error("Invalid command sent by Soar: " + command);
@@ -421,6 +427,15 @@ public class LocalFileCollectionStateObject extends AbstractFileCollection imple
 		//navigatedToFolderId = folderId;
 		
 		LOGGER.debug("Changed to directory " + currentPath);
+	}
+	
+	protected void processGoToHome() {
+		this.currentPath = this.homePath;
+		this.previousPath = null; // temp solution, write better thoughtout state maintenance
+		
+		this.deleteAllFileIdentifiers();
+		SoarHelper.deleteAllChildren(this.currentFolderId);
+		this.currentFolderId.DestroyWME();
 	}
 
 	public String getCurrentPath() {

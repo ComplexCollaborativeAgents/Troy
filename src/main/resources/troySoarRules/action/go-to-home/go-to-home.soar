@@ -1,0 +1,13 @@
+##!
+# @file
+#
+# @created smohan 20171026
+
+sp {action*apply*op_go-to-home
+    (state <s> ^operator <op>
+               ^io.output-link <ol>)
+    (<op> ^name op_go-to-home)
+-->
+    (<ol> ^command <c>)
+    (<c> ^name go-to-home)
+    }

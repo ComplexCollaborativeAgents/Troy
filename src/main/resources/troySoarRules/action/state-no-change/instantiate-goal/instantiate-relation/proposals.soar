@@ -1,0 +1,25 @@
+##!
+# @file
+#
+# @created smohan 20171025
+
+sp {instantiate-relation*propose*instatiate-with-implicit
+	(state <s>	^name instantiate-relation
+            	^relation-id <rel-id>
+             	-^grounded <objid>)
+ 	(<rel-id> ^{<arg> << e1 e2 >>} <objid>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name instantiate-with-implicit
+        	^object-id <objid>)
+}
+
+sp {instantiate-relation*propose*complete-instantiate-relation
+	(state <s>	^name instantiate-relation
+            	^relation-id <rel-id>)
+ 	-{(<rel-id>	^<arg> <id>)
+      (<s>	-^grounded <id>)}
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name complete-instantiate-relation)
+  }
