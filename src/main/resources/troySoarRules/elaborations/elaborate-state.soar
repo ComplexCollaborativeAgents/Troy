@@ -72,10 +72,12 @@ sp {all*elaborate*hack
 
 #### elaborate problem-space
 sp {new-operator*elaborate*problem-space
-   (state <s> ^name task)
+   (state <s> ^name task
+              ^name {<name> <> task <> evaluate-operator})
 -->  
    (<s> ^problem-space <p>)
-   (<p> ^name task
+   (<p> ^name <name>
+        #^name task
    		^default-state-copy yes
 		^two-level-attributes world
   		^one-level-attributes selected interaction)
