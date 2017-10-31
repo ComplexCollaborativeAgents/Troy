@@ -1,0 +1,19 @@
+##!
+# @file
+#
+# @created smohan 20171030
+
+sp {add-subtask-to-actionspace
+	(state <s>	^name action
+            	^indexed-action <ia>
+             	^topstate.interaction.stack.segment.next.groundings.indexed-action <task>
+              	^smem.command <scomm>)
+	(<task>	^_metadata.map <taskmap>)
+ 	(<taskmap> ^actionspace <asp>)
+ 	(<ia> ^_metadata.map {<submap> <> <taskmap>})
+  	(<submap>	^procedural <proc>)
+   	(<proc> ^action-type complex)
+-->
+	(<asp> ^_operator <proc>)
+ 	(<scomm>	^store <p>)
+  }

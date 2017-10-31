@@ -10,7 +10,7 @@ sp {compose-action*propose*compose-action-object
                   ^grounding <g>)
     (<map>    ^procedural <pid>
               ^linguistic <lid>)
-    (<pid> ^{<argument> <> op_name} <arg-id>)
+    (<pid> ^{<argument> <> op_name <> action-type} <arg-id>)
     (<lid>    -^<any-arg> <arg-id>)
     (<ia> -^<argument> <any-value>)
 -->

@@ -35,7 +35,8 @@ sp {action*elaborate*dont-match*arguments
 	(<s>	^dont-match <dm>)
  	(<dm>	#^arg	name
         	^arg	_metadata
-         	^arg	executed)
+         	^arg	executed
+          	^arg	action-type)
   }
 
 sp {action*copy*dont-match*substate

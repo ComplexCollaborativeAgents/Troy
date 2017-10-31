@@ -1,0 +1,80 @@
+##!
+# @file
+#
+# @created smohan 20171030
+
+sp {generate-actionspace*elaborate*map
+	(state <s>	^name generate-actionspace
+            	^superstate.superstate.operator <sop>)
+ 	(<sop>	^_metadata.map <map>)
+-->
+	(<s>	^map <map>)
+ }
+
+sp {generate-actionspace*retrieve*actionspace
+	(state <s>	^name generate-actionspace
+            	^map <map>)
+ 	(<map>	^actionspace <as>)
+-->
+	(<s>	^retrieve-lti <as>)
+ }
+
+sp {generate-actionspace*elaborate*candidate-objects
+	(state <s>	^name generate-actionspace
+            	^map <map>)
+-->
+	(<s>	^candidate-objects <co>)
+ }
+
+sp {generate-actionspace*elaborate*candidate-objects*object
+	(state <s>	^name generate-actionspace
+            	^superstate.superstate.desired <d>
+             	^candidate-objects <co>)
+ 	(<d>	^relation <rel>)
+  	(<rel>	^<< e1 e2 >> <obj>)
+-->
+	(<co>	^object <obj>)
+ }
+
+sp {generate-actionspace*elaborate*candidate-operator*retrieve-id
+	(state <s>	^name generate-actionspace
+            	^map.actionspace._operator <pid>)
+-->
+	(<s>	^retrieve-lti <pid>)
+ }
+
+sp {generate-actionspace*elaborate*candidate-operator*retrieve-id*arg
+	(state <s>	^name generate-actionspace
+            	^map.actionspace._operator.{<arg> <> action-type <> op_name} <pid>)
+-->
+	(<s>	^retrieve-lti <pid>)
+ }
+
+sp {generate-actionspace*elaborate*candidate-operator*map
+	(state <s>	^name generate-actionspace
+            	^map.actionspace._operator <pid>)
+-->
+	(<s>	^smem-query-cue <cue>)
+ 	(<cue>	^procedural <pid>)
+  }
+
+sp {generate-actionspace*elaborate*candidate-operator
+	(state <s>	^name generate-actionspace
+            	^map <map>
+             	^candidate-objects <co>
+              	^retrieved-lti-cue.retrieved-lti <submap>)
+ 	(<map> ^actionspace._operator <pid>)
+ 	(<pid>	^op_name <name>
+         	^action-type complex
+          	^{<arg1> <> op_name <> action-type}	<val1>
+			^{<arg2> <> <arg1> <> op_name <> action-type}.object <val2>)
+	(<co>	^object <obj1>
+       		^object {<obj2> <> <obj1>})
+-->
+	(<s>	^candidate-operator <cop>)
+ 	(<cop>	^name <name>
+        	^<arg1>	<obj1>
+         	^<arg2>.object <obj2>
+          	^_metadata.map <submap>)
+  }
+

@@ -52,7 +52,7 @@ sp {instantiate-goal*retrieve-procedural-id
 
 sp {instantiate-goal*retrieve-procedural-id*sub
 	(state <s>	^name instantiate-goal
-            	^procedural.{<any> <> op_name} <pid>)
+            	^procedural.{<any> <> op_name <> action-type} <pid>)
 -->
 	(<s>	^retrieve-lti <pid>)
  }

@@ -3,10 +3,20 @@
 #
 # @created smohan 20170810
 
-#sp {task*propose*generate-actionspace
-#	(state <s>	^name task
-#            	-^action-space-operator <any>)
-#-->
-#	(<s>	^operator <op> + !)
-# 	(<op>	^name generate-actionspace)
-#  }
+sp {task*propose*generate-actionspace
+	(state <s>	^name task
+            	^superstate <ss>
+            	-^actionspace-operator <any>)
+ 	(<ss>	^indexed-action <ia>)
+  	(<ia>	^_metadata.map.procedural.action-type complex)
+-->
+	(<s>	^operator <op> + !)
+ 	(<op>	^name generate-actionspace)
+  }
+
+sp {task*propose*actionspace-operators
+	(state <s>	^name task
+            	^actionspace-operator <op>)
+-->
+	(<s>	^operator <op> +)
+ }

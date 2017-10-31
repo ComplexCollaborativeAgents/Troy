@@ -13,7 +13,7 @@ sp {anystate*propose*smem-query
   -{(<s> ^retrieved-lti-cue <rlc>)
    (<rlc> ^cue <cue>)}
 -->
-   (<s> ^operator <op> + =)
+   (<s> ^operator <op> + > =)
    (<op> ^name smem-query
             ^cue <cue>)
 }

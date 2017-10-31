@@ -1,0 +1,28 @@
+##!
+# @file
+#
+# @created smohan 20171030
+
+sp {generate-actionspace*apply*complete-generate-actionspace*failure
+	(state <s>	^name generate-actionspace
+            	^superstate <ss>
+             	^map.actionspace <as>
+             	^operator.name complete-generate-actionspace
+              	^quiescence t
+               	^retrieved-lti <as>)
+	(<as>	-^<any>)
+-->
+	(<ss>	^actionspace-operator failure)
+ }
+
+sp {generate-actionspace*apply*complete-generate-actionspace
+	(state <s>	^name generate-actionspace
+            	^superstate <ss>
+             	^candidate-operator <cop>
+             	^map.actionspace <as>
+             	^operator.name complete-generate-actionspace
+              	^quiescence t
+               	^retrieved-lti <as>)
+-->
+	(<ss>	^actionspace-operator <cop>)
+ }
