@@ -4,9 +4,10 @@
 # @created smohan 20170830
 sp {learn-goal-recognition-rule*apply*report-success-all-matched
     (state <s>    ^name learn-goal-recognition-rule
-                  ^operator <op>)
+                  ^operator <op>
+                  ^superstate <ss>)
     (<op>    ^name report-success-all-matched
              ^desired <d>)
 -->
-    (<s>    ^success <d>)
+    (<ss>    ^success <d>)
     }
