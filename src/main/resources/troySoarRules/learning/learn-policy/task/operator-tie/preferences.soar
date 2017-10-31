@@ -11,8 +11,18 @@ sp {selection*prefer*fully*matched*evaluate-operator
       (<op>	-^matched <arg>)
       (<s>	-^dont-match.arg <arg>)}
 -->
-	(<s>	^operator <op> >)
+	(<s>	^operator <op> >
+      		^operator-matched <op>)
  }
- 	
+
+#sp {selection*reject*all*unmatched
+#	(state <s>	^name selection
+#            	^operator <op> +
+#             	^instructed-subtask <is>
+#              	-^operator-matched <op>)
+#-->
+#	(<s>	^operator <op> -)
+# }
+# 	
         	
          

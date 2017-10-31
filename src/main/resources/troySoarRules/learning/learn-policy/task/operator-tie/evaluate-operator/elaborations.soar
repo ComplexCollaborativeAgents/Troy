@@ -1,0 +1,11 @@
+##!
+# @file
+#
+# @created smohan 20171030
+
+sp {evaluate-operator*elaborate*indexed-action
+	(state <s>	^name evaluate-operator
+            	^look-ahead-operator <lop>)
+-->
+	(<s>	^indexed-action <lop>)
+ }

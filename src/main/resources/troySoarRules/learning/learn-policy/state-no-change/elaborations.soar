@@ -47,6 +47,7 @@ sp {action-state-no-change*propose*operator*superstate
               	^desired <d>
         		^success <d>
          		^indexed-action <ia>)
+ 	(<ia> ^name <name>)
 -->
 	(<ss>	^operator <ia> +)
  }

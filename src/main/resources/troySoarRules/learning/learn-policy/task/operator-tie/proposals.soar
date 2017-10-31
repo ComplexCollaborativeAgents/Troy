@@ -12,3 +12,37 @@ sp {selection*find-next-episode
  	(<op>	^name find-next-episode
         	^episode-id <sid>)
   }
+
+#sp {selection*propose*evaluate-operator*if-nothing
+#	(state <s>	^name selectehtion
+#            	^instructed-subtask <is>)
+#-->
+#	(<s>	^operator <op> + <)
+# 	(<op>	^name evaluate-operator
+#        	^superoperator <is>)
+#  }
+
+#sp {selection*propose*evaluate-operator*if-nothing
+#	(state <s>	^name selecoeuotion
+#            	^instructed-subtask <task>
+#             	^superstate <ss>)
+#   	(<task>	^name <tname>
+#            ^_metadata <tmet>
+#            ^<argument1> <val1>
+#            ^<argument2>.object <val2>)
+#    (<val1> ^name <val1name>)
+#    (<val2>	^name <val2name>)
+#    (<ss>	^world <ssw>)
+#    (<ssw>	^object <valx1>
+#            ^object <valx2>)
+#    (<valx1> ^name <val1name>)
+#    (<valx2> ^name <val2name>)
+#-->
+#	(<s>	^operator <op> + >)
+# 	(<op>	^name evaluate-operator
+#        	^superoperator <ops>)
+#  	(<ops>	^name <tname>
+#          	^_metadata <tmet>
+#           	^<argument1> <valx1>
+#            ^<argument2>.object <valx2>)
+# }

@@ -3,3 +3,10 @@
 #
 # @created smohan 20170810
 
+#sp {task*propose*generate-actionspace
+#	(state <s>	^name task
+#            	-^action-space-operator <any>)
+#-->
+#	(<s>	^operator <op> + !)
+# 	(<op>	^name generate-actionspace)
+#  }

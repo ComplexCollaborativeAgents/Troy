@@ -22,9 +22,10 @@ sp {create-new-map*store*map
 	(<s> ^map <map>)
  	(<map> ^type action
   		   ^procedural <proc>
-       	   ^linguistic <ling>)
+       	   ^linguistic <ling>
+           ^action-space <as>)
     (<proc> ^op_name (make-constant-symbol <opname>))
- 	(<scomm> ^store <map> <proc> <ling>)
+ 	(<scomm> ^store <map> <proc> <ling> <as>)
   }
 
 sp {create-new-map*store*verb

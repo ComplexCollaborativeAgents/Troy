@@ -1,0 +1,30 @@
+##!
+# @file
+#
+# @created smohan 20171027
+#sp {task*operator-tie*selection*state-no-change
+#	(state <s>	^superstate <ss>
+#            	^attribute state
+#             	^choices none)
+# 	(<ss>	^name selection
+#        	^instructed-subtask <ist>)
+#-->
+#	(<s>	^operator <ist> + >)
+# }
+#
+#sp {task*operato-tie*selection*state-no-change*copy*world
+#	(state <s>	^superstate <ss>
+#            	^attribute state
+#             	^choices none
+#              	^world <w>)
+# 	(<ss>	^name selection
+#        	^superstate <sss>)
+#  	(<sss> ^world <sssw>)
+#   	(<sssw> ^<attr> <val>)
+#-->
+#	(<w>	^<attr> <val>)
+# }
+#            	
+#
+#sp {task*operator-tie*selection*copy*world*instructed-action
+#	(state <s> 

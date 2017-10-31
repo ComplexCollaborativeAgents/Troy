@@ -10,3 +10,7 @@ source "proposals.soar"
 source "find-next-episode/load.soar"
 
 source "preferences.soar"
+
+source "state-no-change.soar"
+
+source "evaluate-operator/load.soar"

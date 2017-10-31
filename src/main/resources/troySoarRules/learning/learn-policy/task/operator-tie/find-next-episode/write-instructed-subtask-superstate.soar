@@ -12,3 +12,5 @@ sp {find-next-episode*apply*write-instructed-subtask-superstate
 -->
 	(<ss>	^instructed-subtask <task>)
  }
+
+

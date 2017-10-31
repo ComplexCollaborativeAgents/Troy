@@ -43,14 +43,26 @@ sp {selection*elaborate*subtask-segment-id*superstate
  }
 
 
+sp {selection*match*evaluate-operator*superoperator*name
+	(state <s>	^name selection
+           		^instructed-subtask <st>
+             	^operator <op> +)
+ 	(<op>	^name evaluate-operator
+         	^superoperator <sop>)
+ 	(<st>	^name <val>)
+  	(<sop>	^name <val>)
+-->
+	(<op>	^matched name)
+ }
+
 sp {selection*match*evaluate-operator*superoperator*level1
 	(state <s>	^name selection
            		^instructed-subtask <st>
              	^operator <op> +)
  	(<op>	^name evaluate-operator
          	^superoperator <sop>)
- 	(<st>	^<arg> <val>)
-  	(<sop>	^<arg> <val>)
+ 	(<st>	^<arg>.name <val>)
+  	(<sop>	^<arg>.name <val>)
 -->
 	(<op>	^matched <arg>)
  }
@@ -61,10 +73,20 @@ sp {selection*match*evaluate-operator*superoperator*level2
              	^operator <op> +)
  	(<op>	^name evaluate-operator
          	^superoperator <sop>)
- 	(<st>	^<arg>.name <val>)
-  	(<sop>	^<arg>.name <val>)
+ 	(<st>	^<arg>.object.name <val>)
+  	(<sop>	^<arg>.object.name <val>)
 -->
 	(<op>	^matched <arg>)
+ }
+
+
+#### 
+
+sp {selection*retrieve*goal*long-term
+	(state <s>	^name task
+            	^indexed-action._metadata.map.goal <gid>)
+-->
+	(<s>	^retrieve-lti <gid>)
  }
 
 
