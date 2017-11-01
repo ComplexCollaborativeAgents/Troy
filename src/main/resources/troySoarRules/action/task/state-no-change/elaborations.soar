@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20171101
+
+sp {task*state-no-change*elaborate*state-name
+	(state <s>	^impasse no-change
+             	^attribute state
+              	^superstate <ss>)
+ 	(<ss>	^name task)
+-->
+	(<s>	^name task-state-no-change)
+ 	(force-learn <s>)
+ }

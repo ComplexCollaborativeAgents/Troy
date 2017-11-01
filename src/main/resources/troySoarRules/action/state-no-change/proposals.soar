@@ -4,19 +4,19 @@
 # @created smohan 20170713
 
 
-sp {action-state-no-change*instantiate-goal
-	(state <s>	^name action-state-no-change
-            	-^superstate.desired <d>
-              	^indexed-action <ia>)
--->
-	(<s>	^operator <op> +)
- 	(<op>	^name instantiate-goal
-        	^indexed-action <ia>)
-  }
+#sp {action-state-no-change*instantiate-goal
+#	(state <s>	^name action-state-no-change
+#            	-^superstate.desired <d>
+#              	^indexed-action <ia>)
+#-->
+#	(<s>	^operator <op> +)
+# 	(<op>	^name instantiate-goal
+#        	^indexed-action <ia>)
+#  }
 
 sp {action-state-no-change*propose-indexed-action
 	(state <s>	^name action-state-no-change
-            	^superstate.desired <d>
+            	#^superstate.desired <d>
 #                -^problemspace.learning-info explanation
              	^indexed-action <ia>)
 -->

@@ -6,6 +6,7 @@
 sp {task*propose*generate-actionspace
 	(state <s>	^name task
             	^superstate <ss>
+             	^desired <d>
             	-^actionspace-operator <any>)
  	(<ss>	^indexed-action <ia>)
   	(<ia>	^_metadata.map.procedural.action-type complex)
@@ -20,3 +21,14 @@ sp {task*propose*actionspace-operators
 -->
 	(<s>	^operator <op> +)
  }
+
+sp {task*propose*indicate-task-goal-achieved
+    (state <s> ^name task
+               ^success <d>
+               ^desired <d>
+               ^superstate <ss>)
+-->
+    (<s> ^operator <op> + >)
+    (<op> ^name indicate-task-goal-achieved
+          ^type maintenance)
+    }

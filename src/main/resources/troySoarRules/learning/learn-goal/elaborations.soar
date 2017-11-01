@@ -17,6 +17,14 @@ sp {learn-goal*elaborate*world
     (<s>    ^world <w>)
     }
 
+sp {learn-goal*elaborate*indexed-action
+	(state <s>	 ^name learn-goal 
+             	^topstate <ts>)
+    (<ts> ^interaction.stack.segment.next.groundings.indexed-action <ia>)
+    -->
+    (<s> ^indexed-action <ia>)
+    }
+
 sp {learn-goal*elaborate*world*relations
 	(state <s>	^desired <d>
             	^name learn-goal

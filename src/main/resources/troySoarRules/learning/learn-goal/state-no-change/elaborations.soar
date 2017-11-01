@@ -10,15 +10,47 @@ sp {elaborate*learn-goal*state-no-change*name
     (<ss>    -^name troy
               ^desired <d>)
 -->
-    (<s>    ^name learn-goal-recognition-rule)
+    (<s>    ^name learn-goal-recognition-rule
+            ^indexed-action-arguments <arg>)
     }
 
 sp {elaborate*learn-goal*dont-prefer*match-relation
 	(state <s>	^name learn-goal-recognition-rule
+            	-^superstate.name learn-goal
             	^operator <op1> +
              	^operator <op2> +
               	^indexed-action <op2>)
  	(<op1> ^name match-relation)
 -->
 	(<s>	^operator <op1> < <op2>)
+ }
+
+sp {elaborate*learn-goal*prefer*match-relation
+	(state <s>	^name learn-goal-recognition-rule
+            	^superstate.name learn-goal
+            	^operator <op1> +
+             	^operator <op2> +
+              	^indexed-action <op2>)
+ 	(<op1> ^name << match-relation report-success-all-matched >>)
+-->
+	(<s>	^operator <op1> > <op2>)
+ }
+
+sp {elaborate*learn-goal*indexed-action*arguments*level1
+	(state <s>	^name learn-goal-recognition-rule
+            	^indexed-action <ia>
+             	^indexed-action-arguments <args>)
+ 	(<ia>	^{<arg> <> name <> _metadata} <val>)
+  	(<val>	-^object)
+-->
+	(<args>	^object <val>)
+ }
+
+sp {elaborate*learn-goal*indexed-action*arguments*level2
+	(state <s>	^name learn-goal-recognition-rule
+            	^indexed-action <ia>
+             	^indexed-action-arguments <args>)
+ 	(<ia>	^<arg>.object <val>)
+-->
+	(<args>	^object <val>)
  }

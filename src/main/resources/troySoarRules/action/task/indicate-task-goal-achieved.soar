@@ -1,0 +1,14 @@
+##!
+# @file
+#
+# @created smohan 20171101
+
+sp {task*apply*indicate-task-goal-achieved
+	(state <s>	^name task
+            	^operator.name indicate-task-goal-achieved
+             	^superstate <ss>)
+ 	(<ss>	^indexed-action <ia>)
+-->
+	#(<ia> 	^executed true)
+ 	(<ss>	^success-execution <ia>)
+ }

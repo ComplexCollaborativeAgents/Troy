@@ -3,14 +3,21 @@
 #
 # @created smohan 20170810
 
-sp {task*elaborate*problemspace
+sp {task*elaborate*name
 	(state <s>	^superstate <ss>
             	^problemspace <ps>)
     (<ss>   ^indexed-action <ia>
             ^operator <ia>)
 -->
 	(<s>	^name task)
- 	(<ps>	^action-info actionable)
+ }
+
+sp {task*elaborate*problemspace*if-desired
+	(state <s>	^name task
+            	^desired <d>
+             	^problemspace <ps>)
+-->
+	(<ps>	^action-info actionable)
  }
 
 sp {task*elaborate*task-segment-id
@@ -27,12 +34,12 @@ sp {task*elaborate*subtask-segment-id
 	(<s>	^subtask-segment-id (* 100 <id>))
  }
 
-sp {task*elaborate*desired
-	(state <s>	^name task
-            	^superstate.desired <d>)
--->
-	(<s>	^desired <d>)
- }
+#sp {task*elaborate*desired
+#	(state <s>	^name task
+#            	^superstate.desired <d>)
+#-->
+#	(<s>	^desired <d>)
+# }
 
 sp {task*write*indicate-successful-execution
 	(state <s>	^name task

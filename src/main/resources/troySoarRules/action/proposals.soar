@@ -25,8 +25,8 @@ sp {action*propose*complete-action
 
 sp {action*propose*complete-task
     (state <s> ^name action
-               ^success <d>
-               ^desired <d>)
+               ^indexed-action <ia>
+               ^success-execution <ia>)
 -->
     (<s> ^operator <op> + >)
     (<op> ^name complete-action

@@ -36,10 +36,18 @@ sp {action-state-no-change*elaborate*world*args
 sp {action-state-no-change*propose*operator*superstate
 	(state <s>	^name action-state-no-change
               	^superstate <ss>
-              	^desired <d>
-        		^success <d>
-         		^indexed-action <ia>)
- 	(<ia> ^name <name>)
+         		^indexed-action <ia>
+           		^success-execution <ia>)
 -->
 	(<ss>	^operator <ia> +)
+ }
+
+sp {action-state-no-change*elaborate*success-execution*superstate
+	(state <s>	^name action-state-no-change
+            	^success-execution <ia>
+             	^superstate <ss>
+              	-^problemspace.learning-info explanation)
+ 	(<ss>	^name action)
+-->
+	(<ss>	^success-execution <ia>)
  }

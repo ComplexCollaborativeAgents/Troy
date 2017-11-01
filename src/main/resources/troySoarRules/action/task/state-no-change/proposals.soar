@@ -1,0 +1,15 @@
+##!
+# @file
+#
+# @created smohan 20171101
+
+sp {task-state-no-change*propose*instantiate-goal
+	(state <s>	^name task-state-no-change
+            	^superstate <ss>
+             	-^desired <d>)
+ 	(<ss>	^superstate.operator <ia>)
+-->
+	(<s>	^operator <op> +)
+ 	(<op>	^name instantiate-goal
+        	^indexed-action <ia>)
+  }

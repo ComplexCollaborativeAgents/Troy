@@ -4,7 +4,10 @@
 # @created smohan 20170830
 sp {learn-goal-recognition-rule*apply*match-relation
     (state <s>    ^name learn-goal-recognition-rule
-                  ^operator <op>)
+                  ^operator <op>
+                  ^indexed-action-arguments <args>)
+#    (<args>	^object <obj1>
+#            ^object <obj2>)
     (<op>    ^name match-relation
              ^relation <rel>
              ^world <w>)

@@ -13,3 +13,8 @@ source "operator-tie/load.soar"
 
 
 source "generate-actionspace/load.soar"
+
+
+source "state-no-change/load.soar"
+
+source "indicate-task-goal-achieved.soar"

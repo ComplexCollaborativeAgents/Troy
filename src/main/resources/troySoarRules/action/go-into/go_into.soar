@@ -18,10 +18,12 @@ sp {action*apply*op_go_into*model
 	(state <s>	^operator <op>
              	-^io
                	^world <w>)
- 	(<w>	^object <obj>)
+ 	(<w>	^object <obj>
+       		^current-folder <old>)
  	(<op>	^name op_go_into
         	^argument <obj>)
 -->
 	(<w>	^current-folder <obj>
-      		^object <obj> -)
+      		^object <obj> -
+        	^current-folder <old> -)
  }

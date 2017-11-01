@@ -28,7 +28,7 @@ sp {generate-actionspace*elaborate*candidate-objects
 
 sp {generate-actionspace*elaborate*candidate-objects*object
 	(state <s>	^name generate-actionspace
-            	^superstate.superstate.desired <d>
+            	^superstate.desired <d>
              	^candidate-objects <co>)
  	(<d>	^relation <rel>)
   	(<rel>	^<< e1 e2 >> <obj>)
