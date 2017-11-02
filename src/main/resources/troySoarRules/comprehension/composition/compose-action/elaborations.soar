@@ -13,8 +13,6 @@ sp {compose-action*elaborate*grounding*message
          ^message <m>)
     }
 
-
-
 sp {compose-action*elaborate*map
     (state <s> ^name compose-action
                ^grounding.verb.map <map>)
@@ -42,6 +40,38 @@ sp {compose-action*retrieve*procedural-id
 -->
     (<s> ^retrieve-lti <pid>)
     }
+
+
+sp {compose-action*retrieve*goal-id
+	(state <s>	^name compose-action
+            	^map.goal <gid>)
+-->
+	(<s>	^retrieve-lti <gid>)
+ }
+
+sp {compose-action*retrieve*goal-id*relation
+	(state <s>	^name compose-action
+            	^map.goal.relation <rid>)
+ 	(<rid>	-^<any>)
+-->
+	(<s>	^retrieve-lti <rid>)
+ }
+
+sp {compose-action*retrieve*goal-id*relation-objects
+	(state <s>	^name compose-action
+            	^map.goal.relation.<< e1 e2 >> <rel-obj>)
+ 	(<rel-obj> -^<any>)
+-->
+	(<s>	^retrieve-lti <rel-obj>)
+ }
+
+sp {compose-action*retrieve*goal-id*relation-objects*implicit
+	(state <s>	^name compose-action
+            	^map.goal.relation.<< e1 e2 >>_implicit <imp-obj>)
+ 	(<imp-obj> -^<any>)
+-->
+	(<s>	^retrieve-lti <imp-obj>)
+ }
    
 
 sp {compose-action*indexed-action

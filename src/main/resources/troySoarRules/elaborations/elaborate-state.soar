@@ -52,6 +52,7 @@ sp {all*elaborate*problemspace*learning-info
 }
 sp {all*elaborate*problemspace*action-info
 	(state <s>	^superstate.problemspace.action-info <any>
+            	-^name << generate-actionspace evaluate-operator >>
 				^problemspace <ps>
     			^attribute operator)
 -->

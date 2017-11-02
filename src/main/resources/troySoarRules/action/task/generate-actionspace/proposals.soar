@@ -5,8 +5,7 @@
 
 sp {generate-actionspace*propose*complete-generate-actionspace
 	(state <s>	^name generate-actionspace
-            	^map.actionspace <as>
-             	^retrieved-lti <as>)
+            	^map.actionspace <as>)
 -->
 	(<s>	^operator <op> + >)
  	(<op>	^name complete-generate-actionspace)

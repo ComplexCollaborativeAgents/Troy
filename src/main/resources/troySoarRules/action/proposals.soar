@@ -12,7 +12,6 @@
 #	(<s>	^operator <ia> -)
 # }
 
-
 sp {action*propose*complete-action
     (state <s> ^name action
                ^indexed-action <ia>)

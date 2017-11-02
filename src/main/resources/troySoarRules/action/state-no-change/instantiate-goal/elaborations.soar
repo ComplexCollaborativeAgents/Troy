@@ -29,33 +29,33 @@ sp {instantiate-goal*elaborate*desired
 	(<s>	^desired <d>)
  }
 
-sp {instantiate-goal*retrieve*goal
-	(state <s>	^name instantiate-goal
-            	^goal <gid>)
--->
-	(<s>	^retrieve-lti <gid>)
- }
-
-sp {instantiate-goal*retrieve-relation
-	(state <s>	^name instantiate-goal
-            	^goal.relation <relid>)
--->
-	(<s>	^retrieve-lti <relid>)
- }
-
-sp {instantiate-goal*retrieve-procedural-id
-	(state <s>	^name instantiate-goal
-            	^procedural <pid>)
--->
-	(<s>	^retrieve-lti <pid>)
- }
-
-sp {instantiate-goal*retrieve-procedural-id*sub
-	(state <s>	^name instantiate-goal
-            	^procedural.{<any> <> op_name <> action-type} <pid>)
--->
-	(<s>	^retrieve-lti <pid>)
- }
+#sp {instantiate-goal*retrieve*goal
+#	(state <s>	^name instantiate-goal
+#            	^goal <gid>)
+#-->
+#	(<s>	^retrieve-lti <gid>)
+# }
+#
+#sp {instantiate-goal*retrieve-relation
+#	(state <s>	^name instantiate-goal
+#            	^goal.relation <relid>)
+#-->
+#	(<s>	^retrieve-lti <relid>)
+# }
+#
+#sp {instantiate-goal*retrieve-procedural-id
+#	(state <s>	^name instantiate-goal
+#            	^procedural <pid>)
+#-->
+#	(<s>	^retrieve-lti <pid>)
+# }
+#
+#sp {instantiate-goal*retrieve-procedural-id*sub
+#	(state <s>	^name instantiate-goal
+#            	^procedural.{<any> <> op_name <> action-type} <pid>)
+#-->
+#	(<s>	^retrieve-lti <pid>)
+# }
 
 sp {instantiate-goal*elaborate*desired*relation
 	(state <s>	^name instantiate-goal

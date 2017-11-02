@@ -12,8 +12,16 @@ sp {task*elaborate*name
 	(<s>	^name task)
  }
 
+sp {task*elaborate*name*operator
+	(state <s>	^superstate.operator <op>)
+ 	(<op>	^_metadata.map.procedural.action-type complex)
+-->
+	(<s>	^name task)
+ }
+
 sp {task*elaborate*problemspace*if-desired
 	(state <s>	^name task
+            	-^name evaluate-operator
             	^desired <d>
              	^problemspace <ps>)
 -->
@@ -34,18 +42,25 @@ sp {task*elaborate*subtask-segment-id
 	(<s>	^subtask-segment-id (* 100 <id>))
  }
 
-#sp {task*elaborate*desired
+#sp {task*write*indicate-successful-execution
 #	(state <s>	^name task
-#            	^superstate.desired <d>)
+#            	^desired <d>
+#             	^success <d>
+#              	^superstate <ss>)
 #-->
-#	(<s>	^desired <d>)
-# }
+#	(<ss> ^success <d>)
+#  }
 
-sp {task*write*indicate-successful-execution
+sp {task*candidate-operator*retrieve*goal
 	(state <s>	^name task
-            	^desired <d>
-             	^success <d>
-              	^superstate <ss>)
+            	^actionspace-operator._metadata.map.goal <gid>)
 -->
-	(<ss> ^success <d>)
-  }
+	(<s>	^retrieve-lti <gid>)
+ }
+
+sp {task*candidate-operator*retrieve*goal*relation
+	(state <s>	^name task
+            	^actionspace-operator._metadata.map.goal.relation <gid>)
+-->
+	(<s>	^retrieve-lti <gid>)
+ }

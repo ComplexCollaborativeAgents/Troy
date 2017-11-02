@@ -16,7 +16,7 @@ sp {learn-goal*propose*learn-goal-description
             ^segment <seg>)
     }
     
-sp {learn-goal*propose*complete-learn-goal
+sp {lose*complete-learn-goal
      (state <s>    ^name learn-goal
                    ^desired <d>
                    ^success <d>)

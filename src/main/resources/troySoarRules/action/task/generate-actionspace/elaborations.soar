@@ -15,6 +15,7 @@ sp {generate-actionspace*retrieve*actionspace
 	(state <s>	^name generate-actionspace
             	^map <map>)
  	(<map>	^actionspace <as>)
+  	(<as> -^<any>)
 -->
 	(<s>	^retrieve-lti <as>)
  }
@@ -39,6 +40,7 @@ sp {generate-actionspace*elaborate*candidate-objects*object
 sp {generate-actionspace*elaborate*candidate-operator*retrieve-id
 	(state <s>	^name generate-actionspace
             	^map.actionspace._operator <pid>)
+ 	(<pid>	-^<any>)
 -->
 	(<s>	^retrieve-lti <pid>)
  }
@@ -46,6 +48,7 @@ sp {generate-actionspace*elaborate*candidate-operator*retrieve-id
 sp {generate-actionspace*elaborate*candidate-operator*retrieve-id*arg
 	(state <s>	^name generate-actionspace
             	^map.actionspace._operator.{<arg> <> action-type <> op_name} <pid>)
+ 	(<pid>	-^object <obj>)
 -->
 	(<s>	^retrieve-lti <pid>)
  }
@@ -77,4 +80,22 @@ sp {generate-actionspace*elaborate*candidate-operator
          	^<arg2>.object <obj2>
           	^_metadata.map <submap>)
   }
+
+sp {generate-actionspace*elaborate*candidate-operator*map*goal
+	(state <s>	^name generate-actionspace
+            	^retrieved-lti-cue.retrieved-lti <submap>)
+ 	(<submap>	^goal <gid>)
+  	(<gid>	-^<any>)
+-->
+	(<s>	^retrieve-lti <gid>)
+ }
+
+sp {generate-actionspace*elaborate*candidate-operator*map*goal*rerahiot
+	(state <s>	^name generate-actionspace
+            	^retrieved-lti-cue.retrieved-lti.goal <goal>)
+ 	(<goal>	^relation <rid>)
+  	(<rid>	-^<any>)
+-->
+	(<s>	^retrieve-lti <rid>)
+ }
 

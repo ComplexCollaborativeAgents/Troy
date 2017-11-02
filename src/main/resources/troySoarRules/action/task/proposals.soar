@@ -32,3 +32,13 @@ sp {task*propose*indicate-task-goal-achieved
     (<op> ^name indicate-task-goal-achieved
           ^type maintenance)
     }
+
+sp {task*prefer*indicate-task-goal-achieved*HACK
+	(state <s>	^name task
+            	^operator <op1> +
+             	^operator <op2> +)
+ 	(<op1> ^name <any>)
+  	(<op2> ^name smem-retrieve)
+-->
+	(<s>	^operator <op1> > <op2>)
+ }
