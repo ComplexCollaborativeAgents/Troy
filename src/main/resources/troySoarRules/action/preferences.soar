@@ -9,7 +9,7 @@ sp {action*reject*operator*different-name
                ^operator <op> +)
     (<ia> ^name <ia_name>)
     (<op> ^name {<op_name> <> <ia_name>}
-          -^type maintenance)
+          -^type << maintenance memory >>)
 -->
     (<s> ^operator <op> -)
     }

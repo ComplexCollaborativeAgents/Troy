@@ -15,6 +15,7 @@ sp {anystate*propose*smem-query
 -->
    (<s> ^operator <op> + > =)
    (<op> ^name smem-query
+         ^type memory
             ^cue <cue>)
 }
 

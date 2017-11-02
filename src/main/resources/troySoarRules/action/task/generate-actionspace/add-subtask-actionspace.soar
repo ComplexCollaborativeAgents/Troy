@@ -15,5 +15,5 @@ sp {add-subtask-to-actionspace
    	(<proc> ^action-type complex)
 -->
 	(<asp> ^_operator <proc>)
- 	(<scomm>	^store <p>)
+ 	(<scomm> ^store <asp>)
   }

@@ -19,13 +19,19 @@ sp {task*elaborate*name*operator
 	(<s>	^name task)
  }
 
-sp {task*elaborate*problemspace*if-desired
+sp {task*elaborate*problemspace
 	(state <s>	^name task
-            	-^name evaluate-operator
-            	^desired <d>
              	^problemspace <ps>)
 -->
 	(<ps>	^action-info actionable)
+ }
+
+sp {task*elaborate*reject*operators*if-not-desired
+	(state <s>	^name task
+            	-^desired
+              	^operator <op> +)
+-->
+	(<s>	^operator <op> -)
  }
 
 sp {task*elaborate*task-segment-id

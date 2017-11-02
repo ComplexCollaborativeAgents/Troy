@@ -23,6 +23,7 @@ sp {compose-action*elaborate*map
 sp {compose-action*retrieve*linguistic-id
     (state <s>    ^name compose-action
                   ^map.linguistic <ltid>)
+    (<ltid> -^<any>)
 -->
     (<s> ^retrieve-lti <ltid>)
     }
@@ -30,6 +31,7 @@ sp {compose-action*retrieve*linguistic-id
 sp {compose-action*retrieve*linguistic-id*substructure
     (state <s>    ^name compose-action
                   ^map.linguistic.{<sub-arg> <> verb} <subid>)
+    (<subid> -^<any>)
 -->
     (<s>    ^retrieve-lti <subid>)
     }
@@ -37,6 +39,7 @@ sp {compose-action*retrieve*linguistic-id*substructure
 sp {compose-action*retrieve*procedural-id
     (state <s>    ^name compose-action
                   ^map.procedural <pid>)
+    (<pid> -^<any>)
 -->
     (<s> ^retrieve-lti <pid>)
     }
@@ -45,6 +48,7 @@ sp {compose-action*retrieve*procedural-id
 sp {compose-action*retrieve*goal-id
 	(state <s>	^name compose-action
             	^map.goal <gid>)
+ 	(<gid> -^<any>)
 -->
 	(<s>	^retrieve-lti <gid>)
  }
@@ -67,7 +71,7 @@ sp {compose-action*retrieve*goal-id*relation-objects
 
 sp {compose-action*retrieve*goal-id*relation-objects*implicit
 	(state <s>	^name compose-action
-            	^map.goal.relation.<< e1 e2 >>_implicit <imp-obj>)
+            	^map.goal.relation.<< e1 e2 >>._implicit <imp-obj>)
  	(<imp-obj> -^<any>)
 -->
 	(<s>	^retrieve-lti <imp-obj>)

@@ -7,7 +7,8 @@ sp {new*anystate*propose*smem-store*create-cue
           -^stored <lti>)
 -->
    (<s> ^operator <o> + =)
-   (<o> ^name smem-store)
+   (<o> ^name smem-store
+        ^type memory)
 }
 
 sp {new*anystate*apply*smem-store*create-cue

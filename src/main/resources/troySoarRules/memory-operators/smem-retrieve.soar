@@ -14,6 +14,7 @@ sp {new*anystate*propose*smem-retrieve*create-cue
 -->
    (<s> ^operator <o> + > =)
    (<o> ^name smem-retrieve
+        ^type memory
         ^identifier <lti>)
 }
 

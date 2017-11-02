@@ -48,10 +48,9 @@ sp {action*copy*dont-match*substate
           
 sp {action*retrieve*procedural
 	(state <s>	^name action
-            	^indexed-action._metadata.map.procedural <pid>
-             	^smem.command <scomm>)
+            	^indexed-action._metadata.map.procedural <pid>)
 -->
-	(<scomm>	^retrieve <pid>)
+	(<s>	^retrieve-lti <pid>)
  }
 
 sp {action*elaborate*space
