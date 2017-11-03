@@ -55,18 +55,52 @@ sp {generate-actionspace*elaborate*candidate-operator*retrieve-id*arg
 
 sp {generate-actionspace*elaborate*candidate-operator*map
 	(state <s>	^name generate-actionspace
-            	^map.actionspace._operator <pid>)
+            	^map.actionspace._subtask <submap>)
+ 	(<submap>	-^procedural <suboperator>)
 -->
-	(<s>	^smem-query-cue <cue>)
- 	(<cue>	^procedural <pid>)
+	(<s>	^retrieve-lti <submap>)
   }
+
+sp {generate-actionspace*elaborate*candidate-operator*map*procedural
+	(state <s>	^name generate-actionspace
+            	^map.actionspace._subtask.procedural <proc>)
+ 	(<proc>	-^action-type complex)
+-->
+	(<s>	^retrieve-lti <proc>)
+ }
+
+sp {generate-actionspace*elaborate*candidate-operator*map*procedural*arguments
+	(state <s>	^name generate-actionspace
+            	^map.actionspace._subtask.procedural <proc>)
+ 	(<proc>	^{<arg> <> op_name <> action-type} <val>)
+  	(<val> -^object <obj>)
+-->
+	(<s>	^retrieve-lti <val>)
+ }
+
+sp {generate-actionspace*elaborate*goal
+	(state <s>	^name generate-actionspace
+            	^map.actionspace._subtask.goal <gid>)
+ 	(<gid>	-^<any>)
+-->
+	(<s>	^retrieve-lti <gid>)
+ }
+
+sp {generate-actionspace*elaborate*goal*relation
+	(state <s>	^name generate-actionspace
+            	^map.actionspace._subtask.goal.relation <rid>)
+ 	(<rid>	-^<any>)
+-->
+	(<s>	^retrieve-lti <rid>)
+ }
+
 
 sp {generate-actionspace*elaborate*candidate-operator
 	(state <s>	^name generate-actionspace
             	^map <map>
-             	^candidate-objects <co>
-              	^retrieved-lti-cue.retrieved-lti <submap>)
- 	(<map> ^actionspace._operator <pid>)
+             	^candidate-objects <co>)
+ 	(<map> ^actionspace._subtask <submap>)
+  	(<submap>	^procedural <pid>)
  	(<pid>	^op_name <name>
          	^action-type complex
           	^{<arg1> <> op_name <> action-type}	<val1>

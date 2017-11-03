@@ -6,14 +6,13 @@
 sp {add-subtask-to-actionspace
 	(state <s>	^name action
             	^indexed-action <ia>
-             	^topstate.interaction.stack.segment.next.groundings.indexed-action <task>
-              	^smem.command <scomm>)
+             	^topstate.interaction.stack.segment.next.groundings.indexed-action <task>)
 	(<task>	^_metadata.map <taskmap>)
  	(<taskmap> ^actionspace <asp>)
  	(<ia> ^_metadata.map {<submap> <> <taskmap>})
   	(<submap>	^procedural <proc>)
    	(<proc> ^action-type complex)
 -->
-	(<asp> ^_operator <proc>)
- 	(<scomm> ^store <asp>)
+	(<asp> ^_subtask <submap>)
+ 	(<s> ^store-concept <asp>)
   }
